@@ -25,7 +25,7 @@ AC_PREREQ(2.50)
 ## ------------------------ ##
 ## Autoconf initialisation. ##
 ## ------------------------ ##
-AC_INIT([libtool], [1.5.6], [bug-libtool@gnu.org])
+AC_INIT([libtool], [1.5.10], [bug-libtool@gnu.org])
 AC_CONFIG_SRCDIR([ltmain.in])
 
 
@@ -104,7 +104,10 @@ AC_PROG_LN_S
 pushdef([AC_MSG_ERROR], [CXX=no])
 AC_PROG_CXX
 popdef([AC_MSG_ERROR])
-AM_CONDITIONAL(HAVE_CXX, [test "x$CXX" != xno])
+AM_CONDITIONAL(HAVE_CXX, 
+[test -n "$CXX" && ( test "X$CXX" != "Xno" &&
+  ( (test "X$CXX" = "Xg++" && `g++ -v >/dev/null 2>&1` ) || 
+  (test "X$CXX" != "Xg++")))])
 
 pushdef([AC_MSG_ERROR], [F77=no])
 AC_PROG_F77

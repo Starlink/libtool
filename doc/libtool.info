@@ -1,4 +1,4 @@
-This is libtool.info, produced by makeinfo version 4.6 from
+This is libtool.info, produced by makeinfo version 4.7 from
 libtool.texi.
 
 INFO-DIR-SECTION GNU programming tools
@@ -11,7 +11,7 @@ START-INFO-DIR-ENTRY
 * libtoolize: (libtool)Invoking libtoolize.     Adding libtool support.
 END-INFO-DIR-ENTRY
 
-   This file documents GNU Libtool 1.5.6
+   This file documents GNU Libtool 1.5.10
 
    Copyright (C) 1996-2003 Free Software Foundation, Inc.
 
@@ -30,7 +30,7 @@ Shared library support for GNU
 
 This file documents GNU Libtool, a script that allows package developers
 to provide generic shared library support.  This edition documents
-version 1.5.6.
+version 1.5.10.
 
    *Note Reporting bugs::, for information on how to report problems
 with libtool.
@@ -163,8 +163,8 @@ Platform quirks
 
 File: libtool.info,  Node: Introduction,  Next: Libtool paradigm,  Prev: Top,  Up: Top
 
-Introduction
-************
+1 Introduction
+**************
 
 In the past, if a source code package developer wanted to take advantage
 of the power of shared libraries, he needed to write custom support code
@@ -205,8 +205,8 @@ history, or want to write code to extend libtool in a consistent way.
 
 File: libtool.info,  Node: Motivation,  Next: Issues,  Up: Introduction
 
-Motivation for writing libtool
-==============================
+1.1 Motivation for writing libtool
+==================================
 
 Since early 1995, several different GNU developers have recognized the
 importance of having shared library support for their packages.  The
@@ -238,8 +238,8 @@ this system:
 
 File: libtool.info,  Node: Issues,  Next: Other implementations,  Prev: Motivation,  Up: Introduction
 
-Implementation issues
-=====================
+1.2 Implementation issues
+=========================
 
 The following issues need to be addressed in any reusable shared library
 system, specifically libtool:
@@ -275,8 +275,8 @@ system, specifically libtool:
 
 File: libtool.info,  Node: Other implementations,  Next: Postmortem,  Prev: Issues,  Up: Introduction
 
-Other implementations
-=====================
+1.3 Other implementations
+=========================
 
 Even before libtool was developed, many free software packages built and
 installed their own shared libraries.  At first, these packages were
@@ -289,8 +289,8 @@ packages have been more or less abandoned as influences.
 
 File: libtool.info,  Node: Postmortem,  Prev: Other implementations,  Up: Introduction
 
-A postmortem analysis of other implementations
-==============================================
+1.4 A postmortem analysis of other implementations
+==================================================
 
 In all fairness, each of the implementations that were examined do the
 job that they were intended to do, for a number of different host
@@ -324,8 +324,8 @@ designers of future library systems.
 
 File: libtool.info,  Node: Libtool paradigm,  Next: Using libtool,  Prev: Introduction,  Up: Top
 
-The libtool paradigm
-********************
+2 The libtool paradigm
+**********************
 
 At first, libtool was designed to support an arbitrary number of library
 object types.  After libtool was ported to more platforms, a new
@@ -347,8 +347,8 @@ when you understand it, the world becomes simpler.
 
 File: libtool.info,  Node: Using libtool,  Next: Invoking libtool,  Prev: Libtool paradigm,  Up: Top
 
-Using libtool
-*************
+3 Using libtool
+***************
 
 It makes little sense to talk about using libtool in your own packages
 until you have seen how it makes your life simpler.  The examples in
@@ -397,8 +397,8 @@ linking `main.o' against `libhello'.
 
 File: libtool.info,  Node: Creating object files,  Next: Linking libraries,  Up: Using libtool
 
-Creating object files
-=====================
+3.1 Creating object files
+=========================
 
 To create an object file from a source file, the compiler is invoked
 with the `-c' flag (and any other desired flags):
@@ -465,8 +465,8 @@ done so that compiler warnings aren't annoyingly duplicated.
 
 File: libtool.info,  Node: Linking libraries,  Next: Linking executables,  Prev: Creating object files,  Up: Using libtool
 
-Linking libraries
-=================
+3.2 Linking libraries
+=====================
 
 Without libtool, the programmer would invoke the `ar' command to create
 a static library:
@@ -544,8 +544,8 @@ convenience archive, not a shared library (*note Static libraries::).
 
 File: libtool.info,  Node: Linking executables,  Next: Debugging executables,  Prev: Linking libraries,  Up: Using libtool
 
-Linking executables
-===================
+3.3 Linking executables
+=======================
 
 If you choose at this point to "install" the library (put it in a
 permanent location) before linking executables against it, then you
@@ -672,8 +672,8 @@ shared libraries.
 
 File: libtool.info,  Node: Debugging executables,  Next: Installing libraries,  Prev: Linking executables,  Up: Using libtool
 
-Debugging executables
-=====================
+3.4 Debugging executables
+=========================
 
 If `hell' was a complicated program, you would certainly want to test
 and debug it before installing it on your system.  In the above
@@ -686,9 +686,9 @@ the debugger:
       under certain conditions; type "show copying" to see the conditions.
      There is no warranty for GDB; type "show warranty" for details.
      GDB 4.16 (i386-unknown-netbsd), (C) 1996 Free Software Foundation, Inc.
-     
+
      "hell": not in executable format: File format not recognized
-     
+
      (gdb) quit
      burger$
 
@@ -706,7 +706,7 @@ lives.  So, let's try again, by invoking GDB directly on the executable:
      (gdb) run
      Starting program: /home/src/libtool/demo/.libs/hell
      /home/src/libtool/demo/.libs/hell: can't load library 'libhello.so.2'
-     
+
      Program exited with code 020.
      (gdb) quit
      burger$
@@ -726,7 +726,7 @@ executable wrapper (*note Execute mode::):
      Breakpoint 1 at 0x8048547: file main.c, line 29.
      (gdb) run
      Starting program: /home/src/libtool/demo/.libs/hell
-     
+
      Breakpoint 1, main (argc=1, argv=0xbffffc40) at main.c:29
      29	  printf ("Welcome to GNU Hell!\n");
      (gdb) quit
@@ -736,8 +736,8 @@ executable wrapper (*note Execute mode::):
 
 File: libtool.info,  Node: Installing libraries,  Next: Installing executables,  Prev: Debugging executables,  Up: Using libtool
 
-Installing libraries
-====================
+3.5 Installing libraries
+========================
 
 Installing libraries on a non-libtool system is quite
 straightforward... just copy them into place:(1)
@@ -794,17 +794,17 @@ hints on what to do (*note Finish mode::):
      -----------------------------------------------------------------
      Libraries have been installed in:
         /usr/local/lib
-     
+
      To link against installed libraries in a given directory, LIBDIR,
      you must use the `-LLIBDIR' flag during linking.
-     
+
       You will also need to do one of the following:
         - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
           during execution
         - add LIBDIR to the `LD_RUN_PATH' environment variable
           during linking
         - use the `-RLIBDIR' linker flag
-     
+
      See any operating system documentation about shared libraries for
      more information, such as the ld and ld.so manual pages.
      -----------------------------------------------------------------
@@ -822,8 +822,8 @@ unusable.
 
 File: libtool.info,  Node: Installing executables,  Next: Static libraries,  Prev: Installing libraries,  Up: Using libtool
 
-Installing executables
-======================
+3.6 Installing executables
+==========================
 
 If you used libtool to link any executables against uninstalled libtool
 libraries (*note Linking executables::), you need to use libtool to
@@ -846,8 +846,8 @@ and installs the correct binary:
 
 File: libtool.info,  Node: Static libraries,  Prev: Installing executables,  Up: Using libtool
 
-Linking static libraries
-========================
+3.7 Linking static libraries
+============================
 
 Why return to `ar' and `ranlib' silliness when you've had a taste of
 libtool?  Well, sometimes it is desirable to create a static archive
@@ -910,8 +910,8 @@ creating a standalone binary.  Use libtool to do the linking and add the
 
 File: libtool.info,  Node: Invoking libtool,  Next: Integrating libtool,  Prev: Using libtool,  Up: Top
 
-Invoking `libtool'
-******************
+4 Invoking `libtool'
+********************
 
 The `libtool' program has the following synopsis:
 
@@ -1005,8 +1005,8 @@ programs libtool invokes, rather than libtool itself.
 
 File: libtool.info,  Node: Compile mode,  Next: Link mode,  Up: Invoking libtool
 
-Compile mode
-============
+4.1 Compile mode
+================
 
 For "compile" mode, MODE-ARGS is a compiler command to be used in
 creating a `standard' object file.  These arguments should begin with
@@ -1054,8 +1054,8 @@ it's the only way to make it safe for those that don't.
 
 File: libtool.info,  Node: Link mode,  Next: Execute mode,  Prev: Compile mode,  Up: Invoking libtool
 
-Link mode
-=========
+4.2 Link mode
+=============
 
 "Link" mode links together object files (including library objects) to
 form another library or to create an executable program.
@@ -1217,8 +1217,8 @@ is often called "partial linking".
 
 File: libtool.info,  Node: Execute mode,  Next: Install mode,  Prev: Link mode,  Up: Invoking libtool
 
-Execute mode
-============
+4.3 Execute mode
+================
 
 For "execute" mode, the library path is automatically set, then a
 program is executed.
@@ -1241,8 +1241,8 @@ any of their required library directories are added to the library path.
 
 File: libtool.info,  Node: Install mode,  Next: Finish mode,  Prev: Execute mode,  Up: Invoking libtool
 
-Install mode
-============
+4.4 Install mode
+================
 
 In "install" mode, libtool interprets most of the elements of MODE-ARGS
 as an installation command beginning with `cp', or a BSD-compatible
@@ -1290,8 +1290,8 @@ commands are also completed.
 
 File: libtool.info,  Node: Finish mode,  Next: Uninstall mode,  Prev: Install mode,  Up: Invoking libtool
 
-Finish mode
-===========
+4.5 Finish mode
+===============
 
 "Finish" mode helps system administrators install libtool libraries so
 that they can be located and linked into user programs.
@@ -1303,8 +1303,8 @@ Running this command may require superuser privileges, so the
 
 File: libtool.info,  Node: Uninstall mode,  Next: Clean mode,  Prev: Finish mode,  Up: Invoking libtool
 
-Uninstall mode
-==============
+4.6 Uninstall mode
+==================
 
 "Uninstall" mode deletes installed libraries, executables and objects.
 
@@ -1317,8 +1317,8 @@ Uninstall mode
 
 File: libtool.info,  Node: Clean mode,  Prev: Uninstall mode,  Up: Invoking libtool
 
-Clean mode
-==========
+4.7 Clean mode
+==============
 
 "Clean" mode deletes uninstalled libraries, executables, objects and
 libtool's temporary files associated with them.
@@ -1332,8 +1332,8 @@ libtool's temporary files associated with them.
 
 File: libtool.info,  Node: Integrating libtool,  Next: Versioning,  Prev: Invoking libtool,  Up: Top
 
-Integrating libtool with your package
-*************************************
+5 Integrating libtool with your package
+***************************************
 
 This chapter describes how to integrate libtool with your packages so
 that your users can install hassle-free shared libraries.
@@ -1349,8 +1349,8 @@ that your users can install hassle-free shared libraries.
 
 File: libtool.info,  Node: Makefile rules,  Next: Using Automake,  Up: Integrating libtool
 
-Writing `Makefile' rules for libtool
-====================================
+5.1 Writing `Makefile' rules for libtool
+========================================
 
 Libtool is fully integrated with Automake (*note Introduction:
 (automake)Top.), starting with Automake version 1.2.
@@ -1374,8 +1374,8 @@ need to do one of the following:
 
 File: libtool.info,  Node: Using Automake,  Next: Configuring,  Prev: Makefile rules,  Up: Integrating libtool
 
-Using Automake with libtool
-===========================
+5.2 Using Automake with libtool
+===============================
 
 Libtool library support is implemented under the `LTLIBRARIES' primary.
 
@@ -1386,11 +1386,11 @@ distribution's `demo' subdirectory.
 `program_LDADD' variable:
 
      bin_PROGRAMS = hell hell.debug
-     
+
      # Build hell from main.c and libhello.la
      hell_SOURCES = main.c
      hell_LDADD = libhello.la
-     
+
      # Create an easier-to-debug version of hell.
      hell_debug_SOURCES = main.c
      hell_debug_LDADD = libhello.la
@@ -1441,8 +1441,8 @@ more information.
 
 File: libtool.info,  Node: Configuring,  Next: Distributing,  Prev: Using Automake,  Up: Integrating libtool
 
-Configuring libtool
-===================
+5.3 Configuring libtool
+=======================
 
 Libtool requires intimate knowledge of your compiler suite and operating
 system in order to be able to create shared libraries and link against
@@ -1469,16 +1469,16 @@ generate a libtool script for the installer's host machine.
 
 File: libtool.info,  Node: AC_PROG_LIBTOOL,  Up: Configuring
 
-The `AC_PROG_LIBTOOL' macro
----------------------------
+5.3.1 The `AC_PROG_LIBTOOL' macro
+---------------------------------
 
 If you are using GNU Autoconf (or Automake), you should add a call to
 `AC_PROG_LIBTOOL' to your `configure.in' file.  This macro adds many
 new tests to the `configure' script so that the generated libtool
 script will understand the characteristics of the host:
 
- - Macro: AC_PROG_LIBTOOL
- - Macro: AM_PROG_LIBTOOL
+ -- Macro: AC_PROG_LIBTOOL
+ -- Macro: AM_PROG_LIBTOOL
      Add support for the `--enable-shared' and `--disable-shared'
      `configure' flags.(1)  `AM_PROG_LIBTOOL' was the old name for this
      macro, and although supported at the moment is deprecated.
@@ -1532,13 +1532,13 @@ script will understand the characteristics of the host:
      some dependency on `libtool'.
 
 
- - Macro: AC_LIBTOOL_DLOPEN
+ -- Macro: AC_LIBTOOL_DLOPEN
      Enable checking for dlopen support. This macro should be used if
      the package makes use of the `-dlopen' and `-dlpreopen' flags,
      otherwise libtool will assume that the system does not support
      dlopening.  The macro must be called *before* `AC_PROG_LIBTOOL'.
 
- - Macro: AC_LIBTOOL_WIN32_DLL
+ -- Macro: AC_LIBTOOL_WIN32_DLL
      This macro should be used if the package has been ported to build
      clean dlls on win32 platforms.  Usually this means that any
      library data items are exported with `__declspec(dllexport)' and
@@ -1552,20 +1552,20 @@ script will understand the characteristics of the host:
      `-no-undefined', you must ensure that all the library symbols
      *really are* defined at link time!
 
- - Macro: AC_DISABLE_FAST_INSTALL
+ -- Macro: AC_DISABLE_FAST_INSTALL
      Change the default behaviour for `AC_PROG_LIBTOOL' to disable
      optimization for fast installation.  The user may still override
      this default, depending on platform support, by specifying
      `--enable-fast-install'.
 
- - Macro: AC_DISABLE_SHARED
- - Macro: AM_DISABLE_SHARED
+ -- Macro: AC_DISABLE_SHARED
+ -- Macro: AM_DISABLE_SHARED
      Change the default behaviour for `AC_PROG_LIBTOOL' to disable
      shared libraries.  The user may still override this default by
      specifying `--enable-shared'.
 
- - Macro: AC_DISABLE_STATIC
- - Macro: AM_DISABLE_STATIC
+ -- Macro: AC_DISABLE_STATIC
+ -- Macro: AM_DISABLE_STATIC
      Change the default behaviour for `AC_PROG_LIBTOOL' to disable
      static libraries.  The user may still override this default by
      specifying `--enable-static'.
@@ -1573,58 +1573,58 @@ script will understand the characteristics of the host:
    The tests in `AC_PROG_LIBTOOL' also recognize the following
 environment variables:
 
- - Variable: CC
+ -- Variable: CC
      The C compiler that will be used by the generated `libtool'.  If
      this is not set, `AC_PROG_LIBTOOL' will look for `gcc' or `cc'.
 
- - Variable: CFLAGS
+ -- Variable: CFLAGS
      Compiler flags used to generate standard object files.  If this is
      not set, `AC_PROG_LIBTOOL' will not use any such flags.  It affects
      only the way `AC_PROG_LIBTOOL' runs tests, not the produced
      `libtool'.
 
- - Variable: CPPFLAGS
+ -- Variable: CPPFLAGS
      C preprocessor flags.  If this is not set, `AC_PROG_LIBTOOL' will
      not use any such flags.  It affects only the way `AC_PROG_LIBTOOL'
      runs tests, not the produced `libtool'.
 
- - Variable: LD
+ -- Variable: LD
      The system linker to use (if the generated `libtool' requires one).
      If this is not set, `AC_PROG_LIBTOOL' will try to find out what is
      the linker used by CC.
 
- - Variable: LDFLAGS
+ -- Variable: LDFLAGS
      The flags to be used by `libtool' when it links a program.  If
      this is not set, `AC_PROG_LIBTOOL' will not use any such flags.  It
      affects only the way `AC_PROG_LIBTOOL' runs tests, not the produced
      `libtool'.
 
- - Variable: LIBS
+ -- Variable: LIBS
      The libraries to be used by `AC_PROG_LIBTOOL' when it links a
      program.  If this is not set, `AC_PROG_LIBTOOL' will not use any
      such flags.  It affects only the way `AC_PROG_LIBTOOL' runs tests,
      not the produced `libtool'.
 
- - Variable: NM
+ -- Variable: NM
      Program to use rather than checking for `nm'.
 
- - Variable: RANLIB
+ -- Variable: RANLIB
      Program to use rather than checking for `ranlib'.
 
- - Variable: LN_S
+ -- Variable: LN_S
      A command that creates a link of a program, a soft-link if
      possible, a hard-link otherwise.  `AC_PROG_LIBTOOL' will check for
      a suitable program if this variable is not set.
 
- - Variable: DLLTOOL
+ -- Variable: DLLTOOL
      Program to use rather than checking for `dlltool'.  Only meaningful
      for Cygwin/MS-Windows.
 
- - Variable: OBJDUMP
+ -- Variable: OBJDUMP
      Program to use rather than checking for `objdump'.  Only meaningful
      for Cygwin/MS-Windows.
 
- - Variable: AS
+ -- Variable: AS
      Program to use rather than checking for `as'.  Only used on
      Cygwin/MS-Windows at the moment.
 
@@ -1650,8 +1650,8 @@ the top of your build directory (`../..', for example).
 
 File: libtool.info,  Node: Distributing,  Next: Static-only libraries,  Prev: Configuring,  Up: Integrating libtool
 
-Including libtool in your package
-=================================
+5.4 Including libtool in your package
+=====================================
 
 In order to use libtool, you need to include the following files with
 your package:
@@ -1679,8 +1679,8 @@ copying these files into your package.
 
 File: libtool.info,  Node: Invoking libtoolize,  Next: Autoconf .o macros,  Up: Distributing
 
-Invoking `libtoolize'
----------------------
+5.4.1 Invoking `libtoolize'
+---------------------------
 
 The `libtoolize' program provides a standard way to add libtool support
 to your package.  In the future, it may implement better usage
@@ -1741,8 +1741,8 @@ package, as well.
 
 File: libtool.info,  Node: Autoconf .o macros,  Prev: Invoking libtoolize,  Up: Distributing
 
-Autoconf `.o' macros
---------------------
+5.4.2 Autoconf `.o' macros
+--------------------------
 
 The Autoconf package comes with a few macros that run tests, then set a
 variable corresponding to the name of an object file.  Sometimes it is
@@ -1750,12 +1750,12 @@ necessary to use corresponding names for libtool objects.
 
    Here are the names of variables that list libtool objects:
 
- - Variable: LTALLOCA
+ -- Variable: LTALLOCA
      Substituted by `AC_FUNC_ALLOCA' (*note Particular Function Checks:
      (autoconf)Particular Functions.).  Is either empty, or contains
      `alloca.lo'.
 
- - Variable: LTLIBOBJS
+ -- Variable: LTLIBOBJS
      Substituted by `AC_REPLACE_FUNCS' (*note Generic Function Checks:
      (autoconf)Generic Functions.), and a few other functions.
 
@@ -1773,8 +1773,8 @@ immediately before the call to `AC_OUTPUT' in your `configure.in':
 
 File: libtool.info,  Node: Static-only libraries,  Prev: Distributing,  Up: Integrating libtool
 
-Static-only libraries
-=====================
+5.5 Static-only libraries
+=========================
 
 When you are developing a package, it is often worthwhile to configure
 your package with the `--disable-shared' flag, or to override the
@@ -1804,13 +1804,13 @@ following example note is taken from the GIMP(1) distribution `README':
    ---------- Footnotes ----------
 
    (1) GNU Image Manipulation Program, for those who haven't taken the
-plunge.  See <http://www.gimp.org/>.
+plunge.  See `http://www.gimp.org/'.
 
 
 File: libtool.info,  Node: Versioning,  Next: Library tips,  Prev: Integrating libtool,  Up: Top
 
-Library interface versions
-**************************
+6 Library interface versions
+****************************
 
 The most difficult issue introduced by shared libraries is that of
 creating and resolving runtime dependencies.  Dependencies on programs
@@ -1841,8 +1841,8 @@ they require.
 
 File: libtool.info,  Node: Interfaces,  Next: Libtool versioning,  Up: Versioning
 
-What are library interfaces?
-============================
+6.1 What are library interfaces?
+================================
 
 Interfaces for libraries may be any of the following (and more):
 
@@ -1862,8 +1862,8 @@ are not directly available to the user of the library.
 
 File: libtool.info,  Node: Libtool versioning,  Next: Updating version info,  Prev: Interfaces,  Up: Versioning
 
-Libtool's versioning system
-===========================
+6.2 Libtool's versioning system
+===============================
 
 Libtool has its own formal versioning system.  It is not as flexible as
 some, but it is definitely the simplest of the more powerful versioning
@@ -1917,8 +1917,8 @@ dynamic linker chooses the library with the greater REVISION number.
 
 File: libtool.info,  Node: Updating version info,  Next: Release numbers,  Prev: Libtool versioning,  Up: Versioning
 
-Updating library version information
-====================================
+6.3 Updating library version information
+========================================
 
 If you want to use libtool's versioning system, then you must specify
 the version information to libtool using the `-version-info' flag
@@ -1963,8 +1963,8 @@ other release.
 
 File: libtool.info,  Node: Release numbers,  Prev: Updating version info,  Up: Versioning
 
-Managing release information
-============================
+6.4 Managing release information
+================================
 
 Often, people want to encode the name of the package release into the
 shared library so that it is obvious to the user which package their
@@ -2010,8 +2010,8 @@ frequently.
 
 File: libtool.info,  Node: Library tips,  Next: Inter-library dependencies,  Prev: Versioning,  Up: Top
 
-Tips for interface design
-*************************
+7 Tips for interface design
+***************************
 
 Writing a good library interface takes a lot of practice and thorough
 understanding of the problem that the library is intended to solve.
@@ -2073,8 +2073,8 @@ Be careful with array dimensions
 
 File: libtool.info,  Node: C header files,  Up: Library tips
 
-Writing C header files
-======================
+7.1 Writing C header files
+==========================
 
 Writing portable C header files can be difficult, since they may be read
 by different types of compilers:
@@ -2116,7 +2116,7 @@ installed in a system directory.
      # define BEGIN_C_DECLS /* empty */
      # define END_C_DECLS /* empty */
      #endif
-     
+
      /* PARAMS is a macro used to wrap function prototypes, so that
         compilers that don't understand ANSI C prototypes still work,
         and ANSI C compilers can issue warnings about type mismatches. */
@@ -2133,17 +2133,17 @@ installed in a system directory.
 
      #ifndef FOO_H
      #define FOO_H 1
-     
+
      /* The above macro definitions. */
      #include "..."
-     
+
      BEGIN_C_DECLS
-     
+
      int foo PARAMS((void));
      int hello PARAMS((void));
-     
+
      END_C_DECLS
-     
+
      #endif /* !FOO_H */
 
    Note that the `#ifndef FOO_H' prevents the body of `foo.h' from
@@ -2181,8 +2181,8 @@ begin with an underscore are reserved for the use of the compiler.
 
 File: libtool.info,  Node: Inter-library dependencies,  Next: Dlopened modules,  Prev: Library tips,  Up: Top
 
-Inter-library dependencies
-**************************
+8 Inter-library dependencies
+****************************
 
 By definition, every shared library system provides a way for
 executables to depend on libraries, so that symbol resolution is
@@ -2237,8 +2237,8 @@ only when a program is linked with them.
 
 File: libtool.info,  Node: Dlopened modules,  Next: Using libltdl,  Prev: Inter-library dependencies,  Up: Top
 
-Dlopened modules
-****************
+9 Dlopened modules
+******************
 
 It can sometimes be confusing to discuss "dynamic linking", because the
 term is used to refer to two different concepts:
@@ -2260,7 +2260,7 @@ interpreted language.  In fact, dlopen calls are frequently used in
 language interpreters to provide an efficient way to extend the
 language.
 
-   As of version 1.5.6, libtool provides support for dlopened modules.
+   As of version 1.5.10, libtool provides support for dlopened modules.
 However, you should indicate that your package is willing to use such
 support, by using the macro `AC_LIBTOOL_DLOPEN' in `configure.in'.  If
 this macro is not used (or it is used _after_ `AC_PROG_LIBTOOL'),
@@ -2284,8 +2284,8 @@ might use libtool to generate dlopen-accessible modules.
 
 File: libtool.info,  Node: Building modules,  Next: Dlpreopening,  Up: Dlopened modules
 
-Building modules to dlopen
-==========================
+9.1 Building modules to dlopen
+==============================
 
 On some operating systems, a program symbol must be specially declared
 in order to be dynamically resolved with the `dlsym' (or equivalent)
@@ -2315,8 +2315,8 @@ executable that calls dlopen:
 
 File: libtool.info,  Node: Dlpreopening,  Next: Finding the dlname,  Prev: Building modules,  Up: Dlopened modules
 
-Dlpreopening
-============
+9.2 Dlpreopening
+================
 
 Libtool provides special support for dlopening libtool object and
 libtool library files, so that their symbols can be resolved _even on
@@ -2352,12 +2352,12 @@ represent the program's symbol table.
 your application to dlopen by using the `-dlopen' or `-dlpreopen' flags
 when you link your program (*note Link mode::).
 
- - Structure: struct lt_dlsymlist { const char *NAME; lt_ptr ADDRESS; }
+ -- Structure: struct lt_dlsymlist { const char *NAME; lt_ptr ADDRESS; }
      The NAME attribute is a null-terminated character string of the
      symbol name, such as `"fprintf"'.  The ADDRESS attribute is a
      generic pointer to the appropriate object, such as `&fprintf'.
 
- - Variable: const lt_dlsymlist * lt_preloaded_symbols
+ -- Variable: const lt_dlsymlist * lt_preloaded_symbols
      An array of LT_SYMBOL structures, representing all the preloaded
      symbols linked into the program. For each `-dlpreloaded' file
      there is an element with the NAME of the file and a ADDRESS of
@@ -2374,8 +2374,8 @@ in LT_PRELOADED_SYMBOLS.
 
 File: libtool.info,  Node: Finding the dlname,  Next: Dlopen issues,  Prev: Dlpreopening,  Up: Dlopened modules
 
-Finding the correct name to dlopen
-==================================
+9.3 Finding the correct name to dlopen
+======================================
 
 After a library has been linked with `-module', it can be dlopened.
 Unfortunately, because of the variation in library names, your package
@@ -2407,8 +2407,8 @@ provided you have linked them using libtool.
 
 File: libtool.info,  Node: Dlopen issues,  Prev: Finding the dlname,  Up: Dlopened modules
 
-Unresolved dlopen issues
-========================
+9.4 Unresolved dlopen issues
+============================
 
 The following problems are not solved by using libtool's dlopen support:
 
@@ -2431,8 +2431,8 @@ The following problems are not solved by using libtool's dlopen support:
 
 File: libtool.info,  Node: Using libltdl,  Next: Other languages,  Prev: Dlopened modules,  Up: Top
 
-Using libltdl
-*************
+10 Using libltdl
+****************
 
 Libtool provides a small library, called `libltdl', that aims at hiding
 the various difficulties of dlopening libraries from programmers.  It
@@ -2476,8 +2476,8 @@ License, with the following exception:
 
 File: libtool.info,  Node: Libltdl interface,  Next: Modules for libltdl,  Up: Using libltdl
 
-How to use libltdl in your programs
-===================================
+10.1 How to use libltdl in your programs
+========================================
 
 The libltdl API is similar to the dlopen interface of Solaris and Linux,
 which is very simple but powerful.
@@ -2507,31 +2507,31 @@ welcome.
 
 The following types are defined in `ltdl.h':
 
- - Type: lt_ptr
+ -- Type: lt_ptr
      `lt_ptr' is a generic pointer.
 
- - Type: lt_dlhandle
+ -- Type: lt_dlhandle
      `lt_dlhandle' is a module "handle".  Every lt_dlopened module has
      a handle associated with it.
 
- - Type: lt_dlsymlist
+ -- Type: lt_dlsymlist
      `lt_dlsymlist' is a symbol list for dlpreopened modules.  This
      structure is described in *note Dlpreopening::.
 
 libltdl provides the following functions:
 
- - Function: int lt_dlinit (void)
+ -- Function: int lt_dlinit (void)
      Initialize libltdl.  This function must be called before using
      libltdl and may be called several times.  Return 0 on success,
      otherwise the number of errors.
 
- - Function: int lt_dlexit (void)
+ -- Function: int lt_dlexit (void)
      Shut down libltdl and close all modules.  This function will only
      then shut down libltdl when it was called as many times as
      `lt_dlinit' has been successfully called.  Return 0 on success,
      otherwise the number of errors.
 
- - Function: lt_dlhandle lt_dlopen (const char *FILENAME)
+ -- Function: lt_dlhandle lt_dlopen (const char *FILENAME)
      Open the module with the file name FILENAME and return a handle
      for it.  `lt_dlopen' is able to open libtool dynamic modules,
      preloaded static modules, the program itself and native dynamic
@@ -2568,7 +2568,7 @@ libltdl provides the following functions:
      If the same module is loaded several times, the same handle is
      returned.  If `lt_dlopen' fails for any reason, it returns `NULL'.
 
- - Function: lt_dlhandle lt_dlopenext (const char *FILENAME)
+ -- Function: lt_dlhandle lt_dlopenext (const char *FILENAME)
      The same as `lt_dlopen', except that it tries to append different
      file name extensions to the file name.  If the file with the file
      name FILENAME cannot be found libltdl tries to append the
@@ -2584,29 +2584,29 @@ libltdl provides the following functions:
      to be able to `dlopen' such libraries as well as libtool modules
      transparently.
 
- - Function: int lt_dlclose (lt_dlhandle HANDLE)
+ -- Function: int lt_dlclose (lt_dlhandle HANDLE)
      Decrement the reference count on the module HANDLE.  If it drops
      to zero and no other module depends on this module, then the
      module is unloaded.  Return 0 on success.
 
- - Function: lt_ptr lt_dlsym (lt_dlhandle HANDLE, const char *NAME)
+ -- Function: lt_ptr lt_dlsym (lt_dlhandle HANDLE, const char *NAME)
      Return the address in the module HANDLE, where the symbol given by
      the null-terminated string NAME is loaded.  If the symbol cannot
      be found, `NULL' is returned.
 
- - Function: const char * lt_dlerror (void)
+ -- Function: const char * lt_dlerror (void)
      Return a human readable string describing the most recent error
      that occurred from any of libltdl's functions.  Return `NULL' if
      no errors have occurred since initialization or since it was last
      called.
 
- - Function: int lt_dlpreload (const lt_dlsymlist *PRELOADED)
+ -- Function: int lt_dlpreload (const lt_dlsymlist *PRELOADED)
      Register the list of preloaded modules PRELOADED.  If PRELOADED is
      `NULL', then all previously registered symbol lists, except the
      list set by `lt_dlpreload_default', are deleted. Return 0 on
      success.
 
- - Function: int lt_dlpreload_default (const lt_dlsymlist *PRELOADED)
+ -- Function: int lt_dlpreload_default (const lt_dlsymlist *PRELOADED)
      Set the default list of preloaded modules to PRELOADED, which
      won't be deleted by `lt_dlpreload'.  Note that this function does
      _not_ require libltdl to be initialized using `lt_dlinit' and can
@@ -2616,38 +2616,38 @@ libltdl provides the following functions:
 
      Return 0 on success.
 
- - Macro: LTDL_SET_PRELOADED_SYMBOLS
+ -- Macro: LTDL_SET_PRELOADED_SYMBOLS
      Set the default list of preloaded symbols.  Should be used in your
      program to initialize libltdl's list of preloaded modules.
 
           #include <ltdl.h>
-          
+
           int main() {
             /* ... */
             LTDL_SET_PRELOADED_SYMBOLS();
             /* ... */
           }
 
- - Function: int lt_dladdsearchdir (const char *SEARCH_DIR)
+ -- Function: int lt_dladdsearchdir (const char *SEARCH_DIR)
      Append the search directory SEARCH_DIR to the current user-defined
      library search path. Return 0 on success.
 
- - Function: int lt_dlinsertsearchdir (const char *BEFORE,
+ -- Function: int lt_dlinsertsearchdir (const char *BEFORE,
           const char *SEARCH_DIR)
      Insert the search directory SEARCH_DIR into the user-defined
      library search path, immediately before the element starting at
      address BEFORE.  If BEFORE is `NULL', then SEARCH_DIR is appending
      as if `lt_dladdsearchdir' had been called.  Return 0 on success.
 
- - Function: int lt_dlsetsearchpath (const char *SEARCH_PATH)
+ -- Function: int lt_dlsetsearchpath (const char *SEARCH_PATH)
      Replace the current user-defined library search path with
      SEARCH_PATH, which must be a colon-separated list of absolute
      directories.  Return 0 on success.
 
- - Function: const char * lt_dlgetsearchpath (void)
+ -- Function: const char * lt_dlgetsearchpath (void)
      Return the current user-defined library search path.
 
- - Function: int lt_dlforeachfile (const char *SEARCH_PATH,
+ -- Function: int lt_dlforeachfile (const char *SEARCH_PATH,
           int (*FUNC) (const char *FILENAME, lt_ptr DATA), lt_ptr DATA)
      In some applications you may not want to load individual modules
      with known names, but rather find all of the modules in a set of
@@ -2666,7 +2666,7 @@ libltdl provides the following functions:
      vector of files using DATA to hold the address of the start of the
      vector.
 
- - Function: int lt_dlmakeresident (lt_dlhandle HANDLE)
+ -- Function: int lt_dlmakeresident (lt_dlhandle HANDLE)
      Mark a module so that it cannot be `lt_dlclose'd.  This can be
      useful if a module implements some core functionality in your
      project, which would cause your code to crash if removed.  Return
@@ -2676,15 +2676,15 @@ libltdl provides the following functions:
      binary, that handle will always be marked as resident, and
      consequently cannot be successfully `lt_dlclose'd.
 
- - Function: int lt_dlisresident (lt_dlhandle HANDLE)
+ -- Function: int lt_dlisresident (lt_dlhandle HANDLE)
      Check whether a particular module has been marked as resident,
      returning 1 if it has or 0 otherwise.  If there is an error while
      executing this function, return -1 and set an error message for
      retrieval with `lt_dlerror'.
 
- - Variable: lt_ptr (*) (size_t SIZE) lt_dlmalloc
- - Variable: lt_ptr (*) (lt_ptr PTR, size_t SIZE) lt_dlrealloc
- - Variable: void (*) (lt_ptr PTR) lt_dlfree
+ -- Variable: lt_ptr (*) (size_t SIZE) lt_dlmalloc
+ -- Variable: lt_ptr (*) (lt_ptr PTR, size_t SIZE) lt_dlrealloc
+ -- Variable: void (*) (lt_ptr PTR) lt_dlfree
      These variables are set to `malloc', `realloc' and `free' by
      default, but you can set them to any other functions that provide
      equivalent functionality.  If you change any of these function
@@ -2701,8 +2701,8 @@ libltdl provides the following functions:
 
 File: libtool.info,  Node: Modules for libltdl,  Next: Thread Saftey in libltdl,  Prev: Libltdl interface,  Up: Using libltdl
 
-Creating modules that can be `dlopen'ed
-=======================================
+10.2 Creating modules that can be `dlopen'ed
+============================================
 
 Libtool modules are like normal libtool libraries with a few exceptions:
 
@@ -2737,15 +2737,15 @@ Aliases are defined at the beginning so that the code is more readable.
      /* aliases for the exported symbols */
      #define foo	foo1_LTX_foo
      #define bar	foo1_LTX_bar
-     
+
      /* a global variable definition */
      int bar = 1;
-     
+
      /* a private function */
      int _foo1_helper() {
        return bar;
      }
-     
+
      /* an exported function */
      int foo() {
        return _foo1_helper();
@@ -2756,7 +2756,7 @@ The `Makefile.am' contains the necessary rules to build the module
 
      ...
      lib_LTLIBRARIES = foo1.la
-     
+
      foo1_la_SOURCES = foo1.c
      foo1_la_LDFLAGS = -module
      ...
@@ -2764,14 +2764,14 @@ The `Makefile.am' contains the necessary rules to build the module
 
 File: libtool.info,  Node: Thread Saftey in libltdl,  Next: User defined module data,  Prev: Modules for libltdl,  Up: Using libltdl
 
-Using libtldl in a multi threaded environment
-=============================================
+10.3 Using libtldl in a multi threaded environment
+==================================================
 
 Using the `lt_dlmutex_register()' function, and by providing some
 appropriate callback function definitions, libltdl can be used in a
 multi-threaded environment.
 
- - Type: void lt_dlmutex_lock (void)
+ -- Type: void lt_dlmutex_lock (void)
      This is the type of a function pointer holding the address of a
      function which will be called at the start of parts of the libltdl
      implementation code which require a mutex lock.
@@ -2780,10 +2780,10 @@ multi-threaded environment.
      locking mechanism employed by these callback functions are
      reentrant, or else strange problems will occur.
 
- - Type: void lt_dlmutex_unlock (void)
+ -- Type: void lt_dlmutex_unlock (void)
      The type of a matching unlock function.
 
- - Type: void lt_dlmutex_seterror (const char *ERROR);
+ -- Type: void lt_dlmutex_seterror (const char *ERROR);
      Many of the functions in the libltdl API have a special return
      value to indicate to the client that an error has occured.
      Normally (in single threaded applications) a string describing
@@ -2794,7 +2794,7 @@ multi-threaded environment.
      order for it to work in a multi-threaded context.  The function
      should store any error message passed in thread local storage.
 
- - Type: const char * lt_dlmutex_geterror (void)
+ -- Type: const char * lt_dlmutex_geterror (void)
      The type of a matching callback function to retrieve the last
      stored error message from thread local storage.
 
@@ -2802,7 +2802,7 @@ multi-threaded environment.
      `lt_dlerror())' from all threads to retrieve error messages for the
      client.
 
- - Function: int lt_dlmutex_register (lt_dlmutex_lock *LOCK,
+ -- Function: int lt_dlmutex_register (lt_dlmutex_lock *LOCK,
           lt_dlmutex_unlock *UNLOCK, lt_dlmutex_set_error *SETERROR,
           lt_dlmutex_geterror *GETERROR)
      Use this function to register one of each of function ttypes
@@ -2813,14 +2813,15 @@ multi-threaded environment.
 
 File: libtool.info,  Node: User defined module data,  Next: Module loaders for libltdl,  Prev: Thread Saftey in libltdl,  Up: Using libltdl
 
-Data associated with loaded modules
-===================================
+10.4 Data associated with loaded modules
+========================================
 
 Some of the internal information about each loaded module that is
 maintained by libltdl is available to the user, in the form of this
 structure:
 
- - Type: struct lt_dlinfo { char *FILENAME; char *NAME; int REF_COUNT; }
+ -- Type: struct lt_dlinfo { char *FILENAME; char *NAME; int REF_COUNT;
+          }
      `lt_dlinfo' is used to store information about a module.  The
      FILENAME attribute is a null-terminated character string of the
      real module file name.  If the module is a libtool module then
@@ -2832,7 +2833,7 @@ structure:
    The following function will return a pointer to libltdl's internal
 copy of this structure for the given HANDLE:
 
- - Function: const lt_dlinfo * lt_dlgetinfo (lt_dlhandle HANDLE)
+ -- Function: const lt_dlinfo * lt_dlgetinfo (lt_dlhandle HANDLE)
      Return a pointer to a struct that contains some information about
      the module HANDLE.  The contents of the struct must not be
      modified.  Return `NULL' on failure.
@@ -2841,7 +2842,7 @@ copy of this structure for the given HANDLE:
 handles of all the modules you have loaded, these functions allow you to
 iterate over libltdl's list of loaded modules:
 
- - Function: int lt_dlforeach
+ -- Function: int lt_dlforeach
           (int (*FUNC) (lt_dlhandle HANDLE, lt_ptr DATA), lt_ptr DATA)
      For each loaded module call the function FUNC.  The argument
      HANDLE is the handle of one of the loaded modules, DATA is the
@@ -2849,7 +2850,7 @@ iterate over libltdl's list of loaded modules:
      non-zero value for one of the handles, `lt_dlforeach' will stop
      calling FUNC and immediately return 1.  Otherwise 0 is returned.
 
- - Function: lt_dlhandle lt_dlhandle_next (lt_dlhandle place)
+ -- Function: lt_dlhandle lt_dlhandle_next (lt_dlhandle place)
      Iterate over the loaded module handles, returning the first handle
      in the list if PLACE is `NULL', and the next one on subsequent
      calls.  If PLACE is the last element in the list of loaded
@@ -2866,14 +2867,14 @@ to retrieve the data you stored earlier.  This allows for different
 libraries that each wish to store their own data against loaded modules
 to do so without interfering with one another's data.
 
- - Type: lt_dlcaller_id
+ -- Type: lt_dlcaller_id
      The opaque type used to hold individual data set keys.
 
- - Function: lt_dlcaller_id lt_dlcaller_register (void)
+ -- Function: lt_dlcaller_id lt_dlcaller_register (void)
      Use this to obtain a unique key to store and retrieve individual
      sets of per module data.
 
- - Function: lt_ptr lt_dlcaller_set_data (lt_dlcaller_id KEY,
+ -- Function: lt_ptr lt_dlcaller_set_data (lt_dlcaller_id KEY,
           lt_dlhandle HANDLE, lt_ptr DATA)
      Set DATA as the set of data uniquely associated with KEY and
      HANDLE for later retrieval.  This function returns the DATA
@@ -2887,7 +2888,7 @@ to do so without interfering with one another's data.
               if (stale == NULL)
                 {
                   char *error_msg = lt_dlerror ();
-          
+
                   if (error_msg != NULL)
                     {
                       my_error_handler (error_msg);
@@ -2899,7 +2900,7 @@ to do so without interfering with one another's data.
                   free (stale);
                 }
 
- - Function: lt_ptr lt_dlcaller_get_data (lt_dlcaller_id KEY,
+ -- Function: lt_ptr lt_dlcaller_get_data (lt_dlcaller_id KEY,
           lt_dlhandle HANDLE)
      Return the address of the data associated with KEY and HANDLE, or
      else `NULL' if there is none.
@@ -2912,12 +2913,12 @@ application to track the modules that have been loaded and unloaded:
      my_dlcaller_callback (lt_dlhandle handle, lt_ptr key_ptr)
      {
        struct my_module_data *my_data;
-     
+
        my_data = lt_dlcaller_get_data (handle, (lt_dlcaller_id) *key_ptr);
-     
+
        return process (my_data);
      }
-     
+
      int
      my_dlcaller_foreach (lt_dlcaller_id key)
      {
@@ -2927,8 +2928,8 @@ application to track the modules that have been loaded and unloaded:
 
 File: libtool.info,  Node: Module loaders for libltdl,  Next: Distributing libltdl,  Prev: User defined module data,  Up: Using libltdl
 
-How to create and register new module loaders
-=============================================
+10.5 How to create and register new module loaders
+==================================================
 
 Sometimes libltdl's many ways of gaining access to modules are not
 sufficient for the purposes of a project.  You can write your own
@@ -2964,17 +2965,17 @@ names.
 
 The following types are defined in `ltdl.h':
 
- - Type: lt_module
+ -- Type: lt_module
      `lt_module' is a dlloader dependent module.  The dynamic module
      loader extensions communicate using these low level types.
 
- - Type: lt_dlloader
+ -- Type: lt_dlloader
      `lt_dlloader' is a handle for module loader types.
 
- - Type: lt_user_data
+ -- Type: lt_user_data
      `lt_user_data' is used for specifying loader instance data.
 
- - Type: struct lt_user_dlloader {const char *SYM_PREFIX;
+ -- Type: struct lt_user_dlloader {const char *SYM_PREFIX;
           lt_module_open *MODULE_OPEN; lt_module_close *MODULE_CLOSE;
           lt_find_sym *FIND_SYM; lt_dlloader_exit *DLLOADER_EXIT; }
      If you want to define a new way to open dynamic modules, and have
@@ -2984,7 +2985,7 @@ The following types are defined in `ltdl.h':
      the value of the first parameter to each of the functions
      specified in the function pointer fields.
 
- - Type: lt_module lt_module_open (const char *FILENAME)
+ -- Type: lt_module lt_module_open (const char *FILENAME)
      The type of the loader function for an `lt_dlloader' module
      loader.  The value set in the dlloader_data field of the `struct
      lt_user_dlloader' structure will be passed into this function in
@@ -2994,7 +2995,7 @@ The following types are defined in `ltdl.h':
      `lt_sym_find' function pointers.  If the function fails it should
      return `NULL', and set the error message with `lt_dlseterror'.
 
- - Type: int lt_module_close (lt_user_data LOADER_DATA,
+ -- Type: int lt_module_close (lt_user_data LOADER_DATA,
           lt_module MODULE)
      The type of the unloader function for a user defined module loader.
      Implementatation of such a function should attempt to release any
@@ -3002,14 +3003,14 @@ The following types are defined in `ltdl.h':
      memory.  If the function fails for some reason, set the error
      message with `lt_dlseterror' and return non-zero.
 
- - Type: lt_ptr lt_find_sym (lt_module MODULE, const char *SYMBOL)
+ -- Type: lt_ptr lt_find_sym (lt_module MODULE, const char *SYMBOL)
      The type of the symbol lookup function for a user defined module
      loader.  Implementation of such a function should return the
      address of the named SYMBOL in the module MODULE, or else set the
      error message with `lt_dlseterror' and return `NULL' if lookup
      fails.
 
- - Type: int lt_dlloader_exit (lt_user_data LOADER_DATA)
+ -- Type: int lt_dlloader_exit (lt_user_data LOADER_DATA)
      The type of the finalisation function for a user defined module
      loader.  Implementation of such a function should free any
      resources associated with the loader, including any user specified
@@ -3023,22 +3024,22 @@ The following types are defined in `ltdl.h':
      register_myloader (void)
      {
        lt_user_dlloader dlloader;
-     
+
        /* User modules are responsible for their own initialisation. */
        if (myloader_init () != 0)
          return MYLOADER_INIT_ERROR;
-     
+
        dlloader.sym_prefix    = NULL;
        dlloader.module_open   = myloader_open;
        dlloader.module_close  = myloader_close;
        dlloader.find_sym      = myloader_find_sym.
        dlloader.dlloader_exit = myloader_exit;
        dlloader.dlloader_data = (lt_user_data)myloader_function;
-     
+
        /* Add my loader as the default module loader. */
        if (lt_dlloader_add (lt_dlloader_next (NULL), &dlloader, "myloader") != 0)
          return ERROR;
-     
+
        return OK;
      }
 
@@ -3053,7 +3054,7 @@ during the initialisation phase.
 libltdl provides the following functions for writing your own module
 loaders:
 
- - Function: int lt_dlloader_add (lt_dlloader *PLACE,
+ -- Function: int lt_dlloader_add (lt_dlloader *PLACE,
           lt_user_dlloader *DLLOADER, const char *LOADER_NAME)
      Add a new module loader to the list of all loaders, either as the
      last loader (if PLACE is `NULL'), else immediately before the
@@ -3069,7 +3070,7 @@ loaders:
               perror (lt_dlerror ());
           }
 
- - Function: int lt_dlloader_remove (const char *LOADER_NAME)
+ -- Function: int lt_dlloader_remove (const char *LOADER_NAME)
      Remove the loader identified by the unique name, LOADER_NAME.
      Before this can succeed, all modules opened by the named loader
      must have been closed.  Returns 0 for success, otherwise an error
@@ -3081,7 +3082,7 @@ loaders:
               perror (lt_dlerror ());
           }
 
- - Function: lt_dlloader * lt_dlloader_next (lt_dlloader *PLACE)
+ -- Function: lt_dlloader * lt_dlloader_next (lt_dlloader *PLACE)
      Iterate over the module loaders, returning the first loader if
      PLACE is `NULL', and the next one on subsequent calls. The handle
      is for use with `lt_dlloader_add'.
@@ -3092,7 +3093,7 @@ loaders:
               return ERROR;
           }
 
- - Function: lt_dlloader * lt_dlloader_find (const char *LOADER_NAME)
+ -- Function: lt_dlloader * lt_dlloader_find (const char *LOADER_NAME)
      Return the first loader with a matching LOADER_NAME identifier, or
      else `NULL', if the identifier is not found.
 
@@ -3106,22 +3107,22 @@ loaders:
               return ERROR;
           }
 
- - Function: const char * lt_dlloader_name (lt_dlloader *PLACE)
+ -- Function: const char * lt_dlloader_name (lt_dlloader *PLACE)
      Return the identifying name of PLACE, as obtained from
      `lt_dlloader_next' or `lt_dlloader_find'.  If this function fails,
      it will return `NULL' and set an error for retrieval with
      `lt_dlerror'.
 
- - Function: lt_user_data * lt_dlloader_data (lt_dlloader *PLACE)
+ -- Function: lt_user_data * lt_dlloader_data (lt_dlloader *PLACE)
      Return the address of the `dlloader_data' of PLACE, as obtained
      from `lt_dlloader_next' or `lt_dlloader_find'.  If this function
      fails, it will return `NULL' and set an error for retrieval with
      `lt_dlerror'.
 
-Error handling within user module loaders
------------------------------------------
+10.5.1 Error handling within user module loaders
+------------------------------------------------
 
- - Function: int lt_dladderror (const char *DIAGNOSTIC)
+ -- Function: int lt_dladderror (const char *DIAGNOSTIC)
      This function allows you to integrate your own error messages into
      `lt_dlerror'.  Pass in a suitable diagnostic message for return by
      `lt_dlerror', and an error identifier for use with `lt_dlseterror'
@@ -3133,7 +3134,7 @@ Error handling within user module loaders
           if (myerror < 0)
             perror (lt_dlerror ());
 
- - Function: int lt_dlseterror (int ERRORCODE)
+ -- Function: int lt_dlseterror (int ERRORCODE)
      When writing your own module loaders, you should use this function
      to raise errors so that they are propogated through the
      `lt_dlerror' interface. All of the standard errors used by libltdl
@@ -3151,8 +3152,8 @@ Error handling within user module loaders
 
 File: libtool.info,  Node: Distributing libltdl,  Prev: Module loaders for libltdl,  Up: Using libltdl
 
-How to distribute libltdl with your package
-===========================================
+10.6 How to distribute libltdl with your package
+================================================
 
 Even though libltdl is installed together with libtool, you may wish to
 include libltdl in the distribution of your package, for the convenience
@@ -3269,9 +3270,9 @@ libltdl was embedded using `libtoolize --ltdl'.
    Makefile.am:
      ...
      SUBDIRS = libltdl
-     
+
      INCLUDES = $(LTDLINCL)
-     
+
      myprog_LDFLAGS = -export-dynamic
      # The quotes around -dlopen below fool automake <= 1.4 into accepting it
      myprog_LDADD = $(LIBLTDL) "-dlopen" self "-dlopen" foo1.la
@@ -3288,8 +3289,8 @@ libltdl.
 
 File: libtool.info,  Node: Other languages,  Next: Troubleshooting,  Prev: Using libltdl,  Up: Top
 
-Using libtool with other languages
-**********************************
+11 Using libtool with other languages
+*************************************
 
 Libtool was first implemented in order to add support for writing shared
 libraries in the C language.  However, over time, libtool is being
@@ -3306,8 +3307,8 @@ and what special considerations you need to make if you do not use C.
 
 File: libtool.info,  Node: C++ libraries,  Up: Other languages
 
-Writing libraries for C++
-=========================
+11.1 Writing libraries for C++
+==============================
 
 Creating libraries of C++ code should be a fairly straightforward
 process, because its object files differ from C ones in only three ways:
@@ -3337,8 +3338,8 @@ with the C++ compiler for static C++ objects to be properly initialized.
 
 File: libtool.info,  Node: Troubleshooting,  Next: Maintaining,  Prev: Other languages,  Up: Top
 
-Troubleshooting
-***************
+12 Troubleshooting
+******************
 
 Libtool is under constant development, changing to remain up-to-date
 with modern operating systems.  If libtool doesn't work the way you
@@ -3353,8 +3354,8 @@ determine what the problem is, and how to resolve it.
 
 File: libtool.info,  Node: Libtool test suite,  Next: Reporting bugs,  Up: Troubleshooting
 
-The libtool test suite
-======================
+12.1 The libtool test suite
+===========================
 
 Libtool comes with its own set of programs that test its capabilities,
 and report obvious bugs in the libtool program.  These tests, too, are
@@ -3373,8 +3374,8 @@ make sure that it meets basic functional requirements.
 
 File: libtool.info,  Node: Test descriptions,  Next: When tests fail,  Up: Libtool test suite
 
-Description of test suite
--------------------------
+12.1.1 Description of test suite
+--------------------------------
 
 Here is a list of the current programs in the test suite, and what they
 test for:
@@ -3537,8 +3538,8 @@ test for:
 
 File: libtool.info,  Node: When tests fail,  Prev: Test descriptions,  Up: Libtool test suite
 
-When tests fail
----------------
+12.1.2 When tests fail
+----------------------
 
 Each of the above tests are designed to produce no output when they are
 run via `make check'.  The exit status of each program tells the
@@ -3559,8 +3560,8 @@ of them display debugging information.
 
 File: libtool.info,  Node: Reporting bugs,  Prev: Libtool test suite,  Up: Troubleshooting
 
-Reporting bugs
-==============
+12.2 Reporting bugs
+===================
 
 If you think you have discovered a bug in libtool, you should think
 twice: the libtool maintainer is notorious for passing the buck (or
@@ -3593,8 +3594,8 @@ well as the version number you are using (which can be found by typing
 
 File: libtool.info,  Node: Maintaining,  Next: GNU Free Documentation License,  Prev: Troubleshooting,  Up: Top
 
-Maintenance notes for libtool
-*****************************
+13 Maintenance notes for libtool
+********************************
 
 This chapter contains information that the libtool maintainer finds
 important.  It will be of no use to you unless you are considering
@@ -3611,8 +3612,8 @@ porting libtool to new systems, or writing your own libtool.
 
 File: libtool.info,  Node: New ports,  Next: Tested platforms,  Up: Maintaining
 
-Porting libtool to new systems
-==============================
+13.1 Porting libtool to new systems
+===================================
 
 Before you embark on porting libtool to an unsupported system, it is
 worthwhile to send e-mail to the libtool mailing list
@@ -3631,8 +3632,8 @@ documentation, or to libtool itself, are more than welcome.
 
 File: libtool.info,  Node: Information sources,  Next: Porting inter-library dependencies,  Up: New ports
 
-Information sources
--------------------
+13.1.1 Information sources
+--------------------------
 
 Once it is clear that a new port is necessary, you'll generally need the
 following information:
@@ -3687,8 +3688,8 @@ on the most effective way of accomplishing what you want.
 
 File: libtool.info,  Node: Porting inter-library dependencies,  Prev: Information sources,  Up: New ports
 
-Porting inter-library dependencies support
-------------------------------------------
+13.1.2 Porting inter-library dependencies support
+-------------------------------------------------
 
 Since version 1.2c, libtool has re-introduced the ability to do
 inter-library dependency on some platforms, thanks to a patch by Toshio
@@ -3745,8 +3746,8 @@ more than obvious optimizations.
 
 File: libtool.info,  Node: Tested platforms,  Next: Platform quirks,  Prev: New ports,  Up: Maintaining
 
-Tested platforms
-================
+13.2 Tested platforms
+=====================
 
 This table describes when libtool was last known to be tested on
 platforms where it claims to support shared libraries:
@@ -3909,7 +3910,7 @@ platforms where it claims to support shared libraries:
      sparc-unknown-linux-gnu         gcc      1.3b     ok
        (egcs-1.1.2, GNU ld 2.9.1.0.23)
      sparc64-unknown-linux-gnu       gcc      1.2f     ok
-     
+
      Notes:
      - "ok" means "all tests passed".
      - "NS" means "Not Shared", but OK for static libraries
@@ -3927,8 +3928,8 @@ with `CC='cc -Hnocopyr''.
 
 File: libtool.info,  Node: Platform quirks,  Next: libtool script contents,  Prev: Tested platforms,  Up: Maintaining
 
-Platform quirks
-===============
+13.3 Platform quirks
+====================
 
 This section is dedicated to the sanity of the libtool maintainers.  It
 describes the programs that libtool uses, how they vary from system to
@@ -3951,34 +3952,34 @@ write your own.
 
 File: libtool.info,  Node: References,  Next: Compilers,  Up: Platform quirks
 
-References
-----------
+13.3.1 References
+-----------------
 
 The following is a list of valuable documentation references:
 
    * SGI's IRIX Manual Pages, which can be found at
-     <http://techpubs.sgi.com/cgi-bin/infosrch.cgi?cmd=browse&db=man>.
+     `http://techpubs.sgi.com/cgi-bin/infosrch.cgi?cmd=browse&db=man'.
 
    * Sun's free service area
-     (<http://www.sun.com/service/online/free.html>) and documentation
-     server (<http://docs.sun.com/>).
+     (`http://www.sun.com/service/online/free.html') and documentation
+     server (`http://docs.sun.com/').
 
    * Compaq's Tru64 UNIX online documentation is at
-     (<http://tru64unix.compaq.com/faqs/publications/pub_page/doc_list.html>)
+     (`http://tru64unix.compaq.com/faqs/publications/pub_page/doc_list.html')
      with C++ documentation at
-     (<http://tru64unix.compaq.com/cplus/docs/index.htm>).
+     (`http://tru64unix.compaq.com/cplus/docs/index.htm').
 
    * Hewlett-Packard has online documentation at
-     (<http://docs.hp.com/index.html>).
+     (`http://docs.hp.com/index.html').
 
    * IBM has online documentation at
-     (<http://www.rs6000.ibm.com/resource/aix_resource/Pubs/>).
+     (`http://www.rs6000.ibm.com/resource/aix_resource/Pubs/').
 
 
 File: libtool.info,  Node: Compilers,  Next: Reloadable objects,  Prev: References,  Up: Platform quirks
 
-Compilers
----------
+13.3.2 Compilers
+----------------
 
 The only compiler characteristics that affect libtool are the flags
 needed (if any) to generate PIC objects.  In general, if a C compiler
@@ -4032,8 +4033,8 @@ these systems and no special PIC compiler flags are required.
 
 File: libtool.info,  Node: Reloadable objects,  Next: Multiple dependencies,  Prev: Compilers,  Up: Platform quirks
 
-Reloadable objects
-------------------
+13.3.3 Reloadable objects
+-------------------------
 
 On all known systems, a reloadable object can be created by running `ld
 -r -o OUTPUT.o INPUT1.o INPUT2.o'.  This reloadable object may be
@@ -4042,8 +4043,8 @@ treated as exactly equivalent to other objects.
 
 File: libtool.info,  Node: Multiple dependencies,  Next: Archivers,  Prev: Reloadable objects,  Up: Platform quirks
 
-Multiple dependencies
----------------------
+13.3.4 Multiple dependencies
+----------------------------
 
 On most modern platforms the order that dependent libraries are listed
 has no effect on object generation.  In theory, there are platforms
@@ -4061,8 +4062,8 @@ where it is necessary.
 
 File: libtool.info,  Node: Archivers,  Prev: Multiple dependencies,  Up: Platform quirks
 
-Archivers
----------
+13.3.5 Archivers
+----------------
 
 On all known systems, building a static library can be accomplished by
 running `ar cru libNAME.a OBJ1.o OBJ2.o ...', where the `.a' file is
@@ -4076,8 +4077,8 @@ with the `ranlib libNAME.a' command.  Some systems, like Irix, use the
 
 File: libtool.info,  Node: libtool script contents,  Next: Cheap tricks,  Prev: Platform quirks,  Up: Maintaining
 
-`libtool' script contents
-=========================
+13.4 `libtool' script contents
+==============================
 
 Since version 1.4, the `libtool' script is generated by `configure'
 (*note Configuring::).  In earlier versions, `configure' achieved this
@@ -4102,17 +4103,17 @@ character where necessary.
    Here is a listing of each of the configuration variables, and how
 they are used within `ltmain.sh' (*note Configuring::):
 
- - Variable: AR
+ -- Variable: AR
      The name of the system library archiver.
 
- - Variable: CC
+ -- Variable: CC
      The name of the C compiler used to configure libtool.
 
- - Variable: LD
+ -- Variable: LD
      The name of the linker that libtool should use internally for
      reloadable linking and possibly shared libraries.
 
- - Variable: NM
+ -- Variable: NM
      The name of a BSD-compatible `nm' program, which produces listings
      of global symbols in one the following formats:
 
@@ -4120,34 +4121,34 @@ they are used within `ltmain.sh' (*note Configuring::):
           ADDRESS D GLOBAL-VARIABLE-NAME
           ADDRESS T GLOBAL-FUNCTION-NAME
 
- - Variable: RANLIB
+ -- Variable: RANLIB
      Set to the name of the ranlib program, if any.
 
- - Variable: allow_undefined_flag
+ -- Variable: allow_undefined_flag
      The flag that is used by `archive_cmds' in order to declare that
      there will be unresolved symbols in the resulting shared library.
      Empty, if no such flag is required.  Set to `unsupported' if there
      is no way to generate a shared library with references to symbols
      that aren't defined in that library.
 
- - Variable: always_export_symbols
+ -- Variable: always_export_symbols
      Whether libtool should automatically generate a list of exported
      symbols using EXPORT_SYMBOLS_CMDS before linking an archive.  Set
      to `yes' or `no'.  Default is `no'.
 
- - Variable: archive_cmds
- - Variable: archive_expsym_cmds
- - Variable: old_archive_cmds
+ -- Variable: archive_cmds
+ -- Variable: archive_expsym_cmds
+ -- Variable: old_archive_cmds
      Commands used to create shared libraries, shared libraries with
      `-export-symbols' and static libraries, respectively.
 
- - Variable: old_archive_from_new_cmds
+ -- Variable: old_archive_from_new_cmds
      If the shared library depends on a static library,
      `old_archive_from_new_cmds' contains the commands used to create
      that static library.  If this variable is not empty,
      `old_archive_cmds' is not used.
 
- - Variable: old_archive_from_expsyms_cmds
+ -- Variable: old_archive_from_expsyms_cmds
      If a static library must be created from the export symbol list in
      order to correctly link with a shared library,
      `old_archive_from_expsyms_cmds' contains the commands needed to
@@ -4158,58 +4159,58 @@ they are used within `ltmain.sh' (*note Configuring::):
      commands, libtool will proceed to link against $OBJDIR/$NEWLIB
      instead of SONAME.
 
- - Variable: build_libtool_libs
+ -- Variable: build_libtool_libs
      Whether libtool should build shared libraries on this system.  Set
      to `yes' or `no'.
 
- - Variable: build_old_libs
+ -- Variable: build_old_libs
      Whether libtool should build static libraries on this system.  Set
      to `yes' or `no'.
 
- - Variable: compiler_c_o
+ -- Variable: compiler_c_o
      Whether the compiler supports the `-c' and `-o' options
      simultaneously. Set to `yes' or `no'.
 
- - Variable: compiler_o_lo
+ -- Variable: compiler_o_lo
      Whether the compiler supports compiling directly to a ".lo" file,
      i.e whether object files do not have to have the suffix ".o".  Set
      to `yes' or `no'.
 
- - Variable: dlopen_support
+ -- Variable: dlopen_support
      Whether `dlopen' is supported on the platform.  Set to `yes' or
      `no'.
 
- - Variable: dlopen_self
+ -- Variable: dlopen_self
      Whether it is possible to `dlopen' the executable itself.  Set to
      `yes' or `no'.
 
- - Variable: dlopen_self_static
+ -- Variable: dlopen_self_static
      Whether it is possible to `dlopen' the executable itself, when it
      is linked statically (`-all-static').  Set to `yes' or `no'.
 
- - Variable: echo
+ -- Variable: echo
      An `echo' program which does not interpret backslashes as an
      escape character.
 
- - Variable: exclude_expsyms
+ -- Variable: exclude_expsyms
      List of symbols that should not be listed in the preloaded symbols.
 
- - Variable: export_dynamic_flag_spec
+ -- Variable: export_dynamic_flag_spec
      Compiler link flag that allows a dlopened shared library to
      reference symbols that are defined in the program.
 
- - Variable: export_symbols_cmds
+ -- Variable: export_symbols_cmds
      Commands to extract exported symbols from LIBOBJS to the file
      EXPORT_SYMBOLS.
 
- - Variable: extract_expsyms_cmds
+ -- Variable: extract_expsyms_cmds
      Commands to extract the exported symbols list from a shared
      library.  These commands are executed if there is no file
      $OBJDIR/$SONAME-DEF, and should write the names of the exported
      symbols to that file, for the use of
      `old_archive_from_expsyms_cmds'.
 
- - Variable: fast_install
+ -- Variable: fast_install
      Determines whether libtool will privilege the installer or the
      developer.  The assumption is that installers will seldom run
      programs in the build tree, and the developer will seldom install.
@@ -4226,17 +4227,17 @@ they are used within `ltmain.sh' (*note Configuring::):
      can be turned from `yes' to `no' with the configure flag
      `--disable-fast-install'.
 
- - Variable: finish_cmds
+ -- Variable: finish_cmds
      Commands to tell the dynamic linker how to find shared libraries
      in a specific directory.
 
- - Variable: finish_eval
+ -- Variable: finish_eval
      Same as FINISH_CMDS, except the commands are not displayed.
 
- - Variable: fix_srcfile_path
+ -- Variable: fix_srcfile_path
      Expression to fix the shell variable $srcfile for the compiler.
 
- - Variable: global_symbol_pipe
+ -- Variable: global_symbol_pipe
      A pipeline that takes the output of NM, and produces a listing of
      raw symbols followed by their C names.  For example:
 
@@ -4250,85 +4251,85 @@ they are used within `ltmain.sh' (*note Configuring::):
      The first column contains the symbol type (used to tell data from
      code on some platforms), but its meaning is system dependent.
 
- - Variable: global_symbol_to_cdecl
+ -- Variable: global_symbol_to_cdecl
      A pipeline that translates the output of GLOBAL_SYMBOL_PIPE into
      proper C declarations.  On platforms whose linkers differentiate
      code from data, such as HP/UX, data symbols will be declared as
      such, and code symbols will be declared as functions.  On
      platforms that don't care, everything is assumed to be data.
 
- - Variable: hardcode_action
+ -- Variable: hardcode_action
      Either `immediate' or `relink', depending on whether shared
      library paths can be hardcoded into executables before they are
      installed, or if they need to be relinked.
 
- - Variable: hardcode_direct
+ -- Variable: hardcode_direct
      Set to `yes' or `no', depending on whether the linker hardcodes
      directories if a library is directly specified on the command line
      (such as `DIR/libNAME.a') when HARDCODE_LIBDIR_FLAG_SPEC is
      specified.
 
- - Variable: hardcode_into_libs
+ -- Variable: hardcode_into_libs
      Whether the platform supports hardcoding of run-paths into
      libraries.  If enabled, linking of programs will be much simpler
      but libraries will need to be relinked during installation.   Set
      to `yes' or `no'.
 
- - Variable: hardcode_libdir_flag_spec
+ -- Variable: hardcode_libdir_flag_spec
      Flag to hardcode a LIBDIR variable into a binary, so that the
      dynamic linker searches LIBDIR for shared libraries at runtime.
      If it is empty, libtool will try to use some other hardcoding
      mechanism.
 
- - Variable: hardcode_libdir_separator
+ -- Variable: hardcode_libdir_separator
      If the compiler only accepts a single HARDCODE_LIBDIR_FLAG, then
      this variable contains the string that should separate multiple
      arguments to that flag.
 
- - Variable: hardcode_minus_L
+ -- Variable: hardcode_minus_L
      Set to `yes' or `no', depending on whether the linker hardcodes
      directories specified by `-L' flags into the resulting executable
      when HARDCODE_LIBDIR_FLAG_SPEC is specified.
 
- - Variable: hardcode_shlibpath_var
+ -- Variable: hardcode_shlibpath_var
      Set to `yes' or `no', depending on whether the linker hardcodes
      directories by writing the contents of `$shlibpath_var' into the
      resulting executable when HARDCODE_LIBDIR_FLAG_SPEC is specified.
      Set to `unsupported' if directories specified by `$shlibpath_var'
      are searched at run time, but not at link time.
 
- - Variable: host
- - Variable: host_alias
+ -- Variable: host
+ -- Variable: host_alias
      For information purposes, set to the specified and canonical names
      of the system that libtool was configured for.
 
- - Variable: include_expsyms
+ -- Variable: include_expsyms
      List of symbols that must always be exported when using
      EXPORT_SYMBOLS.
 
- - Variable: libext
+ -- Variable: libext
      The standard old archive suffix (normally "a").
 
- - Variable: libname_spec
+ -- Variable: libname_spec
      The format of a library name prefix.  On all Unix systems, static
      libraries are called `libNAME.a', but on some systems (such as
      OS/2 or MS-DOS), the library is just called `NAME.a'.
 
- - Variable: library_names_spec
+ -- Variable: library_names_spec
      A list of shared library names.  The first is the name of the file,
      the rest are symbolic links to the file.  The name in the list is
      the file name that the linker finds when given `-lNAME'.
 
- - Variable: link_all_deplibs
+ -- Variable: link_all_deplibs
      Whether libtool must link a program against all its dependency
      libraries.  Set to `yes' or `no'.  Default is `unknown', which is
      a synonym for `yes'.
 
- - Variable: link_static_flag
+ -- Variable: link_static_flag
      Linker flag (passed through the C compiler) used to prevent dynamic
      linking.
 
- - Variable: need_lib_prefix
+ -- Variable: need_lib_prefix
      Whether libtool should automatically prefix module names with
      'lib'.  Set to `yes' or `no'.  By default, it is `unknown', which
      means the same as `yes', but documents that we are not really sure
@@ -4336,53 +4337,53 @@ they are used within `ltmain.sh' (*note Configuring::):
      link against a library without 'lib' prefix, i.e. it requires
      HARDCODE_DIRECT to be `yes'.
 
- - Variable: need_version
+ -- Variable: need_version
      Whether versioning is required for libraries, i.e. whether the
      dynamic linker requires a version suffix for all libraries.  Set
      to `yes' or `no'.  By default, it is `unknown', which means the
      same as `yes', but documents that we are not really sure about it.
 
- - Variable: need_locks
+ -- Variable: need_locks
      Whether files must be locked to prevent conflicts when compiling
      simultaneously. Set to `yes' or `no'.
 
- - Variable: no_builtin_flag
+ -- Variable: no_builtin_flag
      Compiler flag to disable builtin functions that conflict with
      declaring external global symbols as `char'.
 
- - Variable: no_undefined_flag
+ -- Variable: no_undefined_flag
      The flag that is used by `archive_cmds' in order to declare that
      there will be no unresolved symbols in the resulting shared
      library.  Empty, if no such flag is required.
 
- - Variable: objdir
+ -- Variable: objdir
      The name of the directory that contains temporary libtool files.
 
- - Variable: objext
+ -- Variable: objext
      The standard object file suffix (normally "o").
 
- - Variable: pic_flag
+ -- Variable: pic_flag
      Any additional compiler flags for building library object files.
 
- - Variable: postinstall_cmds
- - Variable: old_postinstall_cmds
+ -- Variable: postinstall_cmds
+ -- Variable: old_postinstall_cmds
      Commands run after installing a shared or static library,
      respectively.
 
- - Variable: postuninstall_cmds
- - Variable: old_postuninstall_cmds
+ -- Variable: postuninstall_cmds
+ -- Variable: old_postuninstall_cmds
      Commands run after uninstalling a shared or static library,
      respectively.
 
- - Variable: reload_cmds
- - Variable: reload_flag
+ -- Variable: reload_cmds
+ -- Variable: reload_flag
      Commands to create a reloadable object.
 
- - Variable: runpath_var
+ -- Variable: runpath_var
      The environment variable that tells the linker which directories to
      hardcode in the resulting executable.
 
- - Variable: shlibpath_overrides_runpath
+ -- Variable: shlibpath_overrides_runpath
      Indicates whether it is possible to override the hard-coded library
      search path of a program with an environment variable.  If this is
      set to no, libtool may have to create two copies of a program in
@@ -4391,27 +4392,27 @@ they are used within `ltmain.sh' (*note Configuring::):
      value of `fast_install'.  The default value is `unknown', which is
      equivalent to `no'.
 
- - Variable: shlibpath_var
+ -- Variable: shlibpath_var
      The environment variable that tells the dynamic linker where to
      find shared libraries.
 
- - Variable: soname_spec
+ -- Variable: soname_spec
      The name coded into shared libraries, if different from the real
      name of the file.
 
- - Variable: striplib
- - Variable: old_striplib
+ -- Variable: striplib
+ -- Variable: old_striplib
      Command to strip a shared (`striplib') or static (`old_striplib')
      library, respectively.  If these variables are empty, the strip
      flag in the install mode will be ignored for libraries (*note
      Install mode::).
 
- - Variable: sys_lib_dlsearch_path_spec
+ -- Variable: sys_lib_dlsearch_path_spec
      Expression to get the run-time system library search path.
      Directories that appear in this list are never hard-coded into
      executables.
 
- - Variable: sys_lib_search_path_spec
+ -- Variable: sys_lib_search_path_spec
      Expression to get the compile-time system library search path.
      This variable is used by libtool when it has to test whether a
      certain library is shared or static.  The directories listed in
@@ -4420,19 +4421,19 @@ they are used within `ltmain.sh' (*note Configuring::):
      linkers use this variable to extend the library search path.
      Linker switches such as `-L' also augment the search path.
 
- - Variable: thread_safe_flag_spec
+ -- Variable: thread_safe_flag_spec
      Linker flag (passed through the C compiler) used to generate
      thread-safe libraries.
 
- - Variable: version_type
+ -- Variable: version_type
      The library version numbering type.  One of `libtool',
      `freebsd-aout', `freebsd-elf', `irix', `linux', `osf', `sunos',
      `windows', or `none'.
 
- - Variable: whole_archive_flag_spec
+ -- Variable: whole_archive_flag_spec
      Compiler flag to generate shared objects from convenience archives.
 
- - Variable: wl
+ -- Variable: wl
      The C compiler flag that allows libtool to pass a flag directly to
      the linker.  Used as: `${wl}SOME-FLAG'.
 
@@ -4447,8 +4448,8 @@ libtool.
 
 File: libtool.info,  Node: Cheap tricks,  Prev: libtool script contents,  Up: Maintaining
 
-Cheap tricks
-============
+13.5 Cheap tricks
+=================
 
 Here are a few tricks that you can use in order to make maintainership
 easier:
@@ -4488,6 +4489,7 @@ GNU Free Documentation License
 ******************************
 
                         Version 1.1, March 2000
+
      Copyright (C) 2000  Free Software Foundation, Inc.
          59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
      Everyone is permitted to copy and distribute verbatim copies
@@ -4862,445 +4864,585 @@ File: libtool.info,  Node: Index,  Prev: GNU Free Documentation License,  Up: To
 Index
 *****
 
+ [index ]
 * Menu:
 
-* .la files:                             Linking libraries.
-* .libs subdirectory:                    Linking libraries.
+* .la files:                             Linking libraries.   (line  24)
+* .libs subdirectory:                    Linking libraries.   (line  69)
 * .lo files:                             Creating object files.
-* AC_CONFIG_AUX_DIR:                     Invoking libtoolize.
-* AC_DISABLE_FAST_INSTALL:               AC_PROG_LIBTOOL.
-* AC_DISABLE_SHARED:                     AC_PROG_LIBTOOL.
-* AC_DISABLE_STATIC:                     AC_PROG_LIBTOOL.
-* AC_FUNC_ALLOCA:                        Autoconf .o macros.
-* AC_LIBTOOL_DLOPEN:                     AC_PROG_LIBTOOL.
-* AC_LIBTOOL_WIN32_DLL:                  AC_PROG_LIBTOOL.
-* AC_PROG_LIBTOOL:                       AC_PROG_LIBTOOL.
-* AC_REPLACE_FUNCS:                      Autoconf .o macros.
-* aclocal:                               AC_PROG_LIBTOOL.
+                                                              (line  28)
+* AC_CONFIG_AUX_DIR:                     Invoking libtoolize. (line  55)
+* AC_DISABLE_FAST_INSTALL:               AC_PROG_LIBTOOL.     (line  87)
+* AC_DISABLE_SHARED:                     AC_PROG_LIBTOOL.     (line  93)
+* AC_DISABLE_STATIC:                     AC_PROG_LIBTOOL.     (line  99)
+* AC_FUNC_ALLOCA:                        Autoconf .o macros.  (line  13)
+* AC_LIBTOOL_DLOPEN:                     AC_PROG_LIBTOOL.     (line  67)
+* AC_LIBTOOL_WIN32_DLL:                  AC_PROG_LIBTOOL.     (line  73)
+* AC_PROG_LIBTOOL:                       AC_PROG_LIBTOOL.     (line  12)
+* AC_REPLACE_FUNCS:                      Autoconf .o macros.  (line  18)
+* aclocal:                               AC_PROG_LIBTOOL.     (line 162)
 * allow_undefined_flag:                  libtool script contents.
+                                                              (line  51)
 * always_export_symbols:                 libtool script contents.
-* AM_DISABLE_SHARED:                     AC_PROG_LIBTOOL.
-* AM_DISABLE_STATIC:                     AC_PROG_LIBTOOL.
-* AM_PROG_LIBTOOL:                       AC_PROG_LIBTOOL.
-* application-level dynamic linking <1>: Dlopened modules.
-* application-level dynamic linking:     Using libltdl.
-* ar:                                    Linking libraries.
+                                                              (line  58)
+* AM_DISABLE_SHARED:                     AC_PROG_LIBTOOL.     (line  94)
+* AM_DISABLE_STATIC:                     AC_PROG_LIBTOOL.     (line 100)
+* AM_PROG_LIBTOOL:                       AC_PROG_LIBTOOL.     (line  13)
+* application-level dynamic linking <1>: Dlopened modules.    (line   6)
+* application-level dynamic linking:     Using libltdl.       (line   6)
+* ar:                                    Linking libraries.   (line   6)
 * AR:                                    libtool script contents.
+                                                              (line  30)
 * archive_cmds:                          libtool script contents.
+                                                              (line  63)
 * archive_expsym_cmds:                   libtool script contents.
-* AS:                                    AC_PROG_LIBTOOL.
-* assign.test:                           Test descriptions.
+                                                              (line  64)
+* AS:                                    AC_PROG_LIBTOOL.     (line 159)
+* assign.test:                           Test descriptions.   (line 136)
 * avoiding shared libraries:             Static-only libraries.
-* bug reports:                           Reporting bugs.
-* buggy system linkers:                  Linking executables.
+                                                              (line   6)
+* bug reports:                           Reporting bugs.      (line   6)
+* buggy system linkers:                  Linking executables. (line  11)
 * bugs, subtle ones caused by buggy linkers: Linking executables.
-* build-relink.test:                     Test descriptions.
+                                                              (line  16)
+* build-relink.test:                     Test descriptions.   (line  72)
 * build_libtool_libs:                    libtool script contents.
+                                                              (line  86)
 * build_old_libs:                        libtool script contents.
-* C header files, portable:              C header files.
-* C++, pitfalls:                         C++ libraries.
-* C++, using:                            Other languages.
-* C, not using:                          Other languages.
+                                                              (line  90)
+* C header files, portable:              C header files.      (line   6)
+* C++, pitfalls:                         C++ libraries.       (line   6)
+* C++, using:                            Other languages.     (line   6)
+* C, not using:                          Other languages.     (line   6)
 * CC <1>:                                libtool script contents.
-* CC:                                    AC_PROG_LIBTOOL.
-* cdemo-conf.test:                       Test descriptions.
-* cdemo-exec.test:                       Test descriptions.
-* cdemo-make.test:                       Test descriptions.
-* cdemo-shared.test:                     Test descriptions.
-* cdemo-static.test:                     Test descriptions.
-* CFLAGS:                                AC_PROG_LIBTOOL.
-* clean mode:                            Clean mode.
-* command options, libtool:              Invoking libtool.
-* command options, libtoolize:           Invoking libtoolize.
-* compile mode:                          Compile mode.
+                                                              (line  33)
+* CC:                                    AC_PROG_LIBTOOL.     (line 108)
+* cdemo-conf.test:                       Test descriptions.   (line  14)
+* cdemo-exec.test:                       Test descriptions.   (line  14)
+* cdemo-make.test:                       Test descriptions.   (line  14)
+* cdemo-shared.test:                     Test descriptions.   (line  14)
+* cdemo-static.test:                     Test descriptions.   (line  14)
+* CFLAGS:                                AC_PROG_LIBTOOL.     (line 112)
+* clean mode:                            Clean mode.          (line   6)
+* command options, libtool:              Invoking libtool.    (line   6)
+* command options, libtoolize:           Invoking libtoolize. (line   6)
+* compile mode:                          Compile mode.        (line   6)
 * compiler_c_o:                          libtool script contents.
+                                                              (line  94)
 * compiler_o_lo:                         libtool script contents.
+                                                              (line  98)
 * compiling object files:                Creating object files.
-* complexity of library systems:         Postmortem.
-* config.guess:                          Distributing.
-* config.sub:                            Distributing.
-* configuring libtool:                   Configuring.
-* convenience libraries:                 Static libraries.
-* CPPFLAGS:                              AC_PROG_LIBTOOL.
+                                                              (line   6)
+* complexity of library systems:         Postmortem.          (line  11)
+* config.guess:                          Distributing.        (line  10)
+* config.sub:                            Distributing.        (line  13)
+* configuring libtool:                   Configuring.         (line   6)
+* convenience libraries:                 Static libraries.    (line   6)
+* CPPFLAGS:                              AC_PROG_LIBTOOL.     (line 118)
 * debugging libraries:                   Static-only libraries.
-* definition of libraries:               Libtool paradigm.
-* demo-conf.test:                        Test descriptions.
-* demo-exec.test:                        Test descriptions.
-* demo-inst.test:                        Test descriptions.
-* demo-make.test:                        Test descriptions.
-* demo-nofast.test:                      Test descriptions.
-* demo-nopic.test:                       Test descriptions.
-* demo-pic.test:                         Test descriptions.
-* demo-shared.test:                      Test descriptions.
-* demo-static.test:                      Test descriptions.
-* demo-unst.test:                        Test descriptions.
-* depdemo-conf.test:                     Test descriptions.
-* depdemo-exec.test:                     Test descriptions.
-* depdemo-inst.test:                     Test descriptions.
-* depdemo-make.test:                     Test descriptions.
-* depdemo-nofast.test:                   Test descriptions.
-* depdemo-shared.test:                   Test descriptions.
-* depdemo-static.test:                   Test descriptions.
-* depdemo-unst.test:                     Test descriptions.
+                                                              (line   6)
+* definition of libraries:               Libtool paradigm.    (line  11)
+* demo-conf.test:                        Test descriptions.   (line  40)
+* demo-exec.test:                        Test descriptions.   (line  40)
+* demo-inst.test:                        Test descriptions.   (line  40)
+* demo-make.test:                        Test descriptions.   (line  40)
+* demo-nofast.test:                      Test descriptions.   (line  40)
+* demo-nopic.test:                       Test descriptions.   (line  40)
+* demo-pic.test:                         Test descriptions.   (line  40)
+* demo-shared.test:                      Test descriptions.   (line  40)
+* demo-static.test:                      Test descriptions.   (line  40)
+* demo-unst.test:                        Test descriptions.   (line  40)
+* depdemo-conf.test:                     Test descriptions.   (line  89)
+* depdemo-exec.test:                     Test descriptions.   (line  89)
+* depdemo-inst.test:                     Test descriptions.   (line  89)
+* depdemo-make.test:                     Test descriptions.   (line  89)
+* depdemo-nofast.test:                   Test descriptions.   (line  89)
+* depdemo-shared.test:                   Test descriptions.   (line  89)
+* depdemo-static.test:                   Test descriptions.   (line  89)
+* depdemo-unst.test:                     Test descriptions.   (line  89)
 * dependencies between libraries:        Inter-library dependencies.
-* dependency versioning:                 Versioning.
-* deplibs.test:                          Test descriptions.
+                                                              (line   6)
+* dependency versioning:                 Versioning.          (line   6)
+* deplibs.test:                          Test descriptions.   (line  58)
 * deplibs_check_method:                  Porting inter-library dependencies.
-* design issues:                         Issues.
-* design of library interfaces:          Library tips.
-* design philosophy:                     Motivation.
+                                                              (line   6)
+* design issues:                         Issues.              (line   6)
+* design of library interfaces:          Library tips.        (line   6)
+* design philosophy:                     Motivation.          (line   6)
 * developing libraries:                  Static-only libraries.
-* dlclose <1>:                           Using libltdl.
-* dlclose:                               Dlopened modules.
-* dlerror:                               Using libltdl.
-* DLLTOOL:                               AC_PROG_LIBTOOL.
-* dlopen <1>:                            Dlopened modules.
-* dlopen:                                Using libltdl.
+                                                              (line   6)
+* dlclose <1>:                           Using libltdl.       (line   6)
+* dlclose:                               Dlopened modules.    (line   6)
+* dlerror:                               Using libltdl.       (line   6)
+* DLLTOOL:                               AC_PROG_LIBTOOL.     (line 151)
+* dlopen <1>:                            Dlopened modules.    (line   6)
+* dlopen:                                Using libltdl.       (line   6)
 * dlopen_self:                           libtool script contents.
+                                                              (line 107)
 * dlopen_self_static:                    libtool script contents.
+                                                              (line 111)
 * dlopen_support:                        libtool script contents.
-* dlopening modules <1>:                 Using libltdl.
-* dlopening modules:                     Dlopened modules.
-* dlopening, pitfalls:                   Dlopen issues.
-* dlsym <1>:                             Using libltdl.
-* dlsym:                                 Dlopened modules.
+                                                              (line 103)
+* dlopening modules <1>:                 Using libltdl.       (line   6)
+* dlopening modules:                     Dlopened modules.    (line   6)
+* dlopening, pitfalls:                   Dlopen issues.       (line   6)
+* dlsym <1>:                             Using libltdl.       (line   6)
+* dlsym:                                 Dlopened modules.    (line   6)
 * double-compilation, avoiding:          Static-only libraries.
-* dryrun.test:                           Test descriptions.
-* dynamic dependencies:                  Versioning.
-* dynamic linking, applications <1>:     Using libltdl.
-* dynamic linking, applications:         Dlopened modules.
-* dynamic modules, names:                Finding the dlname.
+                                                              (line   6)
+* dryrun.test:                           Test descriptions.   (line 133)
+* dynamic dependencies:                  Versioning.          (line   6)
+* dynamic linking, applications <1>:     Using libltdl.       (line   6)
+* dynamic linking, applications:         Dlopened modules.    (line   6)
+* dynamic modules, names:                Finding the dlname.  (line   6)
 * echo:                                  libtool script contents.
+                                                              (line 115)
 * eliding shared libraries:              Static-only libraries.
-* examples of using libtool:             Using libtool.
+                                                              (line   6)
+* examples of using libtool:             Using libtool.       (line   6)
 * exclude_expsyms:                       libtool script contents.
-* execute mode:                          Execute mode.
+                                                              (line 119)
+* execute mode:                          Execute mode.        (line   6)
 * export_dynamic_flag_spec:              libtool script contents.
+                                                              (line 122)
 * export_symbols_cmds:                   libtool script contents.
+                                                              (line 126)
 * extract_expsyms_cmds:                  libtool script contents.
-* failed tests:                          When tests fail.
+                                                              (line 130)
+* failed tests:                          When tests fail.     (line   6)
 * fast_install:                          libtool script contents.
+                                                              (line 137)
 * file_magic:                            Porting inter-library dependencies.
+                                                              (line  18)
 * file_magic_cmd:                        Porting inter-library dependencies.
+                                                              (line  18)
 * file_magic_test_file:                  Porting inter-library dependencies.
-* finish mode:                           Finish mode.
+                                                              (line  18)
+* finish mode:                           Finish mode.         (line   6)
 * finish_cmds:                           libtool script contents.
+                                                              (line 154)
 * finish_eval:                           libtool script contents.
+                                                              (line 158)
 * fix_srcfile_path:                      libtool script contents.
-* formal versioning:                     Libtool versioning.
-* global functions:                      Library tips.
+                                                              (line 161)
+* formal versioning:                     Libtool versioning.  (line   6)
+* global functions:                      Library tips.        (line  45)
 * global_symbol_pipe:                    libtool script contents.
+                                                              (line 164)
 * global_symbol_to_cdecl:                libtool script contents.
-* hardcode.test:                         Test descriptions.
+                                                              (line 178)
+* hardcode.test:                         Test descriptions.   (line  64)
 * hardcode_action:                       libtool script contents.
+                                                              (line 185)
 * hardcode_direct:                       libtool script contents.
+                                                              (line 190)
 * hardcode_into_libs:                    libtool script contents.
+                                                              (line 196)
 * hardcode_libdir_flag_spec:             libtool script contents.
+                                                              (line 202)
 * hardcode_libdir_separator:             libtool script contents.
+                                                              (line 208)
 * hardcode_minus_L:                      libtool script contents.
+                                                              (line 213)
 * hardcode_shlibpath_var:                libtool script contents.
-* header files:                          Library tips.
+                                                              (line 218)
+* header files:                          Library tips.        (line  39)
 * host:                                  libtool script contents.
+                                                              (line 225)
 * host_alias:                            libtool script contents.
+                                                              (line 226)
 * implementation of libtool:             libtool script contents.
-* include files, portable:               C header files.
+                                                              (line   6)
+* include files, portable:               C header files.      (line   6)
 * include_expsyms:                       libtool script contents.
+                                                              (line 230)
 * install:                               Installing libraries.
-* install mode:                          Install mode.
+                                                              (line  19)
+* install mode:                          Install mode.        (line   6)
 * installation, finishing:               Installing libraries.
+                                                              (line  53)
 * inter-library dependencies:            Inter-library dependencies.
+                                                              (line   6)
 * inter-library dependency:              Porting inter-library dependencies.
-* languages, non-C:                      Other languages.
+                                                              (line   6)
+* languages, non-C:                      Other languages.     (line   6)
 * LD <1>:                                libtool script contents.
-* LD:                                    AC_PROG_LIBTOOL.
-* LDFLAGS:                               AC_PROG_LIBTOOL.
+                                                              (line  36)
+* LD:                                    AC_PROG_LIBTOOL.     (line 123)
+* LDFLAGS:                               AC_PROG_LIBTOOL.     (line 128)
 * libext:                                libtool script contents.
-* libltdl:                               Using libltdl.
+                                                              (line 234)
+* libltdl:                               Using libltdl.       (line   6)
 * libname_spec:                          libtool script contents.
-* libraries, definition of:              Libtool paradigm.
+                                                              (line 237)
+* libraries, definition of:              Libtool paradigm.    (line  11)
 * libraries, finishing installation:     Installing libraries.
+                                                              (line  53)
 * libraries, stripping:                  Installing libraries.
-* library interfaces:                    Interfaces.
-* library interfaces, design:            Library tips.
+                                                              (line  43)
+* library interfaces:                    Interfaces.          (line   6)
+* library interfaces, design:            Library tips.        (line   6)
 * library object file:                   Creating object files.
+                                                              (line  28)
 * library_names_spec:                    libtool script contents.
-* LIBS:                                  AC_PROG_LIBTOOL.
-* libtool:                               Invoking libtool.
-* libtool command options:               Invoking libtool.
-* libtool examples:                      Using libtool.
+                                                              (line 242)
+* LIBS:                                  AC_PROG_LIBTOOL.     (line 134)
+* libtool:                               Invoking libtool.    (line   6)
+* libtool command options:               Invoking libtool.    (line   6)
+* libtool examples:                      Using libtool.       (line   6)
 * libtool implementation:                libtool script contents.
-* libtool libraries:                     Linking libraries.
-* libtool library versions:              Libtool versioning.
-* libtool specifications:                Motivation.
-* libtoolize:                            Invoking libtoolize.
-* libtoolize command options:            Invoking libtoolize.
-* link mode:                             Link mode.
-* link-2.test:                           Test descriptions.
-* link.test:                             Test descriptions.
+                                                              (line   6)
+* libtool libraries:                     Linking libraries.   (line  24)
+* libtool library versions:              Libtool versioning.  (line   6)
+* libtool specifications:                Motivation.          (line  20)
+* libtoolize:                            Invoking libtoolize. (line   6)
+* libtoolize command options:            Invoking libtoolize. (line   6)
+* link mode:                             Link mode.           (line   6)
+* link-2.test:                           Test descriptions.   (line 144)
+* link.test:                             Test descriptions.   (line 140)
 * link_all_deplibs:                      libtool script contents.
+                                                              (line 247)
 * link_static_flag:                      libtool script contents.
-* linking against installed libraries:   Linking executables.
-* linking against uninstalled libraries: Linking executables.
+                                                              (line 252)
+* linking against installed libraries:   Linking executables. (line   6)
+* linking against uninstalled libraries: Linking executables. (line  25)
 * linking with installed libtool libraries: Linking executables.
-* linking, partial:                      Link mode.
-* LN_S:                                  AC_PROG_LIBTOOL.
+                                                              (line  47)
+* linking, partial:                      Link mode.           (line 157)
+* LN_S:                                  AC_PROG_LIBTOOL.     (line 146)
 * lt_dladderror:                         Module loaders for libltdl.
-* lt_dladdsearchdir:                     Libltdl interface.
+                                                              (line 198)
+* lt_dladdsearchdir:                     Libltdl interface.   (line 156)
 * lt_dlcaller_get_data:                  User defined module data.
+                                                              (line  92)
 * lt_dlcaller_id:                        User defined module data.
+                                                              (line  58)
 * lt_dlcaller_register:                  User defined module data.
+                                                              (line  61)
 * lt_dlcaller_set_data:                  User defined module data.
-* lt_dlclose:                            Libltdl interface.
-* lt_dlerror:                            Libltdl interface.
-* lt_dlexit:                             Libltdl interface.
+                                                              (line  66)
+* lt_dlclose:                            Libltdl interface.   (line 112)
+* lt_dlerror:                            Libltdl interface.   (line 122)
+* lt_dlexit:                             Libltdl interface.   (line  53)
 * lt_dlforeach:                          User defined module data.
-* lt_dlforeachfile:                      Libltdl interface.
-* lt_dlfree:                             Libltdl interface.
+                                                              (line  34)
+* lt_dlforeachfile:                      Libltdl interface.   (line 176)
+* lt_dlfree:                             Libltdl interface.   (line 212)
 * lt_dlgetinfo:                          User defined module data.
-* lt_dlgetsearchpath:                    Libltdl interface.
-* lt_dlhandle:                           Libltdl interface.
+                                                              (line  24)
+* lt_dlgetsearchpath:                    Libltdl interface.   (line 172)
+* lt_dlhandle:                           Libltdl interface.   (line  38)
 * lt_dlhandle_next:                      User defined module data.
+                                                              (line  41)
 * lt_dlinfo:                             User defined module data.
-* lt_dlinit:                             Libltdl interface.
-* lt_dlinsertsearchdir:                  Libltdl interface.
-* lt_dlisresident:                       Libltdl interface.
+                                                              (line  12)
+* lt_dlinit:                             Libltdl interface.   (line  48)
+* lt_dlinsertsearchdir:                  Libltdl interface.   (line 161)
+* lt_dlisresident:                       Libltdl interface.   (line 204)
 * lt_dlloader:                           Module loaders for libltdl.
+                                                              (line  45)
 * lt_dlloader_add:                       Module loaders for libltdl.
+                                                              (line 131)
 * lt_dlloader_data:                      Module loaders for libltdl.
+                                                              (line 189)
 * lt_dlloader_exit:                      Module loaders for libltdl.
+                                                              (line  86)
 * lt_dlloader_find:                      Module loaders for libltdl.
+                                                              (line 169)
 * lt_dlloader_name:                      Module loaders for libltdl.
+                                                              (line 183)
 * lt_dlloader_next:                      Module loaders for libltdl.
+                                                              (line 158)
 * lt_dlloader_remove:                    Module loaders for libltdl.
-* lt_dlmakeresident:                     Libltdl interface.
-* lt_dlmalloc:                           Libltdl interface.
+                                                              (line 146)
+* lt_dlmakeresident:                     Libltdl interface.   (line 194)
+* lt_dlmalloc:                           Libltdl interface.   (line 210)
 * lt_dlmutex_geterror:                   Thread Saftey in libltdl.
+                                                              (line  34)
 * lt_dlmutex_lock:                       Thread Saftey in libltdl.
+                                                              (line  11)
 * lt_dlmutex_register:                   Thread Saftey in libltdl.
+                                                              (line  44)
 * lt_dlmutex_seterror:                   Thread Saftey in libltdl.
+                                                              (line  23)
 * lt_dlmutex_unlock:                     Thread Saftey in libltdl.
-* lt_dlopen:                             Libltdl interface.
-* lt_dlopenext:                          Libltdl interface.
-* lt_dlpreload:                          Libltdl interface.
-* lt_dlpreload_default:                  Libltdl interface.
-* lt_dlrealloc:                          Libltdl interface.
+                                                              (line  20)
+* lt_dlopen:                             Libltdl interface.   (line  59)
+* lt_dlopenext:                          Libltdl interface.   (line  96)
+* lt_dlpreload:                          Libltdl interface.   (line 128)
+* lt_dlpreload_default:                  Libltdl interface.   (line 134)
+* lt_dlrealloc:                          Libltdl interface.   (line 211)
 * lt_dlseterror:                         Module loaders for libltdl.
-* lt_dlsetsearchpath:                    Libltdl interface.
-* lt_dlsym:                              Libltdl interface.
-* lt_dlsymlist <1>:                      Dlpreopening.
-* lt_dlsymlist:                          Libltdl interface.
+                                                              (line 210)
+* lt_dlsetsearchpath:                    Libltdl interface.   (line 167)
+* lt_dlsym:                              Libltdl interface.   (line 117)
+* lt_dlsymlist <1>:                      Dlpreopening.        (line  41)
+* lt_dlsymlist:                          Libltdl interface.   (line  42)
 * lt_find_sym:                           Module loaders for libltdl.
+                                                              (line  79)
 * lt_module:                             Module loaders for libltdl.
+                                                              (line  41)
 * lt_module_close:                       Module loaders for libltdl.
+                                                              (line  72)
 * lt_module_open:                        Module loaders for libltdl.
-* lt_preloaded_symbols:                  Dlpreopening.
-* lt_ptr:                                Libltdl interface.
+                                                              (line  61)
+* lt_preloaded_symbols:                  Dlpreopening.        (line  46)
+* lt_ptr:                                Libltdl interface.   (line  35)
 * lt_user_data:                          Module loaders for libltdl.
+                                                              (line  48)
 * lt_user_dlloader:                      Module loaders for libltdl.
-* LTALLOCA:                              Autoconf .o macros.
-* LTDL_SET_PRELOADED_SYMBOLS:            Libltdl interface.
-* LTLIBOBJS:                             Autoconf .o macros.
-* LTLIBRARIES:                           Using Automake.
-* ltmain.sh:                             Distributing.
-* Makefile:                              Makefile rules.
-* Makefile.am:                           Makefile rules.
-* Makefile.in:                           Makefile rules.
-* mdemo-conf.test:                       Test descriptions.
-* mdemo-exec.test:                       Test descriptions.
-* mdemo-inst.test:                       Test descriptions.
-* mdemo-make.test:                       Test descriptions.
-* mdemo-shared.test:                     Test descriptions.
-* mdemo-static.test:                     Test descriptions.
-* mdemo-unst.test:                       Test descriptions.
-* mode, clean:                           Clean mode.
-* mode, compile:                         Compile mode.
-* mode, execute:                         Execute mode.
-* mode, finish:                          Finish mode.
-* mode, install:                         Install mode.
-* mode, link:                            Link mode.
-* mode, uninstall:                       Uninstall mode.
-* modules, dynamic <1>:                  Dlopened modules.
-* modules, dynamic:                      Using libltdl.
-* motivation for writing libtool:        Motivation.
-* names of dynamic modules:              Finding the dlname.
+                                                              (line  53)
+* LTALLOCA:                              Autoconf .o macros.  (line  13)
+* LTDL_SET_PRELOADED_SYMBOLS:            Libltdl interface.   (line 144)
+* LTLIBOBJS:                             Autoconf .o macros.  (line  18)
+* LTLIBRARIES:                           Using Automake.      (line   6)
+* ltmain.sh:                             Distributing.        (line  16)
+* Makefile:                              Makefile rules.      (line   6)
+* Makefile.am:                           Makefile rules.      (line   6)
+* Makefile.in:                           Makefile rules.      (line   6)
+* mdemo-conf.test:                       Test descriptions.   (line 114)
+* mdemo-exec.test:                       Test descriptions.   (line 114)
+* mdemo-inst.test:                       Test descriptions.   (line 114)
+* mdemo-make.test:                       Test descriptions.   (line 114)
+* mdemo-shared.test:                     Test descriptions.   (line 114)
+* mdemo-static.test:                     Test descriptions.   (line 114)
+* mdemo-unst.test:                       Test descriptions.   (line 114)
+* mode, clean:                           Clean mode.          (line   6)
+* mode, compile:                         Compile mode.        (line   6)
+* mode, execute:                         Execute mode.        (line   6)
+* mode, finish:                          Finish mode.         (line   6)
+* mode, install:                         Install mode.        (line   6)
+* mode, link:                            Link mode.           (line   6)
+* mode, uninstall:                       Uninstall mode.      (line   6)
+* modules, dynamic <1>:                  Dlopened modules.    (line   6)
+* modules, dynamic:                      Using libltdl.       (line   6)
+* motivation for writing libtool:        Motivation.          (line   6)
+* names of dynamic modules:              Finding the dlname.  (line   6)
 * need_lib_prefix:                       libtool script contents.
+                                                              (line 256)
 * need_locks:                            libtool script contents.
+                                                              (line 270)
 * need_version:                          libtool script contents.
+                                                              (line 264)
 * NM <1>:                                libtool script contents.
-* NM:                                    AC_PROG_LIBTOOL.
+                                                              (line  40)
+* NM:                                    AC_PROG_LIBTOOL.     (line 140)
 * no_builtin_flag:                       libtool script contents.
+                                                              (line 274)
 * no_undefined_flag:                     libtool script contents.
-* noinst-link.test:                      Test descriptions.
-* nomode.test:                           Test descriptions.
+                                                              (line 278)
+* noinst-link.test:                      Test descriptions.   (line  77)
+* nomode.test:                           Test descriptions.   (line 148)
 * none:                                  Porting inter-library dependencies.
+                                                              (line  38)
 * objdir:                                libtool script contents.
-* OBJDUMP:                               AC_PROG_LIBTOOL.
+                                                              (line 283)
+* OBJDUMP:                               AC_PROG_LIBTOOL.     (line 155)
 * object files, compiling:               Creating object files.
+                                                              (line   6)
 * object files, library:                 Creating object files.
+                                                              (line  28)
 * objext:                                libtool script contents.
+                                                              (line 286)
 * old_archive_cmds:                      libtool script contents.
+                                                              (line  65)
 * old_archive_from_expsyms_cmds:         libtool script contents.
+                                                              (line  75)
 * old_archive_from_new_cmds:             libtool script contents.
+                                                              (line  69)
 * old_postinstall_cmds:                  libtool script contents.
+                                                              (line 293)
 * old_postuninstall_cmds:                libtool script contents.
+                                                              (line 298)
 * old_striplib:                          libtool script contents.
-* opaque data types:                     Library tips.
-* options, libtool command:              Invoking libtool.
-* options, libtoolize command:           Invoking libtoolize.
-* other implementations, flaws in:       Postmortem.
-* partial linking:                       Link mode.
+                                                              (line 328)
+* opaque data types:                     Library tips.        (line  28)
+* options, libtool command:              Invoking libtool.    (line   6)
+* options, libtoolize command:           Invoking libtoolize. (line   6)
+* other implementations, flaws in:       Postmortem.          (line   6)
+* partial linking:                       Link mode.           (line 157)
 * pass_all:                              Porting inter-library dependencies.
+                                                              (line  32)
 * PIC (position-independent code):       Creating object files.
+                                                              (line  23)
 * pic_flag:                              libtool script contents.
-* pitfalls using C++:                    C++ libraries.
-* pitfalls with dlopen:                  Dlopen issues.
-* portable C headers:                    C header files.
+                                                              (line 289)
+* pitfalls using C++:                    C++ libraries.       (line   6)
+* pitfalls with dlopen:                  Dlopen issues.       (line   6)
+* portable C headers:                    C header files.      (line   6)
 * position-independent code:             Creating object files.
+                                                              (line  23)
 * postinstall_cmds:                      libtool script contents.
+                                                              (line 292)
 * postinstallation:                      Installing libraries.
+                                                              (line  53)
 * postuninstall_cmds:                    libtool script contents.
-* problem reports:                       Reporting bugs.
-* problems, blaming somebody else for:   Troubleshooting.
-* problems, solving:                     Troubleshooting.
-* program wrapper scripts:               Linking executables.
-* quote.test:                            Test descriptions.
-* ranlib:                                Linking libraries.
-* RANLIB <1>:                            AC_PROG_LIBTOOL.
+                                                              (line 297)
+* problem reports:                       Reporting bugs.      (line   6)
+* problems, blaming somebody else for:   Troubleshooting.     (line   6)
+* problems, solving:                     Troubleshooting.     (line   6)
+* program wrapper scripts:               Linking executables. (line  74)
+* quote.test:                            Test descriptions.   (line 151)
+* ranlib:                                Linking libraries.   (line  12)
+* RANLIB <1>:                            AC_PROG_LIBTOOL.     (line 143)
 * RANLIB:                                libtool script contents.
+                                                              (line  48)
 * reload_cmds:                           libtool script contents.
+                                                              (line 302)
 * reload_flag:                           libtool script contents.
-* renaming interface functions:          Library tips.
-* reporting bugs:                        Reporting bugs.
-* reusability of library systems:        Postmortem.
+                                                              (line 303)
+* renaming interface functions:          Library tips.        (line  21)
+* reporting bugs:                        Reporting bugs.      (line   6)
+* reusability of library systems:        Postmortem.          (line   6)
 * runpath_var:                           libtool script contents.
+                                                              (line 306)
 * saving time:                           Static-only libraries.
-* security problems with buggy linkers:  Linking executables.
-* sh.test:                               Test descriptions.
+                                                              (line   6)
+* security problems with buggy linkers:  Linking executables. (line  16)
+* sh.test:                               Test descriptions.   (line 154)
 * shared libraries, not using:           Static-only libraries.
-* shared library versions:               Versioning.
-* shl_load <1>:                          Using libltdl.
-* shl_load:                              Dlopened modules.
+                                                              (line   6)
+* shared library versions:               Versioning.          (line   6)
+* shl_load <1>:                          Using libltdl.       (line   6)
+* shl_load:                              Dlopened modules.    (line   6)
 * shlibpath_overrides_runpath:           libtool script contents.
+                                                              (line 310)
 * shlibpath_var:                         libtool script contents.
-* solving problems:                      Troubleshooting.
+                                                              (line 319)
+* solving problems:                      Troubleshooting.     (line   6)
 * soname_spec:                           libtool script contents.
-* specifications for libtool:            Motivation.
-* standalone binaries:                   Static libraries.
-* static linking:                        Static libraries.
+                                                              (line 323)
+* specifications for libtool:            Motivation.          (line  20)
+* standalone binaries:                   Static libraries.    (line  60)
+* static linking:                        Static libraries.    (line   6)
 * strip:                                 Installing libraries.
+                                                              (line   6)
 * striplib:                              libtool script contents.
+                                                              (line 327)
 * stripping libraries:                   Installing libraries.
+                                                              (line  43)
 * su:                                    Installing libraries.
-* suffix.test:                           Test descriptions.
+                                                              (line   9)
+* suffix.test:                           Test descriptions.   (line 157)
 * sys_lib_dlsearch_path_spec:            libtool script contents.
+                                                              (line 334)
 * sys_lib_search_path_spec:              libtool script contents.
-* test suite:                            Libtool test suite.
+                                                              (line 339)
+* test suite:                            Libtool test suite.  (line   6)
 * test_compile:                          Porting inter-library dependencies.
-* tests, failed:                         When tests fail.
+                                                              (line  26)
+* tests, failed:                         When tests fail.     (line   6)
 * thread_safe_flag_spec:                 libtool script contents.
+                                                              (line 348)
 * time, saving:                          Static-only libraries.
-* tricky design issues:                  Issues.
-* trouble with C++:                      C++ libraries.
-* trouble with dlopen:                   Dlopen issues.
-* troubleshooting:                       Troubleshooting.
-* undefined symbols, allowing:           Link mode.
-* uninstall mode:                        Uninstall mode.
+                                                              (line   6)
+* tricky design issues:                  Issues.              (line   6)
+* trouble with C++:                      C++ libraries.       (line   6)
+* trouble with dlopen:                   Dlopen issues.       (line   6)
+* troubleshooting:                       Troubleshooting.     (line   6)
+* undefined symbols, allowing:           Link mode.           (line  14)
+* uninstall mode:                        Uninstall mode.      (line   6)
 * unknown:                               Porting inter-library dependencies.
-* unresolved symbols, allowing:          Link mode.
+                                                              (line  43)
+* unresolved symbols, allowing:          Link mode.           (line  14)
 * using shared libraries, not:           Static-only libraries.
+                                                              (line   6)
 * version_type:                          libtool script contents.
-* versioning, formal:                    Libtool versioning.
+                                                              (line 352)
+* versioning, formal:                    Libtool versioning.  (line   6)
 * whole_archive_flag_spec:               libtool script contents.
+                                                              (line 357)
 * wl:                                    libtool script contents.
-* wrapper scripts for programs:          Linking executables.
+                                                              (line 360)
+* wrapper scripts for programs:          Linking executables. (line  74)
 
 
 
 Tag Table:
-Node: Top865
-Node: Introduction6706
-Node: Motivation8524
-Node: Issues9836
-Node: Other implementations11298
-Node: Postmortem11833
-Node: Libtool paradigm13446
-Node: Using libtool14387
-Node: Creating object files16497
-Node: Linking libraries19003
-Ref: Linking libraries-Footnote-121927
-Node: Linking executables22068
-Ref: Linking executables-Footnote-127046
-Node: Debugging executables27339
-Node: Installing libraries30059
-Ref: Installing libraries-Footnote-133219
-Node: Installing executables33301
-Node: Static libraries34086
-Node: Invoking libtool37314
-Node: Compile mode40556
-Node: Link mode42876
-Node: Execute mode49597
-Node: Install mode50369
-Node: Finish mode52367
-Node: Uninstall mode52794
-Node: Clean mode53227
-Node: Integrating libtool53678
-Node: Makefile rules54357
-Node: Using Automake55425
-Node: Configuring57995
-Node: AC_PROG_LIBTOOL59161
-Ref: AC_PROG_LIBTOOL-Footnote-166460
-Node: Distributing66721
-Node: Invoking libtoolize67569
-Node: Autoconf .o macros69292
-Node: Static-only libraries70532
-Ref: Static-only libraries-Footnote-171883
-Node: Versioning71992
-Node: Interfaces73360
-Node: Libtool versioning73985
-Node: Updating version info76190
-Node: Release numbers78060
-Node: Library tips79899
-Node: C header files82704
-Ref: C header files-Footnote-186397
-Node: Inter-library dependencies86606
-Node: Dlopened modules89264
-Ref: Dlopened modules-Footnote-191172
-Node: Building modules91238
-Node: Dlpreopening92438
-Node: Finding the dlname95262
-Ref: Finding the dlname-Footnote-196553
-Node: Dlopen issues96606
-Node: Using libltdl97651
-Node: Libltdl interface99425
-Node: Modules for libltdl109557
-Node: Thread Saftey in libltdl112054
-Node: User defined module data114251
-Node: Module loaders for libltdl119071
-Ref: Module loaders for libltdl-Footnote-1128419
-Node: Distributing libltdl128525
-Ref: Distributing libltdl-Footnote-1134978
-Node: Other languages135203
-Node: C++ libraries135829
-Node: Troubleshooting137246
-Node: Libtool test suite137775
-Node: Test descriptions138498
-Node: When tests fail144935
-Node: Reporting bugs145816
-Node: Maintaining147424
-Node: New ports148161
-Node: Information sources148844
-Node: Porting inter-library dependencies151298
-Node: Tested platforms154001
-Node: Platform quirks162426
-Node: References163390
-Node: Compilers164233
-Ref: Compilers-Footnote-1165795
-Node: Reloadable objects166111
-Node: Multiple dependencies166456
-Node: Archivers167333
-Node: libtool script contents167885
-Node: Cheap tricks183040
-Node: GNU Free Documentation License184533
-Node: Index203226
+Node: Top866
+Node: Introduction6708
+Node: Motivation8530
+Node: Issues9850
+Node: Other implementations11320
+Node: Postmortem11863
+Node: Libtool paradigm13484
+Node: Using libtool14429
+Node: Creating object files16543
+Node: Linking libraries19057
+Ref: Linking libraries-Footnote-121989
+Node: Linking executables22130
+Ref: Linking executables-Footnote-127116
+Node: Debugging executables27409
+Node: Installing libraries30117
+Ref: Installing libraries-Footnote-133270
+Node: Installing executables33352
+Node: Static libraries34145
+Node: Invoking libtool37381
+Node: Compile mode40627
+Node: Link mode42955
+Node: Execute mode49684
+Node: Install mode50464
+Node: Finish mode52470
+Node: Uninstall mode52905
+Node: Clean mode53346
+Node: Integrating libtool53805
+Node: Makefile rules54488
+Node: Using Automake55564
+Node: Configuring58132
+Node: AC_PROG_LIBTOOL59306
+Ref: AC_PROG_LIBTOOL-Footnote-166638
+Node: Distributing66899
+Node: Invoking libtoolize67755
+Node: Autoconf .o macros69490
+Node: Static-only libraries70744
+Ref: Static-only libraries-Footnote-172103
+Node: Versioning72212
+Node: Interfaces73584
+Node: Libtool versioning74217
+Node: Updating version info76430
+Node: Release numbers78308
+Node: Library tips80155
+Node: C header files82964
+Ref: C header files-Footnote-186635
+Node: Inter-library dependencies86844
+Node: Dlopened modules89506
+Ref: Dlopened modules-Footnote-191419
+Node: Building modules91485
+Node: Dlpreopening92693
+Node: Finding the dlname95527
+Ref: Finding the dlname-Footnote-196826
+Node: Dlopen issues96879
+Node: Using libltdl97932
+Node: Libltdl interface99712
+Node: Modules for libltdl109867
+Node: Thread Saftey in libltdl112354
+Node: User defined module data114566
+Node: Module loaders for libltdl119389
+Ref: Module loaders for libltdl-Footnote-1128757
+Node: Distributing libltdl128863
+Ref: Distributing libltdl-Footnote-1135316
+Node: Other languages135541
+Node: C++ libraries136173
+Node: Troubleshooting137600
+Node: Libtool test suite138135
+Node: Test descriptions138868
+Node: When tests fail145319
+Node: Reporting bugs146214
+Node: Maintaining147832
+Node: New ports148575
+Node: Information sources149268
+Node: Porting inter-library dependencies151736
+Node: Tested platforms154453
+Node: Platform quirks162883
+Node: References163857
+Node: Compilers164714
+Ref: Compilers-Footnote-1166290
+Node: Reloadable objects166606
+Node: Multiple dependencies166965
+Node: Archivers167856
+Node: libtool script contents168422
+Node: Cheap tricks183658
+Node: GNU Free Documentation License185161
+Node: Index203855
 
 End Tag Table
