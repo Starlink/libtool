@@ -24,7 +24,7 @@
 @ifnottex
 This file documents GNU Libtool @value{VERSION}
 
-Copyright (C) 1996-2003 Free Software Foundation, Inc.
+Copyright (C) 1996-2003, 2005 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1
@@ -165,7 +165,7 @@ Using libltdl
 
 * Libltdl interface::           How to use libltdl in your programs.
 * Modules for libltdl::         Creating modules that can be @code{dlopen}ed.
-* Thread Saftey in libltdl::	Registering callbacks for multi-thread safety.
+* Thread Safety in libltdl::	Registering callbacks for multi-thread safety.
 * User defined module data::    Associating data with loaded modules.
 * Module loaders for libltdl::  Creating user defined module loaders.
 * Distributing libltdl::        How to distribute libltdl with your package.
@@ -1278,6 +1278,9 @@ libraries (@pxref{Inter-library dependencies}).
 
 @item -o @var{output-file}
 Create @var{output-file} from the specified objects and libraries.
+
+@item -objectlist @var{file}
+Use a list of object files found in @var{file} to specify objects.
 
 @item -precious-files-regex @var{regex}
 Prevents removal of files from the temporary output directory whose
@@ -2740,7 +2743,7 @@ distribution terms that you use for the rest of that program.
 @menu
 * Libltdl interface::           How to use libltdl in your programs.
 * Modules for libltdl::         Creating modules that can be @code{dlopen}ed.
-* Thread Saftey in libltdl::	Registering callbacks for multi-thread safety.
+* Thread Safety in libltdl::	Registering callbacks for multi-thread safety.
 * User defined module data::    Associating data with loaded modules.
 * Module loaders for libltdl::  Creating user defined module loaders.
 * Distributing libltdl::        How to distribute libltdl with your package.
@@ -3071,7 +3074,7 @@ foo1_la_LDFLAGS = -module
 @end example
 
 
-@node Thread Saftey in libltdl
+@node Thread Safety in libltdl
 @section Using libtldl in a multi threaded environment
 
 Using the @code{lt_dlmutex_register()} function, and by providing some
@@ -3094,7 +3097,7 @@ The type of a matching unlock function.
 
 @deftypefn {Type} void lt_dlmutex_seterror @w{(const char *@var{error});}
 Many of the functions in the libltdl @sc{api} have a special return
-value to indicate to the client that an error has occured.  Normally (in
+value to indicate to the client that an error has occurred.  Normally (in
 single threaded applications) a string describing that error can be
 retrieved from internal storage with @code{lt_dlerror()}.
 
@@ -3501,10 +3504,10 @@ a convenience library or an installable libtool library.
 
 The most simplistic way to add @code{libltdl} to your package is to copy
 the source files, @file{ltdl.c} and @file{ltdl.h}, to a source directory
-withing your package and to build and link them along with the rest of
+within your package and to build and link them along with the rest of
 your sources.  To help you do this, the m4 macros for autoconf are
 available in @file{ltdl.m4}.  You must ensure that they are available in
-@file{aclocal.m4} before you run autoconf -- by appending the contents
+@file{aclocal.m4} before you run Autoconf -- by appending the contents
 of @file{ltdl.m4} to @file{acinclude.m4}, if you are using automake, or
 to @file{aclocal.m4} if you are not.  Having made the macros available,
 you must add a call to the @samp{AC_LIB_LTDL} macro to your package's
@@ -3604,9 +3607,6 @@ configure.in:
 dnl Enable building of the convenience library
 dnl and set LIBLTDL accordingly
 AC_LIBLTDL_CONVENIENCE
-dnl Substitute LTDLINCL and LIBLTDL in the Makefiles
-AC_SUBST(LTDLINCL)
-AC_SUBST(LIBLTDL)
 dnl Check for dlopen support
 AC_LIBTOOL_DLOPEN
 dnl Configure libtool

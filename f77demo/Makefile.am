@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 ##
-## $Id$
+## $Id: Makefile.am,v 1.2 2002/10/31 00:52:39 bfriesen Exp $
 
 AUTOMAKE_OPTIONS = no-dependencies foreign
 

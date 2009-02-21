@@ -625,7 +625,7 @@ argz_create_sep (str, delim, pargz, pargz_len)
   assert (pargz);
   assert (pargz_len);
 
-  /* Make a copy of STR, but replacing each occurence of
+  /* Make a copy of STR, but replacing each occurrence of
      DELIM with '\0'.  */
   argz_len = 1+ LT_STRLEN (str);
   if (argz_len)
@@ -1348,15 +1348,27 @@ sys_wll_open (loader_data, filename)
   if (!searchname)
     return 0;
 
-#if __CYGWIN__
   {
-    char wpath[MAX_PATH];
-    cygwin_conv_to_full_win32_path(searchname, wpath);
-    module = LoadLibrary(wpath);
-  }
+    /* Silence dialog from LoadLibrary on some failures.
+       No way to get the error mode, but to set it,
+       so set it twice to preserve any previous flags. */
+    UINT errormode = SetErrorMode(SEM_FAILCRITICALERRORS);
+    SetErrorMode(errormode | SEM_FAILCRITICALERRORS);
+
+#if defined(__CYGWIN__)
+    {
+      char wpath[MAX_PATH];
+      cygwin_conv_to_full_win32_path (searchname, wpath);
+      module = LoadLibrary (wpath);
+    }
 #else
-  module = LoadLibrary (searchname);
+    module = LoadLibrary (searchname);
 #endif
+
+    /* Restore the error mode. */
+    SetErrorMode(errormode);
+  }
+
   LT_DLFREE (searchname);
 
   /* libltdl expects this function to fail if it is unable

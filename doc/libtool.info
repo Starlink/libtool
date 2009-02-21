@@ -11,9 +11,9 @@ START-INFO-DIR-ENTRY
 * libtoolize: (libtool)Invoking libtoolize.     Adding libtool support.
 END-INFO-DIR-ENTRY
 
-   This file documents GNU Libtool 1.5.18
+   This file documents GNU Libtool 1.5.20
 
-   Copyright (C) 1996-2003 Free Software Foundation, Inc.
+   Copyright (C) 1996-2003, 2005 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1 or
@@ -30,7 +30,7 @@ Shared library support for GNU
 
 This file documents GNU Libtool, a script that allows package developers
 to provide generic shared library support.  This edition documents
-version 1.5.18.
+version 1.5.20.
 
    *Note Reporting bugs::, for information on how to report problems
 with libtool.
@@ -120,7 +120,7 @@ Using libltdl
 
 * Libltdl interface::           How to use libltdl in your programs.
 * Modules for libltdl::         Creating modules that can be `dlopen'ed.
-* Thread Saftey in libltdl::	Registering callbacks for multi-thread safety.
+* Thread Safety in libltdl::	Registering callbacks for multi-thread safety.
 * User defined module data::    Associating data with loaded modules.
 * Module loaders for libltdl::  Creating user defined module loaders.
 * Distributing libltdl::        How to distribute libltdl with your package.
@@ -1142,6 +1142,9 @@ output file (with the `-o' flag) from several object files.
 
 `-o OUTPUT-FILE'
      Create OUTPUT-FILE from the specified objects and libraries.
+
+`-objectlist FILE'
+     Use a list of object files found in FILE to specify objects.
 
 `-precious-files-regex REGEX'
      Prevents removal of files from the temporary output directory whose
@@ -2269,7 +2272,7 @@ interpreted language.  In fact, dlopen calls are frequently used in
 language interpreters to provide an efficient way to extend the
 language.
 
-   As of version 1.5.18, libtool provides support for dlopened modules.
+   As of version 1.5.20, libtool provides support for dlopened modules.
 However, you should indicate that your package is willing to use such
 support, by using the macro `AC_LIBTOOL_DLOPEN' in `configure.in'.  If
 this macro is not used (or it is used _after_ `AC_PROG_LIBTOOL'),
@@ -2477,7 +2480,7 @@ License, with the following exception:
 
 * Libltdl interface::           How to use libltdl in your programs.
 * Modules for libltdl::         Creating modules that can be `dlopen'ed.
-* Thread Saftey in libltdl::	Registering callbacks for multi-thread safety.
+* Thread Safety in libltdl::	Registering callbacks for multi-thread safety.
 * User defined module data::    Associating data with loaded modules.
 * Module loaders for libltdl::  Creating user defined module loaders.
 * Distributing libltdl::        How to distribute libltdl with your package.
@@ -2708,7 +2711,7 @@ libltdl provides the following functions:
      `LTDL_SET_PRELOADED_SYMBOLS'.
 
 
-File: libtool.info,  Node: Modules for libltdl,  Next: Thread Saftey in libltdl,  Prev: Libltdl interface,  Up: Using libltdl
+File: libtool.info,  Node: Modules for libltdl,  Next: Thread Safety in libltdl,  Prev: Libltdl interface,  Up: Using libltdl
 
 10.2 Creating modules that can be `dlopen'ed
 ============================================
@@ -2771,7 +2774,7 @@ The `Makefile.am' contains the necessary rules to build the module
      ...
 
 
-File: libtool.info,  Node: Thread Saftey in libltdl,  Next: User defined module data,  Prev: Modules for libltdl,  Up: Using libltdl
+File: libtool.info,  Node: Thread Safety in libltdl,  Next: User defined module data,  Prev: Modules for libltdl,  Up: Using libltdl
 
 10.3 Using libtldl in a multi threaded environment
 ==================================================
@@ -2794,7 +2797,7 @@ multi-threaded environment.
 
  -- Type: void lt_dlmutex_seterror (const char *ERROR);
      Many of the functions in the libltdl API have a special return
-     value to indicate to the client that an error has occured.
+     value to indicate to the client that an error has occurred.
      Normally (in single threaded applications) a string describing
      that error can be retrieved from internal storage with
      `lt_dlerror()'.
@@ -2820,7 +2823,7 @@ multi-threaded environment.
      all `NULL' to return to single threaded operation.
 
 
-File: libtool.info,  Node: User defined module data,  Next: Module loaders for libltdl,  Prev: Thread Saftey in libltdl,  Up: Using libltdl
+File: libtool.info,  Node: User defined module data,  Next: Module loaders for libltdl,  Prev: Thread Safety in libltdl,  Up: Using libltdl
 
 10.4 Data associated with loaded modules
 ========================================
@@ -3173,11 +3176,11 @@ objects to your package, or else which flavor of libltdl you want to
 use: a convenience library or an installable libtool library.
 
    The most simplistic way to add `libltdl' to your package is to copy
-the source files, `ltdl.c' and `ltdl.h', to a source directory withing
+the source files, `ltdl.c' and `ltdl.h', to a source directory within
 your package and to build and link them along with the rest of your
 sources.  To help you do this, the m4 macros for autoconf are available
 in `ltdl.m4'.  You must ensure that they are available in `aclocal.m4'
-before you run autoconf - by appending the contents of `ltdl.m4' to
+before you run Autoconf - by appending the contents of `ltdl.m4' to
 `acinclude.m4', if you are using automake, or to `aclocal.m4' if you
 are not.  Having made the macros available, you must add a call to the
 `AC_LIB_LTDL' macro to your package's `configure.in' to perform the
@@ -3268,9 +3271,6 @@ libltdl was embedded using `libtoolize --ltdl'.
      dnl Enable building of the convenience library
      dnl and set LIBLTDL accordingly
      AC_LIBLTDL_CONVENIENCE
-     dnl Substitute LTDLINCL and LIBLTDL in the Makefiles
-     AC_SUBST(LTDLINCL)
-     AC_SUBST(LIBLTDL)
      dnl Check for dlopen support
      AC_LIBTOOL_DLOPEN
      dnl Configure libtool
@@ -5121,7 +5121,7 @@ Index
 * linking against uninstalled libraries: Linking executables. (line  25)
 * linking with installed libtool libraries: Linking executables.
                                                               (line  47)
-* linking, partial:                      Link mode.           (line 157)
+* linking, partial:                      Link mode.           (line 160)
 * LN_S:                                  AC_PROG_LIBTOOL.     (line 146)
 * lt_dladderror:                         Module loaders for libltdl.
                                                               (line 199)
@@ -5170,15 +5170,15 @@ Index
                                                               (line 147)
 * lt_dlmakeresident:                     Libltdl interface.   (line 194)
 * lt_dlmalloc:                           Libltdl interface.   (line 210)
-* lt_dlmutex_geterror:                   Thread Saftey in libltdl.
+* lt_dlmutex_geterror:                   Thread Safety in libltdl.
                                                               (line  34)
-* lt_dlmutex_lock:                       Thread Saftey in libltdl.
+* lt_dlmutex_lock:                       Thread Safety in libltdl.
                                                               (line  11)
-* lt_dlmutex_register:                   Thread Saftey in libltdl.
+* lt_dlmutex_register:                   Thread Safety in libltdl.
                                                               (line  44)
-* lt_dlmutex_seterror:                   Thread Saftey in libltdl.
+* lt_dlmutex_seterror:                   Thread Safety in libltdl.
                                                               (line  23)
-* lt_dlmutex_unlock:                     Thread Saftey in libltdl.
+* lt_dlmutex_unlock:                     Thread Safety in libltdl.
                                                               (line  20)
 * lt_dlopen:                             Libltdl interface.   (line  59)
 * lt_dlopenext:                          Libltdl interface.   (line  96)
@@ -5273,7 +5273,7 @@ Index
 * options, libtool command:              Invoking libtool.    (line   6)
 * options, libtoolize command:           Invoking libtoolize. (line   6)
 * other implementations, flaws in:       Postmortem.          (line   6)
-* partial linking:                       Link mode.           (line 157)
+* partial linking:                       Link mode.           (line 160)
 * pass_all:                              Porting inter-library dependencies.
                                                               (line  32)
 * PIC (position-independent code):       Creating object files.
@@ -5372,90 +5372,90 @@ Index
 
 
 Tag Table:
-Node: Top902
-Node: Introduction6744
-Node: Motivation8566
-Node: Issues9886
-Node: Other implementations11356
-Node: Postmortem11899
-Node: Libtool paradigm13520
-Node: Using libtool14465
-Node: Creating object files16579
-Node: Linking libraries19093
-Ref: Linking libraries-Footnote-122025
-Node: Linking executables22166
-Ref: Linking executables-Footnote-127175
-Node: Debugging executables27468
-Node: Installing libraries30176
-Ref: Installing libraries-Footnote-133352
-Node: Installing executables33434
-Node: Static libraries34227
-Node: Invoking libtool37486
-Node: Compile mode40732
-Node: Link mode43060
-Node: Execute mode49789
-Node: Install mode50569
-Node: Finish mode52575
-Node: Uninstall mode53010
-Node: Clean mode53451
-Node: Integrating libtool53910
-Node: Makefile rules54593
-Node: Using Automake55669
-Node: Configuring58237
-Node: AC_PROG_LIBTOOL59411
-Ref: AC_PROG_LIBTOOL-Footnote-166743
-Node: Distributing67004
-Node: Invoking libtoolize68172
-Node: Autoconf .o macros69907
-Node: Static-only libraries71161
-Ref: Static-only libraries-Footnote-172520
-Node: Versioning72629
-Node: Interfaces74001
-Node: Libtool versioning74634
-Node: Updating version info76847
-Node: Release numbers78725
-Node: Library tips80572
-Node: C header files83381
-Ref: C header files-Footnote-187052
-Node: Inter-library dependencies87261
-Node: Dlopened modules89923
-Ref: Dlopened modules-Footnote-191836
-Node: Building modules91902
-Node: Dlpreopening93110
-Node: Finding the dlname95944
-Ref: Finding the dlname-Footnote-197243
-Node: Dlopen issues97296
-Node: Using libltdl98349
-Node: Libltdl interface100129
-Node: Modules for libltdl110284
-Node: Thread Saftey in libltdl112771
-Node: User defined module data114983
-Node: Module loaders for libltdl119806
-Ref: Module loaders for libltdl-Footnote-1129197
-Node: Distributing libltdl129303
-Ref: Distributing libltdl-Footnote-1135927
-Node: Other languages136152
-Node: C++ libraries136784
-Node: Troubleshooting138211
-Node: Libtool test suite138746
-Node: Test descriptions139479
-Node: When tests fail145930
-Node: Reporting bugs146825
-Node: Maintaining148443
-Node: New ports149186
-Node: Information sources149879
-Node: Porting inter-library dependencies152347
-Node: Tested platforms155064
-Node: Platform quirks163494
-Node: References164468
-Node: Compilers165325
-Ref: Compilers-Footnote-1166901
-Node: Reloadable objects167217
-Node: Multiple dependencies167576
-Node: Archivers168468
-Node: libtool script contents169034
-Node: Cheap tricks184270
-Node: GNU Free Documentation License185773
-Node: Index204472
+Node: Top908
+Node: Introduction6750
+Node: Motivation8572
+Node: Issues9892
+Node: Other implementations11362
+Node: Postmortem11905
+Node: Libtool paradigm13526
+Node: Using libtool14471
+Node: Creating object files16585
+Node: Linking libraries19099
+Ref: Linking libraries-Footnote-122031
+Node: Linking executables22172
+Ref: Linking executables-Footnote-127181
+Node: Debugging executables27474
+Node: Installing libraries30182
+Ref: Installing libraries-Footnote-133358
+Node: Installing executables33440
+Node: Static libraries34233
+Node: Invoking libtool37492
+Node: Compile mode40738
+Node: Link mode43066
+Node: Execute mode49881
+Node: Install mode50661
+Node: Finish mode52667
+Node: Uninstall mode53102
+Node: Clean mode53543
+Node: Integrating libtool54002
+Node: Makefile rules54685
+Node: Using Automake55761
+Node: Configuring58329
+Node: AC_PROG_LIBTOOL59503
+Ref: AC_PROG_LIBTOOL-Footnote-166835
+Node: Distributing67096
+Node: Invoking libtoolize68264
+Node: Autoconf .o macros69999
+Node: Static-only libraries71253
+Ref: Static-only libraries-Footnote-172612
+Node: Versioning72721
+Node: Interfaces74093
+Node: Libtool versioning74726
+Node: Updating version info76939
+Node: Release numbers78817
+Node: Library tips80664
+Node: C header files83473
+Ref: C header files-Footnote-187144
+Node: Inter-library dependencies87353
+Node: Dlopened modules90015
+Ref: Dlopened modules-Footnote-191928
+Node: Building modules91994
+Node: Dlpreopening93202
+Node: Finding the dlname96036
+Ref: Finding the dlname-Footnote-197335
+Node: Dlopen issues97388
+Node: Using libltdl98441
+Node: Libltdl interface100221
+Node: Modules for libltdl110376
+Node: Thread Safety in libltdl112863
+Node: User defined module data115076
+Node: Module loaders for libltdl119899
+Ref: Module loaders for libltdl-Footnote-1129290
+Node: Distributing libltdl129396
+Ref: Distributing libltdl-Footnote-1135914
+Node: Other languages136139
+Node: C++ libraries136771
+Node: Troubleshooting138198
+Node: Libtool test suite138733
+Node: Test descriptions139466
+Node: When tests fail145917
+Node: Reporting bugs146812
+Node: Maintaining148430
+Node: New ports149173
+Node: Information sources149866
+Node: Porting inter-library dependencies152334
+Node: Tested platforms155051
+Node: Platform quirks163481
+Node: References164455
+Node: Compilers165312
+Ref: Compilers-Footnote-1166888
+Node: Reloadable objects167204
+Node: Multiple dependencies167563
+Node: Archivers168455
+Node: libtool script contents169021
+Node: Cheap tricks184257
+Node: GNU Free Documentation License185760
+Node: Index204459
 
 End Tag Table
