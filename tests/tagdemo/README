@@ -1,0 +1,8 @@
+# $Id: README,v 1.2 2007/02/24 16:06:50 rwild Exp $
+
+This directory contains a sample package that demonstrates the use of
+GNU Libtool's multi-language support through the use of configuration
+tags.  It requires GNU autoconf, automake and of course libtool.
+
+The demonstration generates a library from C++ sources, which is then
+linked to a C++ program.

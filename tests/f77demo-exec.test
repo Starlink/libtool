@@ -1,34 +1,35 @@
 #! /bin/sh
-# f77demo-exec.test - check that programs in the ../f77demo subdirectory are viable
+# f77demo-exec.test - check that programs in the f77demo subdirectory are viable
+#
+#   Copyright (C) 2003, 2004 Free Software Foundation, Inc.
+#   Written by Gary V. Vaughan, 2003
+#
+#   This file is part of GNU Libtool.
+#
+# GNU Libtool is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# GNU Libtool is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with GNU Libtool; see the file COPYING.  If not, a copy
+# can be downloaded from  http://www.gnu.org/licenses/gpl.html,
+# or obtained by writing to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+####
 
-# Test script header.
-need_prefix=no
-if test -z "$srcdir"; then
-  srcdir=`echo "$0" | sed 's%/[^/]*$%%'`
-  test "$srcdir" = "$0" && srcdir=.
-  test "${VERBOSE+set}" != "set" && VERBOSE=yes
-fi
-. $srcdir/defs || exit 1
+. tests/defs || exit 1
 
-if test -f ../f77demo/fprogram$EXEEXT && test -f ../f77demo/cprogram$EXEEXT; then :
-else
-  echo "You must run f77demo-make.test before running $0" 1>&2
-  exit 77
-fi
+func_require "f77demo-make" "tests/f77demo/fprogram$EXEEXT" "tests/f77demo/cprogram$EXEEXT"
 
-# Check to see if the programs really run.
-echo "Executing uninstalled programs in ../f77demo"
+func_rmprefixdir
+func_exec_init "uninstalled"
+func_exec "tests/f77demo/fprogram$EXEEXT"
+func_exec "tests/f77demo/cprogram$EXEEXT"
 
-if ../f77demo/fprogram ; then :
-else
-  echo "$0: cannot execute ../f77demo/fprogram" 1>&2
-  status=1
-fi
-
-if ../f77demo/cprogram ; then :
-else
-  echo "$0: cannot execute ../f77demo/cprogram" 1>&2
-  status=1
-fi
-
-exit $status
+exit $exec_status
