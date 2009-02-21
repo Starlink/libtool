@@ -1,5 +1,5 @@
-This is ../../libtool/doc/libtool.info, produced by makeinfo version
-4.7 from ../../libtool/doc/libtool.texi.
+This is libtool.info, produced by makeinfo version 4.8 from
+libtool.texi.
 
 INFO-DIR-SECTION GNU programming tools
 START-INFO-DIR-ENTRY
@@ -11,16 +11,16 @@ START-INFO-DIR-ENTRY
 * libtoolize: (libtool)Invoking libtoolize.     Adding libtool support.
 END-INFO-DIR-ENTRY
 
-   This file documents GNU Libtool 1.5.22
+   This file documents GNU Libtool 1.5.24
 
-   Copyright (C) 1996-2003, 2005 Free Software Foundation, Inc.
+   Copyright (C) 1996-2003, 2005-2007 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1 or
-any later version published by the Free Software Foundation; with the
-no Invariant Sections, with no Front-Cover Texts, and with no
-Back-Cover Texts.  A copy of the license is included in the section
-entitled "GNU Free Documentation License".
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled "GNU
+Free Documentation License".
 
 
 File: libtool.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
@@ -30,7 +30,7 @@ Shared library support for GNU
 
 This file documents GNU Libtool, a script that allows package developers
 to provide generic shared library support.  This edition documents
-version 1.5.22.
+version 1.5.24.
 
    *Note Reporting bugs::, for information on how to report problems
 with libtool.
@@ -127,7 +127,8 @@ Using libltdl
 
 Using libtool with other languages
 
-* C++ libraries::
+* C++ libraries::               Writing libraries for C++
+* Tags::                        Tags
 
 Troubleshooting
 
@@ -940,6 +941,9 @@ and accepts the following options:
      packages to determine whether shared or static libraries will be
      built.
 
+`--tag=TAG'
+     Use configuration variables from tag TAG (*note Tags::).
+
 `--preserve-dup-deps'
      Do not remove duplicate dependencies in libraries.  When building
      packages with static libraries, the libraries may depend
@@ -1075,17 +1079,17 @@ output file (with the `-o' flag) from several object files.
 
 `-avoid-version'
      Tries to avoid versioning (*note Versioning::) for libraries and
-     modules, i.e. no version information is stored and no symbolic
+     modules, i.e., no version information is stored and no symbolic
      links are created.  If the platform requires versioning, this
      option has no effect.
 
 `-dlopen FILE'
      Same as `-dlpreopen FILE', if native dlopening is not supported on
      the host platform (*note Dlopened modules::) or if the program is
-     linked with `-static' or `-all-static'.  Otherwise, no effect.  If
-     FILE is `self' libtool will make sure that the program can
-     `dlopen' itself, either by enabling `-export-dynamic' or by
-     falling back to `-dlpreopen self'.
+     linked with `-static', `-static-libtool-libs', or `-all-static'.
+     Otherwise, no effect.  If FILE is `self' libtool will make sure
+     that the program can `dlopen' itself, either by enabling
+     `-export-dynamic' or by falling back to `-dlpreopen self'.
 
 `-dlpreopen FILE'
      Link FILE into the output program, and add its symbols to
@@ -1131,9 +1135,9 @@ output file (with the `-o' flag) from several object files.
 
 `-no-install'
      Link an executable OUTPUT-FILE that can't be installed and
-     therefore doesn't need a wrapper script.  Useful if the program is
-     only used in the build tree, e.g., for testing or generating other
-     files.
+     therefore doesn't need a wrapper script on systems that allow
+     hardcoding of library paths.  Useful if the program is only used
+     in the build tree, e.g., for testing or generating other files.
 
 `-no-undefined'
      Declare that OUTPUT-FILE does not depend on any other libraries.
@@ -1181,6 +1185,11 @@ output file (with the `-o' flag) from several object files.
 `-static'
      If OUTPUT-FILE is a program, then do not link it against any
      uninstalled shared libtool libraries.  If OUTPUT-FILE is a
+     library, then only create a static library.
+
+`-static-libtool-libs'
+     If OUTPUT-FILE is a program, then do not link it against any
+     shared libtool libraries (`.la' files).  If OUTPUT-FILE is a
      library, then only create a static library.
 
 `-version-info CURRENT[:REVISION[:AGE]]'
@@ -2234,7 +2243,7 @@ library systems and simple dynamic library systems.
 In order to build a shared library, it must be entirely self-contained
 (that is, have references only to symbols that are found in the `.lo'
 files or the specified `-l' libraries), and you need to specify the
--NO-UNDEFINED flag.  By default, libtool builds only static libraries
+`-no-undefined' flag.  By default, libtool builds only static libraries
 on these kinds of platforms.
 
    The simple-minded inter-library dependency tracking code of libtool
@@ -2272,7 +2281,7 @@ interpreted language.  In fact, dlopen calls are frequently used in
 language interpreters to provide an efficient way to extend the
 language.
 
-   As of version 1.5.22, libtool provides support for dlopened modules.
+   As of version 1.5.24, libtool provides support for dlopened modules.
 However, you should indicate that your package is willing to use such
 support, by using the macro `AC_LIBTOOL_DLOPEN' in `configure.in'.  If
 this macro is not used (or it is used _after_ `AC_PROG_LIBTOOL'),
@@ -2371,7 +2380,7 @@ when you link your program (*note Link mode::).
 
  -- Variable: const lt_dlsymlist * lt_preloaded_symbols
      An array of LT_SYMBOL structures, representing all the preloaded
-     symbols linked into the program. For each `-dlpreloaded' file
+     symbols linked into the program. For each `-dlpreopen'ed file
      there is an element with the NAME of the file and a ADDRESS of
      `0', followed by all symbols exported from this file.  For the
      executable itself the special name @PROGRAM@ is used.  The last
@@ -2666,13 +2675,13 @@ libltdl provides the following functions:
      directories and load them all during initialisation.  With this
      function you can have libltdl scan the colon delimited directory
      list in SEARCH_PATH for candidates, and pass them, along with DATA
-     to your own callback function, FUNC.  If SEACH_PATH is `NULL',
+     to your own callback function, FUNC.  If SEARCH_PATH is `NULL',
      then search all of the standard locations that `lt_dlopen' would
      examine.  This function will continue to make calls to FUNC for
      each file that it discovers in SEARCH_PATH until one of these
      calls returns non-zero, or until the files are exhausted.
-     `lt_dlforeachfile' returns value returned by the last call made to
-     FUNC.
+     `lt_dlforeachfile' returns the value returned by the last call
+     made to FUNC.
 
      For example you could define FUNC to build an ordered "argv"-like
      vector of files using DATA to hold the address of the start of the
@@ -2776,7 +2785,7 @@ The `Makefile.am' contains the necessary rules to build the module
 
 File: libtool.info,  Node: Thread Safety in libltdl,  Next: User defined module data,  Prev: Modules for libltdl,  Up: Using libltdl
 
-10.3 Using libtldl in a multi threaded environment
+10.3 Using libltdl in a multi threaded environment
 ==================================================
 
 Using the `lt_dlmutex_register()' function, and by providing some
@@ -3257,9 +3266,10 @@ convenience, installed or installable library, just compile with
 assume no dlopening mechanism is supported, and revert to dlpreopening,
 which is probably not what you want.
 
-   Avoid using the `-static' or `-all-static' switches when linking
-programs with libltdl.  This will not work on all platforms, because
-the dlopening functions may not be available for static linking.
+   Avoid using the `-static', `-static-libtool-libs' or `-all-static'
+switches when linking programs with libltdl.  This will not work on all
+platforms, because the dlopening functions may not be available for
+static linking.
 
    The following example shows you how to embed the convenience libltdl
 in your package.  In order to use the installable variant just replace
@@ -3314,10 +3324,11 @@ and what special considerations you need to make if you do not use C.
 
 * Menu:
 
-* C++ libraries::
+* C++ libraries::               Writing libraries for C++
+* Tags::                        Tags
 
 
-File: libtool.info,  Node: C++ libraries,  Up: Other languages
+File: libtool.info,  Node: C++ libraries,  Next: Tags,  Up: Other languages
 
 11.1 Writing libraries for C++
 ==============================
@@ -3346,6 +3357,38 @@ process, because its object files differ from C ones in only three ways:
 use the C++ compiler to compile and link C++ programs and libraries.  In
 some instances the `main()' function of a program must also be compiled
 with the C++ compiler for static C++ objects to be properly initialized.
+
+
+File: libtool.info,  Node: Tags,  Prev: C++ libraries,  Up: Other languages
+
+11.2 Tags
+=========
+
+Libtool supports multiple languages through the use of tags.
+Technically a tag corresponds to a set of configuration variables
+associated with a language.  These variables tell `libtool' how it
+should create objects and libraries for each language.
+
+   Tags are defined at `configure'-time for each language activated in
+the package.  Here is the correspondence between language names and tags
+names.
+
+Language name      Tag name
+C                  CC
+C++                CXX
+Java               GCJ
+Fortran 77         F77
+Windows Resource   RC
+
+   `libtool' tries to automatically infer which tag to use from the
+compiler command being used to compile or link.  If it can't infer a
+tag, then it defaults to the configuration for the `C' language.
+
+   The tag can also be specified using `libtool''s `--tag=TAG' option
+(*note Invoking libtool::).  It is a good idea to do so in `Makefile'
+rules, because that will allow users to substitute the compiler without
+relying on `libtool' inference heuristics.  When no tag is specified,
+`libtool' will default to `CC'; this tag always exists.
 
 
 File: libtool.info,  Node: Troubleshooting,  Next: Maintaining,  Prev: Other languages,  Up: Top
@@ -3750,9 +3793,9 @@ initialization and postprocessing (to setup/release variables for use
 with eval echo libname_spec etc.) and a case statement that decides
 which method is being used.  This is the real code... I wish I could
 condense it a little more, but I don't think I can without function
-calls.  I've mostly optimized it (moved things out of loops, etc) but
+calls.  I've mostly optimized it (moved things out of loops, etc.) but
 there is probably some fat left.  I thought I should stop while I was
-ahead, work on whatever bugs you discover, etc before thinking about
+ahead, work on whatever bugs you discover, etc. before thinking about
 more than obvious optimizations.
 
 
@@ -4099,7 +4142,7 @@ to 1.0, this script simply set shell variables, then sourced the
 libtool backend, `ltmain.sh'.  `ltconfig' from libtool version 1.1
 through 1.3 inlined the contents of `ltmain.sh' into the generated
 `libtool', which improved performance on many systems.  The tests that
-`ltconfig' used to perform are now kept in `libtool.m4' where thay can
+`ltconfig' used to perform are now kept in `libtool.m4' where they can
 be written using Autoconf.  This has the runtime performance benefits
 of inlined `ltmain.sh', _and_ improves the build time a little while
 considerably easing the amount of raw shell code that used to need
@@ -4346,7 +4389,7 @@ they are used within `ltmain.sh' (*note Configuring::):
      'lib'.  Set to `yes' or `no'.  By default, it is `unknown', which
      means the same as `yes', but documents that we are not really sure
      about it.  `yes' means that it is possible both to `dlopen' and to
-     link against a library without 'lib' prefix, i.e. it requires
+     link against a library without 'lib' prefix, i.e., it requires
      HARDCODE_DIRECT to be `yes'.
 
  -- Variable: need_version
@@ -5068,6 +5111,7 @@ Index
 * include files, portable:               C header files.      (line   6)
 * include_expsyms:                       libtool script contents.
                                                               (line 230)
+* inferring tags:                        Tags.                (line   6)
 * install:                               Installing libraries.
                                                               (line  19)
 * install mode:                          Install mode.        (line   6)
@@ -5078,6 +5122,7 @@ Index
                                                               (line   6)
 * inter-library dependency:              Porting inter-library dependencies.
                                                               (line   6)
+* language names:                        Tags.                (line   6)
 * languages, non-C:                      Other languages.     (line   6)
 * LD <1>:                                libtool script contents.
                                                               (line  36)
@@ -5121,7 +5166,7 @@ Index
 * linking against uninstalled libraries: Linking executables. (line  25)
 * linking with installed libtool libraries: Linking executables.
                                                               (line  47)
-* linking, partial:                      Link mode.           (line 160)
+* linking, partial:                      Link mode.           (line 165)
 * LN_S:                                  AC_PROG_LIBTOOL.     (line 146)
 * lt_dladderror:                         Module loaders for libltdl.
                                                               (line 199)
@@ -5273,7 +5318,7 @@ Index
 * options, libtool command:              Invoking libtool.    (line   6)
 * options, libtoolize command:           Invoking libtoolize. (line   6)
 * other implementations, flaws in:       Postmortem.          (line   6)
-* partial linking:                       Link mode.           (line 160)
+* partial linking:                       Link mode.           (line 165)
 * pass_all:                              Porting inter-library dependencies.
                                                               (line  32)
 * PIC (position-independent code):       Creating object files.
@@ -5341,6 +5386,7 @@ Index
                                                               (line 334)
 * sys_lib_search_path_spec:              libtool script contents.
                                                               (line 339)
+* tag names:                             Tags.                (line   6)
 * test suite:                            Libtool test suite.  (line   6)
 * test_compile:                          Porting inter-library dependencies.
                                                               (line  26)
@@ -5372,90 +5418,91 @@ Index
 
 
 Tag Table:
-Node: Top908
-Node: Introduction6750
-Node: Motivation8572
-Node: Issues9892
-Node: Other implementations11362
-Node: Postmortem11905
-Node: Libtool paradigm13526
-Node: Using libtool14471
-Node: Creating object files16585
-Node: Linking libraries19099
-Ref: Linking libraries-Footnote-122031
-Node: Linking executables22172
-Ref: Linking executables-Footnote-127181
-Node: Debugging executables27474
-Node: Installing libraries30182
-Ref: Installing libraries-Footnote-133358
-Node: Installing executables33440
-Node: Static libraries34233
-Node: Invoking libtool37492
-Node: Compile mode40738
-Node: Link mode43067
-Node: Execute mode49882
-Node: Install mode50662
-Node: Finish mode52668
-Node: Uninstall mode53103
-Node: Clean mode53544
-Node: Integrating libtool54003
-Node: Makefile rules54686
-Node: Using Automake55762
-Node: Configuring58330
-Node: AC_PROG_LIBTOOL59504
-Ref: AC_PROG_LIBTOOL-Footnote-166836
-Node: Distributing67097
-Node: Invoking libtoolize68265
-Node: Autoconf .o macros70000
-Node: Static-only libraries71254
-Ref: Static-only libraries-Footnote-172613
-Node: Versioning72722
-Node: Interfaces74094
-Node: Libtool versioning74727
-Node: Updating version info76940
-Node: Release numbers78818
-Node: Library tips80665
-Node: C header files83474
-Ref: C header files-Footnote-187145
-Node: Inter-library dependencies87354
-Node: Dlopened modules90016
-Ref: Dlopened modules-Footnote-191929
-Node: Building modules91995
-Node: Dlpreopening93203
-Node: Finding the dlname96037
-Ref: Finding the dlname-Footnote-197336
-Node: Dlopen issues97389
-Node: Using libltdl98442
-Node: Libltdl interface100222
-Node: Modules for libltdl110377
-Node: Thread Safety in libltdl112864
-Node: User defined module data115075
-Node: Module loaders for libltdl119898
-Ref: Module loaders for libltdl-Footnote-1129287
-Node: Distributing libltdl129393
-Ref: Distributing libltdl-Footnote-1135911
-Node: Other languages136136
-Node: C++ libraries136768
-Node: Troubleshooting138195
-Node: Libtool test suite138730
-Node: Test descriptions139463
-Node: When tests fail145914
-Node: Reporting bugs146809
-Node: Maintaining148427
-Node: New ports149170
-Node: Information sources149863
-Node: Porting inter-library dependencies152331
-Node: Tested platforms155048
-Node: Platform quirks163478
-Node: References164452
-Node: Compilers165309
-Ref: Compilers-Footnote-1166885
-Node: Reloadable objects167201
-Node: Multiple dependencies167560
-Node: Archivers168452
-Node: libtool script contents169018
-Node: Cheap tricks184254
-Node: GNU Free Documentation License185757
-Node: Index204456
+Node: Top873
+Node: Introduction6792
+Node: Motivation8614
+Node: Issues9934
+Node: Other implementations11404
+Node: Postmortem11947
+Node: Libtool paradigm13568
+Node: Using libtool14513
+Node: Creating object files16627
+Node: Linking libraries19141
+Ref: Linking libraries-Footnote-122073
+Node: Linking executables22214
+Ref: Linking executables-Footnote-127223
+Node: Debugging executables27516
+Node: Installing libraries30224
+Ref: Installing libraries-Footnote-133400
+Node: Installing executables33482
+Node: Static libraries34275
+Node: Invoking libtool37534
+Node: Compile mode40855
+Node: Link mode43184
+Node: Execute mode50279
+Node: Install mode51059
+Node: Finish mode53065
+Node: Uninstall mode53500
+Node: Clean mode53941
+Node: Integrating libtool54400
+Node: Makefile rules55083
+Node: Using Automake56159
+Node: Configuring58727
+Node: AC_PROG_LIBTOOL59901
+Ref: AC_PROG_LIBTOOL-Footnote-167233
+Node: Distributing67494
+Node: Invoking libtoolize68662
+Node: Autoconf .o macros70397
+Node: Static-only libraries71651
+Ref: Static-only libraries-Footnote-173010
+Node: Versioning73119
+Node: Interfaces74491
+Node: Libtool versioning75124
+Node: Updating version info77337
+Node: Release numbers79215
+Node: Library tips81062
+Node: C header files83871
+Ref: C header files-Footnote-187542
+Node: Inter-library dependencies87751
+Node: Dlopened modules90415
+Ref: Dlopened modules-Footnote-192328
+Node: Building modules92394
+Node: Dlpreopening93602
+Node: Finding the dlname96436
+Ref: Finding the dlname-Footnote-197735
+Node: Dlopen issues97788
+Node: Using libltdl98841
+Node: Libltdl interface100621
+Node: Modules for libltdl110781
+Node: Thread Safety in libltdl113268
+Node: User defined module data115479
+Node: Module loaders for libltdl120302
+Ref: Module loaders for libltdl-Footnote-1129691
+Node: Distributing libltdl129797
+Ref: Distributing libltdl-Footnote-1136339
+Node: Other languages136564
+Node: C++ libraries137273
+Node: Tags138713
+Node: Troubleshooting139899
+Node: Libtool test suite140434
+Node: Test descriptions141167
+Node: When tests fail147618
+Node: Reporting bugs148513
+Node: Maintaining150131
+Node: New ports150874
+Node: Information sources151567
+Node: Porting inter-library dependencies154035
+Node: Tested platforms156754
+Node: Platform quirks165184
+Node: References166158
+Node: Compilers167015
+Ref: Compilers-Footnote-1168591
+Node: Reloadable objects168907
+Node: Multiple dependencies169266
+Node: Archivers170158
+Node: libtool script contents170724
+Node: Cheap tricks185961
+Node: GNU Free Documentation License187464
+Node: Index206163
 
 End Tag Table

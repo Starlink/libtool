@@ -57,9 +57,10 @@
   Nick Hudson			skrll@netbsd.org		  2004-03-29
   Paolo Bonzini			bonzini@gnu.org			  2003-03-01
   Noah Jeffrey Misch		noah@cs.caltech.edu		  2004-07-05
-  Thorsten Glaser		tg@66h.42h.de			  2004-10-11 
+  Thorsten Glaser		tg@66h.42h.de			  2004-10-11
   Peter Ekberg			peda@lysator.liu.se		  2005-04-12
   Tim Rice			tim@multitalents.net		  2005-11-10
+  Eric Blake			ebb9@byu.net			  2006-01-18
 
 
 * The following additional people made especially gracious contributions of
@@ -73,12 +74,13 @@
   Bruno Haible			haible@ilog.fr
   Carl D. Roth			roth@cse.ucsc.edu
   Chris P. Ross			cross@eng.us.uu.net
+  Christian Biesinger		cbiesinger@web.de
+  Christopher Hulbert		cchgroupmail@gmail.com
   Dalibor Topic			robilad@kaffe.org
   Daniel Reed			n@ml.org
   DJ Delorie			dj@delorie.com
   Edouard G. Parmelan		Edouard.Parmelan@France.NCR.COM
   Erez Zadok			ezk@shekel.mcl.cs.columbia.edu
-  Eric Blake			ebb9@byu.net
   Eric Estievenart		eric@via.ecp.fr
   Frank Ch. Eigler		fche@cygnus.com
   Fred Cox			sailorfred@yahoo.com
@@ -86,12 +88,17 @@
   Howard Chu			hyc@highlandsun.com
   Ian Lance Taylor		ian@cygnus.com
   Jacob Meuser			jakemsr@jakemsr.com
+  James Su			james.su@gmail.com
   Jeff Squyres			jsquyres@lam-mpi.org
+  Jeremy C. Reed		reed@reedmedia.net
   Joel N. Weber II		devnull@gnu.org
+  Joerg Sonnenberger		joerg@netbsd.org
+  John Bowler			jbowler@acm.org
   Joseph Beckenbach III		jrb3@best.com
   Kenneth Albanowski		kjahds@kjahds.com
   Kevin Ryde			user42@zip.com.au
   Kurt D. Zeilenga		Kurt@OpenLDAP.Org
+  Maciej W. Rozycki		macro@linux-mips.org
   Manfred Weichel		Manfred.Weichel@pdb.siemens.de
   Marc Espie			espie@nerim.net
   Marc J. Fraioli		fraioli@dg-rtp.dg.com
@@ -100,13 +107,17 @@
   Patrick Welche		prlw1@newn.cam.ac.uk
   Paul Eggert			eggert@twinsun.com
   Peter Eisentraut		peter_e@gmx.net
+  Peter Jeremy			peterjeremy@optushome.com.au
   Rainer Orth			ro@TechFak.Uni-Bielefeld.DE
   Ralf Menzel			menzel@ls6.cs.uni-dortmund.de
   Robert Ögren			lists@roboros.com
   Sebastian Wilhelmi		wilhelmi@ira.uka.de
+  Simon Josefsson		jas@extundo.com
   Stephan Kulow			coolo@kde.org
+  Steve Ellcey			sje@cup.hp.com
   Steven M. Schultz		sms@wlv.iipo.gtegsc.com
   Sven Verdoolaege		skimo@liacs.nl
+  Terry D. Dontje		Terry.Dontje@Sun.COM
   Tim Mooney			mooney@dogbert.cc.ndsu.NoDak.edu
   Todd Vierling			tv@pobox.com
   Tom Tromey			tromey@cygnus.com

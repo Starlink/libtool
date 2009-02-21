@@ -24,12 +24,12 @@
 @ifnottex
 This file documents GNU Libtool @value{VERSION}
 
-Copyright (C) 1996-2003, 2005 Free Software Foundation, Inc.
+Copyright (C) 1996-2003, 2005-2007 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1
 or any later version published by the Free Software Foundation;
-with the no Invariant Sections, with no Front-Cover Texts,
+with no Invariant Sections, with no Front-Cover Texts,
 and with no Back-Cover Texts.  A copy of the license is included in
 the section entitled "GNU Free Documentation License".
 
@@ -51,12 +51,12 @@ identical to this one except for the removal of this paragraph
 
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 1996-2003 Free Software Foundation, Inc.
+Copyright @copyright{} 1996-2003, 2005-2007 Free Software Foundation, Inc.
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1
 or any later version published by the Free Software Foundation;
-with the no Invariant Sections, with no Front-Cover Texts,
+with no Invariant Sections, with no Front-Cover Texts,
 and with no Back-Cover Texts.  A copy of the license is included in
 the section entitled "GNU Free Documentation License".
 
@@ -172,7 +172,8 @@ Using libltdl
 
 Using libtool with other languages
 
-* C++ libraries::
+* C++ libraries::               Writing libraries for C++
+* Tags::                        Tags
 
 Troubleshooting
 
@@ -1066,6 +1067,9 @@ be executed by libtool.
 Display basic configuration options.  This provides a way for packages
 to determine whether shared or static libraries will be built.
 
+@item --tag=@var{tag}
+Use configuration variables from tag @var{tag} (@pxref{Tags}).
+
 @item --preserve-dup-deps
 Do not remove duplicate dependencies in libraries.  When building packages
 with static libraries, the libraries may depend circularly on each other
@@ -1211,16 +1215,17 @@ create a static library.
 
 @item -avoid-version
 Tries to avoid versioning (@pxref{Versioning}) for libraries and modules,
-i.e. no version information is stored and no symbolic links are created.
+i.e., no version information is stored and no symbolic links are created.
 If the platform requires versioning, this option has no effect.
 
 @item -dlopen @var{file}
 Same as @samp{-dlpreopen @var{file}}, if native dlopening is not
 supported on the host platform (@pxref{Dlopened modules}) or if
-the program is linked with @samp{-static} or @samp{-all-static}.
-Otherwise, no effect.  If @var{file} is @code{self} libtool will make
-sure that the program can @code{dlopen} itself, either by enabling
-@code{-export-dynamic} or by falling back to @samp{-dlpreopen self}.
+the program is linked with @samp{-static}, @samp{-static-libtool-libs},
+or @samp{-all-static}.  Otherwise, no effect.  If @var{file} is
+@code{self} libtool will make sure that the program can @code{dlopen}
+itself, either by enabling @code{-export-dynamic} or by falling back to
+@samp{-dlpreopen self}.
 
 @item -dlpreopen @var{file}
 Link @var{file} into the output program, and add its symbols to
@@ -1268,8 +1273,9 @@ if the program won't be necessarily installed.
 
 @item -no-install
 Link an executable @var{output-file} that can't be installed and
-therefore doesn't need a wrapper script.  Useful if the program is only
-used in the build tree, e.g., for testing or generating other files.
+therefore doesn't need a wrapper script on systems that allow hardcoding
+of library paths.  Useful if the program is only used in the build tree,
+e.g., for testing or generating other files.
 
 @item -no-undefined
 Declare that @var{output-file} does not depend on any other libraries.
@@ -1316,6 +1322,11 @@ program, @var{libdir} will be added to its run-time path.
 @item -static
 If @var{output-file} is a program, then do not link it against any
 uninstalled shared libtool libraries.  If @var{output-file} is a
+library, then only create a static library.
+
+@item -static-libtool-libs
+If @var{output-file} is a program, then do not link it against any
+shared libtool libraries (@samp{.la} files).  If @var{output-file} is a
 library, then only create a static library.
 
 @item -version-info @var{current}[:@var{revision}[:@var{age}]]
@@ -2467,7 +2478,7 @@ Some platforms, such as AIX, do not even allow you this
 flexibility.  In order to build a shared library, it must be entirely
 self-contained (that is, have references only to symbols that are found
 in the @samp{.lo} files or the specified @samp{-l} libraries), and you
-need to specify the @var{-no-undefined} flag.  By default, libtool
+need to specify the @samp{-no-undefined} flag.  By default, libtool
 builds only static libraries on these kinds of platforms.
 
 The simple-minded inter-library dependency tracking code of libtool
@@ -2617,7 +2628,7 @@ generic pointer to the appropriate object, such as @code{&fprintf}.
 
 @deftypevar {const lt_dlsymlist *} lt_preloaded_symbols
 An array of @var{lt_symbol} structures, representing all the preloaded
-symbols linked into the program. For each @samp{-dlpreloaded} file
+symbols linked into the program. For each @samp{-dlpreopen}ed file
 there is an element with the @var{name} of the file and a @var{address}
 of @code{0}, followed by all symbols exported from this file.
 For the executable itself the special name @@PROGRAM@@ is used.
@@ -2961,12 +2972,12 @@ known names, but rather find all of the modules in a set of
 directories and load them all during initialisation.  With this function
 you can have libltdl scan the colon delimited directory list in
 @var{search_path} for candidates, and pass them, along with @var{data}
-to your own callback function, @var{func}.  If @var{seach_path} is
+to your own callback function, @var{func}.  If @var{search_path} is
 @samp{NULL}, then search all of the standard locations that
 @code{lt_dlopen} would examine.  This function will continue to make
 calls to @var{func} for each file that it discovers in @var{search_path}
 until one of these calls returns non-zero, or until the files are
-exhausted.  @samp{lt_dlforeachfile} returns value returned by the last
+exhausted.  @samp{lt_dlforeachfile} returns the value returned by the last
 call made to @var{func}.
 
 For example you could define @var{func} to build an ordered
@@ -3075,7 +3086,7 @@ foo1_la_LDFLAGS = -module
 
 
 @node Thread Safety in libltdl
-@section Using libtldl in a multi threaded environment
+@section Using libltdl in a multi threaded environment
 
 Using the @code{lt_dlmutex_register()} function, and by providing some
 appropriate callback function definitions, libltdl can be used in a
@@ -3592,9 +3603,10 @@ You should probably also add @samp{AC_LIBTOOL_DLOPEN} to your
 libtool will assume no dlopening mechanism is supported, and revert to
 dlpreopening, which is probably not what you want.
 
-Avoid using the @code{-static} or @code{-all-static} switches when
-linking programs with libltdl.  This will not work on all platforms,
-because the dlopening functions may not be available for static linking.
+Avoid using the @code{-static}, @code{-static-libtool-libs} or
+@code{-all-static} switches when linking programs with libltdl.  This
+will not work on all platforms, because the dlopening functions may not
+be available for static linking.
 
 The following example shows you how to embed the convenience libltdl in
 your package.  In order to use the installable variant just replace
@@ -3645,7 +3657,8 @@ This chapter describes how libtool interacts with other languages,
 and what special considerations you need to make if you do not use C.
 
 @menu
-* C++ libraries::
+* C++ libraries::               Writing libraries for C++
+* Tags::                        Tags
 @end menu
 
 @node C++ libraries
@@ -3684,6 +3697,42 @@ the C++ compiler to compile and link C++ programs and libraries.  In
 some instances the @code{main()} function of a program must also be
 compiled with the C++ compiler for static C++ objects to be properly
 initialized.
+
+
+@node Tags
+@section Tags
+@cindex tag names
+@cindex language names
+@cindex inferring tags
+
+Libtool supports multiple languages through the use of tags.  Technically
+a tag corresponds to a set of configuration variables associated with a
+language.  These variables tell @command{libtool} how it should create
+objects and libraries for each language.
+
+Tags are defined at @command{configure}-time for each language activated
+in the package.  Here is the correspondence between language names and tags
+names.
+
+@multitable {Windows Resource} {Tag name}
+@item Language name    @tab Tag name
+@item C                @tab CC
+@item C++              @tab CXX
+@item Java             @tab GCJ
+@item Fortran 77       @tab F77
+@item Windows Resource @tab RC
+@end multitable
+
+@command{libtool} tries to automatically infer which tag to use from
+the compiler command being used to compile or link.  If it can't infer
+a tag, then it defaults to the configuration for the @code{C} language.
+
+The tag can also be specified using @command{libtool}'s
+@option{--tag=@var{tag}} option (@pxref{Invoking libtool}).  It is a good
+idea to do so in @file{Makefile} rules, because that will allow users to
+substitute the compiler without relying on @command{libtool} inference
+heuristics.  When no tag is specified, @command{libtool} will default
+to @code{CC}; this tag always exists.
 
 
 @node Troubleshooting
@@ -4129,9 +4178,9 @@ initialization and postprocessing (to setup/release variables for use
 with eval echo libname_spec etc.) and a case statement that decides
 which method is being used.  This is the real code... I wish I could
 condense it a little more, but I don't think I can without function
-calls.  I've mostly optimized it (moved things out of loops, etc) but
+calls.  I've mostly optimized it (moved things out of loops, etc.) but
 there is probably some fat left.  I thought I should stop while I was
-ahead, work on whatever bugs you discover, etc before thinking about
+ahead, work on whatever bugs you discover, etc.@: before thinking about
 more than obvious optimizations.
 
 @node Tested platforms
@@ -4312,7 +4361,7 @@ simply set shell variables, then sourced the libtool backend,
 inlined the contents of @code{ltmain.sh} into the generated
 @code{libtool}, which improved performance on many systems.  The tests
 that @file{ltconfig} used to perform are now kept in @file{libtool.m4}
-where thay can be written using Autoconf.  This has the runtime
+where they can be written using Autoconf.  This has the runtime
 performance benefits of inlined @code{ltmain.sh}, @emph{and} improves
 the build time a little while considerably easing the amount of raw
 shell code that used to need maintaining.
@@ -4601,7 +4650,7 @@ means the same as @samp{yes}, but documents that we are not really sure
 about it.
 @samp{yes} means that it is possible both to @code{dlopen} and to
 link against a library without 'lib' prefix,
-i.e. it requires @var{hardcode_direct} to be @samp{yes}.
+i.e., it requires @var{hardcode_direct} to be @samp{yes}.
 @end defvar
 
 @defvar need_version
