@@ -58,7 +58,7 @@
   Paolo Bonzini			bonzini@gnu.org			  2003-03-01
   Noah Jeffrey Misch		noah@cs.caltech.edu		  2004-07-05
   Thorsten Glaser		tg@66h.42h.de			  2004-10-11
-  Peter Ekberg			peda@lysator.liu.se		  2005-04-12
+  Peter Rosin			peda@lysator.liu.se		  2005-04-12
   Tim Rice			tim@multitalents.net		  2005-11-10
   Eric Blake			ebb9@byu.net			  2006-01-18
 
@@ -71,10 +71,12 @@
   Andrey Slepuhin		pooh@msu.ru
   Aneesh Kumar K.V		kvaneesh@hotmail.com
   Brad Smith			brad@comstyle.com
+  Brian Barrett			brbarret@osl.iu.edu
   Bruno Haible			haible@ilog.fr
   Carl D. Roth			roth@cse.ucsc.edu
   Chris P. Ross			cross@eng.us.uu.net
   Christian Biesinger		cbiesinger@web.de
+  Christoph Egger		Christoph_Egger@gmx.de
   Christopher Hulbert		cchgroupmail@gmail.com
   Dalibor Topic			robilad@kaffe.org
   Daniel Reed			n@ml.org
@@ -91,6 +93,7 @@
   James Su			james.su@gmail.com
   Jeff Squyres			jsquyres@lam-mpi.org
   Jeremy C. Reed		reed@reedmedia.net
+  Jim Meyering			jim@meyering.net
   Joel N. Weber II		devnull@gnu.org
   Joerg Sonnenberger		joerg@netbsd.org
   John Bowler			jbowler@acm.org
@@ -109,6 +112,7 @@
   Peter Eisentraut		peter_e@gmx.net
   Peter Jeremy			peterjeremy@optushome.com.au
   Rainer Orth			ro@TechFak.Uni-Bielefeld.DE
+  Rainer Tammer			tammer@tammer.net
   Ralf Menzel			menzel@ls6.cs.uni-dortmund.de
   Robert Ögren			lists@roboros.com
   Sebastian Wilhelmi		wilhelmi@ira.uka.de
