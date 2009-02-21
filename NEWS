@@ -1,6 +1,40 @@
 NEWS - list of user-visible changes between releases of GNU Libtool
 
-New in 2.2.4: 2008-05-04: CVS version 2.2.3a, Libtool team:
+New in 2.2.6 2008-09-05: git version 2.2.5a, Libtool team:
+
+* New features:
+
+  - New lt_dloadvise_preload() call to set a hint that only preloadeded
+    modules can be opened.
+  - libtoolize no longer removes config.guess and config.sub, even when
+    --install is passed.
+
+* Changes in supported systems or compilers:
+
+  - Fixes for ifort on Darwin, and newer Intel compilers (icc 10, ifort 9)
+    on GNU/Linux.
+  - Fixes for cwrapper (cygwin/mingw) under -stdc=c99.
+  - Support cross compile of MinGW with Wine.
+  - Initial support for cegcc (Windows CE/PocketPC) cross compilation.
+  - Initial support for lf95 (Lahey Fortran 8.1) on GNU/Linux.
+
+* Bug fixes:
+
+  - Several testsuite issues have been fixed, thanks to user feedback.
+
+  - Fix 2.2 regression that caused argz symbols to be exported from
+    libltdl unrenamed on systems that do not have working argz.
+
+  - Revert "lt_dlopen(NULL) works on AIX again.". It was not the
+    correct fix.
+
+  - Diagnose '-L' arguments correctly.
+
+  - Libtool no longer tries to open devices as files in execute mode.
+
+  - Libtool no longer removes *.gcno profile information from GCC.
+
+New in 2.2.4: 2008-05-04: git version 2.2.3a, Libtool team:
 
 * New features:
 
