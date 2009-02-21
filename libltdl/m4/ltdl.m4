@@ -7,7 +7,7 @@
 # unlimited permission to copy and/or distribute it, with or without
 # modifications, as long as this notice is preserved.
 
-# serial 14 LTDL_INIT
+# serial 15 LTDL_INIT
 
 # LT_CONFIG_LTDL_DIR(DIRECTORY, [LTDL-MODE])
 # ------------------------------------------
@@ -47,7 +47,7 @@ m4_define([_LT_BUILD_PREFIX],
 [m4_ifdef([AC_AUTOCONF_VERSION],
    [m4_if(m4_version_compare(m4_defn([AC_AUTOCONF_VERSION]), [2.62]),
 	  [-1], [m4_ifdef([_AC_HAVE_TOP_BUILD_PREFIX],
-	  		  [${top_build_prefix}],
+			  [${top_build_prefix}],
 			  [${top_builddir}/])],
 	  [${top_build_prefix}])],
    [${top_builddir}/])[]dnl
@@ -79,7 +79,7 @@ _$0()
 # AC_LIBLTDL_CONVENIENCE accepted a directory argument in older libtools,
 # now we have LT_CONFIG_LTDL_DIR:
 AU_DEFUN([AC_LIBLTDL_CONVENIENCE],
-[_LT_CONFIG_LTDL_DIR([$1])
+[_LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
 _LTDL_CONVENIENCE])
 
 dnl aclocal-1.4 backwards compatibility:
@@ -135,7 +135,7 @@ _$0()
 # AC_LIBLTDL_INSTALLABLE accepted a directory argument in older libtools,
 # now we have LT_CONFIG_LTDL_DIR:
 AU_DEFUN([AC_LIBLTDL_INSTALLABLE],
-[_LT_CONFIG_LTDL_DIR([$1])
+[_LT_CONFIG_LTDL_DIR([m4_default([$1], [libltdl])])
 _LTDL_INSTALLABLE])
 
 dnl aclocal-1.4 backwards compatibility:
@@ -711,6 +711,7 @@ beos*)
   LT_DLLOADERS="$LT_DLLOADERS ${lt_dlopen_dir+$lt_dlopen_dir/}load_add_on.la"
   ;;
 cygwin* | mingw* | os2* | pw32*)
+  AC_CHECK_DECLS([cygwin_conv_path], [], [], [[#include <sys/cygwin.h>]])
   LT_DLLOADERS="$LT_DLLOADERS ${lt_dlopen_dir+$lt_dlopen_dir/}loadlibrary.la"
   ;;
 esac

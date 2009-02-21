@@ -1,4 +1,4 @@
-# $Id: README,v 1.2 2007/02/24 16:06:50 rwild Exp $
+# $Id$
 
 This directory contains a sample package that demonstrates the use of
 GNU Libtool's multi-language support through the use of configuration

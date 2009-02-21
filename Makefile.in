@@ -277,6 +277,7 @@ LIBADD_SHL_LOAD = @LIBADD_SHL_LOAD@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
+LIPO = @LIPO@
 LN_S = @LN_S@
 LTDLOPEN = @LTDLOPEN@
 LTLIBOBJS = @LTLIBOBJS@
@@ -290,6 +291,8 @@ NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+OTOOL = @OTOOL@
+OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -407,9 +410,9 @@ m4dir = libltdl/m4
 # Using `cd' in backquotes may print the directory name, use this instead:
 lt__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 MKSTAMP = $(SHELL) $(srcdir)/$(auxdir)/mkstamp
-timestamp = set dummy `$(MKSTAMP) < $(srcdir)/ChangeLog`; shift; \
+timestamp = set dummy `$(MKSTAMP) $(srcdir)`; shift; \
 	case $(VERSION) in \
-	  *[acegikmoqsuwy]) TIMESTAMP=" $$1 $$2 $$3" ;; \
+	  *[acegikmoqsuwy]) TIMESTAMP=" $$1 $$2" ;; \
 	  *) TIMESTAMP="" ;; \
 	esac
 
@@ -454,7 +457,7 @@ sub_aclocal_m4_deps = \
 	$(m4dir)/lt~obsolete.m4
 
 sub_configure_deps = $(sub_aclocal_m4_deps) $(srcdir)/libltdl/aclocal.m4
-LTDL_VERSION_INFO = -version-info 8:1:1
+LTDL_VERSION_INFO = -version-info 8:2:1
 @INSTALL_LTDL_TRUE@ltdlincludedir = $(includedir)/libltdl
 @INSTALL_LTDL_TRUE@ltdlinclude_HEADERS = libltdl/libltdl/lt_system.h \
 @INSTALL_LTDL_TRUE@			  libltdl/libltdl/lt_error.h \
@@ -576,7 +579,8 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/deplibs-ident.at \
 		  tests/configure-iface.at \
 		  tests/stresstest.at \
-		  tests/cmdline_wrap.at
+		  tests/cmdline_wrap.at \
+		  tests/darwin.at
 
 
 # Be sure to reexport important environment variables:
@@ -685,15 +689,15 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/libltdl/Makefile.inc $(a
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnits '; \
-	      cd $(srcdir) && $(AUTOMAKE) --gnits  \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu '; \
+	      cd $(srcdir) && $(AUTOMAKE) --gnu  \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnits  Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnits  Makefile
+	  $(AUTOMAKE) --gnu  Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -850,21 +854,6 @@ uninstall-binSCRIPTS:
 	  echo " rm -f '$(DESTDIR)$(bindir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(bindir)/$$f"; \
 	done
-
-installcheck-binSCRIPTS: $(bin_SCRIPTS)
-	bad=0; pid=$$$$; list="$(bin_SCRIPTS)"; for p in $$list; do \
-	  case ' $(AM_INSTALLCHECK_STD_OPTIONS_EXEMPT) ' in \
-	   *" $$p "* | *" $(srcdir)/$$p "*) continue;; \
-	  esac; \
-	  f=`echo "$$p" | sed 's,^.*/,,;$(transform)'`; \
-	  for opt in --help --version; do \
-	    if "$(DESTDIR)$(bindir)/$$f" $$opt >c$${pid}_.out \
-	         2>c$${pid}_.err </dev/null \
-		 && test -n "`cat c$${pid}_.out`" \
-		 && test -z "`cat c$${pid}_.err`"; then :; \
-	    else echo "$$f does not support $$opt" 1>&2; bad=1; fi; \
-	  done; \
-	done; rm -f c$${pid}_.???; exit $$bad
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -1445,12 +1434,6 @@ check-TESTS: $(TESTS)
 	else :; fi
 
 distdir: $(DISTFILES)
-	@case `sed 15q $(srcdir)/NEWS` in \
-	*"$(VERSION)"*) : ;; \
-	*) \
-	  echo "NEWS not updated; not releasing" 1>&2; \
-	  exit 1;; \
-	esac
 	$(am__remove_distdir)
 	test -d $(distdir) || mkdir $(distdir)
 	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
@@ -1762,7 +1745,7 @@ install-ps-am: $(PSS)
 	  echo " $(INSTALL_DATA) '$$d$$p' '$(DESTDIR)$(psdir)/$$f'"; \
 	  $(INSTALL_DATA) "$$d$$p" "$(DESTDIR)$(psdir)/$$f"; \
 	done
-installcheck-am: installcheck-binSCRIPTS installcheck-local
+installcheck-am: installcheck-local
 
 maintainer-clean: maintainer-clean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
@@ -1810,17 +1793,16 @@ uninstall-am: uninstall-binSCRIPTS uninstall-dvi-am uninstall-html-am \
 	install-includeHEADERS install-info install-info-am \
 	install-libLTLIBRARIES install-ltdlincludeHEADERS install-man \
 	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip installcheck installcheck-am \
-	installcheck-binSCRIPTS installcheck-local installdirs \
-	installdirs-am maintainer-clean maintainer-clean-aminfo \
-	maintainer-clean-generic maintainer-clean-vti mostlyclean \
-	mostlyclean-aminfo mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool mostlyclean-vti pdf pdf-am ps ps-am tags \
-	tags-recursive uninstall uninstall-am uninstall-binSCRIPTS \
-	uninstall-dvi-am uninstall-hook uninstall-html-am \
-	uninstall-includeHEADERS uninstall-info-am \
-	uninstall-libLTLIBRARIES uninstall-ltdlincludeHEADERS \
-	uninstall-pdf-am uninstall-ps-am
+	install-strip installcheck installcheck-am installcheck-local \
+	installdirs installdirs-am maintainer-clean \
+	maintainer-clean-aminfo maintainer-clean-generic \
+	maintainer-clean-vti mostlyclean mostlyclean-aminfo \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	mostlyclean-vti pdf pdf-am ps ps-am tags tags-recursive \
+	uninstall uninstall-am uninstall-binSCRIPTS uninstall-dvi-am \
+	uninstall-hook uninstall-html-am uninstall-includeHEADERS \
+	uninstall-info-am uninstall-libLTLIBRARIES \
+	uninstall-ltdlincludeHEADERS uninstall-pdf-am uninstall-ps-am
 
 
 libtoolize: $(srcdir)/libtoolize.in $(top_builddir)/config.status

@@ -50,9 +50,9 @@ lt__cd		= CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 
 MKSTAMP = $(SHELL) $(srcdir)/$(auxdir)/mkstamp
 
-timestamp = set dummy `$(MKSTAMP) < $(srcdir)/ChangeLog`; shift; \
+timestamp = set dummy `$(MKSTAMP) $(srcdir)`; shift; \
 	case $(VERSION) in \
-	  *[acegikmoqsuwy]) TIMESTAMP=" $$1 $$2 $$3" ;; \
+	  *[acegikmoqsuwy]) TIMESTAMP=" $$1 $$2" ;; \
 	  *) TIMESTAMP="" ;; \
 	esac
 
@@ -465,7 +465,8 @@ TESTSUITE_AT	= tests/testsuite.at \
 		  tests/deplibs-ident.at \
 		  tests/configure-iface.at \
 		  tests/stresstest.at \
-		  tests/cmdline_wrap.at
+		  tests/cmdline_wrap.at \
+		  tests/darwin.at
 
 EXTRA_DIST     += $(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) $(srcdir)/tests/package.m4
 

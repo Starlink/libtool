@@ -1,4 +1,331 @@
+2008-05-04  Gary V. Vaughan  <gary@gnu.org>
+
+	GNU Libtool 2.2.4 was released.
+
+	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version
+	number to 2.2.4.
+	* libltdl/Makefile.inc (LTDL_VERSION_INFO): C:R+1:A because the
+	interfaces are unchanged, even though we improved the code some
+	more.
+	* NEWS: Updated.
+
+	Macro file serial updates for next stable release.
+	* libltdl/m4/libtool.m4, libltdl/m4/ltdl.m4,
+	libltdl/m4/ltoptions.m4, libltdl/m4/lt~obsolete.m4: Bump serial
+	numbers to account for changes since 2.2.2 release.
+
+	Make libtoolize tests work with distcheck.
+	* tests/testsuite.at (_LIBTOOLIZE_TRANSFORM): When $tst_aclocal
+	is set, transform paths that use it to generic
+	/usr/local/share/aclocal in time for AT_CHECK comparisons.
+
+2008-05-03  Gary V. Vaughan  <gary@gnu.org>
+
+	Don't trip over outdated acinclude.m4.
+	* libtoolize.m4sh (all_pkgconfig_files, all_pkgmacro_files)
+	(all_pkgltdl_files): New variables listing all files ever
+	maintained by any release of libtoolize.
+	(func_install_pkgconfig_parent, func_install_pkgltdl_files)
+	(func_install_pkgconfig_subproject, func_install_pkgmacro_parent)
+	(func_install_pkgmacro_subproject): Carefully clean up any files
+	that may have been installed by previous libtoolize releases.
+	* tests/libtoolize.at: New test for libltdl/acinclude.m4 removal.
+	Reported by Andreas Schwab <schwab@suse.de>.
+
+2008-05-02  Peter O'Gorman  <peter@pogma.com>
+
+	It helps to close quotes.
+	* libltdl/config/ltmain.m4sh (func_mode_link): Add closing '.
+
+2008-05-01  Peter O'Gorman  <peter@pogma.com>
+
+	Use AC_CHECK_TOOL for otool and otool64.
+	* libltdl/m4/libtool.m4 (_LT_REQUIRED_DARWIN_CHECKS): Check.
+	* libltdl/config/ltmain.m4sh (func_mode_link): Use.
+	Reported by Richard Purdie <rpurdie@rpsys.net>
+
+2008-04-30  Eric Blake  <ebb9@byu.net>
+
+	Support cygwin 1.7.0 in loadlibrary loader.
+	* libltdl/m4/ltdl.m4 (LT_LIB_DLLOAD) <cygwin>: Check for modern
+	function.
+	* libltdl/loaders/loadlibrary.c (vm_open): Avoid deprecated
+	cygwin_conv_to_full_win32_path.
+
+2008-04-29  Gary V. Vaughan  <gary@gnu.org>
+
+	New libtoolize --no-warn option and LIBTOOLIZE_OPTIONS parsing.
+	* libltdl/config/general.m4sh (opt_warning): New option.
+	(func_warning): Only display a warning message if $opt_warning
+	is true.
+	* libtoolize.m4sh: Accept options in LIBTOOLIZE_OPTIONS
+	environment variable.
+	(--no-warn): Parse new option.
+	(func_serial_update_check, func_keyword_update): Use func_warning.
+	(func_check_macros): Bail out before style issues nags when
+	$opt_warning is false.
+	* doc/libtool.texi (Invoking Libtoolize): Document it.
+	* tests/libtoolize.at: Test it.
+	* NEWS: Updated.
+
+	Fix libtoolize test failure with aclocal-1.10.1.
+	* tests/libtoolize.at
+	(verbatim aclocal.m4 w/o AC_CONFIG_MACRO_DIR): Force aclocal to
+	search the source tree for latest libtool macros.
+
+2008-04-24  Eric Blake  <ebb9@byu.net>
+
+	Fix bug in 2008-04-21 type improvements.
+	* libltdl/ltdl.c (load_deplibs): Fix casting bug.
+
+2008-04-23  Michael Haubenwallner  <michael.haubenwallner@salomon.at>
+
+	Use /nonexistent as destination for files not to be installed.
+	* tests/darwin.at (darwin fat compile): Fix typo.
+	* tests/inherited_flags.at (inherited_linker_flags): Change
+	-rpath to /nonexistent.  This helps to avoid accidentally
+	picking up libraries below /usr/local.
+	* tests/template.at (simple template test): Likewise.  Fixes
+	test failure for additional incompatible libstdc++ in
+	/usr/local.
+	* tests/testsuite.at (configure_options): Add
+	--prefix=/nonexistent.
+
+2008-04-23  Gary V. Vaughan  <gary@gnu.org>
+
+	* libtoolize.m4sh (rerun_aclocal): Remove unused variable.
+	Reported by Olly Betts <olly@survex.com>
+
+2008-04-23  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* tests/static.at (ccache -all-static): Ignore link warnings.
+	Report by Gary V. Vaughan.
+
+2008-04-22  Gary V. Vaughan  <gary@gnu.org>
+
+	Libtoolize now advises AC_CONFIG_MACRO_DIR use where appropriate.
+	* libtoolize.m4sh (func_check_macros): Always advise use of
+	AC_CONFIG_MACRO_DIR when not able to copy libtool macros into
+	the project tree.
+	* tests/libtoolize.at: New test for correct diagnosis of mismatch
+	between AC_CONFIG_MACRO_DIR and ACLOCAL_AMFLAGS.
+	Update expected output of other tests.
+	* NEWS: Updated.
+
+2008-04-22  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix regression over 1.5.26 with ccache $CC -all-static.
+	* libltdl/config/ltmain.m4sh (func_mode_link): Add
+	$link_static_flag to compile_command and link_command only
+	later, instead of right after a possible compiler wrapper.
+	* tests/static.at (ccache -all-static): New test.
+	* THANKS: Update.
+	Report by Richard Purdie.
+
+2008-04-22  Andreas Schwab  <schwab@suse.de>
+	    Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix default argument for AC_LIBLTDL_CONVENIENCE.
+	* libltdl/m4/ltdl.m4 (AC_LIBLTDL_CONVENIENCE): Default argument
+	to libltdl.
+	(AC_LIBLTDL_INSTALLABLE): Likewise.
+	* tests/configure-iface.at (convenience libltdl): New test.
+
+2008-04-21  Gary V. Vaughan  <gary@gnu.org>
+
+	Only complain that files are up-to-date with --force.
+	As a side effect, this also means that when `aclocal' copies the
+	libtool macros into `aclocal.m4' libtoolize complains only about
+	the macro files that are missing or not up-to-date.
+	* libtoolize.m4sh (func_echo_once): New function that prints
+	the contents of a named variable only on the first call.
+	(func_aclocal_update_check): New function that compares serial
+	numbers of libtool macros in aclocal.m4 and only diagnoses the
+	missing files.
+	(func_copy, func_copy_cb, func_copy_some_files, func_serial_update)
+	(func_keyword_update, func_ltmain_update, func_config_update)
+	(func_install_update): Accept a new argument naming a variable
+	containing a header string to print with func_echo_once iff any
+	body text is output by this function.
+	(func_install_pkgmacro_subproject, func_install_pkgmacro_parent)
+	(func_install_pkgltdl_files, func_install_pkgconfig_subproject)
+	(func_install_pkgconfig_parent: Set and pass a suitable
+	header string variable for the above functions.
+	(func_serial_update_check): Don't advise rerunning `libtoolize
+	--force' when aclocal.m4 is not m4_including libtoolize installed
+	macro files.
+	* tests/testsuite.at (_LIBTOOLIZE_TRANSFORM): Transform generic
+	/usr/local/share/aclocal paths to point into the uninstalled
+	libtool macro directory.
+	* tests/libtoolize.at: Update tests that were checking for old
+	behaviour of outputing `file is already up to date' even when
+	--force was not passed.
+	* tests/libtoolize.at: New tests to prevent regressions of these
+	smarter messages.
+	* NEWS: Updated.
+	Reported by Olly Betts <olly@survex.com>
+
+	Capture lt~obsolete.m4 serial number correctly in libtoolize.
+	* libltdl/m4/lt~obsolete.m4: Add the filename to the #serial
+	marker so that libtoolize's serial number checks can find it
+	in a non-include using aclocal.m4.
+	* NEWS: Updated.
+	Reported by Olly Betts <olly@survex.com>
+
+	Allow better compile time type checking for lt_dladvise.
+	* libltdl/lt__private.h (lt__handle, lt__advise): Typedefs
+	removed in favour of...
+	* libltdl/ltdl.h (lt_dlhandle),
+	libltdl/libltdl/lt_dlloader.h (lt_dladvise): ...changing from
+	void* to forward declarations.
+	* libltdl/loaders/dlopen.c, libltdl/loaders/loadlibrary.c,
+	libltdl/lt_dlloader.c, libltdl/ltdl.c: Remove many redundant
+	type casts.
+	* NEWS: Updated.
+	Suggested by Bob Friesenhahn <bfriesen@simple.dallas.tx.us>
+
+2008-04-21  Peter O'Gorman  <peter@pogma.com>
+
+	basename does not take a list of strings.
+	* libltdl/config/ltmain.m4sh(func_extract_archives): Use sed
+	$basename.
+	* tests/darwin.at: New. Check that we can built fat program,
+	shared library and convenience library.
+	* Makefile.am: Add test.
+	Reported by LiKai Liu <liulk@cs.bu.edu>
+
+	Use AC_CHECK_TOOL for lipo too.
+	* libltdl/m4/libtool.m4 (_LT_REQUIRED_DARWIN_CHECKS): Check.
+	* libltdl/config/ltmain.m4sh (func_extract_archives): Use.
+
+2008-04-20  Gary V. Vaughan  <gary@gnu.org>
+
+	Fix misleading lt_dlopenadvise documentation.
+	* doc/libtool.texi (lt_dlopenadvise): The last parameter is of
+	type lt_dladvise, not lt_dladvise*.
+	(my_dlopenext): Correct the example too.
+	* NEWS: Updated.
+	Reported by Gary Kumfert <kumfert@llnl.gov>
+
+2008-04-19  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix testsuite cleanup warnings on AIX with NFS.
+	* tests/testsuite.at [ aix ]: Set file mode creation so that
+	'others' have no permissions.  Shared libraries are kept in
+	memory on AIX after use if they are world-readable, which means
+	on NFS mounts cleanup of test group directories will fail later.
+	* THANKS: Update.
+	Report and analysis by Michael Haubenwallner.
+
+	Fix nonportable use of expr.
+	* libltdl/config/ltmain.m4sh (func_mode_link) <Transforming
+	deplibs into only shared deplibs>: Fix expr portability issues,
+	noted on FreeBSD.  While at it, simplify and avoid forking.
+	Report by Bob Friesenhahn.
+
+	Exploit shell arithmetic expansion and ${#var}.
+	* libltdl/m4/libtool.m4 (_LT_CHECK_SHELL_FEATURES): Also check
+	for arithmetic expansion, and ${#var}.
+	(_LT_PROG_XSI_SHELLFNS): Define func_arith and func_len
+	accordingly, falling back on 'expr'.  Note that the argument to
+	func_len may not start with a hyphen.  In the pre-Posix
+	fallback, take care not to rely on the exit status of the
+	variable assignment (not portable), but set the length to
+	$max_cmd_len instead.
+	* libltdl/config/ltmain.m4sh (func_mode_link): Use func_arith
+	and func_len throughout for integer arithmetic, fixing
+	quadratical amount of counting for reloadable object and
+	piecewise archive linking.  Change all comparisons with
+	max_cmd_len to test for smaller, non-equal length.
+	* THANKS: Update.
+	Suggested by Roland Mainz.
+
+	* libltdl/config/ltmain.m4sh (func_mode_compile): Avoid
+	redundant removal of old output files before compilation.
+	Do not remove $obj until we have successfully grabbed the
+	lockfile (in case the compiler doesn't grok `-c -o'), because
+	it might be identical to $output_obj.
+	At the end of the function, before we remove the lockfile,
+	update $removelist so that if the trap hits after the lockfile
+	has been removed, we do not accidentally remove $output_obj that
+	does not belong to us.
+	(func_write_libtool_object): Use $MV instead of mv.
+
+2008-04-18  Andreas Schwab  <schwab@suse.de>
+
+	* libltdl/m4/ltoptions.m4 (AC_ENABLE_SHARED): Check optional
+	argument.
+	(AC_ENABLE_STATIC): Likewise.
+	(AC_ENABLE_FAST_INSTALL): Likewise.
+
+2008-04-16  Eric Blake  <ebb9@byu.net>
+
+	Make ChangeLog merges easier.
+	* .gitattributes: New file.
+	* HACKING: Mention how it helps.
+
+2008-04-15  Peter O'Gorman  <peter@pogma.com>
+
+	Allow bootstrap from git repository.
+	* Makefile.am: Pass srcdir as an argument to mkstamp and expect
+	only 2 fields in mkstamps output.
+	* clcommit.m4sh: Ditto.
+	* configure.ac: Ditto.
+	* libltdl/config/mkstamp: return a revision and date based on
+	the number of lines which look like dates in all the ChangeLog*
+	files in the directory we got as arg 1.
+
+2008-04-11  Eric Blake  <ebb9@byu.net>
+
+	Fix usage of setmode without declaration on cygwin.
+	* libltdl/config/ltmain.m4sh (func_emit_cwrapperexe_src): Ensure
+	setmode has prototype for both mingw and cygwin.
+
+2008-04-10  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/m4/libtool.m4 (_LT_PROG_XSI_SHELLFNS): Move non-XSI
+	definition of func_dirname_and_basename ...
+	* libltdl/config/general.m4sh (func_dirname_and_basename):
+	... here, to use it for the other scripts that use general.m4sh
+	(and as portable fallback for libtool).  Add marker for early
+	insertion of generated shell functions (into libtool, not the
+	other scripts) here.
+	Use func_dirname_and_basename to compute progname, progpath.
+	* libltdl/config/ltmain.m4sh (func_mode_help): Remove marker
+	for insertion of generated shell functions.
+	* tests/sh.test: Adjust function definition test to not match
+	function call.
+
+	* libltdl/m4/libtool.m4 (_LT_PROG_XSI_SHELLFNS) <func_xform>:
+	New function.
+	* libltdl/config/ltmain.m4sh (func_mode_compile): Use it to
+	avoid two forks with XSI shells.
+	* tests/suffix.test: Also test a file with multiple dots.
+
+2008-04-10  Peter O'Gorman  <peter@pogma.com>
+
+	* libltdl/config/ltmain.m4sh (func_win32_libid,
+	func_generate_dlsyms, func_extract_an_archive,
+	func_extract_archives, func_mode_help): move these so they
+	appear after func_mode_compile.
+	* tests/nomode.test: Check that --mode=link --help works.
+	Reported by Josh Triplett <josh@freedesktop.org>
+
+2008-04-07  Gary V. Vaughan  <gary@gnu.arg>
+
+	* doc/libtool.texi (Libltdl interface): Add missing
+	documentation for lt_dlopenavise.
+	Reported by Anton Erti <anton@mips.complang.tuwien.ac.at>
+
+	* configure.ac, libltdl/configure.ac (AM_INIT_AUTOMAKE): Use
+	gnu rather than gnits standards so that version number 2.2.3a
+	is not rejected!
+	Reported by Olly Betts <olly@survex.com>
+
 2008-04-01  Gary V. Vaughan  <gary@gnu.arg>
+
+	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version
+	number to 2.2.3a.
 
 	GNU Libtool 2.2.2 was released.
 
@@ -138,7 +465,7 @@
 
 2008-03-06  Peter O'Gorman  <peter@pogma.com>
 
-	* libltdl/m4/libtool.m4 (_LT_PROG_FC): Undo commit - bad idea. 
+	* libltdl/m4/libtool.m4 (_LT_PROG_FC): Undo commit - bad idea.
 
 	* libltdl/m4/libtool.m4 (_LT_PROG_FC): Report FC=no if the FC
 	compiler is not a GNU compiler and the CXX compiler is a GNU
@@ -288,7 +615,7 @@
 
 	* libltdl/m4/ltoptions.m4 (_LT_SET_OPTIONS): Only set default
 	LT_INIT values for LT_INIT, not LTDL_INIT.
-	Reported by Jochem Huhmann <joh@revier.com> 
+	Reported by Jochem Huhmann <joh@revier.com>
 
 2008-02-01  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
 
@@ -456,8 +783,8 @@
 
 	* doc/notes.texi: Fix errors in previous commit.
 
-	* libltdl/m4/libtool.m4 (sys_lib_search_path_spec, 
-	sys_lib_dlsearch_path_spec): Allow for a cache variable 
+	* libltdl/m4/libtool.m4 (sys_lib_search_path_spec,
+	sys_lib_dlsearch_path_spec): Allow for a cache variable
 	lt_cv_sys_lib_... to set these at configure time.
 	* doc/notes.texi: Short note about the above change.
 
@@ -701,6 +1028,6 @@
 
 Continued in ChangeLog.2007
 
-	$Revision: 1.2627 $ $Date: 2008/04/01 23:32:01 $
+	$Revision$ $Date$
 
 vim:tw=72

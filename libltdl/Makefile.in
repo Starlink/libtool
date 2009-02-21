@@ -203,6 +203,7 @@ LIBADD_SHL_LOAD = @LIBADD_SHL_LOAD@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
+LIPO = @LIPO@
 LN_S = @LN_S@
 LTDLOPEN = @LTDLOPEN@
 LTLIBOBJS = @LTLIBOBJS@
@@ -215,6 +216,8 @@ NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+OTOOL = @OTOOL@
+OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -300,7 +303,7 @@ EXTRA_DIST = lt__dirent.c lt__strl.c COPYING.LIB configure.ac \
 CLEANFILES = libltdl.la libltdlc.la libdlloader.la $(LIBOBJS) \
 	$(LTLIBOBJS)
 MOSTLYCLEANFILES = argz.h argz.h-t
-LTDL_VERSION_INFO = -version-info 8:1:1
+LTDL_VERSION_INFO = -version-info 8:2:1
 @INSTALL_LTDL_TRUE@ltdlincludedir = $(includedir)/libltdl
 @INSTALL_LTDL_TRUE@ltdlinclude_HEADERS = libltdl/lt_system.h \
 @INSTALL_LTDL_TRUE@			  libltdl/lt_error.h \
