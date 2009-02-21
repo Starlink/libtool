@@ -87,8 +87,10 @@
   Frank Ch. Eigler		fche@cygnus.com
   Fred Cox			sailorfred@yahoo.com
   H.J. Lu			hjl@gnu.org
+  Henning Nielsen Lund		hnl_dk@amigaos.dk
   Howard Chu			hyc@highlandsun.com
   Ian Lance Taylor		ian@cygnus.com
+  Jakub Bogusz			qboosh@pld-linux.org
   Jacob Meuser			jakemsr@jakemsr.com
   James Su			james.su@gmail.com
   Jeff Squyres			jsquyres@lam-mpi.org
@@ -106,6 +108,8 @@
   Marc Espie			espie@nerim.net
   Marc J. Fraioli		fraioli@dg-rtp.dg.com
   Mark Kettenis			kettenis@phys.uva.nl
+  Mike Frysinger		vapier@gentoo.org
+  Nix				nix@esperi.org.uk
   Olly Betts			olly@muscat.co.uk
   Patrick Welche		prlw1@newn.cam.ac.uk
   Paul Eggert			eggert@twinsun.com
@@ -115,6 +119,7 @@
   Rainer Tammer			tammer@tammer.net
   Ralf Menzel			menzel@ls6.cs.uni-dortmund.de
   Robert Ögren			lists@roboros.com
+  Roberto Bagnara		bagnara@cs.unipr.it
   Sebastian Wilhelmi		wilhelmi@ira.uka.de
   Simon Josefsson		jas@extundo.com
   Stephan Kulow			coolo@kde.org

@@ -454,7 +454,7 @@ sub_aclocal_m4_deps = \
 	$(m4dir)/lt~obsolete.m4
 
 sub_configure_deps = $(sub_aclocal_m4_deps) $(srcdir)/libltdl/aclocal.m4
-LTDL_VERSION_INFO = -version-info 8:0:1
+LTDL_VERSION_INFO = -version-info 8:1:1
 @INSTALL_LTDL_TRUE@ltdlincludedir = $(includedir)/libltdl
 @INSTALL_LTDL_TRUE@ltdlinclude_HEADERS = libltdl/libltdl/lt_system.h \
 @INSTALL_LTDL_TRUE@			  libltdl/libltdl/lt_error.h \
@@ -558,6 +558,8 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/search-path.at \
 		  tests/indirect_deps.at \
 		  tests/archive-in-archive.at \
+		  tests/execute-mode.at \
+		  tests/localization.at \
 		  tests/destdir.at \
 		  tests/old-m4-iface.at \
 		  tests/am-subdir.at \
@@ -2052,7 +2054,7 @@ check-local: tests/atconfig $(srcdir)/$(TESTSUITE) libltdl/libltdlc.la $(bin_SCR
 	  $(TESTS_ENVIRONMENT) $(BUILDCHECK_ENVIRONMENT) $(TESTSUITEFLAGS)
 
 # Run the test suite on the *installed* tree.
-installcheck-local:
+installcheck-local: tests/atconfig $(srcdir)/$(TESTSUITE)
 	$(CD_TESTDIR); \
 	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
 	  $(TESTS_ENVIRONMENT) $(INSTALLCHECK_ENVIRONMENT) $(TESTSUITEFLAGS) \

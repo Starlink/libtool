@@ -1,4 +1,213 @@
+2008-04-01  Gary V. Vaughan  <gary@gnu.arg>
+
+	GNU Libtool 2.2.2 was released.
+
+	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version
+	number to 2.2.2.
+	* libltdl/Makefile.in (LTDL_VERSION_INFO): C:R+1:A because the
+	interfaces are unchanged, even though we improved the code some
+	more.
+	* NEWS: Updated.
+
+	* libltdl/m4/libtool.m4, libltdl/m4/ltdl.m4,
+	libltdl/m4/ltoptions.m4: Bump serial numbers to account for
+	changes since 2.2 release.
+
+2008-03-27  Peter O'Gorman  <peter@pogma.com>
+
+	* libltdl/m4/libtool.m4 [_LT_REQUIRED_DARWIN_CHECKS]: Fix the
+	test for -single_module and log it to config.log.
+	Reported by Torok Edwin and Nigel Home.
+
+2008-03-24  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Document that disable-static plus -all-static is not portable.
+	* doc/libtool.texi (Link mode): -all-static does not go well
+	with disable-static on most systems.
+	* tests/static.at (static linking flags for programs) [!aix]:
+	With --disable-static but nonempty link_static_flag, skip the
+	m-all-static link.  Do not skip it on AIX, as there the
+	enable_static is self-inflicted, and thus expected to work.
+	* THANKS: Update.
+	Report by Nix.
+
+2008-03-17  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/m4/libtool.m4 (_LT_CHECK_BUILDDIR): No need to escape
+	backticks in argument to AC_MSG_WARN or AC_MSG_ERROR.
+	* libltdl/m4/ltdl.m4 (_LTDL_INSTALLABLE, LTDL_INIT): Likewise.
+
+2008-03-16  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/config/ltmain.m4sh (NLS nuisances): Fix quoting of
+	localization variables for shell-active characters.
+	* tests/localization.at (localized compiler messages): Extend
+	test.
+	* THANKS: Update.
+	Report by Mike Frysinger.
+
+2008-03-15  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* tests/defs.m4sh (func_get_config): Build egrep regex to speed
+	up extracting several variables at once.  Use it to extract all
+	default variables at once.  Also extract build_alias and
+	host_alias from the libtool script.
+	(func_configure_nofail): Use build_alias and host_alias for
+	--build and --host, respectively.  Pass each if nonempty.
+	* tests/testsuite.at: Pass --build if build_alias is nonemtpy.
+	* tests/quote.test: Extract ECHO and wl at once.
+
+	* libltdl/m4/ltoptions.m4 (AC_LIBTOOL_WIN32_DLL): Require
+	AC_CANONICAL_HOST.
+	* THANKS: Update.
+	Report by Jakub Bogusz.
+
+2008-03-14  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* NEWS: Update.
+
+2008-03-12  Charles Wilson  <libtool@cwilson.fastmail.fm>
+
+	* libltdl/config/ltmain.m4sh (func_emit_cwrapperexe_src) [file
+	scope]: additional #includes and #defines to support...
+	(func_emit_cwrapperexe_src) [main]: ensure stdout is set to
+	binary mode for cygwin|mingw builds. Ensure temporary script
+	file is written in binary mode for cygwin|mingw builds.
+	(func_mode_link) [cygwin|mingw]: cross-build support - only
+	use cwrapper to generate shell wrapper if building native;
+	otherwise use func_emit_wrapper()
+
+2008-03-12  Henning Nielsen Lund  <hnl_dk@amigaos.dk>
+
+	* libltdl/m4/libtool.m4 (_LT_SYS_DYNAMIC_LINKER)
+	(_LT_COMPILER_PIC, _LT_LINKER_SHLIBS) [amigaos]: Port to
+	AmigaOS4 shared libraries on powerpc.
+	* libltdl/m4/ltdl.m4 (LT_SYS_DLOPEN_DEPLIBS) [amigaos]:
+	Likewise.
+	* THANKS, NEWS: Update.
+
+2008-03-09  Bruno Haible  <bruno@clisp.org>
+	and Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix compiler output to be in the user locale.
+	* libltdl/config/general.m4sh (func_show_eval_locale): New
+	function, for running commands in the user locale.
+	* libltdl/config/ltmain.m4sh (func_mode_compile): Use it for
+	compiling.
+	* tests/localization.at (localized compiler messages): New test.
+	* Makefile.am: Adjust.
+	Report by Bruno Haible.
+
+2008-03-08  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix several test failures on Cygwin and MinGW.
+	* tests/nonrecursive.at: Use -no-undefined for foo.la.
+	* tests/recursive.at: Likewise.
+	* tests/subproject.at: Likewise.
+	* tests/lt_dladvise.at: For systems where undefined symbols are
+	not allowed, to not try to load the module libdepend.
+	[ mingw ]: Add to list of such systems.
+	* tests/testsuite.at (_LT_AT_TRANSLATE_TEXT_OUTPUT): New macro,
+	to translate line ending of expout and experr files suitable for
+	host executables.
+	(LT_AT_CHECK, LT_AT_NOINST_EXEC_CHECK): Use it.
+	Report by Bob Friesenhahn.
+
+	Fix installcheck dependencies, fix for --program-transform-name.
+	* Makefile.am (installcheck-local): Depend upon tests/atconfig
+	and $(srcdir)/$(TESTSUITE).
+	* tests/testsuite.at (_LIBTOOLIZE_TRANSFORM): New macro.
+	(LT_AT_CHECK_LIBTOOLIZE): Use it to transform expout and experr
+	files suitably.
+	* HACKING: Update.
+
+	Drop usage of obsolete macros AC_EXEEXT and AC_OBJEXT.
+	* libltdl/m4/libtool.m4 (_LT_ENABLE_LOCK, _LT_COMPILER_OPTION)
+	(_LT_COMPILER_C_O, LT_PATH_NM, _LT_CMD_GLOBAL_SYMBOLS, _LT_SETUP):
+	Drop usage of obsolete AC_OBJEXT and AC_EXEEXT.
+	* tests/am-subdir.at (C++ subdir-objects): Likewise.
+
+2008-03-07  Peter O'Gorman  <peter@pogma.com>
+
+	* tests/convenience.at (Java convenience archives): Skip test if
+	gcj cannot compile a working executable from .java files.
+	Report by Nelson H. F. Beebe.
+
+	* libltdl/m4/libtool.m4 (_LT_LANG_GCJ_CONFIG): Need to set LD.
+	Reported by Nelson H. F. Beebe.
+
+2008-03-06  Peter O'Gorman  <peter@pogma.com>
+
+	* libltdl/m4/libtool.m4 (_LT_PROG_FC): Undo commit - bad idea. 
+
+	* libltdl/m4/libtool.m4 (_LT_PROG_FC): Report FC=no if the FC
+	compiler is not a GNU compiler and the CXX compiler is a GNU
+	compiler.
+	Reported by Nelson H. F. Beebe.
+
+2008-03-06  Gary V. Vaughan  <gary@gnu.org>
+
+	* Makefile.maint (TSDEPS_DIST): Removed.  No longer used.
+	(TSDEPS): libtool.m4 has long since moved to libltdl.
+	(cvs-dist): Don't put the suffix dot in twice.
+
+2008-03-06  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* tests/convenience.at (Java convenience archives): Skip test if
+	gcj cannot compile a .java file.
+	Report by Nelson H. F. Beebe.
+
+2008-03-05  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/config/ltmain.m4sh (func_lalib_unsafe_p): redirect
+	and restore from stdin, not stdout.
+	* tests/execute-mode.at (execute mode): Adjust test to catch
+	this.
+	Report by Roberto Bagnara.
+
+2008-03-04  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix libltdl to not skip dlopen on systems with several loaders,
+	such as HP-UX, Cygwin.
+	* libltdl/slist.c (slist_concat): When appending to the tail
+	of a list, do not drop items off the beginning of the list.
+	* NEWS: Update.
+
+	* libltdl/config/ltmain.m4sh (func_mode_execute): Replace only
+	arguments we have identified as shell or C wrappers.
+	(func_emit_wrapper): Output error message on stderr.
+	* tests/execute-mode.at: New file, with --mode=execute tests.
+	* Makefile.am: Adjust.
+	* NEWS: Update.
+	Fixes 2.2 regression.  Report by Roberto Bagnara.
+
+	* libltdl/m4/libtool.m4 (_LT_CONFIG): Drop misleading `GNU'
+	prefix before the host package name in the "Generated by" line
+	for the libtool script.
+	* THANKS: Update.
+	Reports by Peter Rosin and Roberto Bagnara.
+
+	* doc/libtool.texi (Module loaders for libltdl): Fix typo.
+
+	* libltdl/loaders/dld_link.c (vl_exit): New function, zero out ...
+	(vtable): ... this new file static variable split out from ...
+	(get_vtable): ... here.  Initialize vtable, register vl_exit as
+	dlloader_exit function.
+	* libltdl/loaders/dlopen.c: Likewise.
+	* libltdl/loaders/dyld.c: Likewise.
+	* libltdl/loaders/load_add_on.c: Likewise.
+	* libltdl/loaders/loadlibrary.c: Likewise.
+	* libltdl/loaders/shl_load.c: Likewise.
+	* libltdl/loaders/preopen.c: Likewise; vl_exit existed here
+	already.
+	* tests/lt_dlexit.at (lt_dlexit unloading libs): Update test.
+	* NEWS: Update.
+	Report by Andreas Schwab.
+
 2008-03-01  Gary V. Vaughan <gary@gnu.org>
+
+	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version
+	number to 2.3a.
 
 	GNU Libtool 2.2 was released.
 
@@ -492,6 +701,6 @@
 
 Continued in ChangeLog.2007
 
-	$Revision: 1.2599 $ $Date: 2008/03/02 00:05:01 $
+	$Revision: 1.2627 $ $Date: 2008/04/01 23:32:01 $
 
 vim:tw=72
