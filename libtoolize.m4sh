@@ -1,11 +1,11 @@
-m4_define([_m4_divert(SCRIPT)], 100)
-m4_divert_push([SCRIPT])#! /bin/sh
+m4_pattern_allow([dnl])
+AS_INIT[]m4_divert_push([HEADER-COPYRIGHT])dnl
 # @configure_input@
 
 # libtoolize (GNU @PACKAGE@@TIMESTAMP@) @VERSION@
 # Written by Gary V. Vaughan <gary@gnu.org>, 2003
 
-# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -29,29 +29,29 @@ m4_divert_push([SCRIPT])#! /bin/sh
 #
 # Prepare a package to use libtool.
 #
-# -c, --copy            copy files rather than symlinking them
-#     --debug           enable verbose shell tracing
-# -n, --dry-run         print commands rather than running them
-# -f, --force           replace existing files
-# -i, --install         copy missing auxiliary files
-#     --ltdl[=DIR]      install libltdl sources [default: libltdl]
-#     --no-warn         don't display warning messages
-#     --nonrecursive    prepare ltdl for non-recursive make
-# -q, --quiet           work silently
-#     --recursive       prepare ltdl for recursive make
-#     --subproject      prepare ltdl to configure and build independently
-# -v, --verbose         verbosely report processing
-#     --version         print version information and exit
-# -h, --help            print short or long help message
+#   -c, --copy          copy files rather than symlinking them
+#       --debug         enable verbose shell tracing
+#   -n, --dry-run       print commands rather than running them
+#   -f, --force         replace existing files
+#   -i, --install       copy missing auxiliary files
+#       --ltdl[=DIR]    install libltdl sources [default: libltdl]
+#       --no-warn       don't display warning messages
+#       --nonrecursive  prepare ltdl for non-recursive make
+#   -q, --quiet         work silently
+#       --recursive     prepare ltdl for recursive make
+#       --subproject    prepare ltdl to configure and build independently
+#   -v, --verbose       verbosely report processing
+#       --version       print version information and exit
+#   -h, --help          print short or long help message
 #
 # The following space or comma delimited options can be passed to $progname
 # via the environment variable LIBTOOLIZE_OPTIONS, unknown environment
 # options are ignored:
 #
-#     --debug           enable verbose shell tracing
-#     --no-warn         don't display warning messages
-#     --quiet           work silently
-#     --verbose         verbosely report processing
+#   --debug             enable verbose shell tracing
+#   --no-warn           don't display warning messages
+#   --quiet             work silently
+#   --verbose           verbosely report processing
 #
 # You must `cd' to the top directory of your package before you run
 # `$progname'.
@@ -70,9 +70,7 @@ m4_divert_push([SCRIPT])#! /bin/sh
 
 PROGRAM=libtoolize
 
-AS_SHELL_SANITIZE
-$as_unset CDPATH
-
+m4_divert_pop
 m4_include([getopt.m4sh])
 
 M4SH_VERBATIM([[
@@ -170,11 +168,11 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
 
       --dry-run|-n)	if $opt_dry_run; then :; else
 			  opt_dry_run=:
-			  RM="$ECHO $RM"
-			  test -n "$LN_S" && LN_S="$ECHO $LN_S"
-			  CP="$ECHO $CP"
-			  MKDIR="$ECHO $MKDIR"
-			  TAR="$ECHO $TAR"
+			  RM="func_echo_all $RM"
+			  test -n "$LN_S" && LN_S="func_echo_all $LN_S"
+			  CP="func_echo_all $CP"
+			  MKDIR="func_echo_all $MKDIR"
+			  TAR="func_echo_all $TAR"
 			fi
 			;;
 
@@ -183,10 +181,10 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
       --install|-i)	opt_install=: ;;
 
       --ltdl)		opt_ltdl=:
-      			if test "$#" -gt 0; then
+			if test "$#" -gt 0; then
 			  case $1 in
 			    -*)	;;
-			    *)	ltdldir=`$ECHO "X$1" | $Xsed -e 's,/*$,,'`
+			    *)	ltdldir=`$ECHO "$1" | $SED 's,/*$,,'`
 				shift
 				;;
 			  esac
@@ -196,7 +194,7 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
       --no-warn)	opt_warning=false ;;
 
       --nonrecursive|--non-recursive)
-      			ltdl_mode=nonrecursive
+			ltdl_mode=nonrecursive
 			;;
 
       --quiet|--automake|-q) # --automake is for 1.5 compatibility
@@ -211,24 +209,24 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
 
       # Separate optargs to long options:
       --*=*)
-      			arg=`$ECHO "X$opt" | $Xsed -e "$my_sed_long_arg"`
-			opt=`$ECHO "X$opt" | $Xsed -e "$my_sed_long_opt"`
+			arg=`$ECHO "$opt" | $SED "$my_sed_long_arg"`
+			opt=`$ECHO "$opt" | $SED "$my_sed_long_opt"`
 			set dummy "$opt" "$arg" ${1+"$@"}
 			shift
 			;;
 
       # Separate optargs to short options:
       #-X*)
-      #			arg=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_rest"`
-      #			opt=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_opt"`
+      #			arg=`$ECHO "$opt" | $SED "$my_sed_single_rest"`
+      #			opt=`$ECHO "$opt" | $SED "$my_sed_single_opt"`
       #			set dummy "$opt" "$arg" ${1+"$@"}
       #			shift
       #			;;
 
       # Separate non-argument short options:
       -c*|-f*|-i*|-n*|-q*|-v*)
-			rest=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_rest"`
-			opt=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_opt"`
+			rest=`$ECHO "$opt" | $SED "$my_sed_single_rest"`
+			opt=`$ECHO "$opt" | $SED "$my_sed_single_opt"`
 			set dummy "$opt" "-$rest" ${1+"$@"}
 			shift
 			;;
@@ -271,22 +269,25 @@ func_copy ()
     test -f "$1" || \
       { func_error "\`$1' not copied:  not a regular file"; return 1; }
 
-    my_f1=`$ECHO "X$1" | $Xsed -e "$basename"`
+    func_dirname_and_basename "$1"
+    my_f1=$func_basename_result
 
     if test -d "$2"; then
 
       func_copy_cb "$my_f1" \
-	`$ECHO "X$1" | $Xsed -e "$dirname"` "$2" "$3"
+	`$ECHO "$1" | $SED "$dirname"` "$2" "$3"
 
     else
 
       # Supporting this would mean changing the timestamp:
-      test "X$my_f1" = X`$ECHO "X$2" | $Xsed -e "$basename"` \
+      func_dirname_and_basename "$2"
+      my_tname=$func_basename_result
+      test "X$my_f1" = "X$my_tname" \
         || func_fatal_error "func_copy() cannot change filename on copy"
 
       func_copy_cb "$my_f1" \
-        `$ECHO "X$1" | $Xsed -e "$dirname"` \
-        `$ECHO "X$2" | $Xsed -e "$dirname"` \
+        `$ECHO "$1" | $SED "$dirname"` \
+        `$ECHO "$2" | $SED "$dirname"` \
 	"$3"
 
     fi
@@ -309,14 +310,14 @@ func_copy_cb ()
     copy_return_status=1
 
     # Libtool is probably misinstalled if this happens:
-    test -f "$my_srcdir/$my_file" || 
+    test -f "$my_srcdir/$my_file" ||
         func_fatal_error "\`$my_file' not found in \`$my_srcdir'"
 
     case $opt_verbose in
       false) my_copy_msg="file \`$my_destdir/$my_file'"     ;;
       *)     my_copy_msg="file from \`$my_srcdir/$my_file'" ;;
     esac
-    func_mkdir_p `$ECHO "X$my_destdir/$my_file" | $Xsed -e "$dirname"`
+    func_mkdir_p `$ECHO "$my_destdir/$my_file" | $SED "$dirname"`
 
     $RM "$my_destdir/$my_file"
     if $opt_link; then
@@ -373,7 +374,7 @@ func_copy_some_files ()
         if test "X$my_copy_cb" = Xfunc_copy_cb; then
 	  $opt_force || if test -f "$my_destdir/$my_filename"; then
 	    $opt_quiet || func_echo_once "$my_msg_var"
-  	    $opt_quiet \
+	    $opt_quiet \
 	      || func_error "\`$my_destdir/$my_filename' exists: use \`--force' to overwrite"
 	    continue
 	  fi
@@ -413,7 +414,7 @@ func_fixup_Makefile ()
 	my_fixup_inc_paths_script= ;;
       Makefile.inc)
 	repl=$ltdldir
-	repl_uscore=`$ECHO "X$repl" | $Xsed -e 's,[/.+-],_,g'`
+	repl_uscore=`$ECHO "$repl" | $SED 's,[/.+-],_,g'`
 	my_fixup_inc_paths_script="\
 	  s,libltdl_,@repl_uscore@_,
 	  s,libltdl/,@repl@/,
@@ -478,14 +479,15 @@ func_scan_files ()
     # ---------------------------------------------------- #
 
     my_sed_traces='s,#.*$,,; s,^dnl .*$,,; s, dnl .*$,,
-        s,^.*AC_REQUIRE(.*$,,; s,^.*m4_require(.*$,,; s,^.*m4_define(.*$,,
-	s,^.*A[CU]_DEFUN(.*$,,; s,^.*m4_defun(.*$,,
-    	/AC_CONFIG_AUX_DIR(/ {
-	    s,^.*AC_CONFIG_AUX_DIR([[ 	]*\([^])]*\).*$,ac_auxdir=\1,
+        s,^.*AC_REQUIRE(.*$,,; s,^.*m4@&t@_require(.*$,,;
+	s,^.*m4@&t@_define(.*$,,
+	s,^.*A[CU]_DEFUN(.*$,,; s,^.*m4@&t@_defun(.*$,,
+	/AC_CONFIG_AUX_DIR(/ {
+	    s,^.*AC_CONFIG_AUX_DIR([[	 ]*\([^])]*\).*$,ac_auxdir=\1,
 	    p
         }
-    	/AC_CONFIG_MACRO_DIR(/ {
-	    s,^.*AC_CONFIG_MACRO_DIR([[ 	]*\([^])]*\).*$,ac_macrodir=\1,
+	/AC_CONFIG_MACRO_DIR(/ {
+	    s,^.*AC_CONFIG_MACRO_DIR([[	 ]*\([^])]*\).*$,ac_macrodir=\1,
 	    p
         }
 	/_LT_CONFIG_LTDL_DIR(/d
@@ -500,14 +502,14 @@ func_scan_files ()
 	}
 	/the.*option into.*LT_INIT.*parameter/d
 	/\@<:@LT_INIT/d
-	/LT_INIT/	     	 {
+	/LT_INIT/		 {
 	    s,^.*$,seen_libtool=:,
 	    p
 	}
 	/\@<:@LTDL_INIT/d
 	/LTDL_INIT/          {
-	    s,^.*LTDL_INIT([[ 	]*\([^])]*\).*$,ltdl_options="\1",
-	    s,^.*LTDL_INIT[ 	]*$,seen_ltdl=:,
+	    s,^.*LTDL_INIT([[	 ]*\([^])]*\).*$,ltdl_options="\1",
+	    s,^.*LTDL_INIT[	 ]*$,seen_ltdl=:,
 	    p
 	}
 	/LT_WITH_LTDL/       {
@@ -530,7 +532,7 @@ func_scan_files ()
     # Validate ltdldir. #
     # ----------------- #
 
-    ac_ltdldir=`$ECHO "X$ac_ltdldir" | $Xsed -e 's,/*$,,'`
+    ac_ltdldir=`$ECHO "$ac_ltdldir" | $SED 's,/*$,,'`
 
     # If $configure_ac contains AC_CONFIG_LTDL_DIR, check that its
     # arguments were not given in terms of a shell variable!
@@ -631,8 +633,8 @@ func_scan_files ()
     # Hunt for ACLOCAL_AMFLAGS in `Makefile.am' for a `-I' argument.
 
     my_sed_aclocal_flags='
-        /^[ 	]*ACLOCAL_[A-Z_]*FLAGS[ 	]*=/ {
-	    s,^[^=]*=[ 	]*\(.*\), \1,
+        /^[	 ]*ACLOCAL_[A-Z_]*FLAGS[	 ]*=/ {
+	    s,^[^=]*=[	 ]*\(.*\), \1,
 	    q
 	}
 	d'
@@ -670,14 +672,14 @@ func_included_files ()
 
     my_include_regex=
     my_sed_include='
-        /^m4_include(\[.*\])$/ {
-	    s,^m4_include(\[\(.*\)\])$,\1,
+        /^m4@&t@_include(\[.*\])$/ {
+	    s,^m4@&t@_include(\[\(.*\)\])$,\1,
 	    p
 	}
         d'
 
     if test -f "$my_searchfile"; then
-      $ECHO "X$my_searchfile" | $Xsed
+      $ECHO "$my_searchfile"
 
       # Only recurse when we don't care if all the variables we use get
       # trashed, since they are in global scope.
@@ -697,7 +699,7 @@ func_serial ()
     my_filename="$1"
     my_macro_regex="$2"
     my_sed_serial='
-	/^# serial [1-9][0-9.]*[ 	]*'"$my_macro_regex"'[ 	]*$/ {
+	/^# serial [1-9][0-9.]*[	 ]*'"$my_macro_regex"'[	 ]*$/ {
 	    s,^# serial \([1-9][0-9.]*\).*$,\1,
 	    q
 	}
@@ -706,10 +708,12 @@ func_serial ()
     # Search FILENAME and all the files it m4_includes for a serial number
     # in the file that AC_DEFUNs MACRO_REGEX.
     my_serial=
+    func_dirname_and_basename "$my_filename"
+    my_filebase=$func_basename_result
     for my_file in `func_included_files "$my_filename"`; do
       if test -z "$my_macro_regex" ||
          test "$my_filename" = aclocal.m4 ||
-         test "$my_macro_regex" = `echo "$my_filename" | $SED "$basename"` ||
+         test "X$my_macro_regex" = "X$my_filebase" ||
          func_grep '^AC_DEFUN(\@<:@'"$my_macro_regex" "$my_file"
       then
         my_serial=`$SED -e "$my_sed_serial" "$my_file"`
@@ -720,7 +724,7 @@ func_serial ()
     # If the file has no serial number, we assume it's ancient.
     test -n "$my_serial" || my_serial=0
 
-    $ECHO $my_serial
+    $ECHO "$my_serial"
 }
 
 
@@ -741,14 +745,14 @@ func_serial_max ()
     # Incase they turn out to be the same, we'll set it to empty
     func_serial_max_result=
 
-    test "X$1$2" = X`$ECHO "X$1$2" | $Xsed -e "$my_sed_digits"` || {
+    test "X$1$2" = X`$ECHO "$1$2" | $SED "$my_sed_digits"` || {
       func_error "serial numbers \`$1' or \`$2' contain non-digit chars"
       return
     }
 
     while test -n "$my_serial1$my_serial2"; do
-      my_serial1_part=`$ECHO "X$my_serial1" | $Xsed -e "$my_sed_dot"`
-      my_serial2_part=`$ECHO "X$my_serial2" | $Xsed -e "$my_sed_dot"`
+      my_serial1_part=`$ECHO "$my_serial1" | $SED "$my_sed_dot"`
+      my_serial2_part=`$ECHO "$my_serial2" | $SED "$my_sed_dot"`
 
       test -z "$my_serial1_part$my_serial2_part" \
         && break
@@ -765,8 +769,8 @@ func_serial_max ()
       test "$my_serial2_part" -gt "$my_serial1_part" \
         && { func_serial_max_result="$2"; break; }
 
-      my_serial1=`$ECHO "X$my_serial1" | $Xsed -e "$my_sed_rest"`
-      my_serial2=`$ECHO "X$my_serial2" | $Xsed -e "$my_sed_rest"`
+      my_serial1=`$ECHO "$my_serial1" | $SED "$my_sed_rest"`
+      my_serial2=`$ECHO "$my_serial2" | $SED "$my_sed_rest"`
     done
 }
 
@@ -976,7 +980,7 @@ func_ltmain_update ()
     $opt_debug
     my_sed_ltmain='
 	/^package_revision='\''*[0-9][1-9.]*'\''*/ {
-	    s,^package_revision='\''*\([0-9.]*\)'\''*[ 	]*$,\1,
+	    s,^package_revision='\''*\([0-9.]*\)'\''*[	 ]*$,\1,
 	    p
 	}
 	d'
@@ -1017,6 +1021,7 @@ func_install_update ()
     $opt_debug
     my_sed_install='
 	/^scriptversion='\''*[0-9][1-9.-]*'\''*/ {
+	    s,[#;].*,,
 	    s,^scriptversion='\''*\([0-9.-]*\)'\''*,\1,
 	    s/-/./g
 	    p
@@ -1041,7 +1046,8 @@ func_massage_aclocal_DATA ()
 
     # Massage a value for pkgmacro_files from the value used in Makefile.am.
     for my_filename in @aclocal_DATA@; do
-      my_filename=`$ECHO "X$my_filename" | $Xsed -e "$basename"`
+      func_dirname_and_basename "$my_filename"
+      my_filename=$func_basename_result
 
       # ignore excluded filenames
       if test -n "$my_glob_exclude"; then
@@ -1054,7 +1060,7 @@ func_massage_aclocal_DATA ()
     done
 
     # strip spurious leading `:'
-    pkgmacro_files=`$ECHO "X$pkgmacro_files" | $Xsed -e 's,^:*,,'`
+    pkgmacro_files=`$ECHO "$pkgmacro_files" | $SED 's,^:*,,'`
 }
 
 
@@ -1200,7 +1206,7 @@ func_massage_pkgltdl_files ()
     done
 
     # strip spurious leading `:'
-    pkgltdl_files=`$ECHO "X$pkgltdl_files" | $Xsed -e 's,^:*,,'`
+    pkgltdl_files=`$ECHO "$pkgltdl_files" | $SED 's,^:*,,'`
 }
 
 
@@ -1278,7 +1284,7 @@ func_massage_pkgconfig_files ()
     done
 
     # strip spurious leading `:'
-    pkgconfig_files=`$ECHO "X$pkgconfig_files" | $Xsed -e 's,^:*,,'`
+    pkgconfig_files=`$ECHO "$pkgconfig_files" | $SED 's,^:*,,'`
 }
 
 
@@ -1389,7 +1395,7 @@ func_nonemptydir_p ()
 
     # Is it a directory at all?
     test -d "$my_dir" \
-      || func_fatal_error "\$$my_dirvar not a directory: \`$my_dir'"
+      || func_fatal_error "\$$my_dirvar is not a directory: \`$my_dir'"
 
     # check that the directories contents can be ls'ed
     test -n "`{ cd $my_dir && ls; } 2>/dev/null`" \
@@ -1494,7 +1500,7 @@ func_check_macros ()
       else
         func_echo "Consider adding \`-I $macrodir' to ACLOCAL_AMFLAGS in Makefile.am."
       fi
-    fi 
+    fi
 
     # Don't trace for this, we're just checking the user didn't invoke it
     # directly from configure.ac.

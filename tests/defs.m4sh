@@ -1,8 +1,8 @@
-m4_define([_m4_divert(SCRIPT)], 100)
-m4_divert_push([SCRIPT])# @configure_input@
+AS_INIT[]m4_divert_push([HEADER-COPYRIGHT])dnl
+# @configure_input@
 # defs -- Defines for Libtool testing environment.
 #
-#   Copyright (C) 2003, 2004, 2005, 2007, 2008 Free Software
+#   Copyright (C) 2003, 2004, 2005, 2007, 2008, 2009 Free Software
 #   Foundation, Inc.
 #   Written by Gord Matzigkeit, 1996
 #   Rewritten by Gary V. Vaughan, 2003
@@ -26,9 +26,7 @@ m4_divert_push([SCRIPT])# @configure_input@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 ####
 
-AS_SHELL_SANITIZE
-$as_unset CDPATH
-
+m4_divert_pop
 m4_include([general.m4sh])
 
 M4SH_VERBATIM([[
@@ -61,7 +59,7 @@ DEBUG | debug )
 esac
 
 if test -z "$srcdir"; then
-  srcdir=`$ECHO "X$0" | $Xsed -e "$dirname"`
+  srcdir=`$ECHO "$0" | $SED "$dirname"`
   test "$srcdir" = "$0" && srcdir=.
 fi
 
@@ -104,7 +102,7 @@ func_get_config ()
     my_build_regex=false
   fi
   my_first=:
-  
+
   for my_varname in $my_varname_list; do
     if $my_build_regex; then
       $my_first || my_regex="$my_regex|"
@@ -189,7 +187,8 @@ func_configure_nofail ()
 {
     $opt_debug
     my_args=${1+"$@"}
-    my_dir=`pwd | $SED "$basename"`
+    func_dirname_and_basename "`pwd`"
+    my_dir=$func_basename_result
     my_testdir="$srcdir/tests/$my_dir"
     conf_status=$EXIT_FAILURE
 
@@ -247,9 +246,8 @@ func_make ()
 {
     $opt_debug
     my_args=${1+"$@"}
-    my_dir=`pwd | $SED "$basename"`
-
-    func_msg "Running \`$MAKE $my_args' in $my_dir"
+    func_dirname_and_basename "`pwd`"
+    func_msg "Running \`$MAKE $my_args' in $func_basename_result"
 
     eval $MAKE $my_args || exit $EXIT_FAIL
 }
@@ -288,7 +286,8 @@ func_make_uninstall ()
 func_exec_init ()
 {
     $opt_debug
-    func_msg "Executing $1 programs in $my_dir"
+    func_dirname_and_basename "`pwd`"
+    func_msg "Executing $1 programs in $func_basename_result"
 
     # Windows hosts search for dlls in the command path
     PATH=$prefix/lib:$PATH
@@ -319,7 +318,8 @@ func_exec ()
     $opt_debug
     my_program="$1"
     my_exp_output="$2"
-    my_dir=`pwd | $SED "$basename"`
+    func_dirname_and_basename "`pwd`"
+    my_dir=$func_basename_result
 
     test -n "$my_exp_output" \
       && my_exp_output="| $EGREP -e "\""$my_exp_output"\"
@@ -349,7 +349,7 @@ prefix="./_inst"
 srcdir=`cd $srcdir && pwd`
 m4dir=$srcdir/libltdl/m4
 auxdir=$srcdir/libltdl/config
-scripts="$auxdir/ltmain.sh ./libtoolize"
+scripts="$auxdir/ltmain.m4sh $srcdir/libtoolize.m4sh"
 
 func_msg "Running $progname"
 
@@ -358,4 +358,3 @@ func_msg "Running $progname"
 # sh-indentation:2
 # End:
 ]])
-
