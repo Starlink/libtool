@@ -295,6 +295,7 @@ lib_LTLIBRARIES = libhello.la
 libhello_la_SOURCES = hello.c foo.c
 libhello_la_LIBADD = $(LIBM)
 libhello_la_LDFLAGS = -no-undefined -version-info 3:12:1
+libhello_la_AM_CPPFLAGS = $(AM_CPPFLAGS) -DBUILDING_LIBHELLO
 include_HEADERS = foo.h
 @BINARY_HELLDL_FALSE@BUILD_helldl = 
 @BINARY_HELLDL_TRUE@BUILD_helldl = helldl

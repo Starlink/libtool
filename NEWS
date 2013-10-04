@@ -1,5 +1,38 @@
 NEWS - list of user-visible changes between releases of GNU Libtool
 
+New in 2.4.2 2011-10-17: git version 2.4.1a, Libtool team:
+
+* New features:
+
+  - The --with-pic configure option now supports a list of comma-separated
+    package names.  This can be used to build some static libraries with PIC
+    objects while building others with non-PIC objects.
+
+  - Initial support for Go, using the gccgo compiler.
+
+  - On Mac OS X .dylib is now tried as well as .so with
+    lt_dlopenext().
+
+* Bug fixes:
+
+  - The generic approximation of the command line length limit (when getconf is
+    not available) works again.  Regression introduced in v2.2.6-39-g9c3d4d8.
+  - The bug that leaked developer tool paths into the release tarballs
+    from ./bootstrap is fixed.
+  - Improved support for the Cuda Compiler Driver (nvcc) on Darwin.
+  - For GCC LTO support, the -fuse-linker-plugin switch is now also removed
+    when computing compiler postdeps.
+
+* Important incompatible changes:
+
+  - The undocumented hardcode_libdir_flag_spec_ld tag variable has been
+    removed in favor of using hardcode_libdir_flag_spec with $wl set to empty.
+
+* Changes in supported systems or compilers:
+
+  - Fixes for gfortran on Darwin, XL Fortran on GNU/Linux.
+  - Support for FreeBSD 1.x (outdated since 1994) has been removed.
+
 New in 2.4 2010-09-22: git version 2.2.11a, Libtool team:
 
 * New features:

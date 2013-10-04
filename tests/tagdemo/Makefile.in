@@ -112,7 +112,7 @@ libfoo_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 PROGRAMS = $(bin_PROGRAMS)
 am_tagdemo_OBJECTS = main.$(OBJEXT)
 tagdemo_OBJECTS = $(am_tagdemo_OBJECTS)
-tagdemo_DEPENDENCIES = libbaz.la
+tagdemo_DEPENDENCIES = libbaz.la libfoo.la
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp =
 am__depfiles_maybe =
@@ -285,7 +285,7 @@ libconv_la_SOURCES = conv.cpp
 libconv_la_LDFLAGS = -no-undefined
 noinst_HEADERS = foo.h baz.h conv.h
 tagdemo_SOURCES = main.cpp
-tagdemo_LDADD = libbaz.la
+tagdemo_LDADD = libbaz.la libfoo.la
 all: all-am
 
 .SUFFIXES:
