@@ -1,8 +1,7 @@
-This is libtool.info, produced by makeinfo version 4.8 from
-libtool.texi.
-
 INFO-DIR-SECTION GNU programming tools
 START-INFO-DIR-ENTRY
+This is libtool.info, produced by makeinfo version 4.11 from libtool.texi.
+
 * Libtool: (libtool).           Generic shared library support script.
 END-INFO-DIR-ENTRY
 
@@ -11,12 +10,12 @@ START-INFO-DIR-ENTRY
 * libtoolize: (libtool)Invoking libtoolize.     Adding libtool support.
 END-INFO-DIR-ENTRY
 
-   This file documents GNU Libtool 1.5.24
+   This file documents GNU Libtool 1.5.26
 
    Copyright (C) 1996-2003, 2005-2007 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
-under the terms of the GNU Free Documentation License, Version 1.1 or
+under the terms of the GNU Free Documentation License, Version 1.2 or
 any later version published by the Free Software Foundation; with no
 Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
 Texts.  A copy of the license is included in the section entitled "GNU
@@ -30,7 +29,7 @@ Shared library support for GNU
 
 This file documents GNU Libtool, a script that allows package developers
 to provide generic shared library support.  This edition documents
-version 1.5.24.
+version 1.5.26.
 
    *Note Reporting bugs::, for information on how to report problems
 with libtool.
@@ -92,6 +91,7 @@ Integrating libtool with your package
 Configuring libtool
 
 * AC_PROG_LIBTOOL::             Configuring `libtool' in `configure.in'.
+* Configure notes::             Platform-specific notes for configuration.
 
 Including libtool in your package
 
@@ -610,16 +610,16 @@ link the already-installed libtool library, it will do The Right Thing
    Note that libtool added the necessary run-time path flag, as well as
 `-lm', the library libhello.la depended upon.  Nice, huh?
 
+   Notice that the executable, `hell', was actually created in the
+`.libs' subdirectory.  Then, a wrapper script was created in the
+current directory.
+
    Since libtool created a wrapper script, you should use libtool to
 install it and debug it too.  However, since the program does not depend
 on any uninstalled libtool library, it is probably usable even without
 the wrapper script.  Libtool could probably be made smarter to avoid the
 creation of the wrapper script in this case, but this is left as an
 exercise for the reader.
-
-   Notice that the executable, `hell', was actually created in the
-`.libs' subdirectory.  Then, a wrapper script was created in the
-current directory.
 
    On NetBSD 1.2, libtool encodes the installation directory of
 `libhello', by using the `-R/usr/local/lib' compiler flag.  Then, the
@@ -1480,9 +1480,10 @@ generate a libtool script for the installer's host machine.
 * Menu:
 
 * AC_PROG_LIBTOOL::             Configuring `libtool' in `configure.in'.
+* Configure notes::             Platform-specific notes for configuration.
 
 
-File: libtool.info,  Node: AC_PROG_LIBTOOL,  Up: Configuring
+File: libtool.info,  Node: AC_PROG_LIBTOOL,  Next: Configure notes,  Up: Configuring
 
 5.3.1 The `AC_PROG_LIBTOOL' macro
 ---------------------------------
@@ -1661,6 +1662,76 @@ weird errors when versions don't match.
 variable `top_builddir' in your `Makefile.in'.  Automake does this
 automatically, but Autoconf users should set it to the relative path to
 the top of your build directory (`../..', for example).
+
+
+File: libtool.info,  Node: Configure notes,  Prev: AC_PROG_LIBTOOL,  Up: Configuring
+
+5.3.2 Platform-specific configuration notes
+-------------------------------------------
+
+While Libtool tries to hide as many platform-specific features as
+possible, some have to be taken into account when configuring either
+the Libtool package or a libtoolized package.
+
+   * Note that Sun C++ compiler versions before 5.6 may need some
+     special setup to link properly against shared versions of the C++
+     standard libraries.  See
+     `http://lists.gnu.org/archive/html/libtool/2005-08/msg00088.html'
+     for more information.
+
+   * On AIX there are two different styles of shared linking, one in
+     which symbols are bound at link-time and one in which symbols are
+     bound at runtime only, similar to ELF.  In case of doubt use
+     `LDFLAGS=-Wl,-brtl' for the latter style.
+
+   * On AIX, native tools are to be preferred over binutils; especially
+     for C++ code, if using the AIX Toolbox GCC 4.0 and binutils,
+     configure with `AR=/usr/bin/ar LD=/usr/bin/ld NM='/usr/bin/nm -B''.
+
+   * On AIX, the `/bin/sh' is very slow due to its inefficient handling
+     of here-documents.  A modern shell is preferable:
+          CONFIG_SHELL=/bin/bash; export $CONFIG_SHELL
+          $CONFIG_SHELL ./configure [...]
+
+   * Note in some cases you might need to put ABI-changing compiler
+     flags into the compiler name.  For example, use of
+            configure CC='gcc -m32'
+     rather than
+            configure CC=gcc CFLAGS=-m32 LDFLAGS=-m32
+     might help with this Libtool release.
+
+   * The default shell on UNICOS 9, a ksh 88e variant, is too buggy to
+     correctly execute the libtool script.  Users are advised to
+     install a modern shell such as GNU bash.
+
+   * Some HP-UX `sed' programs are horribly broken, and cannot handle
+     libtool's requirements, so users may report unusual problems.
+     There is no workaround except to install a working `sed' (such as
+     GNU sed) on these systems.
+
+   * The vendor-distributed NCR MP-RAS `cc' programs emits copyright on
+     standard error that confuse tests on size of `conftest.err'.  The
+     workaround is to specify `CC' when run configure with `CC='cc
+     -Hnocopyr''.
+
+   * Any earlier DG/UX system with ELF executables, such as R3.10 or
+     R4.10, is also likely to work, but hasn't been explicitly tested.
+
+   * On Reliant Unix libtool has only been tested with the Siemens
+     C-compiler and an old version of `gcc' provided by Marco Walther.
+
+   * `libtool.m4', `ltdl.m4' and the `configure.ac' files are marked to
+     use autoconf-mode, which is distributed with GNU Emacs 21,
+     Autoconf itself, and all recent releases of XEmacs.
+
+   * When building on some linux systems for multilib targets `libtool'
+     sometimes guesses the wrong paths that the linker and dynamic
+     linker search by default. If this occurs, you may override
+     libtool's guesses at `configure' time by setting the `autoconf'
+     cache variables `lt_cv_sys_lib_search_path_spec' and
+     `lt_cv_sys_lib_dlsearch_path_spec' respectively to the correct
+     search paths.
+
 
 
 File: libtool.info,  Node: Distributing,  Next: Static-only libraries,  Prev: Configuring,  Up: Integrating libtool
@@ -2281,7 +2352,7 @@ interpreted language.  In fact, dlopen calls are frequently used in
 language interpreters to provide an efficient way to extend the
 language.
 
-   As of version 1.5.24, libtool provides support for dlopened modules.
+   As of version 1.5.26, libtool provides support for dlopened modules.
 However, you should indicate that your package is willing to use such
 support, by using the macro `AC_LIBTOOL_DLOPEN' in `configure.in'.  If
 this macro is not used (or it is used _after_ `AC_PROG_LIBTOOL'),
@@ -4540,352 +4611,403 @@ without having to rerun `configure'.
 
 File: libtool.info,  Node: GNU Free Documentation License,  Next: Index,  Prev: Maintaining,  Up: Top
 
-GNU Free Documentation License
-******************************
+Appendix A GNU Free Documentation License
+*****************************************
 
-                        Version 1.1, March 2000
+                      Version 1.2, November 2002
 
-     Copyright (C) 2000  Free Software Foundation, Inc.
-         51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+     Copyright (C) 2000,2001,2002 Free Software Foundation, Inc.
+     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA
+
      Everyone is permitted to copy and distribute verbatim copies
      of this license document, but changing it is not allowed.
 
-Preamble
-========
+  0. PREAMBLE
 
-The purpose of this License is to make a manual, textbook, or other
-written document "free" in the sense of freedom: to assure everyone the
-effective freedom to copy and redistribute it, with or without
-modifying it, either commercially or noncommercially.  Secondarily,
-this License preserves for the author and publisher a way to get credit
-for their work, while not being considered responsible for
-modifications made by others.
+     The purpose of this License is to make a manual, textbook, or other
+     functional and useful document "free" in the sense of freedom: to
+     assure everyone the effective freedom to copy and redistribute it,
+     with or without modifying it, either commercially or
+     noncommercially.  Secondarily, this License preserves for the
+     author and publisher a way to get credit for their work, while not
+     being considered responsible for modifications made by others.
 
-   This License is a kind of "copyleft", which means that derivative
-works of the document must themselves be free in the same sense.  It
-complements the GNU General Public License, which is a copyleft license
-designed for free software.
+     This License is a kind of "copyleft", which means that derivative
+     works of the document must themselves be free in the same sense.
+     It complements the GNU General Public License, which is a copyleft
+     license designed for free software.
 
-   We have designed this License in order to use it for manuals for free
-software, because free software needs free documentation: a free
-program should come with manuals providing the same freedoms that the
-software does.  But this License is not limited to software manuals; it
-can be used for any textual work, regardless of subject matter or
-whether it is published as a printed book.  We recommend this License
-principally for works whose purpose is instruction or reference.
+     We have designed this License in order to use it for manuals for
+     free software, because free software needs free documentation: a
+     free program should come with manuals providing the same freedoms
+     that the software does.  But this License is not limited to
+     software manuals; it can be used for any textual work, regardless
+     of subject matter or whether it is published as a printed book.
+     We recommend this License principally for works whose purpose is
+     instruction or reference.
 
-APPLICABILITY AND DEFINITIONS
-=============================
+  1. APPLICABILITY AND DEFINITIONS
 
-This License applies to any manual or other work that contains a notice
-placed by the copyright holder saying it can be distributed under the
-terms of this License.  The "Document", below, refers to any such
-manual or work.  Any member of the public is a licensee, and is
-addressed as "you".
+     This License applies to any manual or other work, in any medium,
+     that contains a notice placed by the copyright holder saying it
+     can be distributed under the terms of this License.  Such a notice
+     grants a world-wide, royalty-free license, unlimited in duration,
+     to use that work under the conditions stated herein.  The
+     "Document", below, refers to any such manual or work.  Any member
+     of the public is a licensee, and is addressed as "you".  You
+     accept the license if you copy, modify or distribute the work in a
+     way requiring permission under copyright law.
 
-   A "Modified Version" of the Document means any work containing the
-Document or a portion of it, either copied verbatim, or with
-modifications and/or translated into another language.
+     A "Modified Version" of the Document means any work containing the
+     Document or a portion of it, either copied verbatim, or with
+     modifications and/or translated into another language.
 
-   A "Secondary Section" is a named appendix or a front-matter section
-of the Document that deals exclusively with the relationship of the
-publishers or authors of the Document to the Document's overall subject
-(or to related matters) and contains nothing that could fall directly
-within that overall subject.  (For example, if the Document is in part a
-textbook of mathematics, a Secondary Section may not explain any
-mathematics.)  The relationship could be a matter of historical
-connection with the subject or with related matters, or of legal,
-commercial, philosophical, ethical or political position regarding them.
+     A "Secondary Section" is a named appendix or a front-matter section
+     of the Document that deals exclusively with the relationship of the
+     publishers or authors of the Document to the Document's overall
+     subject (or to related matters) and contains nothing that could
+     fall directly within that overall subject.  (Thus, if the Document
+     is in part a textbook of mathematics, a Secondary Section may not
+     explain any mathematics.)  The relationship could be a matter of
+     historical connection with the subject or with related matters, or
+     of legal, commercial, philosophical, ethical or political position
+     regarding them.
 
-   The "Invariant Sections" are certain Secondary Sections whose titles
-are designated, as being those of Invariant Sections, in the notice
-that says that the Document is released under this License.
+     The "Invariant Sections" are certain Secondary Sections whose
+     titles are designated, as being those of Invariant Sections, in
+     the notice that says that the Document is released under this
+     License.  If a section does not fit the above definition of
+     Secondary then it is not allowed to be designated as Invariant.
+     The Document may contain zero Invariant Sections.  If the Document
+     does not identify any Invariant Sections then there are none.
 
-   The "Cover Texts" are certain short passages of text that are listed,
-as Front-Cover Texts or Back-Cover Texts, in the notice that says that
-the Document is released under this License.
+     The "Cover Texts" are certain short passages of text that are
+     listed, as Front-Cover Texts or Back-Cover Texts, in the notice
+     that says that the Document is released under this License.  A
+     Front-Cover Text may be at most 5 words, and a Back-Cover Text may
+     be at most 25 words.
 
-   A "Transparent" copy of the Document means a machine-readable copy,
-represented in a format whose specification is available to the general
-public, whose contents can be viewed and edited directly and
-straightforwardly with generic text editors or (for images composed of
-pixels) generic paint programs or (for drawings) some widely available
-drawing editor, and that is suitable for input to text formatters or
-for automatic translation to a variety of formats suitable for input to
-text formatters.  A copy made in an otherwise Transparent file format
-whose markup has been designed to thwart or discourage subsequent
-modification by readers is not Transparent.  A copy that is not
-"Transparent" is called "Opaque".
+     A "Transparent" copy of the Document means a machine-readable copy,
+     represented in a format whose specification is available to the
+     general public, that is suitable for revising the document
+     straightforwardly with generic text editors or (for images
+     composed of pixels) generic paint programs or (for drawings) some
+     widely available drawing editor, and that is suitable for input to
+     text formatters or for automatic translation to a variety of
+     formats suitable for input to text formatters.  A copy made in an
+     otherwise Transparent file format whose markup, or absence of
+     markup, has been arranged to thwart or discourage subsequent
+     modification by readers is not Transparent.  An image format is
+     not Transparent if used for any substantial amount of text.  A
+     copy that is not "Transparent" is called "Opaque".
 
-   Examples of suitable formats for Transparent copies include plain
-ASCII without markup, Texinfo input format, LaTeX input format, SGML or
-XML using a publicly available DTD, and standard-conforming simple HTML
-designed for human modification.  Opaque formats include PostScript,
-PDF, proprietary formats that can be read and edited only by
-proprietary word processors, SGML or XML for which the DTD and/or
-processing tools are not generally available, and the machine-generated
-HTML produced by some word processors for output purposes only.
+     Examples of suitable formats for Transparent copies include plain
+     ASCII without markup, Texinfo input format, LaTeX input format,
+     SGML or XML using a publicly available DTD, and
+     standard-conforming simple HTML, PostScript or PDF designed for
+     human modification.  Examples of transparent image formats include
+     PNG, XCF and JPG.  Opaque formats include proprietary formats that
+     can be read and edited only by proprietary word processors, SGML or
+     XML for which the DTD and/or processing tools are not generally
+     available, and the machine-generated HTML, PostScript or PDF
+     produced by some word processors for output purposes only.
 
-   The "Title Page" means, for a printed book, the title page itself,
-plus such following pages as are needed to hold, legibly, the material
-this License requires to appear in the title page.  For works in
-formats which do not have any title page as such, "Title Page" means
-the text near the most prominent appearance of the work's title,
-preceding the beginning of the body of the text.
+     The "Title Page" means, for a printed book, the title page itself,
+     plus such following pages as are needed to hold, legibly, the
+     material this License requires to appear in the title page.  For
+     works in formats which do not have any title page as such, "Title
+     Page" means the text near the most prominent appearance of the
+     work's title, preceding the beginning of the body of the text.
 
-VERBATIM COPYING
-================
+     A section "Entitled XYZ" means a named subunit of the Document
+     whose title either is precisely XYZ or contains XYZ in parentheses
+     following text that translates XYZ in another language.  (Here XYZ
+     stands for a specific section name mentioned below, such as
+     "Acknowledgements", "Dedications", "Endorsements", or "History".)
+     To "Preserve the Title" of such a section when you modify the
+     Document means that it remains a section "Entitled XYZ" according
+     to this definition.
 
-You may copy and distribute the Document in any medium, either
-commercially or noncommercially, provided that this License, the
-copyright notices, and the license notice saying this License applies
-to the Document are reproduced in all copies, and that you add no other
-conditions whatsoever to those of this License.  You may not use
-technical measures to obstruct or control the reading or further
-copying of the copies you make or distribute.  However, you may accept
-compensation in exchange for copies.  If you distribute a large enough
-number of copies you must also follow the conditions in section 3.
+     The Document may include Warranty Disclaimers next to the notice
+     which states that this License applies to the Document.  These
+     Warranty Disclaimers are considered to be included by reference in
+     this License, but only as regards disclaiming warranties: any other
+     implication that these Warranty Disclaimers may have is void and
+     has no effect on the meaning of this License.
 
-   You may also lend copies, under the same conditions stated above, and
-you may publicly display copies.
+  2. VERBATIM COPYING
 
-COPYING IN QUANTITY
-===================
+     You may copy and distribute the Document in any medium, either
+     commercially or noncommercially, provided that this License, the
+     copyright notices, and the license notice saying this License
+     applies to the Document are reproduced in all copies, and that you
+     add no other conditions whatsoever to those of this License.  You
+     may not use technical measures to obstruct or control the reading
+     or further copying of the copies you make or distribute.  However,
+     you may accept compensation in exchange for copies.  If you
+     distribute a large enough number of copies you must also follow
+     the conditions in section 3.
 
-If you publish printed copies of the Document numbering more than 100,
-and the Document's license notice requires Cover Texts, you must enclose
-the copies in covers that carry, clearly and legibly, all these Cover
-Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
-the back cover.  Both covers must also clearly and legibly identify you
-as the publisher of these copies.  The front cover must present the
-full title with all words of the title equally prominent and visible.
-You may add other material on the covers in addition.  Copying with
-changes limited to the covers, as long as they preserve the title of
-the Document and satisfy these conditions, can be treated as verbatim
-copying in other respects.
+     You may also lend copies, under the same conditions stated above,
+     and you may publicly display copies.
 
-   If the required texts for either cover are too voluminous to fit
-legibly, you should put the first ones listed (as many as fit
-reasonably) on the actual cover, and continue the rest onto adjacent
-pages.
+  3. COPYING IN QUANTITY
 
-   If you publish or distribute Opaque copies of the Document numbering
-more than 100, you must either include a machine-readable Transparent
-copy along with each Opaque copy, or state in or with each Opaque copy
-a publicly-accessible computer-network location containing a complete
-Transparent copy of the Document, free of added material, which the
-general network-using public has access to download anonymously at no
-charge using public-standard network protocols.  If you use the latter
-option, you must take reasonably prudent steps, when you begin
-distribution of Opaque copies in quantity, to ensure that this
-Transparent copy will remain thus accessible at the stated location
-until at least one year after the last time you distribute an Opaque
-copy (directly or through your agents or retailers) of that edition to
-the public.
+     If you publish printed copies (or copies in media that commonly
+     have printed covers) of the Document, numbering more than 100, and
+     the Document's license notice requires Cover Texts, you must
+     enclose the copies in covers that carry, clearly and legibly, all
+     these Cover Texts: Front-Cover Texts on the front cover, and
+     Back-Cover Texts on the back cover.  Both covers must also clearly
+     and legibly identify you as the publisher of these copies.  The
+     front cover must present the full title with all words of the
+     title equally prominent and visible.  You may add other material
+     on the covers in addition.  Copying with changes limited to the
+     covers, as long as they preserve the title of the Document and
+     satisfy these conditions, can be treated as verbatim copying in
+     other respects.
 
-   It is requested, but not required, that you contact the authors of
-the Document well before redistributing any large number of copies, to
-give them a chance to provide you with an updated version of the
-Document.
+     If the required texts for either cover are too voluminous to fit
+     legibly, you should put the first ones listed (as many as fit
+     reasonably) on the actual cover, and continue the rest onto
+     adjacent pages.
 
-MODIFICATIONS
-=============
+     If you publish or distribute Opaque copies of the Document
+     numbering more than 100, you must either include a
+     machine-readable Transparent copy along with each Opaque copy, or
+     state in or with each Opaque copy a computer-network location from
+     which the general network-using public has access to download
+     using public-standard network protocols a complete Transparent
+     copy of the Document, free of added material.  If you use the
+     latter option, you must take reasonably prudent steps, when you
+     begin distribution of Opaque copies in quantity, to ensure that
+     this Transparent copy will remain thus accessible at the stated
+     location until at least one year after the last time you
+     distribute an Opaque copy (directly or through your agents or
+     retailers) of that edition to the public.
 
-You may copy and distribute a Modified Version of the Document under
-the conditions of sections 2 and 3 above, provided that you release the
-Modified Version under precisely this License, with the Modified
-Version filling the role of the Document, thus licensing distribution
-and modification of the Modified Version to whoever possesses a copy of
-it.  In addition, you must do these things in the Modified Version:
+     It is requested, but not required, that you contact the authors of
+     the Document well before redistributing any large number of
+     copies, to give them a chance to provide you with an updated
+     version of the Document.
 
-  A. Use in the Title Page (and on the covers, if any) a title distinct
-     from that of the Document, and from those of previous versions
-     (which should, if there were any, be listed in the History section
-     of the Document).  You may use the same title as a previous version
-     if the original publisher of that version gives permission.
+  4. MODIFICATIONS
 
-  B.  List on the Title Page, as authors, one or more persons or
-     entities responsible for authorship of the modifications in the
-     Modified Version, together with at least five of the principal
-     authors of the Document (all of its principal authors, if it has
-     less than five).
+     You may copy and distribute a Modified Version of the Document
+     under the conditions of sections 2 and 3 above, provided that you
+     release the Modified Version under precisely this License, with
+     the Modified Version filling the role of the Document, thus
+     licensing distribution and modification of the Modified Version to
+     whoever possesses a copy of it.  In addition, you must do these
+     things in the Modified Version:
 
-  C. State on the Title page the name of the publisher of the Modified
-     Version, as the publisher.
+       A. Use in the Title Page (and on the covers, if any) a title
+          distinct from that of the Document, and from those of
+          previous versions (which should, if there were any, be listed
+          in the History section of the Document).  You may use the
+          same title as a previous version if the original publisher of
+          that version gives permission.
 
-  D.  Preserve all the copyright notices of the Document.
+       B. List on the Title Page, as authors, one or more persons or
+          entities responsible for authorship of the modifications in
+          the Modified Version, together with at least five of the
+          principal authors of the Document (all of its principal
+          authors, if it has fewer than five), unless they release you
+          from this requirement.
 
-  E. Add an appropriate copyright notice for your modifications
-     adjacent to the other copyright notices.
+       C. State on the Title page the name of the publisher of the
+          Modified Version, as the publisher.
 
-  F. Include, immediately after the copyright notices, a license notice
-     giving the public permission to use the Modified Version under the
-     terms of this License, in the form shown in the Addendum below.
+       D. Preserve all the copyright notices of the Document.
 
-  G. Preserve in that license notice the full lists of Invariant
-     Sections and required Cover Texts given in the Document's license
-     notice.
+       E. Add an appropriate copyright notice for your modifications
+          adjacent to the other copyright notices.
 
-  H. Include an unaltered copy of this License.
+       F. Include, immediately after the copyright notices, a license
+          notice giving the public permission to use the Modified
+          Version under the terms of this License, in the form shown in
+          the Addendum below.
 
-  I. Preserve the section entitled "History", and its title, and add to
-     it an item stating at least the title, year, new authors, and
-     publisher of the Modified Version as given on the Title Page.  If
-     there is no section entitled "History" in the Document, create one
-     stating the title, year, authors, and publisher of the Document as
-     given on its Title Page, then add an item describing the Modified
-     Version as stated in the previous sentence.
+       G. Preserve in that license notice the full lists of Invariant
+          Sections and required Cover Texts given in the Document's
+          license notice.
 
-  J. Preserve the network location, if any, given in the Document for
-     public access to a Transparent copy of the Document, and likewise
-     the network locations given in the Document for previous versions
-     it was based on.  These may be placed in the "History" section.
-     You may omit a network location for a work that was published at
-     least four years before the Document itself, or if the original
-     publisher of the version it refers to gives permission.
+       H. Include an unaltered copy of this License.
 
-  K. In any section entitled "Acknowledgements" or "Dedications",
-     preserve the section's title, and preserve in the section all the
-     substance and tone of each of the contributor acknowledgements
-     and/or dedications given therein.
+       I. Preserve the section Entitled "History", Preserve its Title,
+          and add to it an item stating at least the title, year, new
+          authors, and publisher of the Modified Version as given on
+          the Title Page.  If there is no section Entitled "History" in
+          the Document, create one stating the title, year, authors,
+          and publisher of the Document as given on its Title Page,
+          then add an item describing the Modified Version as stated in
+          the previous sentence.
 
-  L. Preserve all the Invariant Sections of the Document, unaltered in
-     their text and in their titles.  Section numbers or the equivalent
-     are not considered part of the section titles.
+       J. Preserve the network location, if any, given in the Document
+          for public access to a Transparent copy of the Document, and
+          likewise the network locations given in the Document for
+          previous versions it was based on.  These may be placed in
+          the "History" section.  You may omit a network location for a
+          work that was published at least four years before the
+          Document itself, or if the original publisher of the version
+          it refers to gives permission.
 
-  M. Delete any section entitled "Endorsements".  Such a section may
-     not be included in the Modified Version.
+       K. For any section Entitled "Acknowledgements" or "Dedications",
+          Preserve the Title of the section, and preserve in the
+          section all the substance and tone of each of the contributor
+          acknowledgements and/or dedications given therein.
 
-  N. Do not retitle any existing section as "Endorsements" or to
-     conflict in title with any Invariant Section.
+       L. Preserve all the Invariant Sections of the Document,
+          unaltered in their text and in their titles.  Section numbers
+          or the equivalent are not considered part of the section
+          titles.
 
-   If the Modified Version includes new front-matter sections or
-appendices that qualify as Secondary Sections and contain no material
-copied from the Document, you may at your option designate some or all
-of these sections as invariant.  To do this, add their titles to the
-list of Invariant Sections in the Modified Version's license notice.
-These titles must be distinct from any other section titles.
+       M. Delete any section Entitled "Endorsements".  Such a section
+          may not be included in the Modified Version.
 
-   You may add a section entitled "Endorsements", provided it contains
-nothing but endorsements of your Modified Version by various
-parties-for example, statements of peer review or that the text has
-been approved by an organization as the authoritative definition of a
-standard.
+       N. Do not retitle any existing section to be Entitled
+          "Endorsements" or to conflict in title with any Invariant
+          Section.
 
-   You may add a passage of up to five words as a Front-Cover Text, and
-a passage of up to 25 words as a Back-Cover Text, to the end of the list
-of Cover Texts in the Modified Version.  Only one passage of
-Front-Cover Text and one of Back-Cover Text may be added by (or through
-arrangements made by) any one entity.  If the Document already includes
-a cover text for the same cover, previously added by you or by
-arrangement made by the same entity you are acting on behalf of, you
-may not add another; but you may replace the old one, on explicit
-permission from the previous publisher that added the old one.
+       O. Preserve any Warranty Disclaimers.
 
-   The author(s) and publisher(s) of the Document do not by this License
-give permission to use their names for publicity for or to assert or
-imply endorsement of any Modified Version.
+     If the Modified Version includes new front-matter sections or
+     appendices that qualify as Secondary Sections and contain no
+     material copied from the Document, you may at your option
+     designate some or all of these sections as invariant.  To do this,
+     add their titles to the list of Invariant Sections in the Modified
+     Version's license notice.  These titles must be distinct from any
+     other section titles.
 
-COMBINING DOCUMENTS
-===================
+     You may add a section Entitled "Endorsements", provided it contains
+     nothing but endorsements of your Modified Version by various
+     parties--for example, statements of peer review or that the text
+     has been approved by an organization as the authoritative
+     definition of a standard.
 
-You may combine the Document with other documents released under this
-License, under the terms defined in section 4 above for modified
-versions, provided that you include in the combination all of the
-Invariant Sections of all of the original documents, unmodified, and
-list them all as Invariant Sections of your combined work in its
-license notice.
+     You may add a passage of up to five words as a Front-Cover Text,
+     and a passage of up to 25 words as a Back-Cover Text, to the end
+     of the list of Cover Texts in the Modified Version.  Only one
+     passage of Front-Cover Text and one of Back-Cover Text may be
+     added by (or through arrangements made by) any one entity.  If the
+     Document already includes a cover text for the same cover,
+     previously added by you or by arrangement made by the same entity
+     you are acting on behalf of, you may not add another; but you may
+     replace the old one, on explicit permission from the previous
+     publisher that added the old one.
 
-   The combined work need only contain one copy of this License, and
-multiple identical Invariant Sections may be replaced with a single
-copy.  If there are multiple Invariant Sections with the same name but
-different contents, make the title of each such section unique by
-adding at the end of it, in parentheses, the name of the original
-author or publisher of that section if known, or else a unique number.
-Make the same adjustment to the section titles in the list of Invariant
-Sections in the license notice of the combined work.
+     The author(s) and publisher(s) of the Document do not by this
+     License give permission to use their names for publicity for or to
+     assert or imply endorsement of any Modified Version.
 
-   In the combination, you must combine any sections entitled "History"
-in the various original documents, forming one section entitled
-"History"; likewise combine any sections entitled "Acknowledgements",
-and any sections entitled "Dedications".  You must delete all sections
-entitled "Endorsements."
+  5. COMBINING DOCUMENTS
 
-COLLECTIONS OF DOCUMENTS
-========================
+     You may combine the Document with other documents released under
+     this License, under the terms defined in section 4 above for
+     modified versions, provided that you include in the combination
+     all of the Invariant Sections of all of the original documents,
+     unmodified, and list them all as Invariant Sections of your
+     combined work in its license notice, and that you preserve all
+     their Warranty Disclaimers.
 
-You may make a collection consisting of the Document and other documents
-released under this License, and replace the individual copies of this
-License in the various documents with a single copy that is included in
-the collection, provided that you follow the rules of this License for
-verbatim copying of each of the documents in all other respects.
+     The combined work need only contain one copy of this License, and
+     multiple identical Invariant Sections may be replaced with a single
+     copy.  If there are multiple Invariant Sections with the same name
+     but different contents, make the title of each such section unique
+     by adding at the end of it, in parentheses, the name of the
+     original author or publisher of that section if known, or else a
+     unique number.  Make the same adjustment to the section titles in
+     the list of Invariant Sections in the license notice of the
+     combined work.
 
-   You may extract a single document from such a collection, and
-distribute it individually under this License, provided you insert a
-copy of this License into the extracted document, and follow this
-License in all other respects regarding verbatim copying of that
-document.
+     In the combination, you must combine any sections Entitled
+     "History" in the various original documents, forming one section
+     Entitled "History"; likewise combine any sections Entitled
+     "Acknowledgements", and any sections Entitled "Dedications".  You
+     must delete all sections Entitled "Endorsements."
 
-AGGREGATION WITH INDEPENDENT WORKS
-==================================
+  6. COLLECTIONS OF DOCUMENTS
 
-A compilation of the Document or its derivatives with other separate
-and independent documents or works, in or on a volume of a storage or
-distribution medium, does not as a whole count as a Modified Version of
-the Document, provided no compilation copyright is claimed for the
-compilation.  Such a compilation is called an "aggregate", and this
-License does not apply to the other self-contained works thus compiled
-with the Document, on account of their being thus compiled, if they are
-not themselves derivative works of the Document.
+     You may make a collection consisting of the Document and other
+     documents released under this License, and replace the individual
+     copies of this License in the various documents with a single copy
+     that is included in the collection, provided that you follow the
+     rules of this License for verbatim copying of each of the
+     documents in all other respects.
 
-   If the Cover Text requirement of section 3 is applicable to these
-copies of the Document, then if the Document is less than one quarter
-of the entire aggregate, the Document's Cover Texts may be placed on
-covers that surround only the Document within the aggregate.  Otherwise
-they must appear on covers around the whole aggregate.
+     You may extract a single document from such a collection, and
+     distribute it individually under this License, provided you insert
+     a copy of this License into the extracted document, and follow
+     this License in all other respects regarding verbatim copying of
+     that document.
 
-TRANSLATION
-===========
+  7. AGGREGATION WITH INDEPENDENT WORKS
 
-Translation is considered a kind of modification, so you may distribute
-translations of the Document under the terms of section 4.  Replacing
-Invariant Sections with translations requires special permission from
-their copyright holders, but you may include translations of some or
-all Invariant Sections in addition to the original versions of these
-Invariant Sections.  You may include a translation of this License
-provided that you also include the original English version of this
-License.  In case of a disagreement between the translation and the
-original English version of this License, the original English version
-will prevail.
+     A compilation of the Document or its derivatives with other
+     separate and independent documents or works, in or on a volume of
+     a storage or distribution medium, is called an "aggregate" if the
+     copyright resulting from the compilation is not used to limit the
+     legal rights of the compilation's users beyond what the individual
+     works permit.  When the Document is included in an aggregate, this
+     License does not apply to the other works in the aggregate which
+     are not themselves derivative works of the Document.
 
-TERMINATION
-===========
+     If the Cover Text requirement of section 3 is applicable to these
+     copies of the Document, then if the Document is less than one half
+     of the entire aggregate, the Document's Cover Texts may be placed
+     on covers that bracket the Document within the aggregate, or the
+     electronic equivalent of covers if the Document is in electronic
+     form.  Otherwise they must appear on printed covers that bracket
+     the whole aggregate.
 
-You may not copy, modify, sublicense, or distribute the Document except
-as expressly provided for under this License.  Any other attempt to
-copy, modify, sublicense or distribute the Document is void, and will
-automatically terminate your rights under this License.  However,
-parties who have received copies, or rights, from you under this
-License will not have their licenses terminated so long as such parties
-remain in full compliance.
+  8. TRANSLATION
 
-FUTURE REVISIONS OF THIS LICENSE
-================================
+     Translation is considered a kind of modification, so you may
+     distribute translations of the Document under the terms of section
+     4.  Replacing Invariant Sections with translations requires special
+     permission from their copyright holders, but you may include
+     translations of some or all Invariant Sections in addition to the
+     original versions of these Invariant Sections.  You may include a
+     translation of this License, and all the license notices in the
+     Document, and any Warranty Disclaimers, provided that you also
+     include the original English version of this License and the
+     original versions of those notices and disclaimers.  In case of a
+     disagreement between the translation and the original version of
+     this License or a notice or disclaimer, the original version will
+     prevail.
 
-The Free Software Foundation may publish new, revised versions of the
-GNU Free Documentation License from time to time.  Such new versions
-will be similar in spirit to the present version, but may differ in
-detail to address new problems or concerns.  See
-http://www.gnu.org/copyleft/.
+     If a section in the Document is Entitled "Acknowledgements",
+     "Dedications", or "History", the requirement (section 4) to
+     Preserve its Title (section 1) will typically require changing the
+     actual title.
 
-   Each version of the License is given a distinguishing version number.
-If the Document specifies that a particular numbered version of this
-License "or any later version" applies to it, you have the option of
-following the terms and conditions either of that specified version or
-of any later version that has been published (not as a draft) by the
-Free Software Foundation.  If the Document does not specify a version
-number of this License, you may choose any version ever published (not
-as a draft) by the Free Software Foundation.
+  9. TERMINATION
+
+     You may not copy, modify, sublicense, or distribute the Document
+     except as expressly provided for under this License.  Any other
+     attempt to copy, modify, sublicense or distribute the Document is
+     void, and will automatically terminate your rights under this
+     License.  However, parties who have received copies, or rights,
+     from you under this License will not have their licenses
+     terminated so long as such parties remain in full compliance.
+
+ 10. FUTURE REVISIONS OF THIS LICENSE
+
+     The Free Software Foundation may publish new, revised versions of
+     the GNU Free Documentation License from time to time.  Such new
+     versions will be similar in spirit to the present version, but may
+     differ in detail to address new problems or concerns.  See
+     `http://www.gnu.org/copyleft/'.
+
+     Each version of the License is given a distinguishing version
+     number.  If the Document specifies that a particular numbered
+     version of this License "or any later version" applies to it, you
+     have the option of following the terms and conditions either of
+     that specified version or of any later version that has been
+     published (not as a draft) by the Free Software Foundation.  If
+     the Document does not specify a version number of this License,
+     you may choose any version ever published (not as a draft) by the
+     Free Software Foundation.
 
 ADDENDUM: How to use this License for your documents
 ====================================================
@@ -4894,19 +5016,24 @@ To use this License in a document you have written, include a copy of
 the License in the document and put the following copyright and license
 notices just after the title page:
 
-     Copyright (c)  YEAR  YOUR NAME.
-     Permission is granted to copy, distribute and/or modify this document
-     under the terms of the GNU Free Documentation License, Version 1.1
-     or any later version published by the Free Software Foundation;
-     with the Invariant Sections being LIST THEIR TITLES, with the
-     Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
-     A copy of the license is included in the section entitled "GNU
-     Free Documentation License".
+       Copyright (C)  YEAR  YOUR NAME.
+       Permission is granted to copy, distribute and/or modify this document
+       under the terms of the GNU Free Documentation License, Version 1.2
+       or any later version published by the Free Software Foundation;
+       with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+       Texts.  A copy of the license is included in the section entitled ``GNU
+       Free Documentation License''.
 
-   If you have no Invariant Sections, write "with no Invariant Sections"
-instead of saying which ones are invariant.  If you have no Front-Cover
-Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts being
-LIST"; likewise for Back-Cover Texts.
+   If you have Invariant Sections, Front-Cover Texts and Back-Cover
+Texts, replace the "with...Texts." line with this:
+
+         with the Invariant Sections being LIST THEIR TITLES, with
+         the Front-Cover Texts being LIST, and with the Back-Cover Texts
+         being LIST.
+
+   If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
 
    If your document contains nontrivial examples of program code, we
 recommend releasing these examples in parallel under your choice of
@@ -5067,6 +5194,8 @@ Index
 * failed tests:                          When tests fail.     (line   6)
 * fast_install:                          libtool script contents.
                                                               (line 137)
+* FDL, GNU Free Documentation License:   GNU Free Documentation License.
+                                                              (line   6)
 * file_magic:                            Porting inter-library dependencies.
                                                               (line  18)
 * file_magic_cmd:                        Porting inter-library dependencies.
@@ -5339,7 +5468,7 @@ Index
 * problem reports:                       Reporting bugs.      (line   6)
 * problems, blaming somebody else for:   Troubleshooting.     (line   6)
 * problems, solving:                     Troubleshooting.     (line   6)
-* program wrapper scripts:               Linking executables. (line  75)
+* program wrapper scripts:               Linking executables. (line  68)
 * quote.test:                            Test descriptions.   (line 151)
 * RANLIB <1>:                            libtool script contents.
                                                               (line  48)
@@ -5413,96 +5542,97 @@ Index
                                                               (line 357)
 * wl:                                    libtool script contents.
                                                               (line 360)
-* wrapper scripts for programs:          Linking executables. (line  75)
+* wrapper scripts for programs:          Linking executables. (line  68)
 
 
 
 Tag Table:
-Node: Top873
-Node: Introduction6792
-Node: Motivation8614
-Node: Issues9934
-Node: Other implementations11404
-Node: Postmortem11947
-Node: Libtool paradigm13568
-Node: Using libtool14513
-Node: Creating object files16627
-Node: Linking libraries19141
-Ref: Linking libraries-Footnote-122073
-Node: Linking executables22214
-Ref: Linking executables-Footnote-127223
-Node: Debugging executables27516
-Node: Installing libraries30224
-Ref: Installing libraries-Footnote-133400
-Node: Installing executables33482
-Node: Static libraries34275
-Node: Invoking libtool37534
-Node: Compile mode40855
-Node: Link mode43184
-Node: Execute mode50279
-Node: Install mode51059
-Node: Finish mode53065
-Node: Uninstall mode53500
-Node: Clean mode53941
-Node: Integrating libtool54400
-Node: Makefile rules55083
-Node: Using Automake56159
-Node: Configuring58727
-Node: AC_PROG_LIBTOOL59901
-Ref: AC_PROG_LIBTOOL-Footnote-167233
-Node: Distributing67494
-Node: Invoking libtoolize68662
-Node: Autoconf .o macros70397
-Node: Static-only libraries71651
-Ref: Static-only libraries-Footnote-173010
-Node: Versioning73119
-Node: Interfaces74491
-Node: Libtool versioning75124
-Node: Updating version info77337
-Node: Release numbers79215
-Node: Library tips81062
-Node: C header files83871
-Ref: C header files-Footnote-187542
-Node: Inter-library dependencies87751
-Node: Dlopened modules90415
-Ref: Dlopened modules-Footnote-192328
-Node: Building modules92394
-Node: Dlpreopening93602
-Node: Finding the dlname96436
-Ref: Finding the dlname-Footnote-197735
-Node: Dlopen issues97788
-Node: Using libltdl98841
-Node: Libltdl interface100621
-Node: Modules for libltdl110781
-Node: Thread Safety in libltdl113268
-Node: User defined module data115479
-Node: Module loaders for libltdl120302
-Ref: Module loaders for libltdl-Footnote-1129691
-Node: Distributing libltdl129797
-Ref: Distributing libltdl-Footnote-1136339
-Node: Other languages136564
-Node: C++ libraries137273
-Node: Tags138713
-Node: Troubleshooting139899
-Node: Libtool test suite140434
-Node: Test descriptions141167
-Node: When tests fail147618
-Node: Reporting bugs148513
-Node: Maintaining150131
-Node: New ports150874
-Node: Information sources151567
-Node: Porting inter-library dependencies154035
-Node: Tested platforms156754
-Node: Platform quirks165184
-Node: References166158
-Node: Compilers167015
-Ref: Compilers-Footnote-1168591
-Node: Reloadable objects168907
-Node: Multiple dependencies169266
-Node: Archivers170158
-Node: libtool script contents170724
-Node: Cheap tricks185961
-Node: GNU Free Documentation License187464
-Node: Index206163
+Node: Top874
+Node: Introduction6868
+Node: Motivation8690
+Node: Issues10010
+Node: Other implementations11480
+Node: Postmortem12023
+Node: Libtool paradigm13644
+Node: Using libtool14589
+Node: Creating object files16703
+Node: Linking libraries19217
+Ref: Linking libraries-Footnote-122149
+Node: Linking executables22290
+Ref: Linking executables-Footnote-127299
+Node: Debugging executables27592
+Node: Installing libraries30300
+Ref: Installing libraries-Footnote-133476
+Node: Installing executables33558
+Node: Static libraries34351
+Node: Invoking libtool37610
+Node: Compile mode40931
+Node: Link mode43260
+Node: Execute mode50355
+Node: Install mode51135
+Node: Finish mode53141
+Node: Uninstall mode53576
+Node: Clean mode54017
+Node: Integrating libtool54476
+Node: Makefile rules55159
+Node: Using Automake56235
+Node: Configuring58803
+Node: AC_PROG_LIBTOOL60052
+Ref: AC_PROG_LIBTOOL-Footnote-167408
+Node: Configure notes67669
+Node: Distributing70806
+Node: Invoking libtoolize71974
+Node: Autoconf .o macros73709
+Node: Static-only libraries74963
+Ref: Static-only libraries-Footnote-176322
+Node: Versioning76431
+Node: Interfaces77803
+Node: Libtool versioning78436
+Node: Updating version info80649
+Node: Release numbers82527
+Node: Library tips84374
+Node: C header files87183
+Ref: C header files-Footnote-190854
+Node: Inter-library dependencies91063
+Node: Dlopened modules93727
+Ref: Dlopened modules-Footnote-195640
+Node: Building modules95706
+Node: Dlpreopening96914
+Node: Finding the dlname99748
+Ref: Finding the dlname-Footnote-1101047
+Node: Dlopen issues101100
+Node: Using libltdl102153
+Node: Libltdl interface103933
+Node: Modules for libltdl114093
+Node: Thread Safety in libltdl116580
+Node: User defined module data118791
+Node: Module loaders for libltdl123614
+Ref: Module loaders for libltdl-Footnote-1133003
+Node: Distributing libltdl133109
+Ref: Distributing libltdl-Footnote-1139651
+Node: Other languages139876
+Node: C++ libraries140585
+Node: Tags142025
+Node: Troubleshooting143211
+Node: Libtool test suite143746
+Node: Test descriptions144479
+Node: When tests fail150930
+Node: Reporting bugs151825
+Node: Maintaining153443
+Node: New ports154186
+Node: Information sources154879
+Node: Porting inter-library dependencies157347
+Node: Tested platforms160066
+Node: Platform quirks168496
+Node: References169470
+Node: Compilers170327
+Ref: Compilers-Footnote-1171903
+Node: Reloadable objects172219
+Node: Multiple dependencies172578
+Node: Archivers173470
+Node: libtool script contents174036
+Node: Cheap tricks189273
+Node: GNU Free Documentation License190776
+Node: Index213207
 
 End Tag Table

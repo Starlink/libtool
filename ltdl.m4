@@ -5,7 +5,7 @@
 ## unlimited permission to copy and/or distribute it, with or without
 ## modifications, as long as this notice is preserved.
 
-# serial 8 AC_LIB_LTDL
+# serial 9 AC_LIB_LTDL
 
 # AC_WITH_LTDL
 # ------------
@@ -119,7 +119,7 @@ AC_CACHE_CHECK([whether deplibs are loaded by dlopen],
     # we want this `case' here to explicitly catch those versions.
     libltdl_cv_sys_dlopen_deplibs=unknown
     ;;
-  aix[[45]]*)
+  aix[[4-9]]*)
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;
   darwin*)

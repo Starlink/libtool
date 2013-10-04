@@ -1,5 +1,16 @@
 NEWS - list of user-visible changes between releases of GNU Libtool
 
+New in 1.5.26: 2008-02-01; CVS version 1.5.25a, Libtool team:
+* Improved support for Mac OS X Leopard.
+* More robust parsing of mangled `.la' files inside libltdl, fixing a
+  possible overrun and a crash due to memory exhaustion.
+* Fix compile command line for gcj on MinGW.
+* Some configure variables have been renamed to fix caching:
+  lt_prog_compiler_pic_works to lt_cv_prog_compiler_pic_works
+  lt_prog_compiler_static_works to lt_cv_prog_compiler_static_works.
+* Support for AIX 6.1.
+* Bug Fixes.
+
 New in 1.5.24: 2007-06-17; CVS version 1.5.23c, Libtool team:
 * Initial support for Interix newer than version 3.
 * Use getconf ARG_MAX to find the max command line length.
