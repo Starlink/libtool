@@ -1,9 +1,9 @@
 #! /bin/sh
-# Generated from tests/defs.m4sh by GNU Autoconf 2.65.
-# @configure_input@
+# Generated from tests/defs.m4sh by GNU Autoconf 2.67.
+
 # defs -- Defines for Libtool testing environment.
 #
-#   Copyright (C) 2003, 2004, 2005, 2007, 2008, 2009 Free Software
+#   Copyright (C) 2003, 2004, 2005, 2007, 2008, 2009, 2010 Free Software
 #   Foundation, Inc.
 #   Written by Gord Matzigkeit, 1996
 #   Rewritten by Gary V. Vaughan, 2003
@@ -309,6 +309,27 @@ IFS=" 	$lt_nl"
 dirname="s,/[^/]*$,,"
 basename="s,^.*/,,"
 
+# func_dirname file append nondir_replacement
+# Compute the dirname of FILE.  If nonempty, add APPEND to the result,
+# otherwise set result to NONDIR_REPLACEMENT.
+func_dirname ()
+{
+    func_dirname_result=`$ECHO "${1}" | $SED "$dirname"`
+    if test "X$func_dirname_result" = "X${1}"; then
+      func_dirname_result="${3}"
+    else
+      func_dirname_result="$func_dirname_result${2}"
+    fi
+} # func_dirname may be replaced by extended shell implementation
+
+
+# func_basename file
+func_basename ()
+{
+    func_basename_result=`$ECHO "${1}" | $SED "$basename"`
+} # func_basename may be replaced by extended shell implementation
+
+
 # func_dirname_and_basename file append nondir_replacement
 # perform func_basename and func_dirname in a single function
 # call:
@@ -323,17 +344,31 @@ basename="s,^.*/,,"
 # those functions but instead duplicate the functionality here.
 func_dirname_and_basename ()
 {
-  # Extract subdirectory from the argument.
-  func_dirname_result=`$ECHO "${1}" | $SED -e "$dirname"`
-  if test "X$func_dirname_result" = "X${1}"; then
-    func_dirname_result="${3}"
-  else
-    func_dirname_result="$func_dirname_result${2}"
-  fi
-  func_basename_result=`$ECHO "${1}" | $SED -e "$basename"`
-}
+    # Extract subdirectory from the argument.
+    func_dirname_result=`$ECHO "${1}" | $SED -e "$dirname"`
+    if test "X$func_dirname_result" = "X${1}"; then
+      func_dirname_result="${3}"
+    else
+      func_dirname_result="$func_dirname_result${2}"
+    fi
+    func_basename_result=`$ECHO "${1}" | $SED -e "$basename"`
+} # func_dirname_and_basename may be replaced by extended shell implementation
 
-# Generated shell functions inserted here.
+
+# func_stripname prefix suffix name
+# strip PREFIX and SUFFIX off of NAME.
+# PREFIX and SUFFIX must not contain globbing or regex special
+# characters, hashes, percent signs, but SUFFIX may contain a leading
+# dot (in which case that matches only a dot).
+# func_strip_suffix prefix name
+func_stripname ()
+{
+    case ${2} in
+      .*) func_stripname_result=`$ECHO "${3}" | $SED "s%^${1}%%; s%\\\\${2}\$%%"`;;
+      *)  func_stripname_result=`$ECHO "${3}" | $SED "s%^${1}%%; s%${2}\$%%"`;;
+    esac
+} # func_stripname may be replaced by extended shell implementation
+
 
 # These SED scripts presuppose an absolute path with a trailing slash.
 pathcar='s,^/\([^/]*\).*$,\1,'
@@ -516,6 +551,15 @@ sed_quote_subst='s/\([`"$\\]\)/\\\1/g'
 # Same as above, but do not quote variable references.
 double_quote_subst='s/\(["`\\]\)/\\\1/g'
 
+# Sed substitution that turns a string into a regex matching for the
+# string literally.
+sed_make_literal_regex='s,[].[^$\\*\/],\\&,g'
+
+# Sed substitution that converts a w32 file name or path
+# which contains forward slashes, into one that contains
+# (escaped) backslashes.  A very naive implementation.
+lt_sed_naive_backslashify='s|\\\\*|\\|g;s|/|\\|g;s|\\|\\\\|g'
+
 # Re-`\' parameter expansions in output of double_quote_subst that were
 # `\'-ed in input to the same.  If an odd number of `\' preceded a '$'
 # in input to double_quote_subst, that '$' was protected from expansion.
@@ -544,7 +588,7 @@ opt_warning=:
 # name if it has been set yet.
 func_echo ()
 {
-    $ECHO "$progname${mode+: }$mode: $*"
+    $ECHO "$progname: ${opt_mode+$opt_mode: }$*"
 }
 
 # func_verbose arg...
@@ -570,14 +614,14 @@ func_echo_all ()
 # Echo program name prefixed message to standard error.
 func_error ()
 {
-    $ECHO "$progname${mode+: }$mode: "${1+"$@"} 1>&2
+    $ECHO "$progname: ${opt_mode+$opt_mode: }"${1+"$@"} 1>&2
 }
 
 # func_warning arg...
 # Echo program name prefixed warning message to standard error.
 func_warning ()
 {
-    $opt_warning && $ECHO "$progname${mode+: }$mode: warning: "${1+"$@"} 1>&2
+    $opt_warning && $ECHO "$progname: ${opt_mode+$opt_mode: }warning: "${1+"$@"} 1>&2
 
     # bash bug again:
     :
@@ -796,6 +840,23 @@ func_show_eval_locale ()
     fi
 }
 
+# func_tr_sh
+# Turn $1 into a string suitable for a shell variable name.
+# Result is stored in $func_tr_sh_result.  All characters
+# not in the set a-zA-Z0-9_ are replaced with '_'. Further,
+# if $1 begins with a digit, a '_' is prepended as well.
+func_tr_sh ()
+{
+  case $1 in
+  [0-9]* | *[!a-zA-Z0-9_]*)
+    func_tr_sh_result=`$ECHO "$1" | $SED 's/^\([0-9]\)/_\1/; s/[^a-zA-Z0-9_]/_/g'`
+    ;;
+  * )
+    func_tr_sh_result=$1
+    ;;
+  esac
+}
+
 
 
 
@@ -812,15 +873,10 @@ if test -z "$DJGPP"; then
     CONFIG_SITE=/nonexistent
 fi
 
-# How verbose should we be?  Default is no test output.
-# Setting VERBOSE=yes enables test output.
-# Setting VERBOSE=debug also puts the shell in debug mode.
+# How verbose should we be?  Default is test output in log file.
+# Setting VERBOSE=debug puts the shell in debug mode.
 opt_debug=:
-test "${VERBOSE+set}" != "set" && VERBOSE=no
 case "$VERBOSE" in
-NO | no | 0 | "")
-  exec > /dev/null 2>&1
-  ;;
 DEBUG | debug )
   opt_debug='set -x'
   $opt_debug
@@ -828,7 +884,7 @@ DEBUG | debug )
 esac
 
 if test -z "$srcdir"; then
-  srcdir=`$ECHO "$0" | $SED "$dirname"`
+  srcdir=`$ECHO "$0" | $SED "$dirname; s,/tests\$,,"`
   test "$srcdir" = "$0" && srcdir=.
 fi
 
@@ -899,6 +955,7 @@ func_get_config "objext
 objdir
 CC
 host
+host_os
 host_alias
 build
 build_alias" "$LIBTOOL --config" ": fatal"
@@ -1114,11 +1171,25 @@ func_exec ()
 }
 
 # Shared global variables for test scripts
-prefix="./_inst"
+prefix=./_inst-`echo "$0" | sed 's,.*/,,; s,-.*,,'`
 srcdir=`cd $srcdir && pwd`
 m4dir=$srcdir/libltdl/m4
 auxdir=$srcdir/libltdl/config
 scripts="$auxdir/ltmain.m4sh $srcdir/libtoolize.m4sh"
+
+# Unset some MAKE... variables that may cause $MAKE to act like a
+# recursively invoked sub-make.  Any $MAKE invocation in a test is
+# conceptually an independent invocation.
+unset MFLAGS MAKEFLAGS MAKELEVEL __MKLVL__ MAKE_JOBS_FIFO
+
+# On AIX, shared libraries remain loaded in memory after use if they
+# are world-readable, until root issues slibclean.  On NFS, this causes
+# a testsuite rerun to fail to clean up test group directories.  Avoid
+# this with a suitable umask.  Do not do this on other systems, for
+# example HP-UX suffers unless shared libraries are mode 555.
+case $host_os in
+aix*) umask o-rwx ;;
+esac
 
 func_msg "Running $progname"
 

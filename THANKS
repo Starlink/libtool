@@ -106,9 +106,11 @@
   Jakub Bogusz			qboosh@pld-linux.org
   Jacob Meuser			jakemsr@jakemsr.com
   James Su			james.su@gmail.com
+  Jay Krell			jay.krell@cornell.edu
   Jeff Squyres			jsquyres@lam-mpi.org
   Jeremy C. Reed		reed@reedmedia.net
   Jim Meyering			jim@meyering.net
+  Joakim Tjernlund		joakim.tjernlund@transmode.se
   Joel N. Weber II		devnull@gnu.org
   Joerg Sonnenberger		joerg@netbsd.org
   John Bowler			jbowler@acm.org
@@ -130,6 +132,7 @@
   Marcel Loose			loose@astron.nl
   Mark Kettenis			kettenis@phys.uva.nl
   Matthijs Kooijman		matthijs@stdin.nl
+  Micheal E. Faenza		mfaenza@mitre.org
   Michael Haubenwallner		michael.haubenwallner@salomon.at
   Mike Gorchak			mike@malva.ua
   Mike Frysinger		vapier@gentoo.org
@@ -144,6 +147,7 @@
   Peter Fritzsche		peter.fritzsche@gmx.de
   Peter Jeremy			peterjeremy@optushome.com.au
   Peter Kjellerstedt		peter.kjellerstedt@axis.com
+  Philip Allison		philip.allison@smoothwall.net
   Rainer Emrich			r.emrich@de.tecosim.com
   Rainer Orth			ro@TechFak.Uni-Bielefeld.DE
   Rainer Tammer			tammer@tammer.net
@@ -173,6 +177,7 @@
   Tom Tromey			tromey@cygnus.com
   Tor Lillqvist			tml@iki.fi
   Ulrich Drepper		drepper@ipd.info.uni-karlsruhe.de
+  Warren Dodge			warren.l.dodge@Tektronix.com
   Vadim Zeitlin			vz-libtool@zeitlins.org
   Vincent Lefevre		vincent@vinc17.org
   Vincent Torri			vtorri@univ-evry.fr

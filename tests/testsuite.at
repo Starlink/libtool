@@ -1,6 +1,6 @@
 # Process with autom4te to create an -*- Autotest -*- test suite.
 #
-#   Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009 Free Software
+#   Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software
 #   Foundation, Inc.
 #   Written by Gary V. Vaughan, 2004
 #
@@ -23,8 +23,6 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 ####
 
-AT_INIT
-
 m4_divert_push([PREPARE_TESTS])dnl
 : ${tst_dist=dist}
 : ${ACLOCAL=aclocal}
@@ -39,13 +37,19 @@ for tool in ACLOCAL AUTOHEADER AUTOCONF AUTOMAKE AUTORECONF; do
 done
 export ACLOCAL AUTOHEADER AUTOCONF AUTOMAKE AUTORECONF
 eval `$LIBTOOL --config | grep '^EGREP='`
-eval `$LIBTOOL --config | $EGREP '^(host|host_os|host_alias|build|build_alias)='`
+eval `$LIBTOOL --config | $EGREP '^(host|host_os|host_alias|build|build_alias|to_host_file_cmd|to_tool_file_cmd)='`
 configure_options=--prefix=/nonexistent
 if test -n "$host_alias"; then
   configure_options="$configure_options --host $host_alias"
 fi
 if test -n "$build_alias"; then
   configure_options="$configure_options --build $build_alias"
+fi
+if test -n "$to_host_file_cmd"; then
+  configure_options="$configure_options lt_cv_to_host_file_cmd=$to_host_file_cmd"
+fi
+if test -n "$to_tool_file_cmd"; then
+  configure_options="$configure_options lt_cv_to_tool_file_cmd=$to_tool_file_cmd"
 fi
 if (FOO=bar; unset FOO) >/dev/null 2>&1; then
   unset=unset
@@ -59,6 +63,11 @@ case $lt_INSTALL in
     lt_INSTALL=$abs_top_srcdir/libltdl/config/install-sh
     ;;
 esac
+
+# Unset some MAKE... variables that may cause $MAKE to act like a
+# recursively invoked sub-make.  Any $MAKE invocation in a test is
+# conceptually an independent invocation.
+unset MFLAGS MAKEFLAGS MAKELEVEL __MKLVL__ MAKE_JOBS_FIFO
 
 # On AIX, shared libraries remain loaded in memory after use if they
 # are world-readable, until root issues slibclean.  On NFS, this causes
@@ -148,11 +157,13 @@ AT_KEYWORDS([autoconf automake])
 ])
 
 
-# LT_AT_CONFIGURE([OPTIONS])
-# --------------------------
+# LT_AT_CONFIGURE([OPTIONS], [CONFIGURE-SCRIPT])
+# ----------------------------------------------
+# Configure CONFIGURE-SCRIPT, defaulting to ./configure, with
+# additional OPTIONS.
 m4_define([LT_AT_CONFIGURE],
 [AT_CHECK([: ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; ]dnl
-	  [$CONFIG_SHELL ./configure $configure_options $1],
+	  [$CONFIG_SHELL m4_default([$2], [./configure]) $configure_options $1],
 	  [0], [ignore], [ignore])
 ])
 
@@ -229,10 +240,13 @@ esac])
 # - distcc process numbers,
 # - ccache file location,
 # - newline encoding,
-# - location of the libtool script.
+# - location of the libtool script,
+# - error messages involving unstable temporary file names.
 m4_define([LT_AT_NORMALIZE_COMPILER_OUTPUT],
 [_ltbase=`$ECHO "$LIBTOOL" | sed 's,^.*/,,'`
-[sed "/^distcc\[[0-9]*\]/d; /^$_ltbase: compile/d" < $1 > $1.t]
+[sed "/^distcc\[[0-9]*\]/d
+      /^$_ltbase: compile/d
+      s/\(tmp\/\{1,\}cc\)\([a-zA-Z0-9_]\{1,\}\)/\1-normalized-tmpname/g" < $1 > $1.t]
 LT_AT_UNIFY_NL([$1.t], [m4_default([$2], [$1])])[]dnl
 ])
 
@@ -275,11 +289,38 @@ AT_CHECK([if $LIBTOOL --mode=execute $2 "$lt_exe" $6; then :; else lt_status=$?;
 
 # LT_AT_TAG(TAG)
 # --------------
+# Declare that the language TAG will be used in this test.
+# Skips the test if the compiler is apparently not functional.
 m4_define([LT_AT_TAG],
 [AT_KEYWORDS([$1])
 AT_CHECK([{ test -n "[$]$1" && test "X[$]$1" != Xno; } || (exit 77)])
-m4_if([$1], [CXX],
-  [AT_CHECK([test "X$CXX" != Xg++ || (g++ -v >/dev/null 2>&1) || (exit 77)])])
+m4_case([$1],
+  [CXX],
+  [AT_CHECK([test "X$CXX" != Xg++ || (g++ -v >/dev/null 2>&1) || (exit 77)])],
+  [GCJ],
+  [# There are just too many broken gcj installations out there, either missing
+   # libgcj.spec or unable to find it.  Skip the test for them.
+   AT_DATA([gcj_test.java],
+[[public class gcj_test {
+    public static void main(String[] argv) { }
+  }
+]])
+   AT_CHECK([$GCJ $GCJFLAGS -c gcj_test.java || exit 77],
+	    [], [ignore], [ignore])])
+])
+
+
+# LT_AT_EXEC_TAG([TAG])
+# ---------------------
+# Declare that the language TAG will be used and compiled programs may be run.
+# Skips the test if the compiler is apparently not functional.
+m4_define([LT_AT_EXEC_TAG],
+[LT_AT_TAG([$1])
+m4_case([$1],
+  [GCJ],
+  [AT_CHECK([$GCJ $GCJFLAGS --main=gcj_test -o gcj_test$EXEEXT gcj_test.java ]dnl
+	    [|| exit 77], [], [ignore], [ignore])
+   AT_CHECK([./gcj_test$EXEEXT || exit 77], [], [ignore], [ignore])])
 ])
 
 
@@ -413,6 +454,11 @@ m4_pattern_allow([^dnl$])
 
 # We exercise these tools.
 dnl AT_TESTED([grep autoreconf autom4te automake])
+
+# Enable colored output if available.
+m4_ifdef([AT_COLOR_TESTS], [AT_COLOR_TESTS])
+
+AT_INIT
 
 ## ----------- ##
 ## The suite.  ##
