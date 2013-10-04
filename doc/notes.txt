@@ -1,8 +1,4 @@
-   * Note that Sun C++ compiler versions before 5.6 may need some
-     special setup to link properly against shared versions of the C++
-     standard libraries.  See
-     `http://lists.gnu.org/archive/html/libtool/2005-08/msg00088.html'
-     for more information.
+   * You currently need GNU make to build the Libtool package itself.
 
    * On AIX there are two different styles of shared linking, one in
      which symbols are bound at link-time and one in which symbols are
@@ -18,12 +14,16 @@
           CONFIG_SHELL=/bin/bash; export $CONFIG_SHELL
           $CONFIG_SHELL ./configure [...]
 
-   * Note in some cases you might need to put ABI-changing compiler
-     flags into the compiler name.  For example, use of
-            configure CC='gcc -m32'
-     rather than
-            configure CC=gcc CFLAGS=-m32 LDFLAGS=-m32
-     might help with this Libtool release.
+   * For C++ code with templates, it may be necessary to specify the
+     way the compiler will generate the instantiations.  For Portland
+     pgCC version5, use `CXX='pgCC --one_instantiation_per_object'' and
+     avoid parallel `make'.
+
+   * On Darwin, for C++ code with templates you need two level shared
+     libraries.  Libtool builds these by default if
+     `MACOSX_DEPLOYMENT_TARGET' is set to 10.3 or later at `configure'
+     time.  See `rdar://problem/4135857' for more information on this
+     issue.
 
    * The default shell on UNICOS 9, a ksh 88e variant, is too buggy to
      correctly execute the libtool script.  Users are advised to
