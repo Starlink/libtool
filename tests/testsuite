@@ -620,78 +620,85 @@ at_change_dir=false
 # List of the tested programs.
 at_tested=''
 # List of the all the test groups.
-at_groups_all=' 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66'
+at_groups_all=' 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73'
 # As many question marks as there are digits in the last test group number.
 # Used to normalize the test group numbers so that `ls' lists them in
 # numerical order.
 at_format='??'
 # Description of all the test groups.
-at_help_all="1;libtoolize.at:79;libtoolize macro installation;libtoolize;
-2;libtoolize.at:103;libtoolize macro serial update;libtoolize;
-3;libtoolize.at:194;libtoolize config files serial update;libtoolize;
-4;libtoolize.at:296;diagnose missing LT_CONFIG_LTDL_DIR;libtoolize;
-5;libtoolize.at:436;copy ltdl.m4 with shared macro directory;libtoolize;
-6;libtoolize.at:448;correctly parse LTDL_INIT from configure.ac;libtoolize;
-7;libtoolize.at:460;diagnose missing LTDL_INIT invocation;libtoolize;
-8;libtoolize.at:536;upgrading verbatim style aclocal.m4;libtoolize automake;
-9;libtoolize.at:660;nonrecursive ltdl with AC_CONFIG_MACRO_DIR;libtoolize;
-10;libtoolize.at:727;subproject ltdl with non-shared directories;libtoolize;
-11;duplicate_members.at:26;duplicate members in archive tests;libtool;
-12;duplicate_conv.at:25;duplicate convenience archive names;libtool;
-13;duplicate_deps.at:25;preserve duplicate convenience deps;libtool;
-14;inherited_flags.at:26;inherited_linker_flags;libtool;
-15;convenience.at:30;C convenience archives;libtool;
-16;convenience.at:69;C++ convenience archives;cxx libtool;
-17;convenience.at:109;F77 convenience archives;f77 libtool;
-18;convenience.at:169;FC convenience archives;fc libtool;
-19;convenience.at:229;Java convenience archives;gcj libtool;
-20;link-order.at:26;Link order test.;libtool;
-21;link-order2.at:46;Link order of deplibs.;libtool;
-22;fail.at:27;Failure tests;libtool;
-23;shlibpath.at:25;shlibpath_overrides_runpath;libtool;
-24;runpath-in-lalib.at:25;Runpath in libtool library files;libtool;
-25;static.at:68;static linking flags for programs;libtool;
-26;export.at:25;Export test;libtool;
-27;search-path.at:25;sys_lib_search_path;libtool;
-28;indirect_deps.at:25;indirect convenience;libtool;
-29;indirect_deps.at:71;indirect uninstalled;libtool;
-30;archive-in-archive.at:26;static library contains static library;libtool;
-31;execute-mode.at:25;execute mode;libtool;
-32;localization.at:25;localized compiler messages;libtool;
-33;destdir.at:48;Simple DESTDIR install;libtool;
-34;destdir.at:75;DESTDIR with in-package deplibs;libtool;
-35;old-m4-iface.at:40;AM_PROG_LIBTOOL;libtoolize autoconf;
-36;old-m4-iface.at:107;AC_WITH_LTDL;libtoolize automake autoconf;
-37;am-subdir.at:33;C subdir-objects;libtoolize automake autoconf;
-38;am-subdir.at:93;C++ subdir-objects;cxx libtoolize automake autoconf;
-39;lt_dlexit.at:30;lt_dlexit unloading libs;libltdl;
-40;lt_dladvise.at:28;lt_dlopenadvise library loading;libltdl;
-41;need_lib_prefix.at:25;enforced lib prefix;libltdl libtool;
-42;standalone.at:31;compiling softlinked libltdl;libtoolize;
-43;standalone.at:46;compiling copied libltdl;libtoolize;
-44;standalone.at:61;installable libltdl;libtoolize;
-45;standalone.at:79;linking libltdl without autotools;libtoolize;
-46;subproject.at:57;compiling softlinked libltdl;libtoolize automake autoconf;
-47;subproject.at:73;compiling copied libltdl;libtoolize automake autoconf;
-48;subproject.at:89;installable libltdl;libtoolize automake autoconf;
-49;subproject.at:109;linking libltdl without autotools;libtoolize;
-50;nonrecursive.at:78;compiling softlinked libltdl;libtoolize automake autoconf;
-51;nonrecursive.at:102;compiling copied libltdl;libtoolize automake autoconf;
-52;nonrecursive.at:126;installable libltdl;libtoolize automake autoconf;
-53;recursive.at:60;compiling softlinked libltdl;libtoolize autoconf automake;
-54;recursive.at:80;compiling copied libltdl;libtoolize autoconf automake;
-55;recursive.at:100;installable libltdl;libtoolize autoconf automake;
-56;template.at:27;simple template test;cxx libtool;
-57;template.at:126;template test with subdirs;cxx libtool;
-58;ctor.at:27;C++ static constructors;cxx libtool;
-59;early-libtool.at:32;config.status;libtoolize automake autoconf;
-60;early-libtool.at:126;config.lt;libtoolize automake autoconf;
-61;deplibs-ident.at:32;build tree relpaths;libtool;
-62;configure-iface.at:102;installable libltdl;libltdl libtoolize automake autoconf;
-63;configure-iface.at:159;--with-ltdl-include/lib;libltdl libtoolize automake autoconf;
-64;configure-iface.at:225;--with-included-ltdl;libltdl libtoolize automake autoconf;
-65;stresstest.at:31;Link option thorough search test;libtool;
-66;cmdline_wrap.at:28;Run tests with low max_cmd_len;recursive;
+at_help_all="1;libtoolize.at:83;libtoolize macro installation;libtoolize;
+2;libtoolize.at:108;libtoolize macro directory mismatch error;libtoolize;
+3;libtoolize.at:128;libtoolize macro serial update;libtoolize;
+4;libtoolize.at:201;libtoolize config files serial update;libtoolize;
+5;libtoolize.at:281;diagnose missing LT_CONFIG_LTDL_DIR;libtoolize;
+6;libtoolize.at:426;copy ltdl.m4 with shared macro directory;libtoolize;
+7;libtoolize.at:438;correctly parse LTDL_INIT from configure.ac;libtoolize;
+8;libtoolize.at:450;diagnose missing LTDL_INIT invocation;libtoolize;
+9;libtoolize.at:527;upgrading verbatim style aclocal.m4;libtoolize automake;
+10;libtoolize.at:651;verbatim aclocal.m4 w/o AC_CONFIG_MACRO_DIR;libtoolize automake;
+11;libtoolize.at:783;nonrecursive ltdl with AC_CONFIG_MACRO_DIR;libtoolize;
+12;libtoolize.at:854;subproject ltdl with non-shared directories;libtoolize;
+13;libtoolize.at:945;LIBTOOLIZE_OPTIONS;libtoolize;
+14;libtoolize.at:992;cleanup old installation;libtoolize;
+15;duplicate_members.at:26;duplicate members in archive tests;libtool;
+16;duplicate_conv.at:25;duplicate convenience archive names;libtool;
+17;duplicate_deps.at:25;preserve duplicate convenience deps;libtool;
+18;inherited_flags.at:26;inherited_linker_flags;libtool;
+19;convenience.at:30;C convenience archives;libtool;
+20;convenience.at:69;C++ convenience archives;cxx libtool;
+21;convenience.at:109;F77 convenience archives;f77 libtool;
+22;convenience.at:169;FC convenience archives;fc libtool;
+23;convenience.at:229;Java convenience archives;gcj libtool;
+24;link-order.at:26;Link order test.;libtool;
+25;link-order2.at:46;Link order of deplibs.;libtool;
+26;fail.at:27;Failure tests;libtool;
+27;shlibpath.at:25;shlibpath_overrides_runpath;libtool;
+28;runpath-in-lalib.at:25;Runpath in libtool library files;libtool;
+29;static.at:68;static linking flags for programs;libtool;
+30;static.at:357;ccache -all-static;;
+31;export.at:25;Export test;libtool;
+32;search-path.at:25;sys_lib_search_path;libtool;
+33;indirect_deps.at:25;indirect convenience;libtool;
+34;indirect_deps.at:71;indirect uninstalled;libtool;
+35;archive-in-archive.at:26;static library contains static library;libtool;
+36;execute-mode.at:25;execute mode;libtool;
+37;localization.at:25;localized compiler messages;libtool;
+38;destdir.at:48;Simple DESTDIR install;libtool;
+39;destdir.at:75;DESTDIR with in-package deplibs;libtool;
+40;old-m4-iface.at:40;AM_PROG_LIBTOOL;libtoolize autoconf;
+41;old-m4-iface.at:107;AC_WITH_LTDL;libtoolize automake autoconf;
+42;am-subdir.at:33;C subdir-objects;libtoolize automake autoconf;
+43;am-subdir.at:93;C++ subdir-objects;cxx libtoolize automake autoconf;
+44;lt_dlexit.at:30;lt_dlexit unloading libs;libltdl;
+45;lt_dladvise.at:28;lt_dlopenadvise library loading;libltdl;
+46;need_lib_prefix.at:25;enforced lib prefix;libltdl libtool;
+47;standalone.at:31;compiling softlinked libltdl;libtoolize;
+48;standalone.at:46;compiling copied libltdl;libtoolize;
+49;standalone.at:61;installable libltdl;libtoolize;
+50;standalone.at:79;linking libltdl without autotools;libtoolize;
+51;subproject.at:57;compiling softlinked libltdl;libtoolize automake autoconf;
+52;subproject.at:73;compiling copied libltdl;libtoolize automake autoconf;
+53;subproject.at:89;installable libltdl;libtoolize automake autoconf;
+54;subproject.at:109;linking libltdl without autotools;libtoolize;
+55;nonrecursive.at:78;compiling softlinked libltdl;libtoolize automake autoconf;
+56;nonrecursive.at:102;compiling copied libltdl;libtoolize automake autoconf;
+57;nonrecursive.at:126;installable libltdl;libtoolize automake autoconf;
+58;recursive.at:60;compiling softlinked libltdl;libtoolize autoconf automake;
+59;recursive.at:80;compiling copied libltdl;libtoolize autoconf automake;
+60;recursive.at:100;installable libltdl;libtoolize autoconf automake;
+61;template.at:27;simple template test;cxx libtool;
+62;template.at:126;template test with subdirs;cxx libtool;
+63;ctor.at:27;C++ static constructors;cxx libtool;
+64;early-libtool.at:32;config.status;libtoolize automake autoconf;
+65;early-libtool.at:126;config.lt;libtoolize automake autoconf;
+66;deplibs-ident.at:32;build tree relpaths;libtool;
+67;configure-iface.at:102;installable libltdl;libltdl libtoolize automake autoconf;
+68;configure-iface.at:159;--with-ltdl-include/lib;libltdl libtoolize automake autoconf;
+69;configure-iface.at:225;--with-included-ltdl;libltdl libtoolize automake autoconf;
+70;configure-iface.at:283;convenience libltdl;libtoolize automake autoconf;
+71;stresstest.at:31;Link option thorough search test;libtool;
+72;cmdline_wrap.at:28;Run tests with low max_cmd_len;recursive;
+73;darwin.at:26;darwin fat compile;;
 "
 
 # at_func_validate_ranges [N...]
@@ -701,7 +708,7 @@ at_func_validate_ranges ()
 {
   for at_grp
   do
-    if test $at_grp -lt 1 || test $at_grp -gt 66; then
+    if test $at_grp -lt 1 || test $at_grp -gt 73; then
       $as_echo "invalid test group: $at_grp" >&2
       exit 1
     fi
@@ -928,7 +935,7 @@ fi
 # List of tests.
 if $at_list_p; then
   cat <<_ATEOF || at_write_fail=1
-libtool 2.2.2 test suite test groups:
+libtool 2.2.4 test suite test groups:
 
  NUM: FILE-NAME:LINE     TEST-GROUP-NAME
       KEYWORDS
@@ -957,7 +964,7 @@ _ATEOF
   exit $at_write_fail
 fi
 if $at_version_p; then
-  $as_echo "$as_me (libtool 2.2.2)" &&
+  $as_echo "$as_me (libtool 2.2.4)" &&
   cat <<\_ACEOF || at_write_fail=1
 
 Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008
@@ -980,50 +987,53 @@ esac
 # Category starts at test group 1.
 at_banner_text_1="Libtoolize operation."
 # Banner 2. duplicate_members.at:25
-# Category starts at test group 11.
+# Category starts at test group 15.
 at_banner_text_2="Testing libtool functions."
 # Banner 3. destdir.at:25
-# Category starts at test group 33.
+# Category starts at test group 38.
 at_banner_text_3="DESTDIR tests"
 # Banner 4. old-m4-iface.at:26
-# Category starts at test group 35.
+# Category starts at test group 40.
 at_banner_text_4="Support for older m4 interface."
 # Banner 5. am-subdir.at:26
-# Category starts at test group 37.
+# Category starts at test group 42.
 at_banner_text_5="Libtool subdir-objects support."
 # Banner 6. lt_dlexit.at:28
-# Category starts at test group 39.
+# Category starts at test group 44.
 at_banner_text_6="Libltdl functionality."
 # Banner 7. standalone.at:25
-# Category starts at test group 42.
+# Category starts at test group 47.
 at_banner_text_7="Standalone Libltdl."
 # Banner 8. subproject.at:25
-# Category starts at test group 46.
+# Category starts at test group 51.
 at_banner_text_8="Subproject Libltdl."
 # Banner 9. nonrecursive.at:26
-# Category starts at test group 50.
+# Category starts at test group 55.
 at_banner_text_9="Nonrecursive Automake Libltdl."
 # Banner 10. recursive.at:25
-# Category starts at test group 53.
+# Category starts at test group 58.
 at_banner_text_10="Recursive Automake Libltdl."
 # Banner 11. template.at:25
-# Category starts at test group 56.
+# Category starts at test group 61.
 at_banner_text_11="C++ template tests."
 # Banner 12. ctor.at:25
-# Category starts at test group 58.
+# Category starts at test group 63.
 at_banner_text_12="Constructors."
 # Banner 13. early-libtool.at:25
-# Category starts at test group 59.
+# Category starts at test group 64.
 at_banner_text_13="libtool script generation."
 # Banner 14. deplibs-ident.at:25
-# Category starts at test group 61.
+# Category starts at test group 66.
 at_banner_text_14="Detecting identical deplibs."
 # Banner 15. configure-iface.at:25
-# Category starts at test group 62.
+# Category starts at test group 67.
 at_banner_text_15="configure interface to libltdl."
 # Banner 16. stresstest.at:30
-# Category starts at test group 65.
+# Category starts at test group 71.
 at_banner_text_16="Libtool stress test."
+# Banner 17. darwin.at:25
+# Category starts at test group 73.
+at_banner_text_17="Mac OS X tests"
 
 # Take any -C into account.
 if $at_change_dir ; then
@@ -1165,13 +1175,13 @@ exec 5>>"$at_suite_log"
 # Banners and logs.
 cat <<\_ASBOX
 ## ------------------------- ##
-## libtool 2.2.2 test suite. ##
+## libtool 2.2.4 test suite. ##
 ## ------------------------- ##
 _ASBOX
 {
   cat <<\_ASBOX
 ## ------------------------- ##
-## libtool 2.2.2 test suite. ##
+## libtool 2.2.4 test suite. ##
 ## ------------------------- ##
 _ASBOX
   echo
@@ -1261,7 +1271,7 @@ done
 export ACLOCAL AUTOHEADER AUTOCONF AUTOMAKE AUTORECONF
 eval `$LIBTOOL --config | grep '^EGREP='`
 eval `$LIBTOOL --config | $EGREP '^(host|host_os|host_alias|build|build_alias|ECHO)='`
-configure_options=
+configure_options=--prefix=/nonexistent
 if test -n "$host_alias"; then
   configure_options="$configure_options --host $host_alias"
 fi
@@ -1274,6 +1284,15 @@ else
   unset=false
 fi
 : ${mkdir_p="$abs_top_srcdir/libltdl/config/install-sh -d"}
+
+# On AIX, shared libraries remain loaded in memory after use if they
+# are world-readable, until root issues slibclean.  On NFS, this causes
+# a testsuite rerun to fail to clean up test group directories.  Avoid
+# this with a suitable umask.  Do not do this on other systems, for
+# example HP-UX suffers unless shared libraries are mode 555.
+case $host_os in
+aix*) umask o-rwx ;;
+esac
 
 ## --------------- ##
 ## Shell functions ##
@@ -1435,7 +1454,7 @@ IFS=$as_save_IFS
 
   if test -f "$as_dir/$at_program"; then
     {
-      $as_echo "$at_srcdir/testsuite.at:359: $as_dir/$at_program --version"
+      $as_echo "$at_srcdir/testsuite.at:369: $as_dir/$at_program --version"
       "$as_dir/$at_program" --version </dev/null
       echo
     } >&5 2>&1
@@ -1869,7 +1888,7 @@ _ASBOX
   $as_echo "Please send \`${at_testdir+${at_testdir}/}$as_me.log' and all information you think might help:
 
    To: <bug-libtool@gnu.org>
-   Subject: [libtool 2.2.2] $as_me:$at_fail_list${at_fail_list:+ failed${at_xpass_list:+,}}$at_xpass_list${at_xpass_list:+ passed unexpectedly}
+   Subject: [libtool 2.2.4] $as_me:$at_fail_list${at_fail_list:+ failed${at_xpass_list:+,}}$at_xpass_list${at_xpass_list:+ passed unexpectedly}
 "
   if test $at_debug_p = false; then
     echo
@@ -1887,20 +1906,20 @@ exit 0
 ## Actual tests. ##
 ## ------------- ##
 #AT_START_1
-# 1. libtoolize.at:79: libtoolize macro installation
-at_setup_line='libtoolize.at:79'
+# 1. libtoolize.at:83: libtoolize macro installation
+at_setup_line='libtoolize.at:83'
 at_func_banner 1
 at_desc="libtoolize macro installation"
 $at_quiet $as_echo_n "  1: $at_desc                  "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "1. libtoolize.at:79: testing ..."
+  $as_echo "1. libtoolize.at:83: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -1918,17 +1937,19 @@ libtoolize: copying file `m4/ltoptions.m4'
 libtoolize: copying file `m4/ltsugar.m4'
 libtoolize: copying file `m4/ltversion.m4'
 libtoolize: copying file `m4/lt~obsolete.m4'
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:94: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:99: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:94 >"$at_check_line_file"
+echo libtoolize.at:99 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -1944,7 +1965,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:94"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:99"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -1957,20 +1978,89 @@ $at_traceon
 at_status=`cat "$at_status_file"`
 #AT_STOP_1
 #AT_START_2
-# 2. libtoolize.at:103: libtoolize macro serial update
-at_setup_line='libtoolize.at:103'
+# 2. libtoolize.at:108: libtoolize macro directory mismatch error
+at_setup_line='libtoolize.at:108'
 at_func_banner 1
-at_desc="libtoolize macro serial update"
-$at_quiet $as_echo_n "  2: $at_desc                 "
+at_desc="libtoolize macro directory mismatch error"
+$at_quiet $as_echo_n "  2: $at_desc      "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "2. libtoolize.at:103: testing ..."
+  $as_echo "2. libtoolize.at:108: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
+LT_INIT
+AC_OUTPUT
+_ATEOF
+
+
+
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I me2
+_ATEOF
+
+
+cat >experr <<'_ATEOF'
+libtoolize: AC_CONFIG_MACRO_DIR([m4]) conflicts with ACLOCAL_AMFLAGS=-I me2.
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
+mv -f experr.t experr
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:120: $LIBTOOLIZE --copy
+
+"
+echo libtoolize.at:120 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+$at_diff experr "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 1 $at_status "$at_srcdir/libtoolize.at:120"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_2
+#AT_START_3
+# 3. libtoolize.at:128: libtoolize macro serial update
+at_setup_line='libtoolize.at:128'
+at_func_banner 1
+at_desc="libtoolize macro serial update"
+$at_quiet $as_echo_n "  3: $at_desc                 "
+at_xfail=no
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "3. libtoolize.at:128: testing ..."
+  $at_traceon
+
+
+cat >configure.ac <<'_ATEOF'
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -1982,6 +2072,11 @@ _ATEOF
 test -d m4 || { rm -f m4 && mkdir m4; }
 
 rm -f m4/libtool.m4 m4/ltoptions.m4 build-aux/ltmain.sh
+
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I m4
+_ATEOF
+
 
 # This file should be upgraded.
 cat >m4/libtool.m4 <<'_ATEOF'
@@ -2023,7 +2118,6 @@ _ATEOF
 ## -------------------------------------------------------------------- ##
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
 libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
 libtoolize: copying file `m4/libtool.m4'
 libtoolize: copying file `m4/ltsugar.m4'
@@ -2038,17 +2132,19 @@ libtoolize: `m4/ltoptions.m4' is newer: use `--force' to overwrite
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < experr > experr.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
 mv -f experr.t experr
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:127: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:151: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:127 >"$at_check_line_file"
+echo libtoolize.at:151 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -2064,7 +2160,7 @@ at_status=$?
 at_failed=false
 $at_diff experr "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:127"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:151"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2077,12 +2173,6 @@ $at_traceon
 ## ---------------------------------------------------------- ##
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
-libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
-libtoolize: `m4/libtool.m4' is already up to date.
-libtoolize: `m4/ltsugar.m4' is already up to date.
-libtoolize: `m4/ltversion.m4' is already up to date.
-libtoolize: `m4/lt~obsolete.m4' is already up to date.
 _ATEOF
 
 
@@ -2092,17 +2182,19 @@ libtoolize: `m4/ltoptions.m4' is newer: use `--force' to overwrite
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < experr > experr.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
 mv -f experr.t experr
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:148: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:165: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:148 >"$at_check_line_file"
+echo libtoolize.at:165 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -2118,7 +2210,7 @@ at_status=$?
 at_failed=false
 $at_diff experr "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:148"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:165"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2142,14 +2234,15 @@ libtoolize: copying file `m4/lt~obsolete.m4'
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:166: $LIBTOOLIZE --copy --force
+$as_echo "$at_srcdir/libtoolize.at:183: $LIBTOOLIZE --copy --force
 
 "
-echo libtoolize.at:166 >"$at_check_line_file"
+echo libtoolize.at:183 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --force
@@ -2165,7 +2258,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:166"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:183"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2173,30 +2266,23 @@ $at_traceon
 
 
 
-## --------------------------------------------------------- ##
-## A final update attempt with everything now force updated. ##
-## --------------------------------------------------------- ##
+## ---------------------------------------------------------------- ##
+## A final update attempt with everything previously force updated. ##
+## ---------------------------------------------------------------- ##
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
-libtoolize: `build-aux/ltmain.sh' is already up to date.
-libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
-libtoolize: `m4/libtool.m4' is already up to date.
-libtoolize: `m4/ltoptions.m4' is already up to date.
-libtoolize: `m4/ltsugar.m4' is already up to date.
-libtoolize: `m4/ltversion.m4' is already up to date.
-libtoolize: `m4/lt~obsolete.m4' is already up to date.
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:184: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:192: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:184 >"$at_check_line_file"
+echo libtoolize.at:192 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -2212,11 +2298,10 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:184"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:192"
 
 $at_failed && at_func_log_failure
 $at_traceon
-
 
 
 
@@ -2224,22 +2309,22 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_2
-#AT_START_3
-# 3. libtoolize.at:194: libtoolize config files serial update
-at_setup_line='libtoolize.at:194'
+#AT_STOP_3
+#AT_START_4
+# 4. libtoolize.at:201: libtoolize config files serial update
+at_setup_line='libtoolize.at:201'
 at_func_banner 1
 at_desc="libtoolize config files serial update"
-$at_quiet $as_echo_n "  3: $at_desc          "
+$at_quiet $as_echo_n "  4: $at_desc          "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "3. libtoolize.at:194: testing ..."
+  $as_echo "4. libtoolize.at:201: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2251,6 +2336,11 @@ _ATEOF
 test -d m4 || { rm -f m4 && mkdir m4; }
 
 rm -f m4/libtool.m4 m4/ltoptions.m4 build-aux/ltmain.sh
+
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I m4
+_ATEOF
+
 
 # This file should be upgraded.
 cat >m4/libtool.m4 <<'_ATEOF'
@@ -2310,17 +2400,19 @@ libtoolize: `m4/ltoptions.m4' is newer: use `--force' to overwrite
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < experr > experr.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
 mv -f experr.t experr
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:221: $LIBTOOLIZE --copy --install
+$as_echo "$at_srcdir/libtoolize.at:228: $LIBTOOLIZE --copy --install
 
 "
-echo libtoolize.at:221 >"$at_check_line_file"
+echo libtoolize.at:228 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --install
@@ -2336,7 +2428,7 @@ at_status=$?
 at_failed=false
 $at_diff experr "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:221"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:228"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2349,15 +2441,6 @@ $at_traceon
 ## ---------------------------------------------------------- ##
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
-libtoolize: `build-aux/config.guess' is already up to date.
-libtoolize: `build-aux/config.sub' is already up to date.
-libtoolize: `build-aux/install-sh' is already up to date.
-libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
-libtoolize: `m4/libtool.m4' is already up to date.
-libtoolize: `m4/ltsugar.m4' is already up to date.
-libtoolize: `m4/ltversion.m4' is already up to date.
-libtoolize: `m4/lt~obsolete.m4' is already up to date.
 _ATEOF
 
 
@@ -2367,17 +2450,19 @@ libtoolize: `m4/ltoptions.m4' is newer: use `--force' to overwrite
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < experr > experr.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
 mv -f experr.t experr
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:245: $LIBTOOLIZE --copy --install
+$as_echo "$at_srcdir/libtoolize.at:242: $LIBTOOLIZE --copy --install
 
 "
-echo libtoolize.at:245 >"$at_check_line_file"
+echo libtoolize.at:242 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --install
@@ -2393,7 +2478,7 @@ at_status=$?
 at_failed=false
 $at_diff experr "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:245"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:242"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2420,14 +2505,15 @@ libtoolize: copying file `m4/lt~obsolete.m4'
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:266: $LIBTOOLIZE --copy --force --install
+$as_echo "$at_srcdir/libtoolize.at:263: $LIBTOOLIZE --copy --force --install
 
 "
-echo libtoolize.at:266 >"$at_check_line_file"
+echo libtoolize.at:263 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --force --install
@@ -2443,7 +2529,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:266"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:263"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2451,33 +2537,23 @@ $at_traceon
 
 
 
-## --------------------------------------------------------- ##
-## A final update attempt with everything now force updated. ##
-## --------------------------------------------------------- ##
+## ---------------------------------------------------------------- ##
+## A final update attempt with everything previously force updated. ##
+## ---------------------------------------------------------------- ##
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
-libtoolize: `build-aux/config.guess' is already up to date.
-libtoolize: `build-aux/config.sub' is already up to date.
-libtoolize: `build-aux/install-sh' is already up to date.
-libtoolize: `build-aux/ltmain.sh' is already up to date.
-libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
-libtoolize: `m4/libtool.m4' is already up to date.
-libtoolize: `m4/ltoptions.m4' is already up to date.
-libtoolize: `m4/ltsugar.m4' is already up to date.
-libtoolize: `m4/ltversion.m4' is already up to date.
-libtoolize: `m4/lt~obsolete.m4' is already up to date.
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:287: $LIBTOOLIZE --copy --install
+$as_echo "$at_srcdir/libtoolize.at:272: $LIBTOOLIZE --copy --install
 
 "
-echo libtoolize.at:287 >"$at_check_line_file"
+echo libtoolize.at:272 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --install
@@ -2493,7 +2569,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:287"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:272"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2504,17 +2580,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_3
-#AT_START_4
-# 4. libtoolize.at:296: diagnose missing LT_CONFIG_LTDL_DIR
-at_setup_line='libtoolize.at:296'
+#AT_STOP_4
+#AT_START_5
+# 5. libtoolize.at:281: diagnose missing LT_CONFIG_LTDL_DIR
+at_setup_line='libtoolize.at:281'
 at_func_banner 1
 at_desc="diagnose missing LT_CONFIG_LTDL_DIR"
-$at_quiet $as_echo_n "  4: $at_desc            "
+$at_quiet $as_echo_n "  5: $at_desc            "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "4. libtoolize.at:296: testing ..."
+  $as_echo "5. libtoolize.at:281: testing ..."
   $at_traceon
 
 
@@ -2563,11 +2639,12 @@ libtoolize: copying file `ltdl/ltdl.h'
 libtoolize: copying file `ltdl/slist.c'
 libtoolize: creating file `ltdl/Makefile.inc'
 libtoolize: Remember to add `LT_CONFIG_LTDL_DIR([ltdl])' to `configure.ac'.
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
 _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2576,14 +2653,15 @@ AC_OUTPUT
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:354: $LIBTOOLIZE --copy --install --ltdl=ltdl
+$as_echo "$at_srcdir/libtoolize.at:340: $LIBTOOLIZE --copy --install --ltdl=ltdl
 
 "
-echo libtoolize.at:354 >"$at_check_line_file"
+echo libtoolize.at:340 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --install --ltdl=ltdl
@@ -2599,7 +2677,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:354"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:340"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2610,17 +2688,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_4
-#AT_START_5
-# 5. libtoolize.at:436: copy ltdl.m4 with shared macro directory
-at_setup_line='libtoolize.at:436'
+#AT_STOP_5
+#AT_START_6
+# 6. libtoolize.at:426: copy ltdl.m4 with shared macro directory
+at_setup_line='libtoolize.at:426'
 at_func_banner 1
 at_desc="copy ltdl.m4 with shared macro directory"
-$at_quiet $as_echo_n "  5: $at_desc       "
+$at_quiet $as_echo_n "  6: $at_desc       "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "5. libtoolize.at:436: testing ..."
+  $as_echo "6. libtoolize.at:426: testing ..."
   $at_traceon
 
 
@@ -2680,7 +2758,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -2690,15 +2768,21 @@ AC_OUTPUT
 _ATEOF
 
 
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I ltdl/m4
+_ATEOF
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:440: $LIBTOOLIZE --ltdl
+$as_echo "$at_srcdir/libtoolize.at:430: $LIBTOOLIZE --ltdl
 
 "
-echo libtoolize.at:440 >"$at_check_line_file"
+echo libtoolize.at:430 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --ltdl
@@ -2714,7 +2798,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:440"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:430"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2725,17 +2809,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_5
-#AT_START_6
-# 6. libtoolize.at:448: correctly parse LTDL_INIT from configure.ac
-at_setup_line='libtoolize.at:448'
+#AT_STOP_6
+#AT_START_7
+# 7. libtoolize.at:438: correctly parse LTDL_INIT from configure.ac
+at_setup_line='libtoolize.at:438'
 at_func_banner 1
 at_desc="correctly parse LTDL_INIT from configure.ac"
-$at_quiet $as_echo_n "  6: $at_desc    "
+$at_quiet $as_echo_n "  7: $at_desc    "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "6. libtoolize.at:448: testing ..."
+  $as_echo "7. libtoolize.at:438: testing ..."
   $at_traceon
 
 
@@ -2795,7 +2879,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -2805,15 +2889,21 @@ AC_OUTPUT
 _ATEOF
 
 
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I ltdl/m4
+_ATEOF
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:452: $LIBTOOLIZE
+$as_echo "$at_srcdir/libtoolize.at:442: $LIBTOOLIZE
 
 "
-echo libtoolize.at:452 >"$at_check_line_file"
+echo libtoolize.at:442 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE
@@ -2829,7 +2919,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:452"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:442"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2840,17 +2930,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_6
-#AT_START_7
-# 7. libtoolize.at:460: diagnose missing LTDL_INIT invocation
-at_setup_line='libtoolize.at:460'
+#AT_STOP_7
+#AT_START_8
+# 8. libtoolize.at:450: diagnose missing LTDL_INIT invocation
+at_setup_line='libtoolize.at:450'
 at_func_banner 1
 at_desc="diagnose missing LTDL_INIT invocation"
-$at_quiet $as_echo_n "  7: $at_desc          "
+$at_quiet $as_echo_n "  8: $at_desc          "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "7. libtoolize.at:460: testing ..."
+  $as_echo "8. libtoolize.at:450: testing ..."
   $at_traceon
 
 
@@ -2907,11 +2997,12 @@ libtoolize: copying file `ltdl/ltdl.c'
 libtoolize: copying file `ltdl/ltdl.h'
 libtoolize: copying file `ltdl/slist.c'
 libtoolize: Remember to add `LTDL_INIT' to configure.ac.
+libtoolize: Consider adding `-I ltdl/m4' to ACLOCAL_AMFLAGS in Makefile.am.
 _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -2920,14 +3011,15 @@ AC_OUTPUT
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:526: $LIBTOOLIZE --ltdl --copy
+$as_echo "$at_srcdir/libtoolize.at:517: $LIBTOOLIZE --ltdl --copy
 
 "
-echo libtoolize.at:526 >"$at_check_line_file"
+echo libtoolize.at:517 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --ltdl --copy
@@ -2943,7 +3035,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:526"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:517"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -2954,48 +3046,53 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_7
-#AT_START_8
-# 8. libtoolize.at:536: upgrading verbatim style aclocal.m4
-at_setup_line='libtoolize.at:536'
+#AT_STOP_8
+#AT_START_9
+# 9. libtoolize.at:527: upgrading verbatim style aclocal.m4
+at_setup_line='libtoolize.at:527'
 at_func_banner 1
 at_desc="upgrading verbatim style aclocal.m4"
-$at_quiet $as_echo_n "  8: $at_desc            "
+$at_quiet $as_echo_n "  9: $at_desc            "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "8. libtoolize.at:536: testing ..."
+  $as_echo "9. libtoolize.at:527: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 LT_INIT
 AC_OUTPUT
 _ATEOF
 
 
-cat >expout <<EOF
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, \`build-aux'.
-libtoolize: copying file \`build-aux/ltmain.sh'
-libtoolize: You should add the contents of the following files to \`aclocal.m4':
-libtoolize:   \`$tst_aclocaldir/libtool.m4'
-libtoolize:   \`$tst_aclocaldir/ltoptions.m4'
-libtoolize:   \`$tst_aclocaldir/ltversion.m4'
-libtoolize:   \`$tst_aclocaldir/ltsugar.m4'
-libtoolize:   \`$tst_aclocaldir/lt~obsolete.m4'
-EOF
+cat >expout <<'_ATEOF'
+libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
+libtoolize: copying file `build-aux/ltmain.sh'
+libtoolize: You should add the contents of the following files to `aclocal.m4':
+libtoolize:   `/usr/local/share/aclocal/libtool.m4'
+libtoolize:   `/usr/local/share/aclocal/ltoptions.m4'
+libtoolize:   `/usr/local/share/aclocal/ltversion.m4'
+libtoolize:   `/usr/local/share/aclocal/ltsugar.m4'
+libtoolize:   `/usr/local/share/aclocal/lt~obsolete.m4'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+_ATEOF
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:556: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:550: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:556 >"$at_check_line_file"
+echo libtoolize.at:550 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -3011,7 +3108,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:556"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:550"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3024,11 +3121,16 @@ $at_traceon
 ## --------------------------------------- ##
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 AC_OUTPUT
+_ATEOF
+
+
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I m4
 _ATEOF
 
 
@@ -3047,8 +3149,6 @@ _ATEOF
 
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
-libtoolize: `build-aux/ltmain.sh' is already up to date.
 libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
 libtoolize: copying file `m4/libtool.m4'
 libtoolize: copying file `m4/ltoptions.m4'
@@ -3061,14 +3161,15 @@ libtoolize: You should add the contents of `m4/lt~obsolete.m4' to `aclocal.m4'.
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:598: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:594: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:598 >"$at_check_line_file"
+echo libtoolize.at:594 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -3084,7 +3185,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:598"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:594"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3097,8 +3198,8 @@ $at_traceon
 ## ------------------------------------------- ##
 
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:605: \$ACLOCAL -I m4"
-echo libtoolize.at:605 >"$at_check_line_file"
+$as_echo "$at_srcdir/libtoolize.at:601: \$ACLOCAL -I m4"
+echo libtoolize.at:601 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
   && at_func_check_newline "$ACLOCAL -I m4"; then
@@ -3111,7 +3212,7 @@ at_status=$?
 at_failed=false
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:605"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:601"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3138,13 +3239,8 @@ _ATEOF
 
 
 cat >expout <<'_ATEOF'
-libtoolize: putting auxiliary files in AC_CONFIG_AUX_DIR, `build-aux'.
-libtoolize: `build-aux/ltmain.sh' is already up to date.
 libtoolize: putting macros in AC_CONFIG_MACRO_DIR, `m4'.
 libtoolize: copying file `m4/libtool.m4'
-libtoolize: `m4/ltsugar.m4' is already up to date.
-libtoolize: `m4/ltversion.m4' is already up to date.
-libtoolize: `m4/lt~obsolete.m4' is already up to date.
 _ATEOF
 
 
@@ -3153,17 +3249,19 @@ libtoolize: `m4/ltoptions.m4' is newer: use `--force' to overwrite
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < experr > experr.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
 mv -f experr.t experr
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:634: $LIBTOOLIZE --copy
+$as_echo "$at_srcdir/libtoolize.at:625: $LIBTOOLIZE --copy
 
 "
-echo libtoolize.at:634 >"$at_check_line_file"
+echo libtoolize.at:625 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy
@@ -3179,7 +3277,7 @@ at_status=$?
 at_failed=false
 $at_diff experr "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:634"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:625"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3202,14 +3300,15 @@ libtoolize: copying file `m4/lt~obsolete.m4'
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:651: $LIBTOOLIZE --copy --force
+$as_echo "$at_srcdir/libtoolize.at:642: $LIBTOOLIZE --copy --force
 
 "
-echo libtoolize.at:651 >"$at_check_line_file"
+echo libtoolize.at:642 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --force
@@ -3225,7 +3324,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:651"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:642"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3236,17 +3335,273 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_8
-#AT_START_9
-# 9. libtoolize.at:660: nonrecursive ltdl with AC_CONFIG_MACRO_DIR
-at_setup_line='libtoolize.at:660'
+#AT_STOP_9
+#AT_START_10
+# 10. libtoolize.at:651: verbatim aclocal.m4 w/o AC_CONFIG_MACRO_DIR
+at_setup_line='libtoolize.at:651'
+at_func_banner 1
+at_desc="verbatim aclocal.m4 w/o AC_CONFIG_MACRO_DIR"
+$at_quiet $as_echo_n " 10: $at_desc    "
+at_xfail=no
+      test "$ACLOCAL" = no && at_xfail=yes
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "10. libtoolize.at:651: testing ..."
+  $at_traceon
+
+
+cat >configure.ac <<'_ATEOF'
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
+LT_INIT
+AC_OUTPUT
+_ATEOF
+
+
+cat >aclocal.m4 <<'_ATEOF'
+# This should need upgrading:
+# serial 25 LT_INIT
+AC_DEFUN([LT_INIT],
+[blah])
+
+# This is newer than the upgrade version:
+# serial 99999 ltoptions.m4
+
+# This is older than the upgrade version:
+# serial 1 ltversion.m4
+_ATEOF
+
+
+cat >expout <<'_ATEOF'
+libtoolize: putting auxiliary files in `.'.
+libtoolize: copying file `./ltmain.sh'
+libtoolize: You should add the contents of the following files to `aclocal.m4':
+libtoolize:   `/usr/local/share/aclocal/libtool.m4'
+libtoolize:   `/usr/local/share/aclocal/ltversion.m4'
+libtoolize:   `/usr/local/share/aclocal/ltsugar.m4'
+libtoolize:   `/usr/local/share/aclocal/lt~obsolete.m4'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
+mv -f expout.t expout
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:685: $LIBTOOLIZE --copy
+
+"
+echo libtoolize.at:685 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+$at_diff expout "$at_stdout" || at_failed=:
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:685"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+## ----------------------------------------------------------------------- ##
+## Upgrading an aclocal maintained aclocal.m4 without AC_CONFIG_MACRO_DIR. ##
+## ----------------------------------------------------------------------- ##
+
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:692: \$ACLOCAL -I\$abs_top_srcdir/libltdl/m4"
+echo libtoolize.at:692 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$ACLOCAL -I$abs_top_srcdir/libltdl/m4"; then
+  ( $at_traceon; $ACLOCAL -I$abs_top_srcdir/libltdl/m4 ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $ACLOCAL -I$abs_top_srcdir/libltdl/m4 ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:692"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+
+## The following code is adapted (and simplified) from libtoolize.m4sh
+####
+: ${GREP="grep"}
+: ${SED="sed"}
+
+basename="s,^.*/,,"
+
+# func_grep expression filename
+# Check whether EXPRESSION matches any line of FILENAME, without output.
+func_grep ()
+{
+    $GREP "$1" "$2" >/dev/null 2>&1
+}
+
+# func_serial filename [macro_regex]
+# Output the value of the serial number comment in FILENAME, where the
+# comment line must also match MACRO_REGEX, if given.
+func_serial ()
+{
+    my_filename="$1"
+    my_macro_regex="$2"
+    my_sed_serial='
+	/^# serial [1-9][0-9.]*[ 	]*'"$my_macro_regex"'[ 	]*$/ {
+	    s,^# serial \([1-9][0-9.]*\).*$,\1,
+	    q
+	}
+	d'
+
+    # Search FILENAME and all the files it m4_includes for a serial number
+    # in the file that AC_DEFUNs MACRO_REGEX.
+    my_serial=
+    if test -z "$my_macro_regex" ||
+       test "$my_filename" = aclocal.m4 ||
+       test "$my_macro_regex" = `echo "$my_filename" | $SED "$basename"` ||
+       func_grep '^AC_DEFUN(\['"$my_macro_regex" "$my_filename"
+    then
+      my_serial=`$SED -e "$my_sed_serial" "$my_filename"`
+    fi
+
+    # If the file has no serial number, something is badly wrong!
+    test -n "$my_serial" || exit 1
+
+    echo $my_serial
+}
+
+# Make the serial number in aclocal.m4 higher than installed ltoptions.m4,
+# and the others match the macro files that libtoolize will compare against.
+libtool_serial=`func_serial "$tst_aclocaldir/libtool.m4" LT_INIT`
+ltversion_serial=`func_serial "$tst_aclocaldir/ltversion.m4" ltversion.m4`
+ltsugar_serial=`func_serial "$tst_aclocaldir/ltsugar.m4" ltsugar.m4`
+lt_obsolete_serial=`func_serial "$tst_aclocaldir/lt~obsolete.m4" lt~obsolete.m4`
+$SED -e 's,^#.*serial.*ltoptions.m4$,# serial 99999 ltoptions.m4,' \
+  -e "s,^#.*serial.*libtool.m4\$,# serial $libtool_serial libtool.m4," \
+  -e "s,^#.*serial.*ltversion.m4\$,# serial $ltversion_serial ltversion.m4," \
+  -e "s,^#.*serial.*ltsugar.m4\$,# serial $ltsugar_serial ltsugar.m4," \
+  -e "s,^#.*serial.*lt~obsolete.m4\$,# serial $lt_obsolete_serial lt~obsolete.m4," \
+ < aclocal.m4 > aclocal.m4t
+mv -f aclocal.m4t aclocal.m4
+
+cat >expout <<'_ATEOF'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
+mv -f expout.t expout
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:759: $LIBTOOLIZE --copy
+
+"
+echo libtoolize.at:759 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+$at_diff expout "$at_stdout" || at_failed=:
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:759"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+## --------------------- ##
+## Now, a forced update. ##
+## --------------------- ##
+
+cat >expout <<'_ATEOF'
+libtoolize: putting auxiliary files in `.'.
+libtoolize: copying file `./ltmain.sh'
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
+libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
+mv -f expout.t expout
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:774: $LIBTOOLIZE --copy --force
+
+"
+echo libtoolize.at:774 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy --force
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy --force
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+$at_diff expout "$at_stdout" || at_failed=:
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:774"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_10
+#AT_START_11
+# 11. libtoolize.at:783: nonrecursive ltdl with AC_CONFIG_MACRO_DIR
+at_setup_line='libtoolize.at:783'
 at_func_banner 1
 at_desc="nonrecursive ltdl with AC_CONFIG_MACRO_DIR"
-$at_quiet $as_echo_n "  9: $at_desc     "
+$at_quiet $as_echo_n " 11: $at_desc     "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "9. libtoolize.at:660: testing ..."
+  $as_echo "11. libtoolize.at:783: testing ..."
   $at_traceon
 
 
@@ -3298,7 +3653,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
@@ -3308,14 +3663,20 @@ AC_OUTPUT
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I m4
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:718: $LIBTOOLIZE --copy --install --ltdl=ltdl
+$as_echo "$at_srcdir/libtoolize.at:845: $LIBTOOLIZE --copy --install --ltdl=ltdl
 
 "
-echo libtoolize.at:718 >"$at_check_line_file"
+echo libtoolize.at:845 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --install --ltdl=ltdl
@@ -3331,7 +3692,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:718"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:845"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3342,17 +3703,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_9
-#AT_START_10
-# 10. libtoolize.at:727: subproject ltdl with non-shared directories
-at_setup_line='libtoolize.at:727'
+#AT_STOP_11
+#AT_START_12
+# 12. libtoolize.at:854: subproject ltdl with non-shared directories
+at_setup_line='libtoolize.at:854'
 at_func_banner 1
 at_desc="subproject ltdl with non-shared directories"
-$at_quiet $as_echo_n " 10: $at_desc    "
+$at_quiet $as_echo_n " 12: $at_desc    "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "10. libtoolize.at:727: testing ..."
+  $as_echo "12. libtoolize.at:854: testing ..."
   $at_traceon
 
 
@@ -3423,11 +3784,12 @@ libtoolize: copying file `ltdl/ltdl.h'
 libtoolize: copying file `ltdl/slist.c'
 libtoolize: Consider using `AC_CONFIG_AUX_DIR([ltdl/config])' in configure.ac.
 libtoolize: Consider using `AC_CONFIG_MACRO_DIR([ltdl/m4])' in configure.ac.
+libtoolize: Consider adding `-I ltdl/m4' to ACLOCAL_AMFLAGS in Makefile.am.
 _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([acm4])
@@ -3437,14 +3799,15 @@ AC_OUTPUT
 _ATEOF
 
 
-lt_name=`$ECHO "$LIBTOOLIZE" | sed 's,^.*/,,'` # restore font-lock: ''
-sed "s/^libtoolize/$lt_name/" < expout > expout.t
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < expout > expout.t
 mv -f expout.t expout
 $at_traceoff
-$as_echo "$at_srcdir/libtoolize.at:808: $LIBTOOLIZE --copy --install
+$as_echo "$at_srcdir/libtoolize.at:936: $LIBTOOLIZE --copy --install
 
 "
-echo libtoolize.at:808 >"$at_check_line_file"
+echo libtoolize.at:936 >"$at_check_line_file"
 
 if test -n "$at_traceon"; then
   ( $at_traceon; $LIBTOOLIZE --copy --install
@@ -3460,7 +3823,7 @@ at_status=$?
 at_failed=false
 at_func_diff_devnull "$at_stderr" || at_failed=:
 $at_diff expout "$at_stdout" || at_failed=:
-at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:808"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:936"
 
 $at_failed && at_func_log_failure
 $at_traceon
@@ -3471,17 +3834,284 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_10
-#AT_START_11
-# 11. duplicate_members.at:26: duplicate members in archive tests
-at_setup_line='duplicate_members.at:26'
-at_func_banner 2
-at_desc="duplicate members in archive tests"
-$at_quiet $as_echo_n " 11: $at_desc             "
+#AT_STOP_12
+#AT_START_13
+# 13. libtoolize.at:945: LIBTOOLIZE_OPTIONS
+at_setup_line='libtoolize.at:945'
+at_func_banner 1
+at_desc="LIBTOOLIZE_OPTIONS"
+$at_quiet $as_echo_n " 13: $at_desc                             "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "11. duplicate_members.at:26: testing ..."
+  $as_echo "13. libtoolize.at:945: testing ..."
+  $at_traceon
+
+
+cat >configure.ac <<'_ATEOF'
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
+LT_INIT
+AC_OUTPUT
+_ATEOF
+
+
+
+LIBTOOLIZE_OPTIONS="narf"
+export LIBTOOLIZE_OPTIONS
+
+cat >experr <<'_ATEOF'
+libtoolize: garbled LIBTOOLIZE_OPTIONS near `narf'
+libtoolize: Try `libtoolize --help' for more information.
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
+mv -f experr.t experr
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:957: $LIBTOOLIZE --copy
+
+"
+echo libtoolize.at:957 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+$at_diff experr "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 1 $at_status "$at_srcdir/libtoolize.at:957"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+## --------------------------- ##
+## Unknown LIBTOOLIZE_OPTIONS. ##
+## --------------------------- ##
+
+LIBTOOLIZE_OPTIONS=--no-such-option
+export LIBTOOLIZE_OPTIONS
+
+cat >experr <<'_ATEOF'
+libtoolize: warning: unrecognized environment option `--no-such-option'
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
+mv -f experr.t experr
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:971: $LIBTOOLIZE --copy
+
+"
+echo libtoolize.at:971 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+$at_diff experr "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:971"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+## ----------------------------- ##
+## --no-warn environment option. ##
+## ----------------------------- ##
+
+LIBTOOLIZE_OPTIONS=--no-warn,--no-such-option
+export LIBTOOLIZE_OPTIONS
+
+cat >experr <<'_ATEOF'
+_ATEOF
+
+
+lt_name=`$ECHO "$LIBTOOLIZE" | sed "s,^.*/,,"`
+sed "s/^libtoolize/$lt_name/
+s|/usr/local/share/aclocal/|${tst_aclocaldir-$abs_top_srcdir/libltdl/m4}/|" < experr > experr.t
+mv -f experr.t experr
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:983: $LIBTOOLIZE --copy
+
+"
+echo libtoolize.at:983 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+$at_diff experr "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:983"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_13
+#AT_START_14
+# 14. libtoolize.at:992: cleanup old installation
+at_setup_line='libtoolize.at:992'
+at_func_banner 1
+at_desc="cleanup old installation"
+$at_quiet $as_echo_n " 14: $at_desc                       "
+at_xfail=no
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "14. libtoolize.at:992: testing ..."
+  $at_traceon
+
+
+cat >configure.ac <<'_ATEOF'
+AC_INIT([libtoolize-demo], 2.2.4, bug-libtool@gnu.org)
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
+LT_INIT
+AC_OUTPUT
+_ATEOF
+
+
+
+cat >Makefile.am <<'_ATEOF'
+ACLOCAL_AMFLAGS = -I m4
+_ATEOF
+
+
+cat >acinclude.m4 <<'_ATEOF'
+AC_DEFUN([LT_INIT],
+[: keep me, I might be hand maintained!]) # LT_INIT
+_ATEOF
+
+
+cat >libltdl/acinclude.m4 <<'_ATEOF'
+AC_DEFUN([LT_INIT],
+[: delete me, I was left here by on old libltdl build]) # LT_INIT
+_ATEOF
+
+
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:1010: $LIBTOOLIZE --copy --force --ltdl
+
+"
+echo libtoolize.at:1010 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; $LIBTOOLIZE --copy --force --ltdl
+
+ ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOLIZE --copy --force --ltdl
+
+ ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:1010"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+# check files are left as expected
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:1013: grep 'keep me' acinclude.m4"
+echo libtoolize.at:1013 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; grep 'keep me' acinclude.m4 ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; grep 'keep me' acinclude.m4 ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/libtoolize.at:1013"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+$at_traceoff
+$as_echo "$at_srcdir/libtoolize.at:1014: test -f libltdl/acinclude.m4"
+echo libtoolize.at:1014 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; test -f libltdl/acinclude.m4 ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; test -f libltdl/acinclude.m4 ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 1 $at_status "$at_srcdir/libtoolize.at:1014"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_14
+#AT_START_15
+# 15. duplicate_members.at:26: duplicate members in archive tests
+at_setup_line='duplicate_members.at:26'
+at_func_banner 2
+at_desc="duplicate members in archive tests"
+$at_quiet $as_echo_n " 15: $at_desc             "
+at_xfail=no
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "15. duplicate_members.at:26: testing ..."
   $at_traceon
 
 
@@ -3569,17 +4199,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_11
-#AT_START_12
-# 12. duplicate_conv.at:25: duplicate convenience archive names
+#AT_STOP_15
+#AT_START_16
+# 16. duplicate_conv.at:25: duplicate convenience archive names
 at_setup_line='duplicate_conv.at:25'
 at_func_banner 2
 at_desc="duplicate convenience archive names"
-$at_quiet $as_echo_n " 12: $at_desc            "
+$at_quiet $as_echo_n " 16: $at_desc            "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "12. duplicate_conv.at:25: testing ..."
+  $as_echo "16. duplicate_conv.at:25: testing ..."
   $at_traceon
 
 
@@ -3915,17 +4545,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_12
-#AT_START_13
-# 13. duplicate_deps.at:25: preserve duplicate convenience deps
+#AT_STOP_16
+#AT_START_17
+# 17. duplicate_deps.at:25: preserve duplicate convenience deps
 at_setup_line='duplicate_deps.at:25'
 at_func_banner 2
 at_desc="preserve duplicate convenience deps"
-$at_quiet $as_echo_n " 13: $at_desc            "
+$at_quiet $as_echo_n " 17: $at_desc            "
 at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "13. duplicate_deps.at:25: testing ..."
+  $as_echo "17. duplicate_deps.at:25: testing ..."
   $at_traceon
 
 
@@ -4075,17 +4705,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_13
-#AT_START_14
-# 14. inherited_flags.at:26: inherited_linker_flags
+#AT_STOP_17
+#AT_START_18
+# 18. inherited_flags.at:26: inherited_linker_flags
 at_setup_line='inherited_flags.at:26'
 at_func_banner 2
 at_desc="inherited_linker_flags"
-$at_quiet $as_echo_n " 14: $at_desc                         "
+$at_quiet $as_echo_n " 18: $at_desc                         "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "14. inherited_flags.at:26: testing ..."
+  $as_echo "18. inherited_flags.at:26: testing ..."
   $at_traceon
 
 
@@ -4125,9 +4755,9 @@ $LIBTOOL --mode=compile --tag=CC $CC $CPPFLAGS $CFLAGS -c -o bar.lo bar.c
 $LIBTOOL --mode=compile --tag=CC $CC $CPPFLAGS $CFLAGS -c -o baz.lo baz.c
 $LIBTOOL --mode=compile --tag=CC $CC $CPPFLAGS $CFLAGS -c -o both.lo both.c
 $LIBTOOL --mode=compile --tag=CC $CC $CPPFLAGS $CFLAGS -c -o main.lo main.c
-$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libfoo.la foo.lo -rpath /usr/local/lib -no-undefined
-$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbar.la bar.lo -rpath /usr/local/lib -no-undefined
-$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libboth.la both.lo -rpath /usr/local/lib -no-undefined
+$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libfoo.la foo.lo -rpath /nonexistent -no-undefined
+$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbar.la bar.lo -rpath /nonexistent -no-undefined
+$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libboth.la both.lo -rpath /nonexistent -no-undefined
 
 
 mv libfoo.la libfoo.la.bak
@@ -4143,15 +4773,15 @@ sed -e "s/^inherited_linker_flags.*/inherited_linker_flags='-llt_inlikely_existi
 rm libboth.la.bak
 
 $at_traceoff
-$as_echo "$at_srcdir/inherited_flags.at:77: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la"
+$as_echo "$at_srcdir/inherited_flags.at:77: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la"
 echo inherited_flags.at:77 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
-  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la"; then
-  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stder1"
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stder1"
   at_func_filter_trace $?
 else
-  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stderr"
+  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stderr"
 fi
 at_status=$?
 at_failed=false
@@ -4206,15 +4836,15 @@ $at_failed && at_func_log_failure
 $at_traceon
 
 $at_traceoff
-$as_echo "$at_srcdir/inherited_flags.at:86: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la"
+$as_echo "$at_srcdir/inherited_flags.at:86: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la"
 echo inherited_flags.at:86 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
-  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la"; then
-  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stder1"
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stder1"
   at_func_filter_trace $?
 else
-  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stderr"
+  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la ) >"$at_stdout" 2>"$at_stderr"
 fi
 at_status=$?
 at_failed=false
@@ -4247,15 +4877,15 @@ $at_traceon
 
 # now check for duplicates
 $at_traceoff
-$as_echo "$at_srcdir/inherited_flags.at:92: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la ./libboth.la"
+$as_echo "$at_srcdir/inherited_flags.at:92: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la ./libboth.la"
 echo inherited_flags.at:92 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
-  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la ./libboth.la"; then
-  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stder1"
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la ./libboth.la"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stder1"
   at_func_filter_trace $?
 else
-  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /usr/local/lib ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stderr"
+  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o libbaz.la baz.lo -no-undefined -rpath /nonexistent ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stderr"
 fi
 at_status=$?
 at_failed=false
@@ -4305,15 +4935,15 @@ $at_failed && at_func_log_failure
 $at_traceon
 
 $at_traceoff
-$as_echo "$at_srcdir/inherited_flags.at:98: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la ./libboth.la"
+$as_echo "$at_srcdir/inherited_flags.at:98: \$LIBTOOL --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la ./libboth.la"
 echo inherited_flags.at:98 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
-  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la ./libboth.la"; then
-  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stder1"
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la ./libboth.la"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stder1"
   at_func_filter_trace $?
 else
-  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /usr/local/lib  ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stderr"
+  ( :; $LIBTOOL --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -o main main.lo -no-undefined -rpath /nonexistent  ./libfoo.la ./libbar.la ./libboth.la ) >"$at_stdout" 2>"$at_stderr"
 fi
 at_status=$?
 at_failed=false
@@ -4368,15 +4998,15 @@ sed "s/^inherited_linker_flags.*/inherited_linker_flags='-framework Cocoa -frame
 rm libboth.la.bak
 
 $at_traceoff
-$as_echo "$at_srcdir/inherited_flags.at:109: \$LIBTOOL -n --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /usr/local/lib"
+$as_echo "$at_srcdir/inherited_flags.at:109: \$LIBTOOL -n --mode=link --tag=CC \$CC \$CFLAGS \$LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /nonexistent"
 echo inherited_flags.at:109 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
-  && at_func_check_newline "$LIBTOOL -n --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /usr/local/lib"; then
-  ( $at_traceon; $LIBTOOL -n --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /usr/local/lib ) >"$at_stdout" 2>"$at_stder1"
+  && at_func_check_newline "$LIBTOOL -n --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /nonexistent"; then
+  ( $at_traceon; $LIBTOOL -n --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /nonexistent ) >"$at_stdout" 2>"$at_stder1"
   at_func_filter_trace $?
 else
-  ( :; $LIBTOOL -n --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /usr/local/lib ) >"$at_stdout" 2>"$at_stderr"
+  ( :; $LIBTOOL -n --mode=link --tag=CC $CC $CFLAGS $LDFLAGS -framework Cocoa -framework ApplicationServices -o libbaz.la baz.lo libboth.la -no-undefined -rpath /nonexistent ) >"$at_stdout" 2>"$at_stderr"
 fi
 at_status=$?
 at_failed=false
@@ -4430,17 +5060,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_14
-#AT_START_15
-# 15. convenience.at:30: C convenience archives
+#AT_STOP_18
+#AT_START_19
+# 19. convenience.at:30: C convenience archives
 at_setup_line='convenience.at:30'
 at_func_banner 2
 at_desc="C convenience archives"
-$at_quiet $as_echo_n " 15: $at_desc                         "
+$at_quiet $as_echo_n " 19: $at_desc                         "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "15. convenience.at:30: testing ..."
+  $as_echo "19. convenience.at:30: testing ..."
   $at_traceon
 
 
@@ -4616,17 +5246,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_15
-#AT_START_16
-# 16. convenience.at:69: C++ convenience archives
+#AT_STOP_19
+#AT_START_20
+# 20. convenience.at:69: C++ convenience archives
 at_setup_line='convenience.at:69'
 at_func_banner 2
 at_desc="C++ convenience archives"
-$at_quiet $as_echo_n " 16: $at_desc                       "
+$at_quiet $as_echo_n " 20: $at_desc                       "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "16. convenience.at:69: testing ..."
+  $as_echo "20. convenience.at:69: testing ..."
   $at_traceon
 
 
@@ -4844,17 +5474,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_16
-#AT_START_17
-# 17. convenience.at:109: F77 convenience archives
+#AT_STOP_20
+#AT_START_21
+# 21. convenience.at:109: F77 convenience archives
 at_setup_line='convenience.at:109'
 at_func_banner 2
 at_desc="F77 convenience archives"
-$at_quiet $as_echo_n " 17: $at_desc                       "
+$at_quiet $as_echo_n " 21: $at_desc                       "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "17. convenience.at:109: testing ..."
+  $as_echo "21. convenience.at:109: testing ..."
   $at_traceon
 
 
@@ -5073,17 +5703,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_17
-#AT_START_18
-# 18. convenience.at:169: FC convenience archives
+#AT_STOP_21
+#AT_START_22
+# 22. convenience.at:169: FC convenience archives
 at_setup_line='convenience.at:169'
 at_func_banner 2
 at_desc="FC convenience archives"
-$at_quiet $as_echo_n " 18: $at_desc                        "
+$at_quiet $as_echo_n " 22: $at_desc                        "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "18. convenience.at:169: testing ..."
+  $as_echo "22. convenience.at:169: testing ..."
   $at_traceon
 
 
@@ -5302,17 +5932,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_18
-#AT_START_19
-# 19. convenience.at:229: Java convenience archives
+#AT_STOP_22
+#AT_START_23
+# 23. convenience.at:229: Java convenience archives
 at_setup_line='convenience.at:229'
 at_func_banner 2
 at_desc="Java convenience archives"
-$at_quiet $as_echo_n " 19: $at_desc                      "
+$at_quiet $as_echo_n " 23: $at_desc                      "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "19. convenience.at:229: testing ..."
+  $as_echo "23. convenience.at:229: testing ..."
   $at_traceon
 
 
@@ -5592,17 +6222,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_19
-#AT_START_20
-# 20. link-order.at:26: Link order test.
+#AT_STOP_23
+#AT_START_24
+# 24. link-order.at:26: Link order test.
 at_setup_line='link-order.at:26'
 at_func_banner 2
 at_desc="Link order test."
-$at_quiet $as_echo_n " 20: $at_desc                               "
+$at_quiet $as_echo_n " 24: $at_desc                               "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "20. link-order.at:26: testing ..."
+  $as_echo "24. link-order.at:26: testing ..."
   $at_traceon
 
 
@@ -5810,17 +6440,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_20
-#AT_START_21
-# 21. link-order2.at:46: Link order of deplibs.
+#AT_STOP_24
+#AT_START_25
+# 25. link-order2.at:46: Link order of deplibs.
 at_setup_line='link-order2.at:46'
 at_func_banner 2
 at_desc="Link order of deplibs."
-$at_quiet $as_echo_n " 21: $at_desc                         "
+$at_quiet $as_echo_n " 25: $at_desc                         "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "21. link-order2.at:46: testing ..."
+  $as_echo "25. link-order2.at:46: testing ..."
   $at_traceon
 
 
@@ -6108,17 +6738,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_21
-#AT_START_22
-# 22. fail.at:27: Failure tests
+#AT_STOP_25
+#AT_START_26
+# 26. fail.at:27: Failure tests
 at_setup_line='fail.at:27'
 at_func_banner 2
 at_desc="Failure tests"
-$at_quiet $as_echo_n " 22: $at_desc                                  "
+$at_quiet $as_echo_n " 26: $at_desc                                  "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "22. fail.at:27: testing ..."
+  $as_echo "26. fail.at:27: testing ..."
   $at_traceon
 
 
@@ -6386,17 +7016,17 @@ esac
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_22
-#AT_START_23
-# 23. shlibpath.at:25: shlibpath_overrides_runpath
+#AT_STOP_26
+#AT_START_27
+# 27. shlibpath.at:25: shlibpath_overrides_runpath
 at_setup_line='shlibpath.at:25'
 at_func_banner 2
 at_desc="shlibpath_overrides_runpath"
-$at_quiet $as_echo_n " 23: $at_desc                    "
+$at_quiet $as_echo_n " 27: $at_desc                    "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "23. shlibpath.at:25: testing ..."
+  $as_echo "27. shlibpath.at:25: testing ..."
   $at_traceon
 
 
@@ -6591,17 +7221,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_23
-#AT_START_24
-# 24. runpath-in-lalib.at:25: Runpath in libtool library files
+#AT_STOP_27
+#AT_START_28
+# 28. runpath-in-lalib.at:25: Runpath in libtool library files
 at_setup_line='runpath-in-lalib.at:25'
 at_func_banner 2
 at_desc="Runpath in libtool library files"
-$at_quiet $as_echo_n " 24: $at_desc               "
+$at_quiet $as_echo_n " 28: $at_desc               "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "24. runpath-in-lalib.at:25: testing ..."
+  $as_echo "28. runpath-in-lalib.at:25: testing ..."
   $at_traceon
 
 
@@ -6800,17 +7430,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_24
-#AT_START_25
-# 25. static.at:68: static linking flags for programs
+#AT_STOP_28
+#AT_START_29
+# 29. static.at:68: static linking flags for programs
 at_setup_line='static.at:68'
 at_func_banner 2
 at_desc="static linking flags for programs"
-$at_quiet $as_echo_n " 25: $at_desc              "
+$at_quiet $as_echo_n " 29: $at_desc              "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "25. static.at:68: testing ..."
+  $as_echo "29. static.at:68: testing ..."
   $at_traceon
 
 
@@ -7523,17 +8153,92 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_25
-#AT_START_26
-# 26. export.at:25: Export test
-at_setup_line='export.at:25'
+#AT_STOP_29
+#AT_START_30
+# 30. static.at:357: ccache -all-static
+at_setup_line='static.at:357'
 at_func_banner 2
-at_desc="Export test"
-$at_quiet $as_echo_n " 26: $at_desc                                    "
+at_desc="ccache -all-static"
+$at_quiet $as_echo_n " 30: $at_desc                             "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "26. export.at:25: testing ..."
+  $as_echo "30. static.at:357: testing ..."
+  $at_traceon
+
+
+cat >ccache <<'_ATEOF'
+#! /bin/sh
+# poor man's ccache clone
+case $1 in
+-*) echo "bogus argument: $1" >&2; exit 1 ;;
+esac
+exec "$@"
+_ATEOF
+
+chmod +x ./ccache
+
+cat >a.c <<'_ATEOF'
+int main(void) { return 0; }
+_ATEOF
+
+
+$at_traceoff
+$as_echo "$at_srcdir/static.at:373: \$CC \$CPPFLAGS \$CFLAGS -c a.c"
+echo static.at:373 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$CC $CPPFLAGS $CFLAGS -c a.c"; then
+  ( $at_traceon; $CC $CPPFLAGS $CFLAGS -c a.c ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $CC $CPPFLAGS $CFLAGS -c a.c ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/static.at:373"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+$at_traceoff
+$as_echo "$at_srcdir/static.at:375: \$LIBTOOL --mode=link --tag=CC ./ccache \$CC \$CFLAGS \$LDFLAGS -all-static a.\$OBJEXT -o a"
+echo static.at:375 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC ./ccache $CC $CFLAGS $LDFLAGS -all-static a.$OBJEXT -o a"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC ./ccache $CC $CFLAGS $LDFLAGS -all-static a.$OBJEXT -o a ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=link --tag=CC ./ccache $CC $CFLAGS $LDFLAGS -all-static a.$OBJEXT -o a ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/static.at:375"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_30
+#AT_START_31
+# 31. export.at:25: Export test
+at_setup_line='export.at:25'
+at_func_banner 2
+at_desc="Export test"
+$at_quiet $as_echo_n " 31: $at_desc                                    "
+at_xfail=no
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "31. export.at:25: testing ..."
   $at_traceon
 
 
@@ -8022,17 +8727,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_26
-#AT_START_27
-# 27. search-path.at:25: sys_lib_search_path
+#AT_STOP_31
+#AT_START_32
+# 32. search-path.at:25: sys_lib_search_path
 at_setup_line='search-path.at:25'
 at_func_banner 2
 at_desc="sys_lib_search_path"
-$at_quiet $as_echo_n " 27: $at_desc                            "
+$at_quiet $as_echo_n " 32: $at_desc                            "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "27. search-path.at:25: testing ..."
+  $as_echo "32. search-path.at:25: testing ..."
   $at_traceon
 
 
@@ -8085,17 +8790,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_27
-#AT_START_28
-# 28. indirect_deps.at:25: indirect convenience
+#AT_STOP_32
+#AT_START_33
+# 33. indirect_deps.at:25: indirect convenience
 at_setup_line='indirect_deps.at:25'
 at_func_banner 2
 at_desc="indirect convenience"
-$at_quiet $as_echo_n " 28: $at_desc                           "
+$at_quiet $as_echo_n " 33: $at_desc                           "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "28. indirect_deps.at:25: testing ..."
+  $as_echo "33. indirect_deps.at:25: testing ..."
   $at_traceon
 
 
@@ -8250,17 +8955,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_28
-#AT_START_29
-# 29. indirect_deps.at:71: indirect uninstalled
+#AT_STOP_33
+#AT_START_34
+# 34. indirect_deps.at:71: indirect uninstalled
 at_setup_line='indirect_deps.at:71'
 at_func_banner 2
 at_desc="indirect uninstalled"
-$at_quiet $as_echo_n " 29: $at_desc                           "
+$at_quiet $as_echo_n " 34: $at_desc                           "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "29. indirect_deps.at:71: testing ..."
+  $as_echo "34. indirect_deps.at:71: testing ..."
   $at_traceon
 
 
@@ -8420,18 +9125,18 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_29
-#AT_START_30
-# 30. archive-in-archive.at:26: static library contains static library
+#AT_STOP_34
+#AT_START_35
+# 35. archive-in-archive.at:26: static library contains static library
 at_setup_line='archive-in-archive.at:26'
 at_func_banner 2
 at_desc="static library contains static library"
-$at_quiet $as_echo_n " 30: $at_desc         "
+$at_quiet $as_echo_n " 35: $at_desc         "
 at_xfail=no
       case "$archive_contents" in *"libfoo.a"*) : ;; esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "30. archive-in-archive.at:26: testing ..."
+  $as_echo "35. archive-in-archive.at:26: testing ..."
   $at_traceon
 
 
@@ -8522,17 +9227,17 @@ archive_contents=`ar -t libbar.a`
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_30
-#AT_START_31
-# 31. execute-mode.at:25: execute mode
+#AT_STOP_35
+#AT_START_36
+# 36. execute-mode.at:25: execute mode
 at_setup_line='execute-mode.at:25'
 at_func_banner 2
 at_desc="execute mode"
-$at_quiet $as_echo_n " 31: $at_desc                                   "
+$at_quiet $as_echo_n " 36: $at_desc                                   "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "31. execute-mode.at:25: testing ..."
+  $as_echo "36. execute-mode.at:25: testing ..."
   $at_traceon
 
 
@@ -8850,17 +9555,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_31
-#AT_START_32
-# 32. localization.at:25: localized compiler messages
+#AT_STOP_36
+#AT_START_37
+# 37. localization.at:25: localized compiler messages
 at_setup_line='localization.at:25'
 at_func_banner 2
 at_desc="localized compiler messages"
-$at_quiet $as_echo_n " 32: $at_desc                    "
+$at_quiet $as_echo_n " 37: $at_desc                    "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "32. localization.at:25: testing ..."
+  $as_echo "37. localization.at:25: testing ..."
   $at_traceon
 
 
@@ -9010,19 +9715,19 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_32
-#AT_START_33
-# 33. destdir.at:48: Simple DESTDIR install
+#AT_STOP_37
+#AT_START_38
+# 38. destdir.at:48: Simple DESTDIR install
 at_setup_line='destdir.at:48'
 at_func_banner 3
 at_desc="Simple DESTDIR install"
-$at_quiet $as_echo_n " 33: $at_desc                         "
+$at_quiet $as_echo_n " 38: $at_desc                         "
 at_xfail=no
       eval `$LIBTOOL --config | grep '^fast_install='`
            case $fast_install in no) :;; *) false;; esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "33. destdir.at:48: testing ..."
+  $as_echo "38. destdir.at:48: testing ..."
   $at_traceon
 
 
@@ -9167,19 +9872,19 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_33
-#AT_START_34
-# 34. destdir.at:75: DESTDIR with in-package deplibs
+#AT_STOP_38
+#AT_START_39
+# 39. destdir.at:75: DESTDIR with in-package deplibs
 at_setup_line='destdir.at:75'
 at_func_banner 3
 at_desc="DESTDIR with in-package deplibs"
-$at_quiet $as_echo_n " 34: $at_desc                "
+$at_quiet $as_echo_n " 39: $at_desc                "
 at_xfail=no
       eval `$LIBTOOL --config | grep '^fast_install='`
            case $fast_install in no) :;; *) false;; esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "34. destdir.at:75: testing ..."
+  $as_echo "39. destdir.at:75: testing ..."
   $at_traceon
 
 
@@ -9446,18 +10151,18 @@ fi
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_34
-#AT_START_35
-# 35. old-m4-iface.at:40: AM_PROG_LIBTOOL
+#AT_STOP_39
+#AT_START_40
+# 40. old-m4-iface.at:40: AM_PROG_LIBTOOL
 at_setup_line='old-m4-iface.at:40'
 at_func_banner 4
 at_desc="AM_PROG_LIBTOOL"
-$at_quiet $as_echo_n " 35: $at_desc                                "
+$at_quiet $as_echo_n " 40: $at_desc                                "
 at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "35. old-m4-iface.at:40: testing ..."
+  $as_echo "40. old-m4-iface.at:40: testing ..."
   $at_traceon
 
 
@@ -9748,19 +10453,19 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_35
-#AT_START_36
-# 36. old-m4-iface.at:107: AC_WITH_LTDL
+#AT_STOP_40
+#AT_START_41
+# 41. old-m4-iface.at:107: AC_WITH_LTDL
 at_setup_line='old-m4-iface.at:107'
 at_func_banner 4
 at_desc="AC_WITH_LTDL"
-$at_quiet $as_echo_n " 36: $at_desc                                   "
+$at_quiet $as_echo_n " 41: $at_desc                                   "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "36. old-m4-iface.at:107: testing ..."
+  $as_echo "41. old-m4-iface.at:107: testing ..."
   $at_traceon
 
 
@@ -10003,25 +10708,25 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_36
-#AT_START_37
-# 37. am-subdir.at:33: C subdir-objects
+#AT_STOP_41
+#AT_START_42
+# 42. am-subdir.at:33: C subdir-objects
 at_setup_line='am-subdir.at:33'
 at_func_banner 5
 at_desc="C subdir-objects"
-$at_quiet $as_echo_n " 37: $at_desc                               "
+$at_quiet $as_echo_n " 42: $at_desc                               "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOMAKE" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "37. am-subdir.at:33: testing ..."
+  $as_echo "42. am-subdir.at:33: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdir-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdir-demo], 2.2.4, bug-libtool@gnu.org)
 AM_INIT_AUTOMAKE
 LT_INIT([win32-dll])
 AC_PROG_CC
@@ -10283,20 +10988,20 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_37
-#AT_START_38
-# 38. am-subdir.at:93: C++ subdir-objects
+#AT_STOP_42
+#AT_START_43
+# 43. am-subdir.at:93: C++ subdir-objects
 at_setup_line='am-subdir.at:93'
 at_func_banner 5
 at_desc="C++ subdir-objects"
-$at_quiet $as_echo_n " 38: $at_desc                             "
+$at_quiet $as_echo_n " 43: $at_desc                             "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOMAKE" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "38. am-subdir.at:93: testing ..."
+  $as_echo "43. am-subdir.at:93: testing ..."
   $at_traceon
 
 
@@ -10343,7 +11048,7 @@ $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdir-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdir-demo], 2.2.4, bug-libtool@gnu.org)
 AM_INIT_AUTOMAKE
 AC_PROG_CC
 AM_PROG_CC_C_O
@@ -10575,17 +11280,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_38
-#AT_START_39
-# 39. lt_dlexit.at:30: lt_dlexit unloading libs
+#AT_STOP_43
+#AT_START_44
+# 44. lt_dlexit.at:30: lt_dlexit unloading libs
 at_setup_line='lt_dlexit.at:30'
 at_func_banner 6
 at_desc="lt_dlexit unloading libs"
-$at_quiet $as_echo_n " 39: $at_desc                       "
+$at_quiet $as_echo_n " 44: $at_desc                       "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "39. lt_dlexit.at:30: testing ..."
+  $as_echo "44. lt_dlexit.at:30: testing ..."
   $at_traceon
 
 
@@ -10841,17 +11546,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_39
-#AT_START_40
-# 40. lt_dladvise.at:28: lt_dlopenadvise library loading
+#AT_STOP_44
+#AT_START_45
+# 45. lt_dladvise.at:28: lt_dlopenadvise library loading
 at_setup_line='lt_dladvise.at:28'
 at_func_banner 6
 at_desc="lt_dlopenadvise library loading"
-$at_quiet $as_echo_n " 40: $at_desc                "
+$at_quiet $as_echo_n " 45: $at_desc                "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "40. lt_dladvise.at:28: testing ..."
+  $as_echo "45. lt_dladvise.at:28: testing ..."
   $at_traceon
 
 
@@ -11283,17 +11988,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_40
-#AT_START_41
-# 41. need_lib_prefix.at:25: enforced lib prefix
+#AT_STOP_45
+#AT_START_46
+# 46. need_lib_prefix.at:25: enforced lib prefix
 at_setup_line='need_lib_prefix.at:25'
 at_func_banner 6
 at_desc="enforced lib prefix"
-$at_quiet $as_echo_n " 41: $at_desc                            "
+$at_quiet $as_echo_n " 46: $at_desc                            "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "41. need_lib_prefix.at:25: testing ..."
+  $as_echo "46. need_lib_prefix.at:25: testing ..."
   $at_traceon
 
 
@@ -11610,17 +12315,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_41
-#AT_START_42
-# 42. standalone.at:31: compiling softlinked libltdl
+#AT_STOP_46
+#AT_START_47
+# 47. standalone.at:31: compiling softlinked libltdl
 at_setup_line='standalone.at:31'
 at_func_banner 7
 at_desc="compiling softlinked libltdl"
-$at_quiet $as_echo_n " 42: $at_desc                   "
+$at_quiet $as_echo_n " 47: $at_desc                   "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "42. standalone.at:31: testing ..."
+  $as_echo "47. standalone.at:31: testing ..."
   $at_traceon
 
 
@@ -11720,17 +12425,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_42
-#AT_START_43
-# 43. standalone.at:46: compiling copied libltdl
+#AT_STOP_47
+#AT_START_48
+# 48. standalone.at:46: compiling copied libltdl
 at_setup_line='standalone.at:46'
 at_func_banner 7
 at_desc="compiling copied libltdl"
-$at_quiet $as_echo_n " 43: $at_desc                       "
+$at_quiet $as_echo_n " 48: $at_desc                       "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "43. standalone.at:46: testing ..."
+  $as_echo "48. standalone.at:46: testing ..."
   $at_traceon
 
 
@@ -11830,17 +12535,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_43
-#AT_START_44
-# 44. standalone.at:61: installable libltdl
+#AT_STOP_48
+#AT_START_49
+# 49. standalone.at:61: installable libltdl
 at_setup_line='standalone.at:61'
 at_func_banner 7
 at_desc="installable libltdl"
-$at_quiet $as_echo_n " 44: $at_desc                            "
+$at_quiet $as_echo_n " 49: $at_desc                            "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "44. standalone.at:61: testing ..."
+  $as_echo "49. standalone.at:61: testing ..."
   $at_traceon
 
 
@@ -11963,17 +12668,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_44
-#AT_START_45
-# 45. standalone.at:79: linking libltdl without autotools
+#AT_STOP_49
+#AT_START_50
+# 50. standalone.at:79: linking libltdl without autotools
 at_setup_line='standalone.at:79'
 at_func_banner 7
 at_desc="linking libltdl without autotools"
-$at_quiet $as_echo_n " 45: $at_desc              "
+$at_quiet $as_echo_n " 50: $at_desc              "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "45. standalone.at:79: testing ..."
+  $as_echo "50. standalone.at:79: testing ..."
   $at_traceon
 
 
@@ -12168,25 +12873,25 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_45
-#AT_START_46
-# 46. subproject.at:57: compiling softlinked libltdl
+#AT_STOP_50
+#AT_START_51
+# 51. subproject.at:57: compiling softlinked libltdl
 at_setup_line='subproject.at:57'
 at_func_banner 8
 at_desc="compiling softlinked libltdl"
-$at_quiet $as_echo_n " 46: $at_desc                   "
+$at_quiet $as_echo_n " 51: $at_desc                   "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOMAKE" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "46. subproject.at:57: testing ..."
+  $as_echo "51. subproject.at:57: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subproject-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subproject-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([sub/ltdl])
 AC_CONFIG_AUX_DIR([sub/ltdl/config])
 AC_CONFIG_MACRO_DIR([sub/ltdl/m4])
@@ -12375,25 +13080,25 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_46
-#AT_START_47
-# 47. subproject.at:73: compiling copied libltdl
+#AT_STOP_51
+#AT_START_52
+# 52. subproject.at:73: compiling copied libltdl
 at_setup_line='subproject.at:73'
 at_func_banner 8
 at_desc="compiling copied libltdl"
-$at_quiet $as_echo_n " 47: $at_desc                       "
+$at_quiet $as_echo_n " 52: $at_desc                       "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOMAKE" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "47. subproject.at:73: testing ..."
+  $as_echo "52. subproject.at:73: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subproject-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subproject-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([sub/ltdl])
 AC_CONFIG_AUX_DIR([sub/ltdl/config])
 AC_CONFIG_MACRO_DIR([sub/ltdl/m4])
@@ -12582,27 +13287,27 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_47
-#AT_START_48
-# 48. subproject.at:89: installable libltdl
+#AT_STOP_52
+#AT_START_53
+# 53. subproject.at:89: installable libltdl
 at_setup_line='subproject.at:89'
 at_func_banner 8
 at_desc="installable libltdl"
-$at_quiet $as_echo_n " 48: $at_desc                            "
+$at_quiet $as_echo_n " 53: $at_desc                            "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOMAKE" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "48. subproject.at:89: testing ..."
+  $as_echo "53. subproject.at:89: testing ..."
   $at_traceon
 
 
 prefix=`pwd`/_inst
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subproject-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subproject-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([sub/ltdl])
 AC_CONFIG_AUX_DIR([sub/ltdl/config])
 AC_CONFIG_MACRO_DIR([sub/ltdl/m4])
@@ -12812,17 +13517,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_48
-#AT_START_49
-# 49. subproject.at:109: linking libltdl without autotools
+#AT_STOP_53
+#AT_START_54
+# 54. subproject.at:109: linking libltdl without autotools
 at_setup_line='subproject.at:109'
 at_func_banner 8
 at_desc="linking libltdl without autotools"
-$at_quiet $as_echo_n " 49: $at_desc              "
+$at_quiet $as_echo_n " 54: $at_desc              "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "49. subproject.at:109: testing ..."
+  $as_echo "54. subproject.at:109: testing ..."
   $at_traceon
 
 
@@ -12994,13 +13699,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_49
-#AT_START_50
-# 50. nonrecursive.at:78: compiling softlinked libltdl
+#AT_STOP_54
+#AT_START_55
+# 55. nonrecursive.at:78: compiling softlinked libltdl
 at_setup_line='nonrecursive.at:78'
 at_func_banner 9
 at_desc="compiling softlinked libltdl"
-$at_quiet $as_echo_n " 50: $at_desc                   "
+$at_quiet $as_echo_n " 55: $at_desc                   "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOHEADER" = no && at_xfail=yes
@@ -13008,12 +13713,12 @@ at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "50. nonrecursive.at:78: testing ..."
+  $as_echo "55. nonrecursive.at:78: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -13270,13 +13975,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_50
-#AT_START_51
-# 51. nonrecursive.at:102: compiling copied libltdl
+#AT_STOP_55
+#AT_START_56
+# 56. nonrecursive.at:102: compiling copied libltdl
 at_setup_line='nonrecursive.at:102'
 at_func_banner 9
 at_desc="compiling copied libltdl"
-$at_quiet $as_echo_n " 51: $at_desc                       "
+$at_quiet $as_echo_n " 56: $at_desc                       "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOHEADER" = no && at_xfail=yes
@@ -13284,12 +13989,12 @@ at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "51. nonrecursive.at:102: testing ..."
+  $as_echo "56. nonrecursive.at:102: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -13546,13 +14251,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_51
-#AT_START_52
-# 52. nonrecursive.at:126: installable libltdl
+#AT_STOP_56
+#AT_START_57
+# 57. nonrecursive.at:126: installable libltdl
 at_setup_line='nonrecursive.at:126'
 at_func_banner 9
 at_desc="installable libltdl"
-$at_quiet $as_echo_n " 52: $at_desc                            "
+$at_quiet $as_echo_n " 57: $at_desc                            "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOHEADER" = no && at_xfail=yes
@@ -13560,12 +14265,12 @@ at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "52. nonrecursive.at:126: testing ..."
+  $as_echo "57. nonrecursive.at:126: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -13845,23 +14550,23 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_52
-#AT_START_53
-# 53. recursive.at:60: compiling softlinked libltdl
+#AT_STOP_57
+#AT_START_58
+# 58. recursive.at:60: compiling softlinked libltdl
 at_setup_line='recursive.at:60'
 at_func_banner 10
 at_desc="compiling softlinked libltdl"
-$at_quiet $as_echo_n " 53: $at_desc                   "
+$at_quiet $as_echo_n " 58: $at_desc                   "
 at_xfail=no
       case ,$AUTORECONF,$AUTOCONF,$AUTOHEADER,$ACLOCAL,$AUTOMAKE, in *,no,*) :;; *) false;; esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "53. recursive.at:60: testing ..."
+  $as_echo "58. recursive.at:60: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -14025,23 +14730,23 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_53
-#AT_START_54
-# 54. recursive.at:80: compiling copied libltdl
+#AT_STOP_58
+#AT_START_59
+# 59. recursive.at:80: compiling copied libltdl
 at_setup_line='recursive.at:80'
 at_func_banner 10
 at_desc="compiling copied libltdl"
-$at_quiet $as_echo_n " 54: $at_desc                       "
+$at_quiet $as_echo_n " 59: $at_desc                       "
 at_xfail=no
       case ,$AUTORECONF,$AUTOCONF,$AUTOHEADER,$ACLOCAL,$AUTOMAKE, in *,no,*) :;; *) false;; esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "54. recursive.at:80: testing ..."
+  $as_echo "59. recursive.at:80: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -14205,23 +14910,23 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_54
-#AT_START_55
-# 55. recursive.at:100: installable libltdl
+#AT_STOP_59
+#AT_START_60
+# 60. recursive.at:100: installable libltdl
 at_setup_line='recursive.at:100'
 at_func_banner 10
 at_desc="installable libltdl"
-$at_quiet $as_echo_n " 55: $at_desc                            "
+$at_quiet $as_echo_n " 60: $at_desc                            "
 at_xfail=no
       case ,$AUTORECONF,$AUTOCONF,$AUTOHEADER,$ACLOCAL,$AUTOMAKE, in *,no,*) :;; *) false;; esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "55. recursive.at:100: testing ..."
+  $as_echo "60. recursive.at:100: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.4, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -14408,17 +15113,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_55
-#AT_START_56
-# 56. template.at:27: simple template test
+#AT_STOP_60
+#AT_START_61
+# 61. template.at:27: simple template test
 at_setup_line='template.at:27'
 at_func_banner 11
 at_desc="simple template test"
-$at_quiet $as_echo_n " 56: $at_desc                           "
+$at_quiet $as_echo_n " 61: $at_desc                           "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "56. template.at:27: testing ..."
+  $as_echo "61. template.at:27: testing ..."
   $at_traceon
 
 
@@ -14579,15 +15284,15 @@ $at_failed && at_func_log_failure
 $at_traceon
 
 $at_traceoff
-$as_echo "$at_srcdir/template.at:86: \$LIBTOOL --tag=CXX --mode=link \$CXX \$CPPFLAGS \$CXXFLAGS \$LDFLAGS -o libalib.la -rpath /usr/local/lib alib.lo libaclib.la"
+$as_echo "$at_srcdir/template.at:86: \$LIBTOOL --tag=CXX --mode=link \$CXX \$CPPFLAGS \$CXXFLAGS \$LDFLAGS -o libalib.la -rpath /nonexistent alib.lo libaclib.la"
 echo template.at:86 >"$at_check_line_file"
 
 if test -n "$at_traceon" \
-  && at_func_check_newline "$LIBTOOL --tag=CXX --mode=link $CXX $CPPFLAGS $CXXFLAGS $LDFLAGS -o libalib.la -rpath /usr/local/lib alib.lo libaclib.la"; then
-  ( $at_traceon; $LIBTOOL --tag=CXX --mode=link $CXX $CPPFLAGS $CXXFLAGS $LDFLAGS -o libalib.la -rpath /usr/local/lib alib.lo libaclib.la ) >"$at_stdout" 2>"$at_stder1"
+  && at_func_check_newline "$LIBTOOL --tag=CXX --mode=link $CXX $CPPFLAGS $CXXFLAGS $LDFLAGS -o libalib.la -rpath /nonexistent alib.lo libaclib.la"; then
+  ( $at_traceon; $LIBTOOL --tag=CXX --mode=link $CXX $CPPFLAGS $CXXFLAGS $LDFLAGS -o libalib.la -rpath /nonexistent alib.lo libaclib.la ) >"$at_stdout" 2>"$at_stder1"
   at_func_filter_trace $?
 else
-  ( :; $LIBTOOL --tag=CXX --mode=link $CXX $CPPFLAGS $CXXFLAGS $LDFLAGS -o libalib.la -rpath /usr/local/lib alib.lo libaclib.la ) >"$at_stdout" 2>"$at_stderr"
+  ( :; $LIBTOOL --tag=CXX --mode=link $CXX $CPPFLAGS $CXXFLAGS $LDFLAGS -o libalib.la -rpath /nonexistent alib.lo libaclib.la ) >"$at_stdout" 2>"$at_stderr"
 fi
 at_status=$?
 at_failed=false
@@ -14680,17 +15385,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_56
-#AT_START_57
-# 57. template.at:126: template test with subdirs
+#AT_STOP_61
+#AT_START_62
+# 62. template.at:126: template test with subdirs
 at_setup_line='template.at:126'
 at_func_banner 11
 at_desc="template test with subdirs"
-$at_quiet $as_echo_n " 57: $at_desc                     "
+$at_quiet $as_echo_n " 62: $at_desc                     "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "57. template.at:126: testing ..."
+  $as_echo "62. template.at:126: testing ..."
   $at_traceon
 
 
@@ -15473,17 +16178,17 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_57
-#AT_START_58
-# 58. ctor.at:27: C++ static constructors
+#AT_STOP_62
+#AT_START_63
+# 63. ctor.at:27: C++ static constructors
 at_setup_line='ctor.at:27'
 at_func_banner 12
 at_desc="C++ static constructors"
-$at_quiet $as_echo_n " 58: $at_desc                        "
+$at_quiet $as_echo_n " 63: $at_desc                        "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "58. ctor.at:27: testing ..."
+  $as_echo "63. ctor.at:27: testing ..."
   $at_traceon
 
 
@@ -15688,24 +16393,24 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_58
-#AT_START_59
-# 59. early-libtool.at:32: config.status
+#AT_STOP_63
+#AT_START_64
+# 64. early-libtool.at:32: config.status
 at_setup_line='early-libtool.at:32'
 at_func_banner 13
 at_desc="config.status"
-$at_quiet $as_echo_n " 59: $at_desc                                  "
+$at_quiet $as_echo_n " 64: $at_desc                                  "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "59. early-libtool.at:32: testing ..."
+  $as_echo "64. early-libtool.at:32: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtool-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtool-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 AC_CONFIG_FILES([Makefile])
@@ -15952,24 +16657,24 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_59
-#AT_START_60
-# 60. early-libtool.at:126: config.lt
+#AT_STOP_64
+#AT_START_65
+# 65. early-libtool.at:126: config.lt
 at_setup_line='early-libtool.at:126'
 at_func_banner 13
 at_desc="config.lt"
-$at_quiet $as_echo_n " 60: $at_desc                                      "
+$at_quiet $as_echo_n " 65: $at_desc                                      "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "60. early-libtool.at:126: testing ..."
+  $as_echo "65. early-libtool.at:126: testing ..."
   $at_traceon
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtool-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([libtool-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 LT_OUTPUT
@@ -16227,13 +16932,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_60
-#AT_START_61
-# 61. deplibs-ident.at:32: build tree relpaths
+#AT_STOP_65
+#AT_START_66
+# 66. deplibs-ident.at:32: build tree relpaths
 at_setup_line='deplibs-ident.at:32'
 at_func_banner 14
 at_desc="build tree relpaths"
-$at_quiet $as_echo_n " 61: $at_desc                            "
+$at_quiet $as_echo_n " 66: $at_desc                            "
 at_xfail=no
       case $host in
                  *-*-aix*|hppa*-*-hpux*|*-*-interix*|*-*-openbsd*) false;;
@@ -16241,7 +16946,7 @@ at_xfail=no
                esac && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "61. deplibs-ident.at:32: testing ..."
+  $as_echo "66. deplibs-ident.at:32: testing ..."
   $at_traceon
 
 
@@ -16416,13 +17121,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_61
-#AT_START_62
-# 62. configure-iface.at:102: installable libltdl
+#AT_STOP_66
+#AT_START_67
+# 67. configure-iface.at:102: installable libltdl
 at_setup_line='configure-iface.at:102'
 at_func_banner 15
 at_desc="installable libltdl"
-$at_quiet $as_echo_n " 62: $at_desc                            "
+$at_quiet $as_echo_n " 67: $at_desc                            "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOHEADER" = no && at_xfail=yes
@@ -16430,7 +17135,7 @@ at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "62. configure-iface.at:102: testing ..."
+  $as_echo "67. configure-iface.at:102: testing ..."
   $at_traceon
 
 
@@ -16506,7 +17211,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([installable-ltdl-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([installable-ltdl-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([libltdl/config])
 AC_CONFIG_MACRO_DIR([libltdl/m4])
 AC_CONFIG_HEADERS([config.h:config.hin])
@@ -16773,13 +17478,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_62
-#AT_START_63
-# 63. configure-iface.at:159: --with-ltdl-include/lib
+#AT_STOP_67
+#AT_START_68
+# 68. configure-iface.at:159: --with-ltdl-include/lib
 at_setup_line='configure-iface.at:159'
 at_func_banner 15
 at_desc="--with-ltdl-include/lib"
-$at_quiet $as_echo_n " 63: $at_desc                        "
+$at_quiet $as_echo_n " 68: $at_desc                        "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOHEADER" = no && at_xfail=yes
@@ -16787,7 +17492,7 @@ at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "63. configure-iface.at:159: testing ..."
+  $as_echo "68. configure-iface.at:159: testing ..."
   $at_traceon
 
 
@@ -16962,7 +17667,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([configure-iface-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([configure-iface-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_MACRO_DIR([_inst/aclocal])
 AC_CONFIG_HEADERS([config.h:config.hin])
 AM_INIT_AUTOMAKE([foreign])
@@ -17201,13 +17906,13 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_63
-#AT_START_64
-# 64. configure-iface.at:225: --with-included-ltdl
+#AT_STOP_68
+#AT_START_69
+# 69. configure-iface.at:225: --with-included-ltdl
 at_setup_line='configure-iface.at:225'
 at_func_banner 15
 at_desc="--with-included-ltdl"
-$at_quiet $as_echo_n " 64: $at_desc                           "
+$at_quiet $as_echo_n " 69: $at_desc                           "
 at_xfail=no
       test "$ACLOCAL" = no && at_xfail=yes
       test "$AUTOHEADER" = no && at_xfail=yes
@@ -17215,7 +17920,7 @@ at_xfail=no
       test "$AUTOCONF" = no && at_xfail=yes
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "64. configure-iface.at:225: testing ..."
+  $as_echo "69. configure-iface.at:225: testing ..."
   $at_traceon
 
 
@@ -17291,7 +17996,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([configure-iface-demo], 2.2.2, bug-libtool@gnu.org)
+AC_INIT([configure-iface-demo], 2.2.4, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([libltdl/config])
 AC_CONFIG_MACRO_DIR([libltdl/m4])
 AC_CONFIG_HEADERS([config.h:config.hin])
@@ -17576,17 +18281,170 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_64
-#AT_START_65
-# 65. stresstest.at:31: Link option thorough search test
+#AT_STOP_69
+#AT_START_70
+# 70. configure-iface.at:283: convenience libltdl
+at_setup_line='configure-iface.at:283'
+at_func_banner 15
+at_desc="convenience libltdl"
+$at_quiet $as_echo_n " 70: $at_desc                            "
+at_xfail=no
+      test "$ACLOCAL" = no && at_xfail=yes
+      test "$AUTOCONF" = no && at_xfail=yes
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "70. configure-iface.at:283: testing ..."
+  $at_traceon
+
+
+cat >configure.ac <<'_ATEOF'
+AC_INIT
+AC_CONFIG_AUX_DIR([libltdl/config])
+AC_LIBLTDL_CONVENIENCE
+AC_LIBTOOL_DLOPEN
+AC_PROG_LIBTOOL
+AC_CONFIG_FILES(Makefile)
+AC_OUTPUT
+_ATEOF
+
+cat >Makefile.in <<'_ATEOF'
+LIBLTDL = @LIBLTDL@
+print-ltdl:
+	echo $(LIBLTDL)
+_ATEOF
+
+
+$LIBTOOLIZE --ltdl
+
+
+$at_traceoff
+$as_echo "$at_srcdir/configure-iface.at:300: \$ACLOCAL -I libltdl/m4"
+echo configure-iface.at:300 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$ACLOCAL -I libltdl/m4"; then
+  ( $at_traceon; $ACLOCAL -I libltdl/m4 ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $ACLOCAL -I libltdl/m4 ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/configure-iface.at:300"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+
+
+$at_traceoff
+$as_echo "$at_srcdir/configure-iface.at:300: \$AUTOCONF "
+echo configure-iface.at:300 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$AUTOCONF "; then
+  ( $at_traceon; $AUTOCONF  ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $AUTOCONF  ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/configure-iface.at:300"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+
+
+( SHELL=${CONFIG_SHELL-/bin/sh}
+   $at_traceoff
+$as_echo "$at_srcdir/configure-iface.at:300: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
+echo configure-iface.at:300 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options "; then
+  ( $at_traceon; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options  ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options  ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/configure-iface.at:300"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+ )
+
+
+
+$at_traceoff
+$as_echo "$at_srcdir/configure-iface.at:301: \$MAKE print-ltdl"
+echo configure-iface.at:301 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$MAKE print-ltdl"; then
+  ( $at_traceon; $MAKE print-ltdl ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $MAKE print-ltdl ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+echo stdout:; tee stdout <"$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/configure-iface.at:301"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+$at_traceoff
+$as_echo "$at_srcdir/configure-iface.at:302: grep libltdl/libltdlc.la stdout"
+echo configure-iface.at:302 >"$at_check_line_file"
+
+if test -n "$at_traceon"; then
+  ( $at_traceon; grep libltdl/libltdlc.la stdout ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; grep libltdl/libltdlc.la stdout ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/configure-iface.at:302"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_70
+#AT_START_71
+# 71. stresstest.at:31: Link option thorough search test
 at_setup_line='stresstest.at:31'
 at_func_banner 16
 at_desc="Link option thorough search test"
-$at_quiet $as_echo_n " 65: $at_desc               "
+$at_quiet $as_echo_n " 71: $at_desc               "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "65. stresstest.at:31: testing ..."
+  $as_echo "71. stresstest.at:31: testing ..."
   $at_traceon
 
 
@@ -18066,17 +18924,17 @@ done
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_65
-#AT_START_66
-# 66. cmdline_wrap.at:28: Run tests with low max_cmd_len
+#AT_STOP_71
+#AT_START_72
+# 72. cmdline_wrap.at:28: Run tests with low max_cmd_len
 at_setup_line='cmdline_wrap.at:28'
 at_func_banner 16
 at_desc="Run tests with low max_cmd_len"
-$at_quiet $as_echo_n " 66: $at_desc                 "
+$at_quiet $as_echo_n " 72: $at_desc                 "
 at_xfail=no
 echo "#                             -*- compilation -*-" >> "$at_group_log"
 (
-  $as_echo "66. cmdline_wrap.at:28: testing ..."
+  $as_echo "72. cmdline_wrap.at:28: testing ..."
   $at_traceon
 
 
@@ -18118,4 +18976,252 @@ $at_traceon
   $at_times_p && times >"$at_times_file"
 ) 5>&1 2>&1 | eval $at_tee_pipe
 at_status=`cat "$at_status_file"`
-#AT_STOP_66
+#AT_STOP_72
+#AT_START_73
+# 73. darwin.at:26: darwin fat compile
+at_setup_line='darwin.at:26'
+at_func_banner 17
+at_desc="darwin fat compile"
+$at_quiet $as_echo_n " 73: $at_desc                             "
+at_xfail=no
+echo "#                             -*- compilation -*-" >> "$at_group_log"
+(
+  $as_echo "73. darwin.at:26: testing ..."
+  $at_traceon
+
+noskip=:
+case "$host_os" in
+darwin*) ;;
+*) noskip=false ;;
+esac
+
+cat >foo.c <<'_ATEOF'
+
+int x=0;
+_ATEOF
+
+
+$noskip && {
+$CC $CPPFLAGS $CFLAGS -arch ppc -arch i386 -c -o foo.o foo.c 2>&1 > /dev/null || noskip=false
+rm -f foo.o
+}
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:42: \$noskip || (exit 77)"
+echo darwin.at:42 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$noskip || (exit 77)"; then
+  ( $at_traceon; $noskip || (exit 77) ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $noskip || (exit 77) ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+at_func_diff_devnull "$at_stderr" || at_failed=:
+at_func_diff_devnull "$at_stdout" || at_failed=:
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:42"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+cat >baz.c <<'_ATEOF'
+
+int y=0;
+_ATEOF
+
+
+cat >bar.c <<'_ATEOF'
+
+extern int x;
+int bar(void);
+int bar() { return x;}
+_ATEOF
+
+
+cat >main.c <<'_ATEOF'
+
+extern int x;
+extern int y;
+
+int main() {
+return x+y;
+}
+_ATEOF
+
+
+mkdir bin
+cat >bin/basename <<'_ATEOF'
+
+#! /bin/sh
+
+usage="usage: $0 argument"
+if test $# != 1; then
+                  echo $usage >&2
+                  exit 1
+fi
+
+echo $1 | sed "s,^.*/,,"
+_ATEOF
+
+
+chmod +x bin/basename
+save_PATH=$PATH
+PATH=`pwd`/bin:$PATH
+export PATH
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:81: \$LIBTOOL --mode=compile --tag=CC \$CC -c -o foo.lo \$CPPFLAGS \$CFLAGS -arch ppc -arch i386 foo.c"
+echo darwin.at:81 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=compile --tag=CC $CC -c -o foo.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 foo.c"; then
+  ( $at_traceon; $LIBTOOL --mode=compile --tag=CC $CC -c -o foo.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 foo.c ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=compile --tag=CC $CC -c -o foo.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 foo.c ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:81"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:83: \$LIBTOOL --mode=compile --tag=CC \$CC -c -o baz.lo \$CPPFLAGS \$CFLAGS -arch ppc -arch i386 baz.c"
+echo darwin.at:83 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=compile --tag=CC $CC -c -o baz.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 baz.c"; then
+  ( $at_traceon; $LIBTOOL --mode=compile --tag=CC $CC -c -o baz.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 baz.c ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=compile --tag=CC $CC -c -o baz.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 baz.c ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:83"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:85: \$LIBTOOL --mode=link --tag=CC \$CC -o libfoo.la \$CPPFLAGS \$CFLAGS \$LDFLAGS -arch ppc -arch i386 foo.lo baz.lo"
+echo darwin.at:85 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC -o libfoo.la $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 foo.lo baz.lo"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC -o libfoo.la $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 foo.lo baz.lo ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=link --tag=CC $CC -o libfoo.la $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 foo.lo baz.lo ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:85"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:87: \$LIBTOOL --mode=compile --tag=CC \$CC -c -o bar.lo \$CPPFLAGS \$CFLAGS -arch ppc -arch i386 bar.c"
+echo darwin.at:87 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=compile --tag=CC $CC -c -o bar.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 bar.c"; then
+  ( $at_traceon; $LIBTOOL --mode=compile --tag=CC $CC -c -o bar.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 bar.c ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=compile --tag=CC $CC -c -o bar.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 bar.c ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:87"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:89: \$LIBTOOL --mode=link --tag=CC \$CC  -o libbar.la \$CPPFLAGS \$CFLAGS \$LDFLAGS -arch ppc -arch i386 bar.lo libfoo.la -rpath /nonexistent"
+echo darwin.at:89 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC  -o libbar.la $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 bar.lo libfoo.la -rpath /nonexistent"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC  -o libbar.la $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 bar.lo libfoo.la -rpath /nonexistent ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=link --tag=CC $CC  -o libbar.la $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 bar.lo libfoo.la -rpath /nonexistent ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:89"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:91: \$LIBTOOL --mode=compile --tag=CC \$CC -c -o main.lo \$CPPFLAGS \$CFLAGS -arch ppc -arch i386 main.c"
+echo darwin.at:91 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=compile --tag=CC $CC -c -o main.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 main.c"; then
+  ( $at_traceon; $LIBTOOL --mode=compile --tag=CC $CC -c -o main.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 main.c ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=compile --tag=CC $CC -c -o main.lo $CPPFLAGS $CFLAGS -arch ppc -arch i386 main.c ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:91"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+$at_traceoff
+$as_echo "$at_srcdir/darwin.at:93: \$LIBTOOL --mode=link --tag=CC \$CC  -o main \$CPPFLAGS \$CFLAGS \$LDFLAGS -arch ppc -arch i386 main.lo libbar.la"
+echo darwin.at:93 >"$at_check_line_file"
+
+if test -n "$at_traceon" \
+  && at_func_check_newline "$LIBTOOL --mode=link --tag=CC $CC  -o main $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 main.lo libbar.la"; then
+  ( $at_traceon; $LIBTOOL --mode=link --tag=CC $CC  -o main $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 main.lo libbar.la ) >"$at_stdout" 2>"$at_stder1"
+  at_func_filter_trace $?
+else
+  ( :; $LIBTOOL --mode=link --tag=CC $CC  -o main $CPPFLAGS $CFLAGS $LDFLAGS -arch ppc -arch i386 main.lo libbar.la ) >"$at_stdout" 2>"$at_stderr"
+fi
+at_status=$?
+at_failed=false
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_func_check_status 0 $at_status "$at_srcdir/darwin.at:93"
+
+$at_failed && at_func_log_failure
+$at_traceon
+
+
+PATH=$save_PATH
+  $at_traceoff
+  $at_times_p && times >"$at_times_file"
+) 5>&1 2>&1 | eval $at_tee_pipe
+at_status=`cat "$at_status_file"`
+#AT_STOP_73

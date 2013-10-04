@@ -136,7 +136,14 @@ vm_open (lt_user_data LT__UNUSED loader_data, const char *filename,
 	  return 0;
 	}
 
-#if defined(__CYGWIN__)
+#if HAVE_DECL_CYGWIN_CONV_PATH
+      if (cygwin_conv_path (CCP_POSIX_TO_WIN_A, filename, wpath, MAX_PATH))
+	{
+	  LT__SETERROR (CANNOT_OPEN);
+	  return 0;
+	}
+      len = 0;
+#elif defined(__CYGWIN__)
       cygwin_conv_to_full_win32_path (filename, wpath);
       len = 0;
 #else
@@ -184,9 +191,9 @@ vm_open (lt_user_data LT__UNUSED loader_data, const char *filename,
      an already loaded module, and simulate failure if we
      find one. */
   {
-    lt__handle *        cur        = 0;
+    lt_dlhandle cur = 0;
 
-    while ((cur = (lt__handle *) lt_dlhandle_iterate (iface_id, (lt_dlhandle) cur)))
+    while ((cur = lt_dlhandle_iterate (iface_id, cur)))
       {
         if (!cur->module)
           {
