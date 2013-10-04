@@ -5,7 +5,7 @@
 ## unlimited permission to copy and/or distribute it, with or without
 ## modifications, as long as this notice is preserved.
 
-# serial 6 AC_LIB_LTDL
+# serial 7 AC_LIB_LTDL
 
 # AC_WITH_LTDL
 # ------------
@@ -99,7 +99,7 @@ AC_DEFUN([AC_LTDL_ENABLE_INSTALL],
 
 AM_CONDITIONAL(INSTALL_LTDL, test x"${enable_ltdl_install-no}" != xno)
 AM_CONDITIONAL(CONVENIENCE_LTDL, test x"${enable_ltdl_convenience-no}" != xno)
-])])# AC_LTDL_ENABLE_INSTALL
+])# AC_LTDL_ENABLE_INSTALL
 
 
 # AC_LTDL_SYS_DLOPEN_DEPLIBS
@@ -132,6 +132,9 @@ AC_CACHE_CHECK([whether deplibs are loaded by dlopen],
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;
   hpux10*|hpux11*)
+    libltdl_cv_sys_dlopen_deplibs=yes
+    ;;
+  interix*)
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;
   irix[[12345]]*|irix6.[[01]]*)
@@ -173,6 +176,9 @@ AC_CACHE_CHECK([whether deplibs are loaded by dlopen],
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;
   solaris*)
+    libltdl_cv_sys_dlopen_deplibs=yes
+    ;;
+  sysv5* | sco3.2v5* | sco5v6* | unixware* | OpenUNIX* | sysv4*uw2*)
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;
   esac

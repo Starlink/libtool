@@ -1,5 +1,5 @@
-This is ../../libtool/doc/libtool.info, produced by makeinfo version
-4.7 from ../../libtool/doc/libtool.texi.
+Dies ist ../../libtool/doc/libtool.info, hergestellt von Makeinfo
+Version 4.7 aus ../../libtool/doc/libtool.texi.
 
 INFO-DIR-SECTION GNU programming tools
 START-INFO-DIR-ENTRY
@@ -11,7 +11,7 @@ START-INFO-DIR-ENTRY
 * libtoolize: (libtool)Invoking libtoolize.     Adding libtool support.
 END-INFO-DIR-ENTRY
 
-   This file documents GNU Libtool 1.5.22
+   This file documents GNU Libtool 1.5.21a
 
    Copyright (C) 1996-2003, 2005 Free Software Foundation, Inc.
 
@@ -30,7 +30,7 @@ Shared library support for GNU
 
 This file documents GNU Libtool, a script that allows package developers
 to provide generic shared library support.  This edition documents
-version 1.5.22.
+version 1.5.21a.
 
    *Note Reporting bugs::, for information on how to report problems
 with libtool.
@@ -959,10 +959,10 @@ and accepts the following options:
 
 `--mode=MODE'
      Use MODE as the operation mode.  If not specified, an attempt is
-     made to infer the operation mode from the MODE-ARGS.  Not
+     made to inferr the operation mode from the MODE-ARGS.  Not
      specifying the MODE is currently deprecated, as there are too many
      situations where it is not possible to guess.  Future versions of
-     Libtool will require that MODE be explicitly set.
+     Libtool will require that MODE be explicity set.
 
      MODE must be set to one of the following:
 
@@ -1028,7 +1028,7 @@ linker flags with `-Wl,FLAG' and `-Xlinker FLAG'.  You can also pass
 compile specific flags using `-Wc,FLAG' and `-Xcompiler FLAG'.
 
    If both PIC and non-PIC objects are being built, libtool will
-normally suppress the compiler output for the PIC object compilation to
+normally supress the compiler output for the PIC object compilation to
 save showing very similar, if not identical duplicate output for each
 object.  If the `-no-suppress' option is given in compile mode, libtool
 will show the compiler output for both objects.
@@ -1483,8 +1483,8 @@ If you are using GNU Autoconf (or Automake), you should add a call to
 new tests to the `configure' script so that the generated libtool
 script will understand the characteristics of the host:
 
- -- Macro: AC_PROG_LIBTOOL
- -- Macro: AM_PROG_LIBTOOL
+ -- Makro: AC_PROG_LIBTOOL
+ -- Makro: AM_PROG_LIBTOOL
      Add support for the `--enable-shared' and `--disable-shared'
      `configure' flags.(1)  `AM_PROG_LIBTOOL' was the old name for this
      macro, and although supported at the moment is deprecated.
@@ -1538,13 +1538,13 @@ script will understand the characteristics of the host:
      some dependency on `libtool'.
 
 
- -- Macro: AC_LIBTOOL_DLOPEN
+ -- Makro: AC_LIBTOOL_DLOPEN
      Enable checking for dlopen support. This macro should be used if
      the package makes use of the `-dlopen' and `-dlpreopen' flags,
      otherwise libtool will assume that the system does not support
      dlopening.  The macro must be called *before* `AC_PROG_LIBTOOL'.
 
- -- Macro: AC_LIBTOOL_WIN32_DLL
+ -- Makro: AC_LIBTOOL_WIN32_DLL
      This macro should be used if the package has been ported to build
      clean dlls on win32 platforms.  Usually this means that any
      library data items are exported with `__declspec(dllexport)' and
@@ -1558,20 +1558,20 @@ script will understand the characteristics of the host:
      `-no-undefined', you must ensure that all the library symbols
      *really are* defined at link time!
 
- -- Macro: AC_DISABLE_FAST_INSTALL
+ -- Makro: AC_DISABLE_FAST_INSTALL
      Change the default behaviour for `AC_PROG_LIBTOOL' to disable
      optimization for fast installation.  The user may still override
      this default, depending on platform support, by specifying
      `--enable-fast-install'.
 
- -- Macro: AC_DISABLE_SHARED
- -- Macro: AM_DISABLE_SHARED
+ -- Makro: AC_DISABLE_SHARED
+ -- Makro: AM_DISABLE_SHARED
      Change the default behaviour for `AC_PROG_LIBTOOL' to disable
      shared libraries.  The user may still override this default by
      specifying `--enable-shared'.
 
- -- Macro: AC_DISABLE_STATIC
- -- Macro: AM_DISABLE_STATIC
+ -- Makro: AC_DISABLE_STATIC
+ -- Makro: AM_DISABLE_STATIC
      Change the default behaviour for `AC_PROG_LIBTOOL' to disable
      static libraries.  The user may still override this default by
      specifying `--enable-static'.
@@ -2272,12 +2272,12 @@ interpreted language.  In fact, dlopen calls are frequently used in
 language interpreters to provide an efficient way to extend the
 language.
 
-   As of version 1.5.22, libtool provides support for dlopened modules.
-However, you should indicate that your package is willing to use such
-support, by using the macro `AC_LIBTOOL_DLOPEN' in `configure.in'.  If
-this macro is not used (or it is used _after_ `AC_PROG_LIBTOOL'),
-libtool will assume no dlopening mechanism is available, and will try
-to simulate it.
+   As of version 1.5.21a, libtool provides support for dlopened
+modules.  However, you should indicate that your package is willing to
+use such support, by using the macro `AC_LIBTOOL_DLOPEN' in
+`configure.in'.  If this macro is not used (or it is used _after_
+`AC_PROG_LIBTOOL'), libtool will assume no dlopening mechanism is
+available, and will try to simulate it.
 
    This chapter discusses how you as a dlopen application developer
 might use libtool to generate dlopen-accessible modules.
@@ -2532,18 +2532,18 @@ The following types are defined in `ltdl.h':
 
 libltdl provides the following functions:
 
- -- Function: int lt_dlinit (void)
+ -- Funktion: int lt_dlinit (void)
      Initialize libltdl.  This function must be called before using
      libltdl and may be called several times.  Return 0 on success,
      otherwise the number of errors.
 
- -- Function: int lt_dlexit (void)
+ -- Funktion: int lt_dlexit (void)
      Shut down libltdl and close all modules.  This function will only
      then shut down libltdl when it was called as many times as
      `lt_dlinit' has been successfully called.  Return 0 on success,
      otherwise the number of errors.
 
- -- Function: lt_dlhandle lt_dlopen (const char *FILENAME)
+ -- Funktion: lt_dlhandle lt_dlopen (const char *FILENAME)
      Open the module with the file name FILENAME and return a handle
      for it.  `lt_dlopen' is able to open libtool dynamic modules,
      preloaded static modules, the program itself and native dynamic
@@ -2580,7 +2580,7 @@ libltdl provides the following functions:
      If the same module is loaded several times, the same handle is
      returned.  If `lt_dlopen' fails for any reason, it returns `NULL'.
 
- -- Function: lt_dlhandle lt_dlopenext (const char *FILENAME)
+ -- Funktion: lt_dlhandle lt_dlopenext (const char *FILENAME)
      The same as `lt_dlopen', except that it tries to append different
      file name extensions to the file name.  If the file with the file
      name FILENAME cannot be found libltdl tries to append the
@@ -2596,29 +2596,29 @@ libltdl provides the following functions:
      to be able to `dlopen' such libraries as well as libtool modules
      transparently.
 
- -- Function: int lt_dlclose (lt_dlhandle HANDLE)
+ -- Funktion: int lt_dlclose (lt_dlhandle HANDLE)
      Decrement the reference count on the module HANDLE.  If it drops
      to zero and no other module depends on this module, then the
      module is unloaded.  Return 0 on success.
 
- -- Function: lt_ptr lt_dlsym (lt_dlhandle HANDLE, const char *NAME)
+ -- Funktion: lt_ptr lt_dlsym (lt_dlhandle HANDLE, const char *NAME)
      Return the address in the module HANDLE, where the symbol given by
      the null-terminated string NAME is loaded.  If the symbol cannot
      be found, `NULL' is returned.
 
- -- Function: const char * lt_dlerror (void)
+ -- Funktion: const char * lt_dlerror (void)
      Return a human readable string describing the most recent error
      that occurred from any of libltdl's functions.  Return `NULL' if
      no errors have occurred since initialization or since it was last
      called.
 
- -- Function: int lt_dlpreload (const lt_dlsymlist *PRELOADED)
+ -- Funktion: int lt_dlpreload (const lt_dlsymlist *PRELOADED)
      Register the list of preloaded modules PRELOADED.  If PRELOADED is
      `NULL', then all previously registered symbol lists, except the
      list set by `lt_dlpreload_default', are deleted. Return 0 on
      success.
 
- -- Function: int lt_dlpreload_default (const lt_dlsymlist *PRELOADED)
+ -- Funktion: int lt_dlpreload_default (const lt_dlsymlist *PRELOADED)
      Set the default list of preloaded modules to PRELOADED, which
      won't be deleted by `lt_dlpreload'.  Note that this function does
      _not_ require libltdl to be initialized using `lt_dlinit' and can
@@ -2628,7 +2628,7 @@ libltdl provides the following functions:
 
      Return 0 on success.
 
- -- Macro: LTDL_SET_PRELOADED_SYMBOLS
+ -- Makro: LTDL_SET_PRELOADED_SYMBOLS
      Set the default list of preloaded symbols.  Should be used in your
      program to initialize libltdl's list of preloaded modules.
 
@@ -2640,26 +2640,26 @@ libltdl provides the following functions:
             /* ... */
           }
 
- -- Function: int lt_dladdsearchdir (const char *SEARCH_DIR)
+ -- Funktion: int lt_dladdsearchdir (const char *SEARCH_DIR)
      Append the search directory SEARCH_DIR to the current user-defined
      library search path. Return 0 on success.
 
- -- Function: int lt_dlinsertsearchdir (const char *BEFORE,
+ -- Funktion: int lt_dlinsertsearchdir (const char *BEFORE,
           const char *SEARCH_DIR)
      Insert the search directory SEARCH_DIR into the user-defined
      library search path, immediately before the element starting at
      address BEFORE.  If BEFORE is `NULL', then SEARCH_DIR is appending
      as if `lt_dladdsearchdir' had been called.  Return 0 on success.
 
- -- Function: int lt_dlsetsearchpath (const char *SEARCH_PATH)
+ -- Funktion: int lt_dlsetsearchpath (const char *SEARCH_PATH)
      Replace the current user-defined library search path with
      SEARCH_PATH, which must be a colon-separated list of absolute
      directories.  Return 0 on success.
 
- -- Function: const char * lt_dlgetsearchpath (void)
+ -- Funktion: const char * lt_dlgetsearchpath (void)
      Return the current user-defined library search path.
 
- -- Function: int lt_dlforeachfile (const char *SEARCH_PATH,
+ -- Funktion: int lt_dlforeachfile (const char *SEARCH_PATH,
           int (*FUNC) (const char *FILENAME, lt_ptr DATA), lt_ptr DATA)
      In some applications you may not want to load individual modules
      with known names, but rather find all of the modules in a set of
@@ -2678,7 +2678,7 @@ libltdl provides the following functions:
      vector of files using DATA to hold the address of the start of the
      vector.
 
- -- Function: int lt_dlmakeresident (lt_dlhandle HANDLE)
+ -- Funktion: int lt_dlmakeresident (lt_dlhandle HANDLE)
      Mark a module so that it cannot be `lt_dlclose'd.  This can be
      useful if a module implements some core functionality in your
      project, which would cause your code to crash if removed.  Return
@@ -2688,7 +2688,7 @@ libltdl provides the following functions:
      binary, that handle will always be marked as resident, and
      consequently cannot be successfully `lt_dlclose'd.
 
- -- Function: int lt_dlisresident (lt_dlhandle HANDLE)
+ -- Funktion: int lt_dlisresident (lt_dlhandle HANDLE)
      Check whether a particular module has been marked as resident,
      returning 1 if it has or 0 otherwise.  If there is an error while
      executing this function, return -1 and set an error message for
@@ -2788,7 +2788,7 @@ multi-threaded environment.
      function which will be called at the start of parts of the libltdl
      implementation code which require a mutex lock.
 
-     Because libltdl is inherently recursive, it is important that the
+     Because libltdl is inherantly recursive, it is important that the
      locking mechanism employed by these callback functions are
      reentrant, or else strange problems will occur.
 
@@ -2810,14 +2810,14 @@ multi-threaded environment.
      The type of a matching callback function to retrieve the last
      stored error message from thread local storage.
 
-     When registered correctly this function will be used by
+     When regeistered correctly this function will be used by
      `lt_dlerror())' from all threads to retrieve error messages for the
      client.
 
  -- Function: int lt_dlmutex_register (lt_dlmutex_lock *LOCK,
           lt_dlmutex_unlock *UNLOCK, lt_dlmutex_set_error *SETERROR,
           lt_dlmutex_geterror *GETERROR)
-     Use this function to register one of each of function types
+     Use this function to register one of each of function ttypes
      described above in preparation for multi-threaded use of libltdl.
      All arguments must be valid non-`NULL' function addresses, or else
      all `NULL' to return to single threaded operation.
@@ -2845,7 +2845,7 @@ structure:
    The following function will return a pointer to libltdl's internal
 copy of this structure for the given HANDLE:
 
- -- Function: const lt_dlinfo * lt_dlgetinfo (lt_dlhandle HANDLE)
+ -- Funktion: const lt_dlinfo * lt_dlgetinfo (lt_dlhandle HANDLE)
      Return a pointer to a struct that contains some information about
      the module HANDLE.  The contents of the struct must not be
      modified.  Return `NULL' on failure.
@@ -2854,7 +2854,7 @@ copy of this structure for the given HANDLE:
 handles of all the modules you have loaded, these functions allow you to
 iterate over libltdl's list of loaded modules:
 
- -- Function: int lt_dlforeach
+ -- Funktion: int lt_dlforeach
           (int (*FUNC) (lt_dlhandle HANDLE, lt_ptr DATA), lt_ptr DATA)
      For each loaded module call the function FUNC.  The argument
      HANDLE is the handle of one of the loaded modules, DATA is the
@@ -2862,7 +2862,7 @@ iterate over libltdl's list of loaded modules:
      non-zero value for one of the handles, `lt_dlforeach' will stop
      calling FUNC and immediately return 1.  Otherwise 0 is returned.
 
- -- Function: lt_dlhandle lt_dlhandle_next (lt_dlhandle place)
+ -- Funktion: lt_dlhandle lt_dlhandle_next (lt_dlhandle place)
      Iterate over the loaded module handles, returning the first handle
      in the list if PLACE is `NULL', and the next one on subsequent
      calls.  If PLACE is the last element in the list of loaded
@@ -2882,11 +2882,11 @@ to do so without interfering with one another's data.
  -- Type: lt_dlcaller_id
      The opaque type used to hold individual data set keys.
 
- -- Function: lt_dlcaller_id lt_dlcaller_register (void)
+ -- Funktion: lt_dlcaller_id lt_dlcaller_register (void)
      Use this to obtain a unique key to store and retrieve individual
      sets of per module data.
 
- -- Function: lt_ptr lt_dlcaller_set_data (lt_dlcaller_id KEY,
+ -- Funktion: lt_ptr lt_dlcaller_set_data (lt_dlcaller_id KEY,
           lt_dlhandle HANDLE, lt_ptr DATA)
      Set DATA as the set of data uniquely associated with KEY and
      HANDLE for later retrieval.  This function returns the DATA
@@ -2912,7 +2912,7 @@ to do so without interfering with one another's data.
                   free (stale);
                 }
 
- -- Function: lt_ptr lt_dlcaller_get_data (lt_dlcaller_id KEY,
+ -- Funktion: lt_ptr lt_dlcaller_get_data (lt_dlcaller_id KEY,
           lt_dlhandle HANDLE)
      Return the address of the data associated with KEY and HANDLE, or
      else `NULL' if there is none.
@@ -3010,7 +3010,7 @@ The following types are defined in `ltdl.h':
  -- Type: int lt_module_close (lt_user_data LOADER_DATA,
           lt_module MODULE)
      The type of the unloader function for a user defined module loader.
-     Implementation of such a function should attempt to release any
+     Implementatation of such a function should attempt to release any
      resources tied up by the MODULE module, and then unload it from
      memory.  If the function fails for some reason, set the error
      message with `lt_dlseterror' and return non-zero.
@@ -3067,7 +3067,7 @@ during the initialisation phase.
 libltdl provides the following functions for writing your own module
 loaders:
 
- -- Function: int lt_dlloader_add (lt_dlloader *PLACE,
+ -- Funktion: int lt_dlloader_add (lt_dlloader *PLACE,
           lt_user_dlloader *DLLOADER, const char *LOADER_NAME)
      Add a new module loader to the list of all loaders, either as the
      last loader (if PLACE is `NULL'), else immediately before the
@@ -3083,7 +3083,7 @@ loaders:
               perror (lt_dlerror ());
           }
 
- -- Function: int lt_dlloader_remove (const char *LOADER_NAME)
+ -- Funktion: int lt_dlloader_remove (const char *LOADER_NAME)
      Remove the loader identified by the unique name, LOADER_NAME.
      Before this can succeed, all modules opened by the named loader
      must have been closed.  Returns 0 for success, otherwise an error
@@ -3095,7 +3095,7 @@ loaders:
               perror (lt_dlerror ());
           }
 
- -- Function: lt_dlloader * lt_dlloader_next (lt_dlloader *PLACE)
+ -- Funktion: lt_dlloader * lt_dlloader_next (lt_dlloader *PLACE)
      Iterate over the module loaders, returning the first loader if
      PLACE is `NULL', and the next one on subsequent calls. The handle
      is for use with `lt_dlloader_add'.
@@ -3106,7 +3106,7 @@ loaders:
               return ERROR;
           }
 
- -- Function: lt_dlloader * lt_dlloader_find (const char *LOADER_NAME)
+ -- Funktion: lt_dlloader * lt_dlloader_find (const char *LOADER_NAME)
      Return the first loader with a matching LOADER_NAME identifier, or
      else `NULL', if the identifier is not found.
 
@@ -3120,13 +3120,13 @@ loaders:
               return ERROR;
           }
 
- -- Function: const char * lt_dlloader_name (lt_dlloader *PLACE)
+ -- Funktion: const char * lt_dlloader_name (lt_dlloader *PLACE)
      Return the identifying name of PLACE, as obtained from
      `lt_dlloader_next' or `lt_dlloader_find'.  If this function fails,
      it will return `NULL' and set an error for retrieval with
      `lt_dlerror'.
 
- -- Function: lt_user_data * lt_dlloader_data (lt_dlloader *PLACE)
+ -- Funktion: lt_user_data * lt_dlloader_data (lt_dlloader *PLACE)
      Return the address of the `dlloader_data' of PLACE, as obtained
      from `lt_dlloader_next' or `lt_dlloader_find'.  If this function
      fails, it will return `NULL' and set an error for retrieval with
@@ -3135,7 +3135,7 @@ loaders:
 10.5.1 Error handling within user module loaders
 ------------------------------------------------
 
- -- Function: int lt_dladderror (const char *DIAGNOSTIC)
+ -- Funktion: int lt_dladderror (const char *DIAGNOSTIC)
      This function allows you to integrate your own error messages into
      `lt_dlerror'.  Pass in a suitable diagnostic message for return by
      `lt_dlerror', and an error identifier for use with `lt_dlseterror'
@@ -3147,9 +3147,9 @@ loaders:
           if (myerror < 0)
             perror (lt_dlerror ());
 
- -- Function: int lt_dlseterror (int ERRORCODE)
+ -- Funktion: int lt_dlseterror (int ERRORCODE)
      When writing your own module loaders, you should use this function
-     to raise errors so that they are propagated through the
+     to raise errors so that they are propogated through the
      `lt_dlerror' interface. All of the standard errors used by libltdl
      are declared in `ltdl.h', or you can add more of your own with
      `lt_dladderror'.  This function returns 0 on success.
@@ -5372,90 +5372,90 @@ Index
 
 
 Tag Table:
-Node: Top908
-Node: Introduction6750
-Node: Motivation8572
-Node: Issues9892
-Node: Other implementations11362
-Node: Postmortem11905
-Node: Libtool paradigm13526
-Node: Using libtool14471
-Node: Creating object files16585
-Node: Linking libraries19099
-Ref: Linking libraries-Footnote-122031
-Node: Linking executables22172
-Ref: Linking executables-Footnote-127181
-Node: Debugging executables27474
-Node: Installing libraries30182
-Ref: Installing libraries-Footnote-133358
-Node: Installing executables33440
-Node: Static libraries34233
-Node: Invoking libtool37492
-Node: Compile mode40738
-Node: Link mode43067
-Node: Execute mode49882
-Node: Install mode50662
-Node: Finish mode52668
-Node: Uninstall mode53103
-Node: Clean mode53544
-Node: Integrating libtool54003
-Node: Makefile rules54686
-Node: Using Automake55762
-Node: Configuring58330
-Node: AC_PROG_LIBTOOL59504
-Ref: AC_PROG_LIBTOOL-Footnote-166836
-Node: Distributing67097
-Node: Invoking libtoolize68265
-Node: Autoconf .o macros70000
-Node: Static-only libraries71254
-Ref: Static-only libraries-Footnote-172613
-Node: Versioning72722
-Node: Interfaces74094
-Node: Libtool versioning74727
-Node: Updating version info76940
-Node: Release numbers78818
-Node: Library tips80665
-Node: C header files83474
-Ref: C header files-Footnote-187145
-Node: Inter-library dependencies87354
-Node: Dlopened modules90016
-Ref: Dlopened modules-Footnote-191929
-Node: Building modules91995
-Node: Dlpreopening93203
-Node: Finding the dlname96037
-Ref: Finding the dlname-Footnote-197336
-Node: Dlopen issues97389
-Node: Using libltdl98442
-Node: Libltdl interface100222
-Node: Modules for libltdl110377
-Node: Thread Safety in libltdl112864
-Node: User defined module data115075
-Node: Module loaders for libltdl119898
-Ref: Module loaders for libltdl-Footnote-1129287
-Node: Distributing libltdl129393
-Ref: Distributing libltdl-Footnote-1135911
-Node: Other languages136136
-Node: C++ libraries136768
-Node: Troubleshooting138195
-Node: Libtool test suite138730
-Node: Test descriptions139463
-Node: When tests fail145914
-Node: Reporting bugs146809
-Node: Maintaining148427
-Node: New ports149170
-Node: Information sources149863
-Node: Porting inter-library dependencies152331
-Node: Tested platforms155048
-Node: Platform quirks163478
-Node: References164452
-Node: Compilers165309
-Ref: Compilers-Footnote-1166885
-Node: Reloadable objects167201
-Node: Multiple dependencies167560
-Node: Archivers168452
-Node: libtool script contents169018
-Node: Cheap tricks184254
-Node: GNU Free Documentation License185757
-Node: Index204456
+Node: Top913
+Node: Introduction6756
+Node: Motivation8578
+Node: Issues9898
+Node: Other implementations11368
+Node: Postmortem11911
+Node: Libtool paradigm13532
+Node: Using libtool14477
+Node: Creating object files16591
+Node: Linking libraries19105
+Ref: Linking libraries-Footnote-122037
+Node: Linking executables22178
+Ref: Linking executables-Footnote-127187
+Node: Debugging executables27480
+Node: Installing libraries30188
+Ref: Installing libraries-Footnote-133364
+Node: Installing executables33446
+Node: Static libraries34239
+Node: Invoking libtool37498
+Node: Compile mode40744
+Node: Link mode43072
+Node: Execute mode49887
+Node: Install mode50667
+Node: Finish mode52673
+Node: Uninstall mode53108
+Node: Clean mode53549
+Node: Integrating libtool54008
+Node: Makefile rules54691
+Node: Using Automake55767
+Node: Configuring58335
+Node: AC_PROG_LIBTOOL59509
+Ref: AC_PROG_LIBTOOL-Footnote-166841
+Node: Distributing67102
+Node: Invoking libtoolize68270
+Node: Autoconf .o macros70005
+Node: Static-only libraries71259
+Ref: Static-only libraries-Footnote-172618
+Node: Versioning72727
+Node: Interfaces74099
+Node: Libtool versioning74732
+Node: Updating version info76945
+Node: Release numbers78823
+Node: Library tips80670
+Node: C header files83479
+Ref: C header files-Footnote-187150
+Node: Inter-library dependencies87359
+Node: Dlopened modules90021
+Ref: Dlopened modules-Footnote-191936
+Node: Building modules92002
+Node: Dlpreopening93210
+Node: Finding the dlname96044
+Ref: Finding the dlname-Footnote-197343
+Node: Dlopen issues97396
+Node: Using libltdl98449
+Node: Libltdl interface100229
+Node: Modules for libltdl110384
+Node: Thread Safety in libltdl112871
+Node: User defined module data115084
+Node: Module loaders for libltdl119907
+Ref: Module loaders for libltdl-Footnote-1129298
+Node: Distributing libltdl129404
+Ref: Distributing libltdl-Footnote-1135922
+Node: Other languages136147
+Node: C++ libraries136779
+Node: Troubleshooting138206
+Node: Libtool test suite138741
+Node: Test descriptions139474
+Node: When tests fail145925
+Node: Reporting bugs146820
+Node: Maintaining148438
+Node: New ports149181
+Node: Information sources149874
+Node: Porting inter-library dependencies152342
+Node: Tested platforms155059
+Node: Platform quirks163489
+Node: References164463
+Node: Compilers165320
+Ref: Compilers-Footnote-1166896
+Node: Reloadable objects167212
+Node: Multiple dependencies167571
+Node: Archivers168463
+Node: libtool script contents169029
+Node: Cheap tricks184265
+Node: GNU Free Documentation License185768
+Node: Index204467
 
 End Tag Table
