@@ -68,7 +68,7 @@ DUALCASE=1; export DUALCASE # for MKS sh
 if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
   emulate sh
   NULLCMD=:
-  # Zsh 3.x and 4.x performs word splitting on ${1+"$@"}, which
+  # Pre-4.2 versions of Zsh do word splitting on ${1+"$@"}, which
   # is contrary to our usage.  Disable this feature.
   alias -g '${1+"$@"}'='"$@"'
   setopt NO_GLOB_SUBST
@@ -90,17 +90,45 @@ as_cr_Letters=$as_cr_letters$as_cr_LETTERS
 as_cr_digits='0123456789'
 as_cr_alnum=$as_cr_Letters$as_cr_digits
 
+as_nl='
+'
+export as_nl
+# Printing a long string crashes Solaris 7 /usr/bin/printf.
+as_echo='\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
+as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo
+as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo$as_echo
+if (test "X`printf %s $as_echo`" = "X$as_echo") 2>/dev/null; then
+  as_echo='printf %s\n'
+  as_echo_n='printf %s'
+else
+  if test "X`(/usr/ucb/echo -n -n $as_echo) 2>/dev/null`" = "X-n $as_echo"; then
+    as_echo_body='eval /usr/ucb/echo -n "$1$as_nl"'
+    as_echo_n='/usr/ucb/echo -n'
+  else
+    as_echo_body='eval expr "X$1" : "X\\(.*\\)"'
+    as_echo_n_body='eval
+      arg=$1;
+      case $arg in
+      *"$as_nl"*)
+	expr "X$arg" : "X\\(.*\\)$as_nl";
+	arg=`expr "X$arg" : ".*$as_nl\\(.*\\)"`;;
+      esac;
+      expr "X$arg" : "X\\(.*\\)" | tr -d "$as_nl"
+    '
+    export as_echo_n_body
+    as_echo_n='sh -c $as_echo_n_body as_echo'
+  fi
+  export as_echo_body
+  as_echo='sh -c $as_echo_body as_echo'
+fi
+
 # The user is always right.
 if test "${PATH_SEPARATOR+set}" != set; then
-  echo "#! /bin/sh" >conf$$.sh
-  echo  "exit 0"   >>conf$$.sh
-  chmod +x conf$$.sh
-  if (PATH="/nonexistent;."; conf$$.sh) >/dev/null 2>&1; then
-    PATH_SEPARATOR=';'
-  else
-    PATH_SEPARATOR=:
-  fi
-  rm -f conf$$.sh
+  PATH_SEPARATOR=:
+  (PATH='/bin;/bin'; FPATH=$PATH; sh -c :) >/dev/null 2>&1 && {
+    (PATH='/bin:/bin'; FPATH=$PATH; sh -c :) >/dev/null 2>&1 ||
+      PATH_SEPARATOR=';'
+  }
 fi
 
 # Support unset when possible.
@@ -116,8 +144,6 @@ fi
 # there to prevent editors from complaining about space-tab.
 # (If _AS_PATH_WALK were called with IFS unset, it would disable word
 # splitting by setting IFS to empty value.)
-as_nl='
-'
 IFS=" ""	$as_nl"
 
 # Find who we are.  Look in the path if we contain no directory separator.
@@ -140,7 +166,7 @@ if test "x$as_myself" = x; then
   as_myself=$0
 fi
 if test ! -f "$as_myself"; then
-  echo "$as_myself: error: cannot find myself; rerun with an absolute file name" >&2
+  $as_echo "$as_myself: error: cannot find myself; rerun with an absolute file name" >&2
   { (exit 1); exit 1; }
 fi
 
@@ -153,17 +179,10 @@ PS2='> '
 PS4='+ '
 
 # NLS nuisances.
-for as_var in \
-  LANG LANGUAGE LC_ADDRESS LC_ALL LC_COLLATE LC_CTYPE LC_IDENTIFICATION \
-  LC_MEASUREMENT LC_MESSAGES LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER \
-  LC_TELEPHONE LC_TIME
-do
-  if (set +x; test -z "`(eval $as_var=C; export $as_var) 2>&1`"); then
-    eval $as_var=C; export $as_var
-  else
-    ($as_unset $as_var) >/dev/null 2>&1 && $as_unset $as_var
-  fi
-done
+LC_ALL=C
+export LC_ALL
+LANGUAGE=C
+export LANGUAGE
 
 # Required to use basename.
 if expr a : '\(a\)' >/dev/null 2>&1 &&
@@ -185,7 +204,7 @@ as_me=`$as_basename -- "$0" ||
 $as_expr X/"$0" : '.*/\([^/][^/]*\)/*$' \| \
 	 X"$0" : 'X\(//\)$' \| \
 	 X"$0" : 'X\(/\)' \| . 2>/dev/null ||
-echo X/"$0" |
+$as_echo X/"$0" |
     sed '/^.*\/\([^/][^/]*\)\/*$/{
 	    s//\1/
 	    q
@@ -517,6 +536,32 @@ func_show_eval ()
     if ${opt_dry_run-false}; then :; else
       eval "$my_cmd"
       my_status=$?
+      if test "$my_status" -eq 0; then :; else
+	eval "(exit $my_status); $my_fail_exp"
+      fi
+    fi
+}
+
+
+# func_show_eval_locale cmd [fail_exp]
+# Unless opt_silent is true, then output CMD.  Then, if opt_dryrun is
+# not true, evaluate CMD.  If the evaluation of CMD fails, and FAIL_EXP
+# is given, then evaluate it.  Use the saved locale for evaluation.
+func_show_eval_locale ()
+{
+    my_cmd="$1"
+    my_fail_exp="${2-:}"
+
+    ${opt_silent-false} || {
+      func_quote_for_expand "$my_cmd"
+      eval "func_echo $func_quote_for_expand_result"
+    }
+
+    if ${opt_dry_run-false}; then :; else
+      eval "$lt_user_locale
+	    $my_cmd"
+      my_status=$?
+      eval "$lt_safe_locale"
       if test "$my_status" -eq 0; then :; else
 	eval "(exit $my_status); $my_fail_exp"
       fi
