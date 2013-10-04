@@ -1,10 +1,11 @@
 #! /bin/sh
+# Generated from libtoolize.m4sh by GNU Autoconf 2.65.
 # @configure_input@
 
 # libtoolize (GNU @PACKAGE@@TIMESTAMP@) @VERSION@
 # Written by Gary V. Vaughan <gary@gnu.org>, 2003
 
-# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -28,29 +29,29 @@
 #
 # Prepare a package to use libtool.
 #
-# -c, --copy            copy files rather than symlinking them
-#     --debug           enable verbose shell tracing
-# -n, --dry-run         print commands rather than running them
-# -f, --force           replace existing files
-# -i, --install         copy missing auxiliary files
-#     --ltdl[=DIR]      install libltdl sources [default: libltdl]
-#     --no-warn         don't display warning messages
-#     --nonrecursive    prepare ltdl for non-recursive make
-# -q, --quiet           work silently
-#     --recursive       prepare ltdl for recursive make
-#     --subproject      prepare ltdl to configure and build independently
-# -v, --verbose         verbosely report processing
-#     --version         print version information and exit
-# -h, --help            print short or long help message
+#   -c, --copy          copy files rather than symlinking them
+#       --debug         enable verbose shell tracing
+#   -n, --dry-run       print commands rather than running them
+#   -f, --force         replace existing files
+#   -i, --install       copy missing auxiliary files
+#       --ltdl[=DIR]    install libltdl sources [default: libltdl]
+#       --no-warn       don't display warning messages
+#       --nonrecursive  prepare ltdl for non-recursive make
+#   -q, --quiet         work silently
+#       --recursive     prepare ltdl for recursive make
+#       --subproject    prepare ltdl to configure and build independently
+#   -v, --verbose       verbosely report processing
+#       --version       print version information and exit
+#   -h, --help          print short or long help message
 #
 # The following space or comma delimited options can be passed to $progname
 # via the environment variable LIBTOOLIZE_OPTIONS, unknown environment
 # options are ignored:
 #
-#     --debug           enable verbose shell tracing
-#     --no-warn         don't display warning messages
-#     --quiet           work silently
-#     --verbose         verbosely report processing
+#   --debug             enable verbose shell tracing
+#   --no-warn           don't display warning messages
+#   --quiet             work silently
+#   --verbose           verbosely report processing
 #
 # You must `cd' to the top directory of your package before you run
 # `$progname'.
@@ -69,13 +70,20 @@
 
 PROGRAM=libtoolize
 
-## --------------------- ##
-## M4sh Initialization.  ##
-## --------------------- ##
+# Work around backward compatibility issue on IRIX 6.5. On IRIX 6.4+, sh
+# is ksh but when the shell is invoked as "sh" and the current value of
+# the _XPG environment variable is not equal to 1 (one), the special
+# positional parameter $0, within a function call, is the name of the
+# function.
+progpath="$0"
+
+## -------------------- ##
+## M4sh Initialization. ##
+## -------------------- ##
 
 # Be more Bourne compatible
 DUALCASE=1; export DUALCASE # for MKS sh
-if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
+if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then :
   emulate sh
   NULLCMD=:
   # Pre-4.2 versions of Zsh do word splitting on ${1+"$@"}, which
@@ -83,22 +91,14 @@ if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
   alias -g '${1+"$@"}'='"$@"'
   setopt NO_GLOB_SUBST
 else
-  case `(set -o) 2>/dev/null` in
-  *posix*) set -o posix ;;
+  case `(set -o) 2>/dev/null` in #(
+  *posix*) :
+    set -o posix ;; #(
+  *) :
+     ;;
 esac
-
 fi
 
-
-
-
-# PATH needs CR
-# Avoid depending upon Character Ranges.
-as_cr_letters='abcdefghijklmnopqrstuvwxyz'
-as_cr_LETTERS='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-as_cr_Letters=$as_cr_letters$as_cr_LETTERS
-as_cr_digits='0123456789'
-as_cr_alnum=$as_cr_Letters$as_cr_digits
 
 as_nl='
 '
@@ -107,7 +107,13 @@ export as_nl
 as_echo='\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
 as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo
 as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo$as_echo
-if (test "X`printf %s $as_echo`" = "X$as_echo") 2>/dev/null; then
+# Prefer a ksh shell builtin over an external printf program on Solaris,
+# but without wasting forks for bash or zsh.
+if test -z "$BASH_VERSION$ZSH_VERSION" \
+    && (test "X`print -r -- $as_echo`" = "X$as_echo") 2>/dev/null; then
+  as_echo='print -r --'
+  as_echo_n='print -rn --'
+elif (test "X`printf %s $as_echo`" = "X$as_echo") 2>/dev/null; then
   as_echo='printf %s\n'
   as_echo_n='printf %s'
 else
@@ -118,7 +124,7 @@ else
     as_echo_body='eval expr "X$1" : "X\\(.*\\)"'
     as_echo_n_body='eval
       arg=$1;
-      case $arg in
+      case $arg in #(
       *"$as_nl"*)
 	expr "X$arg" : "X\\(.*\\)$as_nl";
 	arg=`expr "X$arg" : ".*$as_nl\\(.*\\)"`;;
@@ -141,13 +147,6 @@ if test "${PATH_SEPARATOR+set}" != set; then
   }
 fi
 
-# Support unset when possible.
-if ( (MAIL=60; unset MAIL) || exit) >/dev/null 2>&1; then
-  as_unset=unset
-else
-  as_unset=false
-fi
-
 
 # IFS
 # We need space, tab and new line, in precisely that order.  Quoting is
@@ -157,15 +156,15 @@ fi
 IFS=" ""	$as_nl"
 
 # Find who we are.  Look in the path if we contain no directory separator.
-case $0 in
+case $0 in #((
   *[\\/]* ) as_myself=$0 ;;
   *) as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
 for as_dir in $PATH
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
-  test -r "$as_dir/$0" && as_myself=$as_dir/$0 && break
-done
+    test -r "$as_dir/$0" && as_myself=$as_dir/$0 && break
+  done
 IFS=$as_save_IFS
 
      ;;
@@ -177,12 +176,16 @@ if test "x$as_myself" = x; then
 fi
 if test ! -f "$as_myself"; then
   $as_echo "$as_myself: error: cannot find myself; rerun with an absolute file name" >&2
-  { (exit 1); exit 1; }
+  exit 1
 fi
 
-# Work around bugs in pre-3.0 UWIN ksh.
-for as_var in ENV MAIL MAILPATH
-do ($as_unset $as_var) >/dev/null 2>&1 && $as_unset $as_var
+# Unset variables that we do not need and which cause bugs (e.g. in
+# pre-3.0 UWIN ksh).  But do not cause bugs in bash 2.01; the "|| exit 1"
+# suppresses any "Segmentation fault" message there.  '((' could
+# trigger a bug in pdksh 5.2.14.
+for as_var in BASH_ENV ENV MAIL MAILPATH
+do eval test x\${$as_var+set} = xset \
+  && ( (unset $as_var) || exit 1) >/dev/null 2>&1 && unset $as_var || :
 done
 PS1='$ '
 PS2='> '
@@ -194,52 +197,137 @@ export LC_ALL
 LANGUAGE=C
 export LANGUAGE
 
-# Required to use basename.
-if expr a : '\(a\)' >/dev/null 2>&1 &&
-   test "X`expr 00001 : '.*\(...\)'`" = X001; then
-  as_expr=expr
-else
-  as_expr=false
-fi
-
-if (basename -- /) >/dev/null 2>&1 && test "X`basename -- / 2>&1`" = "X/"; then
-  as_basename=basename
-else
-  as_basename=false
-fi
-
-
-# Name of the executable.
-as_me=`$as_basename -- "$0" ||
-$as_expr X/"$0" : '.*/\([^/][^/]*\)/*$' \| \
-	 X"$0" : 'X\(//\)$' \| \
-	 X"$0" : 'X\(/\)' \| . 2>/dev/null ||
-$as_echo X/"$0" |
-    sed '/^.*\/\([^/][^/]*\)\/*$/{
-	    s//\1/
-	    q
-	  }
-	  /^X\/\(\/\/\)$/{
-	    s//\1/
-	    q
-	  }
-	  /^X\/\(\/\).*/{
-	    s//\1/
-	    q
-	  }
-	  s/.*/./; q'`
-
 # CDPATH.
-$as_unset CDPATH
+(unset CDPATH) >/dev/null 2>&1 && unset CDPATH
 
-$as_unset CDPATH
+if test "x$CONFIG_SHELL" = x; then
+  as_bourne_compatible="if test -n \"\${ZSH_VERSION+set}\" && (emulate sh) >/dev/null 2>&1; then :
+  emulate sh
+  NULLCMD=:
+  # Pre-4.2 versions of Zsh do word splitting on \${1+\"\$@\"}, which
+  # is contrary to our usage.  Disable this feature.
+  alias -g '\${1+\"\$@\"}'='\"\$@\"'
+  setopt NO_GLOB_SUBST
+else
+  case \`(set -o) 2>/dev/null\` in #(
+  *posix*) :
+    set -o posix ;; #(
+  *) :
+     ;;
+esac
+fi
+"
+  as_required="as_fn_return () { (exit \$1); }
+as_fn_success () { as_fn_return 0; }
+as_fn_failure () { as_fn_return 1; }
+as_fn_ret_success () { return 0; }
+as_fn_ret_failure () { return 1; }
+
+exitcode=0
+as_fn_success || { exitcode=1; echo as_fn_success failed.; }
+as_fn_failure && { exitcode=1; echo as_fn_failure succeeded.; }
+as_fn_ret_success || { exitcode=1; echo as_fn_ret_success failed.; }
+as_fn_ret_failure && { exitcode=1; echo as_fn_ret_failure succeeded.; }
+if ( set x; as_fn_ret_success y && test x = \"\$1\" ); then :
+
+else
+  exitcode=1; echo positional parameters were not saved.
+fi
+test x\$exitcode = x0 || exit 1"
+  as_suggested=""
+  if (eval "$as_required") 2>/dev/null; then :
+  as_have_required=yes
+else
+  as_have_required=no
+fi
+  if test x$as_have_required = xyes && (eval "$as_suggested") 2>/dev/null; then :
+
+else
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+as_found=false
+for as_dir in /bin$PATH_SEPARATOR/usr/bin$PATH_SEPARATOR$PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  as_found=:
+  case $as_dir in #(
+	 /*)
+	   for as_base in sh bash ksh sh5; do
+	     # Try only shells that exist, to save several forks.
+	     as_shell=$as_dir/$as_base
+	     if { test -f "$as_shell" || test -f "$as_shell.exe"; } &&
+		    { $as_echo "$as_bourne_compatible""$as_required" | as_run=a "$as_shell"; } 2>/dev/null; then :
+  CONFIG_SHELL=$as_shell as_have_required=yes
+		   break 2
+fi
+	   done;;
+       esac
+  as_found=false
+done
+$as_found || { if { test -f "$SHELL" || test -f "$SHELL.exe"; } &&
+	      { $as_echo "$as_bourne_compatible""$as_required" | as_run=a "$SHELL"; } 2>/dev/null; then :
+  CONFIG_SHELL=$SHELL as_have_required=yes
+fi; }
+IFS=$as_save_IFS
+
+
+      if test "x$CONFIG_SHELL" != x; then :
+  # We cannot yet assume a decent shell, so we have to provide a
+	# neutralization value for shells without unset; and this also
+	# works around shells that cannot unset nonexistent variables.
+	BASH_ENV=/dev/null
+	ENV=/dev/null
+	(unset BASH_ENV) >/dev/null 2>&1 && unset BASH_ENV ENV
+	export CONFIG_SHELL
+	exec "$CONFIG_SHELL" "$as_myself" ${1+"$@"}
+fi
+
+    if test x$as_have_required = xno; then :
+  $as_echo "$0: This script requires a shell more modern than all"
+  $as_echo "$0: the shells that I found on your system."
+  if test x${ZSH_VERSION+set} = xset ; then
+    $as_echo "$0: In particular, zsh $ZSH_VERSION has bugs and should"
+    $as_echo "$0: be upgraded to zsh 4.3.4 or later."
+  else
+    $as_echo "$0: Please tell bug-autoconf@gnu.org about your system,
+$0: including any error possibly output before this
+$0: message. Then install a modern shell, or manually run
+$0: the script under such a shell if you do have one."
+  fi
+  exit 1
+fi
+fi
+fi
+SHELL=${CONFIG_SHELL-/bin/sh}
+export SHELL
+# Unset more variables known to interfere with behavior of common tools.
+CLICOLOR_FORCE= GREP_OPTIONS=
+unset CLICOLOR_FORCE GREP_OPTIONS
+
+## --------------------- ##
+## M4sh Shell Functions. ##
+## --------------------- ##
+# as_fn_unset VAR
+# ---------------
+# Portably unset VAR.
+as_fn_unset ()
+{
+  { eval $1=; unset $1;}
+}
+as_unset=as_fn_unset
+## -------------------- ##
+## Main body of script. ##
+## -------------------- ##
+
+
+
 
 
 
 
 
 : ${CP="cp -f"}
-: ${ECHO="echo"}
+test "${ECHO+set}" = set || ECHO=${as_echo-'printf %s\n'}
 : ${EGREP="@EGREP@"}
 : ${FGREP="@FGREP@"}
 : ${GREP="@GREP@"}
@@ -283,32 +371,168 @@ basename="s,^.*/,,"
 func_dirname_and_basename ()
 {
   # Extract subdirectory from the argument.
-  func_dirname_result=`$ECHO "X${1}" | $Xsed -e "$dirname"`
+  func_dirname_result=`$ECHO "${1}" | $SED -e "$dirname"`
   if test "X$func_dirname_result" = "X${1}"; then
     func_dirname_result="${3}"
   else
     func_dirname_result="$func_dirname_result${2}"
   fi
-  func_basename_result=`$ECHO "X${1}" | $Xsed -e "$basename"`
+  func_basename_result=`$ECHO "${1}" | $SED -e "$basename"`
 }
 
 # Generated shell functions inserted here.
 
-# Work around backward compatibility issue on IRIX 6.5. On IRIX 6.4+, sh
-# is ksh but when the shell is invoked as "sh" and the current value of
-# the _XPG environment variable is not equal to 1 (one), the special
-# positional parameter $0, within a function call, is the name of the
-# function.
-progpath="$0"
+# These SED scripts presuppose an absolute path with a trailing slash.
+pathcar='s,^/\([^/]*\).*$,\1,'
+pathcdr='s,^/[^/]*,,'
+removedotparts=':dotsl
+		s@/\./@/@g
+		t dotsl
+		s,/\.$,/,'
+collapseslashes='s@/\{1,\}@/@g'
+finalslash='s,/*$,/,'
+
+# func_normal_abspath PATH
+# Remove doubled-up and trailing slashes, "." path components,
+# and cancel out any ".." path components in PATH after making
+# it an absolute path.
+#             value returned in "$func_normal_abspath_result"
+func_normal_abspath ()
+{
+  # Start from root dir and reassemble the path.
+  func_normal_abspath_result=
+  func_normal_abspath_tpath=$1
+  func_normal_abspath_altnamespace=
+  case $func_normal_abspath_tpath in
+    "")
+      # Empty path, that just means $cwd.
+      func_stripname '' '/' "`pwd`"
+      func_normal_abspath_result=$func_stripname_result
+      return
+    ;;
+    # The next three entries are used to spot a run of precisely
+    # two leading slashes without using negated character classes;
+    # we take advantage of case's first-match behaviour.
+    ///*)
+      # Unusual form of absolute path, do nothing.
+    ;;
+    //*)
+      # Not necessarily an ordinary path; POSIX reserves leading '//'
+      # and for example Cygwin uses it to access remote file shares
+      # over CIFS/SMB, so we conserve a leading double slash if found.
+      func_normal_abspath_altnamespace=/
+    ;;
+    /*)
+      # Absolute path, do nothing.
+    ;;
+    *)
+      # Relative path, prepend $cwd.
+      func_normal_abspath_tpath=`pwd`/$func_normal_abspath_tpath
+    ;;
+  esac
+  # Cancel out all the simple stuff to save iterations.  We also want
+  # the path to end with a slash for ease of parsing, so make sure
+  # there is one (and only one) here.
+  func_normal_abspath_tpath=`$ECHO "$func_normal_abspath_tpath" | $SED \
+        -e "$removedotparts" -e "$collapseslashes" -e "$finalslash"`
+  while :; do
+    # Processed it all yet?
+    if test "$func_normal_abspath_tpath" = / ; then
+      # If we ascended to the root using ".." the result may be empty now.
+      if test -z "$func_normal_abspath_result" ; then
+        func_normal_abspath_result=/
+      fi
+      break
+    fi
+    func_normal_abspath_tcomponent=`$ECHO "$func_normal_abspath_tpath" | $SED \
+        -e "$pathcar"`
+    func_normal_abspath_tpath=`$ECHO "$func_normal_abspath_tpath" | $SED \
+        -e "$pathcdr"`
+    # Figure out what to do with it
+    case $func_normal_abspath_tcomponent in
+      "")
+        # Trailing empty path component, ignore it.
+      ;;
+      ..)
+        # Parent dir; strip last assembled component from result.
+        func_dirname "$func_normal_abspath_result"
+        func_normal_abspath_result=$func_dirname_result
+      ;;
+      *)
+        # Actual path component, append it.
+        func_normal_abspath_result=$func_normal_abspath_result/$func_normal_abspath_tcomponent
+      ;;
+    esac
+  done
+  # Restore leading double-slash if one was found on entry.
+  func_normal_abspath_result=$func_normal_abspath_altnamespace$func_normal_abspath_result
+}
+
+# func_relative_path SRCDIR DSTDIR
+# generates a relative path from SRCDIR to DSTDIR, with a trailing
+# slash if non-empty, suitable for immediately appending a filename
+# without needing to append a separator.
+#             value returned in "$func_relative_path_result"
+func_relative_path ()
+{
+  func_relative_path_result=
+  func_normal_abspath "$1"
+  func_relative_path_tlibdir=$func_normal_abspath_result
+  func_normal_abspath "$2"
+  func_relative_path_tbindir=$func_normal_abspath_result
+
+  # Ascend the tree starting from libdir
+  while :; do
+    # check if we have found a prefix of bindir
+    case $func_relative_path_tbindir in
+      $func_relative_path_tlibdir)
+        # found an exact match
+        func_relative_path_tcancelled=
+        break
+        ;;
+      $func_relative_path_tlibdir*)
+        # found a matching prefix
+        func_stripname "$func_relative_path_tlibdir" '' "$func_relative_path_tbindir"
+        func_relative_path_tcancelled=$func_stripname_result
+        if test -z "$func_relative_path_result"; then
+          func_relative_path_result=.
+        fi
+        break
+        ;;
+      *)
+        func_dirname $func_relative_path_tlibdir
+        func_relative_path_tlibdir=${func_dirname_result}
+        if test "x$func_relative_path_tlibdir" = x ; then
+          # Have to descend all the way to the root!
+          func_relative_path_result=../$func_relative_path_result
+          func_relative_path_tcancelled=$func_relative_path_tbindir
+          break
+        fi
+        func_relative_path_result=../$func_relative_path_result
+        ;;
+    esac
+  done
+
+  # Now calculate path; take care to avoid doubling-up slashes.
+  func_stripname '' '/' "$func_relative_path_result"
+  func_relative_path_result=$func_stripname_result
+  func_stripname '/' '/' "$func_relative_path_tcancelled"
+  if test "x$func_stripname_result" != x ; then
+    func_relative_path_result=${func_relative_path_result}/${func_stripname_result}
+  fi
+
+  # Normalisation. If bindir is libdir, return empty string,
+  # else relative path ending with a slash; either way, target
+  # file name can be directly appended.
+  if test ! -z "$func_relative_path_result"; then
+    func_stripname './' '' "$func_relative_path_result/"
+    func_relative_path_result=$func_stripname_result
+  fi
+}
 
 # The name of this program:
-# In the unlikely event $progname began with a '-', it would play havoc with
-# func_echo (imagine progname=-n), so we prepend ./ in that case:
 func_dirname_and_basename "$progpath"
 progname=$func_basename_result
-case $progname in
-  -*) progname=./$progname ;;
-esac
 
 # Make sure we have an absolute path for reexecution:
 case $progpath in
@@ -382,6 +606,13 @@ func_verbose ()
     :
 }
 
+# func_echo_all arg...
+# Invoke $ECHO with all args, space-separated.
+func_echo_all ()
+{
+    $ECHO "$*"
+}
+
 # func_error arg...
 # Echo program name prefixed message to standard error.
 func_error ()
@@ -450,9 +681,9 @@ func_mkdir_p ()
         case $my_directory_path in */*) ;; *) break ;; esac
 
         # ...otherwise throw away the child directory and loop
-        my_directory_path=`$ECHO "X$my_directory_path" | $Xsed -e "$dirname"`
+        my_directory_path=`$ECHO "$my_directory_path" | $SED -e "$dirname"`
       done
-      my_dir_list=`$ECHO "X$my_dir_list" | $Xsed -e 's,:*$,,'`
+      my_dir_list=`$ECHO "$my_dir_list" | $SED 's,:*$,,'`
 
       save_mkdir_p_IFS="$IFS"; IFS=':'
       for my_dir in $my_dir_list; do
@@ -502,7 +733,7 @@ func_mktempdir ()
         func_fatal_error "cannot create temporary directory \`$my_tmpdir'"
     fi
 
-    $ECHO "X$my_tmpdir" | $Xsed
+    $ECHO "$my_tmpdir"
 }
 
 
@@ -516,7 +747,7 @@ func_quote_for_eval ()
 {
     case $1 in
       *[\\\`\"\$]*)
-	func_quote_for_eval_unquoted_result=`$ECHO "X$1" | $Xsed -e "$sed_quote_subst"` ;;
+	func_quote_for_eval_unquoted_result=`$ECHO "$1" | $SED "$sed_quote_subst"` ;;
       *)
         func_quote_for_eval_unquoted_result="$1" ;;
     esac
@@ -543,7 +774,7 @@ func_quote_for_expand ()
 {
     case $1 in
       *[\\\`\"]*)
-	my_arg=`$ECHO "X$1" | $Xsed \
+	my_arg=`$ECHO "$1" | $SED \
 	    -e "$double_quote_subst" -e "$sed_double_backslash"` ;;
       *)
         my_arg="$1" ;;
@@ -614,13 +845,19 @@ func_show_eval_locale ()
 
 
 
-
-
 # func_version
 # Echo version message to standard output and exit.
 func_version ()
 {
-    $SED -n '/^# '$PROGRAM' (GNU /,/# warranty; / {
+    $SED -n '/(C)/!b go
+	:more
+	/\./!{
+	  N
+	  s/\n# //
+	  b more
+	}
+	:go
+	/^# '$PROGRAM' (GNU /,/# warranty; / {
         s/^# //
 	s/^# *$//
         s/\((C)\)[ 0-9,-]*\( [1-9][0-9]*\)/\1\2/
@@ -633,19 +870,20 @@ func_version ()
 # Echo short help message to standard output and exit.
 func_usage ()
 {
-    $SED -n '/^# Usage:/,/# -h/ {
+    $SED -n '/^# Usage:/,/^#  *.*--help/ {
         s/^# //
 	s/^# *$//
 	s/\$progname/'$progname'/
 	p
     }' < "$progpath"
-    $ECHO
+    echo
     $ECHO "run \`$progname --help | more' for full usage"
     exit $?
 }
 
-# func_help
-# Echo long help message to standard output and exit.
+# func_help [NOEXIT]
+# Echo long help message to standard output and exit,
+# unless 'noexit' is passed as argument.
 func_help ()
 {
     $SED -n '/^# Usage:/,/# Report bugs to/ {
@@ -662,7 +900,10 @@ func_help ()
 	s/\$autoconf_version/'"`(autoconf --version) 2>/dev/null |$SED 1q`"'/
 	p
      }' < "$progpath"
-    exit $?
+    ret=$?
+    if test -z "$1"; then
+      exit $ret
+    fi
 }
 
 # func_missing_arg argname
@@ -670,7 +911,7 @@ func_help ()
 # exit_cmd.
 func_missing_arg ()
 {
-    func_error "missing argument for $1"
+    func_error "missing argument for $1."
     exit_cmd=exit
 }
 
@@ -774,11 +1015,11 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
 
       --dry-run|-n)	if $opt_dry_run; then :; else
 			  opt_dry_run=:
-			  RM="$ECHO $RM"
-			  test -n "$LN_S" && LN_S="$ECHO $LN_S"
-			  CP="$ECHO $CP"
-			  MKDIR="$ECHO $MKDIR"
-			  TAR="$ECHO $TAR"
+			  RM="func_echo_all $RM"
+			  test -n "$LN_S" && LN_S="func_echo_all $LN_S"
+			  CP="func_echo_all $CP"
+			  MKDIR="func_echo_all $MKDIR"
+			  TAR="func_echo_all $TAR"
 			fi
 			;;
 
@@ -787,10 +1028,10 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
       --install|-i)	opt_install=: ;;
 
       --ltdl)		opt_ltdl=:
-      			if test "$#" -gt 0; then
+			if test "$#" -gt 0; then
 			  case $1 in
 			    -*)	;;
-			    *)	ltdldir=`$ECHO "X$1" | $Xsed -e 's,/*$,,'`
+			    *)	ltdldir=`$ECHO "$1" | $SED 's,/*$,,'`
 				shift
 				;;
 			  esac
@@ -800,7 +1041,7 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
       --no-warn)	opt_warning=false ;;
 
       --nonrecursive|--non-recursive)
-      			ltdl_mode=nonrecursive
+			ltdl_mode=nonrecursive
 			;;
 
       --quiet|--automake|-q) # --automake is for 1.5 compatibility
@@ -815,24 +1056,24 @@ all_pkgltdl_files="COPYING.LIB Makefile Makefile.in Makefile.inc Makefile.am REA
 
       # Separate optargs to long options:
       --*=*)
-      			arg=`$ECHO "X$opt" | $Xsed -e "$my_sed_long_arg"`
-			opt=`$ECHO "X$opt" | $Xsed -e "$my_sed_long_opt"`
+			arg=`$ECHO "$opt" | $SED "$my_sed_long_arg"`
+			opt=`$ECHO "$opt" | $SED "$my_sed_long_opt"`
 			set dummy "$opt" "$arg" ${1+"$@"}
 			shift
 			;;
 
       # Separate optargs to short options:
       #-X*)
-      #			arg=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_rest"`
-      #			opt=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_opt"`
+      #			arg=`$ECHO "$opt" | $SED "$my_sed_single_rest"`
+      #			opt=`$ECHO "$opt" | $SED "$my_sed_single_opt"`
       #			set dummy "$opt" "$arg" ${1+"$@"}
       #			shift
       #			;;
 
       # Separate non-argument short options:
       -c*|-f*|-i*|-n*|-q*|-v*)
-			rest=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_rest"`
-			opt=`$ECHO "X$opt" | $Xsed -e "$my_sed_single_opt"`
+			rest=`$ECHO "$opt" | $SED "$my_sed_single_rest"`
+			opt=`$ECHO "$opt" | $SED "$my_sed_single_opt"`
 			set dummy "$opt" "-$rest" ${1+"$@"}
 			shift
 			;;
@@ -875,22 +1116,25 @@ func_copy ()
     test -f "$1" || \
       { func_error "\`$1' not copied:  not a regular file"; return 1; }
 
-    my_f1=`$ECHO "X$1" | $Xsed -e "$basename"`
+    func_dirname_and_basename "$1"
+    my_f1=$func_basename_result
 
     if test -d "$2"; then
 
       func_copy_cb "$my_f1" \
-	`$ECHO "X$1" | $Xsed -e "$dirname"` "$2" "$3"
+	`$ECHO "$1" | $SED "$dirname"` "$2" "$3"
 
     else
 
       # Supporting this would mean changing the timestamp:
-      test "X$my_f1" = X`$ECHO "X$2" | $Xsed -e "$basename"` \
+      func_dirname_and_basename "$2"
+      my_tname=$func_basename_result
+      test "X$my_f1" = "X$my_tname" \
         || func_fatal_error "func_copy() cannot change filename on copy"
 
       func_copy_cb "$my_f1" \
-        `$ECHO "X$1" | $Xsed -e "$dirname"` \
-        `$ECHO "X$2" | $Xsed -e "$dirname"` \
+        `$ECHO "$1" | $SED "$dirname"` \
+        `$ECHO "$2" | $SED "$dirname"` \
 	"$3"
 
     fi
@@ -920,7 +1164,7 @@ func_copy_cb ()
       false) my_copy_msg="file \`$my_destdir/$my_file'"     ;;
       *)     my_copy_msg="file from \`$my_srcdir/$my_file'" ;;
     esac
-    func_mkdir_p `$ECHO "X$my_destdir/$my_file" | $Xsed -e "$dirname"`
+    func_mkdir_p `$ECHO "$my_destdir/$my_file" | $SED "$dirname"`
 
     $RM "$my_destdir/$my_file"
     if $opt_link; then
@@ -977,7 +1221,7 @@ func_copy_some_files ()
         if test "X$my_copy_cb" = Xfunc_copy_cb; then
 	  $opt_force || if test -f "$my_destdir/$my_filename"; then
 	    $opt_quiet || func_echo_once "$my_msg_var"
-  	    $opt_quiet \
+	    $opt_quiet \
 	      || func_error "\`$my_destdir/$my_filename' exists: use \`--force' to overwrite"
 	    continue
 	  fi
@@ -1017,7 +1261,7 @@ func_fixup_Makefile ()
 	my_fixup_inc_paths_script= ;;
       Makefile.inc)
 	repl=$ltdldir
-	repl_uscore=`$ECHO "X$repl" | $Xsed -e 's,[/.+-],_,g'`
+	repl_uscore=`$ECHO "$repl" | $SED 's,[/.+-],_,g'`
 	my_fixup_inc_paths_script="\
 	  s,libltdl_,@repl_uscore@_,
 	  s,libltdl/,@repl@/,
@@ -1082,14 +1326,15 @@ func_scan_files ()
     # ---------------------------------------------------- #
 
     my_sed_traces='s,#.*$,,; s,^dnl .*$,,; s, dnl .*$,,
-        s,^.*AC_REQUIRE(.*$,,; s,^.*m4_require(.*$,,; s,^.*m4_define(.*$,,
+        s,^.*AC_REQUIRE(.*$,,; s,^.*m4_require(.*$,,;
+	s,^.*m4_define(.*$,,
 	s,^.*A[CU]_DEFUN(.*$,,; s,^.*m4_defun(.*$,,
-    	/AC_CONFIG_AUX_DIR(/ {
-	    s,^.*AC_CONFIG_AUX_DIR([[ 	]*\([^])]*\).*$,ac_auxdir=\1,
+	/AC_CONFIG_AUX_DIR(/ {
+	    s,^.*AC_CONFIG_AUX_DIR([[	 ]*\([^])]*\).*$,ac_auxdir=\1,
 	    p
         }
-    	/AC_CONFIG_MACRO_DIR(/ {
-	    s,^.*AC_CONFIG_MACRO_DIR([[ 	]*\([^])]*\).*$,ac_macrodir=\1,
+	/AC_CONFIG_MACRO_DIR(/ {
+	    s,^.*AC_CONFIG_MACRO_DIR([[	 ]*\([^])]*\).*$,ac_macrodir=\1,
 	    p
         }
 	/_LT_CONFIG_LTDL_DIR(/d
@@ -1104,14 +1349,14 @@ func_scan_files ()
 	}
 	/the.*option into.*LT_INIT.*parameter/d
 	/\[LT_INIT/d
-	/LT_INIT/	     	 {
+	/LT_INIT/		 {
 	    s,^.*$,seen_libtool=:,
 	    p
 	}
 	/\[LTDL_INIT/d
 	/LTDL_INIT/          {
-	    s,^.*LTDL_INIT([[ 	]*\([^])]*\).*$,ltdl_options="\1",
-	    s,^.*LTDL_INIT[ 	]*$,seen_ltdl=:,
+	    s,^.*LTDL_INIT([[	 ]*\([^])]*\).*$,ltdl_options="\1",
+	    s,^.*LTDL_INIT[	 ]*$,seen_ltdl=:,
 	    p
 	}
 	/LT_WITH_LTDL/       {
@@ -1134,7 +1379,7 @@ func_scan_files ()
     # Validate ltdldir. #
     # ----------------- #
 
-    ac_ltdldir=`$ECHO "X$ac_ltdldir" | $Xsed -e 's,/*$,,'`
+    ac_ltdldir=`$ECHO "$ac_ltdldir" | $SED 's,/*$,,'`
 
     # If $configure_ac contains AC_CONFIG_LTDL_DIR, check that its
     # arguments were not given in terms of a shell variable!
@@ -1235,8 +1480,8 @@ func_scan_files ()
     # Hunt for ACLOCAL_AMFLAGS in `Makefile.am' for a `-I' argument.
 
     my_sed_aclocal_flags='
-        /^[ 	]*ACLOCAL_[A-Z_]*FLAGS[ 	]*=/ {
-	    s,^[^=]*=[ 	]*\(.*\), \1,
+        /^[	 ]*ACLOCAL_[A-Z_]*FLAGS[	 ]*=/ {
+	    s,^[^=]*=[	 ]*\(.*\), \1,
 	    q
 	}
 	d'
@@ -1281,7 +1526,7 @@ func_included_files ()
         d'
 
     if test -f "$my_searchfile"; then
-      $ECHO "X$my_searchfile" | $Xsed
+      $ECHO "$my_searchfile"
 
       # Only recurse when we don't care if all the variables we use get
       # trashed, since they are in global scope.
@@ -1301,7 +1546,7 @@ func_serial ()
     my_filename="$1"
     my_macro_regex="$2"
     my_sed_serial='
-	/^# serial [1-9][0-9.]*[ 	]*'"$my_macro_regex"'[ 	]*$/ {
+	/^# serial [1-9][0-9.]*[	 ]*'"$my_macro_regex"'[	 ]*$/ {
 	    s,^# serial \([1-9][0-9.]*\).*$,\1,
 	    q
 	}
@@ -1310,10 +1555,12 @@ func_serial ()
     # Search FILENAME and all the files it m4_includes for a serial number
     # in the file that AC_DEFUNs MACRO_REGEX.
     my_serial=
+    func_dirname_and_basename "$my_filename"
+    my_filebase=$func_basename_result
     for my_file in `func_included_files "$my_filename"`; do
       if test -z "$my_macro_regex" ||
          test "$my_filename" = aclocal.m4 ||
-         test "$my_macro_regex" = `echo "$my_filename" | $SED "$basename"` ||
+         test "X$my_macro_regex" = "X$my_filebase" ||
          func_grep '^AC_DEFUN(\['"$my_macro_regex" "$my_file"
       then
         my_serial=`$SED -e "$my_sed_serial" "$my_file"`
@@ -1324,7 +1571,7 @@ func_serial ()
     # If the file has no serial number, we assume it's ancient.
     test -n "$my_serial" || my_serial=0
 
-    $ECHO $my_serial
+    $ECHO "$my_serial"
 }
 
 
@@ -1345,14 +1592,14 @@ func_serial_max ()
     # Incase they turn out to be the same, we'll set it to empty
     func_serial_max_result=
 
-    test "X$1$2" = X`$ECHO "X$1$2" | $Xsed -e "$my_sed_digits"` || {
+    test "X$1$2" = X`$ECHO "$1$2" | $SED "$my_sed_digits"` || {
       func_error "serial numbers \`$1' or \`$2' contain non-digit chars"
       return
     }
 
     while test -n "$my_serial1$my_serial2"; do
-      my_serial1_part=`$ECHO "X$my_serial1" | $Xsed -e "$my_sed_dot"`
-      my_serial2_part=`$ECHO "X$my_serial2" | $Xsed -e "$my_sed_dot"`
+      my_serial1_part=`$ECHO "$my_serial1" | $SED "$my_sed_dot"`
+      my_serial2_part=`$ECHO "$my_serial2" | $SED "$my_sed_dot"`
 
       test -z "$my_serial1_part$my_serial2_part" \
         && break
@@ -1369,8 +1616,8 @@ func_serial_max ()
       test "$my_serial2_part" -gt "$my_serial1_part" \
         && { func_serial_max_result="$2"; break; }
 
-      my_serial1=`$ECHO "X$my_serial1" | $Xsed -e "$my_sed_rest"`
-      my_serial2=`$ECHO "X$my_serial2" | $Xsed -e "$my_sed_rest"`
+      my_serial1=`$ECHO "$my_serial1" | $SED "$my_sed_rest"`
+      my_serial2=`$ECHO "$my_serial2" | $SED "$my_sed_rest"`
     done
 }
 
@@ -1580,7 +1827,7 @@ func_ltmain_update ()
     $opt_debug
     my_sed_ltmain='
 	/^package_revision='\''*[0-9][1-9.]*'\''*/ {
-	    s,^package_revision='\''*\([0-9.]*\)'\''*[ 	]*$,\1,
+	    s,^package_revision='\''*\([0-9.]*\)'\''*[	 ]*$,\1,
 	    p
 	}
 	d'
@@ -1621,6 +1868,7 @@ func_install_update ()
     $opt_debug
     my_sed_install='
 	/^scriptversion='\''*[0-9][1-9.-]*'\''*/ {
+	    s,[#;].*,,
 	    s,^scriptversion='\''*\([0-9.-]*\)'\''*,\1,
 	    s/-/./g
 	    p
@@ -1645,7 +1893,8 @@ func_massage_aclocal_DATA ()
 
     # Massage a value for pkgmacro_files from the value used in Makefile.am.
     for my_filename in @aclocal_DATA@; do
-      my_filename=`$ECHO "X$my_filename" | $Xsed -e "$basename"`
+      func_dirname_and_basename "$my_filename"
+      my_filename=$func_basename_result
 
       # ignore excluded filenames
       if test -n "$my_glob_exclude"; then
@@ -1658,7 +1907,7 @@ func_massage_aclocal_DATA ()
     done
 
     # strip spurious leading `:'
-    pkgmacro_files=`$ECHO "X$pkgmacro_files" | $Xsed -e 's,^:*,,'`
+    pkgmacro_files=`$ECHO "$pkgmacro_files" | $SED 's,^:*,,'`
 }
 
 
@@ -1804,7 +2053,7 @@ func_massage_pkgltdl_files ()
     done
 
     # strip spurious leading `:'
-    pkgltdl_files=`$ECHO "X$pkgltdl_files" | $Xsed -e 's,^:*,,'`
+    pkgltdl_files=`$ECHO "$pkgltdl_files" | $SED 's,^:*,,'`
 }
 
 
@@ -1882,7 +2131,7 @@ func_massage_pkgconfig_files ()
     done
 
     # strip spurious leading `:'
-    pkgconfig_files=`$ECHO "X$pkgconfig_files" | $Xsed -e 's,^:*,,'`
+    pkgconfig_files=`$ECHO "$pkgconfig_files" | $SED 's,^:*,,'`
 }
 
 
@@ -1993,7 +2242,7 @@ func_nonemptydir_p ()
 
     # Is it a directory at all?
     test -d "$my_dir" \
-      || func_fatal_error "\$$my_dirvar not a directory: \`$my_dir'"
+      || func_fatal_error "\$$my_dirvar is not a directory: \`$my_dir'"
 
     # check that the directories contents can be ls'ed
     test -n "`{ cd $my_dir && ls; } 2>/dev/null`" \

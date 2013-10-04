@@ -1,7 +1,7 @@
 #! /bin/sh
-# bootstrap -- Helps bootstrapping libtool, when checked out from CVS.
+# bootstrap -- Helps bootstrapping libtool, when checked out from repository.
 #
-#   Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc,
+#   Copyright (C) 2003, 2004, 2005, 2006, 2009 Free Software Foundation, Inc,
 #   Mritten by Gary V. Vaughan, 2003
 #
 #   This file is part of GNU Libtool.
@@ -47,7 +47,7 @@ export SHELL
 case $1 in
 --help|-h*)
   cat <<EOF
-`echo $0 | sed 's,^.*/,,g'`: This script is designed to bootstrap a fresh CVS checkout
+`echo $0 | sed 's,^.*/,,g'`: This script is designed to bootstrap a fresh repository checkout
 of Libtool.  Useful environment variable settings:
   reconfdirs='. libltdl'     Do not bootstrap the old test suite.
   WORKING_LIBOBJ_SUPPORT=:   Declare that you have fixed LIBOBJDIR support
@@ -132,9 +132,9 @@ $SED '/^if /,/^endif$/d;/^else$/,/^endif$/d;/^include /d' $makes > Makefile
 # configure, and ltversion.m4 to generate configure in the first place:
 rm -f $auxdir/ltmain.sh $m4dir/ltversion.m4
 
-$MAKE ./$auxdir/ltmain.sh ./$m4dir/ltversion.m4 ./doc/notes.txt \
+$MAKE ./$auxdir/ltmain.sh ./$m4dir/ltversion.m4 \
     ./libtoolize.in ./tests/defs.in ./tests/package.m4 \
-    ./tests/testsuite ./libltdl/Makefile.am \
+    ./tests/testsuite ./libltdl/Makefile.am ./doc/notes.txt \
     srcdir=. top_srcdir=. PACKAGE="$2" VERSION="$3" \
     PACKAGE_BUGREPORT="bug-$2@gnu.org" M4SH="$AUTOM4TE --language=m4sh" \
     AUTOTEST="$AUTOM4TE --language=autotest" SED="$SED" MAKEINFO="$MAKEINFO" \
@@ -149,7 +149,7 @@ rm -f Makefile
 # Make a dummy libtoolize script for autoreconf:
 cat > $auxdir/libtoolize <<'EOF'
 #! /bin/sh
-# This is a dummy file for bootstrapping CVS libtool.
+# This is a dummy file for bootstrapping libtool.
 echo "$0: Bootstrap detected, no files installed." | sed 's,^.*/,,g'
 exit 0
 EOF
@@ -182,6 +182,13 @@ rm -f Makefile libltdl/Makefile libtool vcl.tmp
 # and earlier, but has a new enough timestamp to not be updated.  Force it
 # to be regenerated at make-time with proper substitutions in place:
 touch $auxdir/ltmain.m4sh
+
+for macro in LT_INIT AC_PROG_LIBTOOL AM_PROG_LIBTOOL; do
+  if grep $macro aclocal.m4 libltdl/aclocal.m4; then
+    echo "Bogus $macro macro contents in an aclocal.m4 file." >&2
+    exit 1
+  else :; fi
+done
 
 # Commit script caveat:
 cat <<EOF

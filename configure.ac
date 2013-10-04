@@ -23,13 +23,13 @@
 ####
 
 
-AC_PREREQ(2.59)dnl We use AS_HELP_STRING
+AC_PREREQ(2.62)dnl Some m4sh scripts use $as_echo
 dnl Oldest automake required for bootstrap is below in AM_INIT_AUTOMAKE.
 
 ## ------------------------ ##
 ## Autoconf initialisation. ##
 ## ------------------------ ##
-AC_INIT([libtool], [2.2.6], [bug-libtool@gnu.org])
+AC_INIT([libtool], [2.2.8], [bug-libtool@gnu.org])
 AC_CONFIG_HEADERS([config.h:config-h.in])
 AC_CONFIG_SRCDIR([libtoolize.in])
 LT_CONFIG_LTDL_DIR([libltdl], [nonrecursive])
@@ -204,6 +204,10 @@ AM_CONDITIONAL(HAVE_FC,[test -n "[$]_LT_TAGVAR(compiler, FC)"])
 AM_CONDITIONAL(HAVE_GCJ, [test -n "[$]_LT_TAGVAR(compiler, GCJ)"])
 AM_CONDITIONAL(HAVE_RC, [test -n "[$]_LT_TAGVAR(compiler, RC)"])
 
+## ------------- ##
+## Documentation ##
+## ------------- ##
+AM_MISSING_PROG([HELP2MAN], [help2man])
 
 ## -------- ##
 ## Outputs. ##

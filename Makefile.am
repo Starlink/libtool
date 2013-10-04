@@ -1,7 +1,7 @@
 ## Makefile.am -- Process this file with automake to produce Makefile.in
 ##
-##   Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008  Free Software
-##   Foundation, Inc.
+##   Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010  Free
+##   Software Foundation, Inc.
 ##   Written by Gary V. Vaughan, 2003
 ##
 ##   This file is part of GNU Libtool.
@@ -31,11 +31,12 @@ AM_LDFLAGS		=
 DIST_SUBDIRS		= .
 EXTRA_DIST		=
 
-BUILT_SOURCES		= libtool
+BUILT_SOURCES		= libtool libtoolize
 
 CLEANFILES		=
 MOSTLYCLEANFILES	=
 DISTCLEANFILES		=
+MAINTAINERCLEANFILES	=
 
 include_HEADERS		=
 noinst_LTLIBRARIES	=
@@ -144,7 +145,8 @@ EXTRA_DIST     += bootstrap $(srcdir)/libtoolize.in $(auxdir)/ltmain.m4sh \
 		  ChangeLog.1996 ChangeLog.1997 ChangeLog.1998 \
 		  ChangeLog.1999 ChangeLog.2000 ChangeLog.2001 \
 		  ChangeLog.2002 ChangeLog.2003 ChangeLog.2004 \
-		  ChangeLog.2005 ChangeLog.2006 ChangeLog.2007
+		  ChangeLog.2005 ChangeLog.2006 ChangeLog.2007 \
+		  ChangeLog.2008 ChangeLog.2009
 CLEANFILES     += libtool libtoolize libtoolize.tmp \
 		  $(auxdir)/ltmain.tmp $(m4dir)/ltversion.tmp
 
@@ -329,6 +331,16 @@ $(srcdir)/doc/notes.txt: $(srcdir)/doc/notes.texi
 	cd $(srcdir)/doc && \
 	  $(MAKEINFO) --no-headers $(MAKEINFOFLAGS) -o notes.txt notes.texi
 
+dist_man1_MANS		= $(srcdir)/doc/libtool.1 $(srcdir)/doc/libtoolize.1
+MAINTAINERCLEANFILES	+= $(dist_man1_MANS)
+update_mans = \
+  PATH=.$(PATH_SEPARATOR)$$PATH; export PATH; \
+  $(HELP2MAN) --output=$@
+$(srcdir)/doc/libtool.1: $(srcdir)/$(auxdir)/ltmain.sh
+	$(update_mans) --help-option=--help-all libtool
+$(srcdir)/doc/libtoolize.1: $(srcdir)/libtoolize.in
+	$(update_mans) libtoolize
+
 
 ## ------------- ##
 ## Installation. ##
@@ -422,6 +434,13 @@ dist-hook:
 	case $(VERSION) in \
 	  *[a-z]) cp -p $(srcdir)/README.alpha $(distdir)/README ;; \
 	esac; else :; fi
+## Ensure aclocal has not wrongly picked up old macro definitions.
+	for macro in LT_INIT AC_PROG_LIBTOOL AM_PROG_LIBTOOL; do \
+	  if grep $$macro $(srcdir)/aclocal.m4 $(srcdir)/libltdl/aclocal.m4; then \
+	    echo "Bogus $$macro macro contents in an aclocal.m4 file." >&2; \
+	    exit 1; \
+	  else :; fi; \
+	done
 
 
 ## ----------- ##
@@ -432,9 +451,11 @@ dist-hook:
 TESTSUITE	= tests/testsuite
 TESTSUITE_AT	= tests/testsuite.at \
 		  tests/libtoolize.at \
+		  tests/help.at \
 		  tests/duplicate_members.at \
 		  tests/duplicate_conv.at \
 		  tests/duplicate_deps.at \
+		  tests/flags.at \
 		  tests/inherited_flags.at \
 		  tests/convenience.at \
 		  tests/link-order.at \
@@ -448,13 +469,27 @@ TESTSUITE_AT	= tests/testsuite.at \
 		  tests/indirect_deps.at \
 		  tests/archive-in-archive.at \
 		  tests/execute-mode.at \
+		  tests/bindir.at \
+		  tests/cwrapper.at \
+		  tests/deplib-in-subdir.at \
+		  tests/infer-tag.at \
 		  tests/localization.at \
+		  tests/install.at \
+		  tests/versioning.at \
 		  tests/destdir.at \
 		  tests/old-m4-iface.at \
 		  tests/am-subdir.at \
 		  tests/lt_dlexit.at \
 		  tests/lt_dladvise.at \
+		  tests/lt_dlopen.at \
+		  tests/lt_dlopen_a.at \
+		  tests/lt_dlopenext.at \
 		  tests/ltdl-api.at \
+		  tests/dlloader-api.at \
+		  tests/loadlibrary.at \
+		  tests/lalib-syntax.at \
+		  tests/resident.at \
+		  tests/slist.at \
 		  tests/need_lib_prefix.at \
 		  tests/standalone.at \
 		  tests/subproject.at \
@@ -462,12 +497,15 @@ TESTSUITE_AT	= tests/testsuite.at \
 		  tests/recursive.at \
 		  tests/template.at \
 		  tests/ctor.at \
+		  tests/exceptions.at \
 		  tests/early-libtool.at \
+		  tests/no-executables.at \
 		  tests/deplibs-ident.at \
 		  tests/configure-iface.at \
 		  tests/stresstest.at \
 		  tests/cmdline_wrap.at \
-		  tests/darwin.at
+		  tests/darwin.at \
+		  tests/deplibs-mingw.at
 
 EXTRA_DIST     += $(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) $(srcdir)/tests/package.m4
 
@@ -475,7 +513,7 @@ EXTRA_DIST     += $(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) $(srcdir)/tests/package
 TESTS_ENVIRONMENT = MAKE="$(MAKE)" CC="$(CC)" CFLAGS="$(CFLAGS)" \
 	CPP="$(CPP)" CPPFLAGS="$(CPPFLAGS)" LD="$(LD)" LDFLAGS="$(LDFLAGS)" \
 	LIBS="$(LIBS)" LN_S="$(LN_S)" NM="$(NM)" RANLIB="$(RANLIB)" \
-	STRIP="$(STRIP)" \
+	STRIP="$(STRIP)" lt_INSTALL="$(INSTALL)" \
 	OBJEXT="$(OBJEXT)" EXEEXT="$(EXEEXT)" \
 	SHELL="$(SHELL)" CONFIG_SHELL="$(SHELL)" \
 	CXX="$(CXX)" CXXFLAGS="$(CXXFLAGS)" CXXCPP="$(CXXCPP)" \
@@ -519,18 +557,37 @@ DISTCLEANFILES += tests/atconfig
 
 CD_TESTDIR	= abs_srcdir=`$(lt__cd) $(srcdir) && pwd`; cd tests
 
+testsuite_deps = tests/atconfig $(srcdir)/$(TESTSUITE)
+testsuite_deps_uninstalled = $(testsuite_deps) libltdl/libltdlc.la $(bin_SCRIPTS)
+
 # Hook the test suite into the check rule
-check-local: tests/atconfig $(srcdir)/$(TESTSUITE) libltdl/libltdlc.la $(bin_SCRIPTS)
+check-local: $(testsuite_deps_uninstalled)
 	$(CD_TESTDIR); \
 	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
 	  $(TESTS_ENVIRONMENT) $(BUILDCHECK_ENVIRONMENT) $(TESTSUITEFLAGS)
 
 # Run the test suite on the *installed* tree.
-installcheck-local: tests/atconfig $(srcdir)/$(TESTSUITE)
+installcheck-local: $(testsuite_deps)
 	$(CD_TESTDIR); \
 	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
 	  $(TESTS_ENVIRONMENT) $(INSTALLCHECK_ENVIRONMENT) $(TESTSUITEFLAGS) \
 	  AUTOTEST_PATH="$(exec_prefix)/bin"
+
+# Run only noninteractive parts of the new testsuite.
+check-noninteractive: $(testsuite_deps_uninstalled)
+	$(CD_TESTDIR); \
+	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
+	  $(TESTS_ENVIRONMENT) $(BUILDCHECK_ENVIRONMENT) \
+	  -k !interactive INNER_TESTSUITEFLAGS=",!interactive" \
+	  $(TESTSUITEFLAGS)
+
+# Run only interactive parts of the new testsuite.
+check-interactive: $(testsuite_deps_uninstalled)
+	$(CD_TESTDIR); \
+	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
+	  $(TESTS_ENVIRONMENT) $(BUILDCHECK_ENVIRONMENT) \
+	  -k interactive -k recursive INNER_TESTSUITEFLAGS=",interactive" \
+	  $(TESTSUITEFLAGS)
 
 # We need to remove any file droppings left behind by testsuite
 clean-local: clean-local-legacy
