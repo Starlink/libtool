@@ -279,10 +279,6 @@ as_unset=as_fn_unset
 
 
 
-
-
-
-
 : ${CP="cp -f"}
 test "${ECHO+set}" = set || ECHO=${as_echo-'printf %s\n'}
 : ${EGREP="@EGREP@"}
@@ -799,7 +795,6 @@ func_show_eval_locale ()
       fi
     fi
 }
-
 
 
 

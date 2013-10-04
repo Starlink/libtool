@@ -953,7 +953,7 @@ fi
 # List of tests.
 if $at_list_p; then
   cat <<_ATEOF || at_write_fail=1
-libtool 2.2.8 test suite test groups:
+libtool 2.2.10 test suite test groups:
 
  NUM: FILE-NAME:LINE     TEST-GROUP-NAME
       KEYWORDS
@@ -1002,7 +1002,7 @@ _ATEOF
   exit $at_write_fail
 fi
 if $at_version_p; then
-  $as_echo "$as_me (libtool 2.2.8)" &&
+  $as_echo "$as_me (libtool 2.2.10)" &&
   cat <<\_ATEOF || at_write_fail=1
 
 Copyright (C) 2009 Free Software Foundation, Inc.
@@ -1236,15 +1236,15 @@ exec 5>>"$at_suite_log"
 
 # Banners and logs.
 cat <<\_ASBOX
-## ------------------------- ##
-## libtool 2.2.8 test suite. ##
-## ------------------------- ##
+## -------------------------- ##
+## libtool 2.2.10 test suite. ##
+## -------------------------- ##
 _ASBOX
 {
   cat <<\_ASBOX
-## ------------------------- ##
-## libtool 2.2.8 test suite. ##
-## ------------------------- ##
+## -------------------------- ##
+## libtool 2.2.10 test suite. ##
+## -------------------------- ##
 _ASBOX
   echo
 
@@ -2120,7 +2120,7 @@ _ASBOX
   $as_echo "Please send $at_msg and all information you think might help:
 
    To: <bug-libtool@gnu.org>
-   Subject: [libtool 2.2.8] $as_me: $at_fail_list${at_fail_list:+ failed${at_xpass_list:+, }}$at_xpass_list${at_xpass_list:+ passed unexpectedly}
+   Subject: [libtool 2.2.10] $as_me: $at_fail_list${at_fail_list:+ failed${at_xpass_list:+, }}$at_xpass_list${at_xpass_list:+ passed unexpectedly}
 
 You may investigate any problem if you feel able to do so, in which
 case the test suite provides a good starting point.  Its output may
@@ -2149,7 +2149,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2214,7 +2214,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2276,7 +2276,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2509,7 +2509,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2798,7 +2798,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -2905,7 +2905,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -3019,7 +3019,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -3135,7 +3135,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -3188,7 +3188,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 LT_INIT
 AC_OUTPUT
@@ -3239,7 +3239,7 @@ $at_traceon; }
 ## --------------------------------------- ##
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -3439,7 +3439,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 LT_INIT
 AC_OUTPUT
 _ATEOF
@@ -3711,7 +3711,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
@@ -3840,7 +3840,7 @@ _ATEOF
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([acm4])
@@ -3893,7 +3893,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -4025,7 +4025,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtoolize-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtoolize-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
@@ -11934,6 +11934,7 @@ _ATEOF
 inst=`pwd`/inst
 libdir=$inst/lib
 bindir=$inst/bin
+LDFLAGS="$LDFLAGS -no-undefined"
 mkdir $inst $libdir $bindir
 
 for file in liba1.c liba2.c liba3.c liba4.c libb.c; do
@@ -11947,28 +11948,28 @@ done
 
 # Hypothesis: -version-info is ignored for convenience archives.
 { set +x
-$as_echo "$at_srcdir/versioning.at:118: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0" "versioning.at:118"
+$as_echo "$at_srcdir/versioning.at:119: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0" "versioning.at:119"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; tee stderr <"$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:118"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:119"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:120: grep 'version-info.*ignored for convenience' stderr"
-at_fn_check_prepare_trace "versioning.at:120"
+$as_echo "$at_srcdir/versioning.at:121: grep 'version-info.*ignored for convenience' stderr"
+at_fn_check_prepare_trace "versioning.at:121"
 ( $at_check_trace; grep 'version-info.*ignored for convenience' stderr
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:120"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:121"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -11977,15 +11978,15 @@ $at_traceon; }
 # Be sure not to use zero here, it's not portable.
 for version_number in 1 1:1 2:1 1:1:1 3:2:1; do
   { set +x
-$as_echo "$at_srcdir/versioning.at:125: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	   -version-number \$version_number -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-number $version_number -rpath $libdir" "versioning.at:125"
+$as_echo "$at_srcdir/versioning.at:126: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	   -version-number \$version_number -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-number $version_number -rpath $libdir" "versioning.at:126"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-number $version_number -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:125"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:126"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -11997,15 +11998,15 @@ done
 # for `version_type's of `irix', `nonstopux', or `osf'.
 for version_info in 1 1:2 0:0:0 1:1:1 13:241:7; do
   { set +x
-$as_echo "$at_srcdir/versioning.at:134: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	   -version-info \$version_info -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-info $version_info -rpath $libdir" "versioning.at:134"
+$as_echo "$at_srcdir/versioning.at:135: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	   -version-info \$version_info -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-info $version_info -rpath $libdir" "versioning.at:135"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-info $version_info -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:134"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:135"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12013,28 +12014,28 @@ done
 
 # Hypothesis: we diagnose when AGE is higher than CURRENT.
 { set +x
-$as_echo "$at_srcdir/versioning.at:139: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	 -version-info 1:3:2 -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 1:3:2 -rpath $libdir" "versioning.at:139"
+$as_echo "$at_srcdir/versioning.at:140: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	 -version-info 1:3:2 -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 1:3:2 -rpath $libdir" "versioning.at:140"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 1:3:2 -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; tee stderr <"$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 1 $at_status "$at_srcdir/versioning.at:139"
+at_fn_check_status 1 $at_status "$at_srcdir/versioning.at:140"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:141: grep 'AGE.*is greater than' stderr"
-at_fn_check_prepare_trace "versioning.at:141"
+$as_echo "$at_srcdir/versioning.at:142: grep 'AGE.*is greater than' stderr"
+at_fn_check_prepare_trace "versioning.at:142"
 ( $at_check_trace; grep 'AGE.*is greater than' stderr
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:141"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:142"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12042,15 +12043,15 @@ $at_traceon; }
 # Hypothesis: we diagnose invalid values.
 for version_info in 1:2:3:4 -1 0:-1 0:0:-1; do
   { set +x
-$as_echo "$at_srcdir/versioning.at:145: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	   -version-info \$version_info -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-info $version_info -rpath $libdir" "versioning.at:145"
+$as_echo "$at_srcdir/versioning.at:146: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	   -version-info \$version_info -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-info $version_info -rpath $libdir" "versioning.at:146"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	   -version-info $version_info -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 1 $at_status "$at_srcdir/versioning.at:145"
+at_fn_check_status 1 $at_status "$at_srcdir/versioning.at:146"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12065,38 +12066,40 @@ test_uninstalled ()
 {
   # temporarily move installed libraries out of the way in order to avoid
   # skewing test results:
-  mv $libdir temp
+  mv $libdir temp-lib
+  mv $bindir temp-bin
   lt_exe=./prog1; if test -f "./prog1$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
 { set +x
-$as_echo "$at_srcdir/versioning.at:159: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
-at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:159"
+$as_echo "$at_srcdir/versioning.at:161: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
+at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:161"
 ( $at_check_trace; if "$lt_exe" ; then :; else lt_status=$?; 	   	   test "X$host" != "X$build" && test -x "$lt_exe" && exit 77; 	   exit $lt_status; fi
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 at_fn_diff_devnull "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:159"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:161"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
   lt_exe=./prog2; if test -f "./prog2$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
 { set +x
-$as_echo "$at_srcdir/versioning.at:160: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
-at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:160"
+$as_echo "$at_srcdir/versioning.at:162: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
+at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:162"
 ( $at_check_trace; if "$lt_exe" ; then :; else lt_status=$?; 	   	   test "X$host" != "X$build" && test -x "$lt_exe" && exit 77; 	   exit $lt_status; fi
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 at_fn_diff_devnull "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:160"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:162"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-  mv temp $libdir
+  mv temp-lib $libdir
+  mv temp-bin $bindir
 }
 
 test_installed ()
@@ -12106,30 +12109,30 @@ test_installed ()
   mv $objdir temp
   lt_exe=$bindir/prog1; if test -f "$bindir/prog1$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
 { set +x
-$as_echo "$at_srcdir/versioning.at:169: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
-at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:169"
+$as_echo "$at_srcdir/versioning.at:172: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
+at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:172"
 ( $at_check_trace; if "$lt_exe" ; then :; else lt_status=$?; 	   	   test "X$host" != "X$build" && test -x "$lt_exe" && exit 77; 	   exit $lt_status; fi
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 at_fn_diff_devnull "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:169"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:172"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
   lt_exe=$bindir/prog2; if test -f "$bindir/prog2$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
 { set +x
-$as_echo "$at_srcdir/versioning.at:170: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
-at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:170"
+$as_echo "$at_srcdir/versioning.at:173: if \"\$lt_exe\" ; then :; else lt_status=\$?; 	   	   test \"X\$host\" != \"X\$build\" && test -x \"\$lt_exe\" && exit 77; 	   exit \$lt_status; fi"
+at_fn_check_prepare_dynamic "if \"$lt_exe\" ; then :; else lt_status=$?; 	   	   test \"X$host\" != \"X$build\" && test -x \"$lt_exe\" && exit 77; 	   exit $lt_status; fi" "versioning.at:173"
 ( $at_check_trace; if "$lt_exe" ; then :; else lt_status=$?; 	   	   test "X$host" != "X$build" && test -x "$lt_exe" && exit 77; 	   exit $lt_status; fi
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 at_fn_diff_devnull "$at_stderr" || at_failed=:
 at_fn_diff_devnull "$at_stdout" || at_failed=:
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:170"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:173"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12138,62 +12141,48 @@ $at_traceon; }
 }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:174: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0 -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0 -rpath $libdir" "versioning.at:174"
+$as_echo "$at_srcdir/versioning.at:177: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0 -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0 -rpath $libdir" "versioning.at:177"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba1.lo 	 -version-info 0:0:0 -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:174"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:177"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:176: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o libb.la libb.lo liba.la 	 -version-info 0:0:0 -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o libb.la libb.lo liba.la 	 -version-info 0:0:0 -rpath $libdir" "versioning.at:176"
+$as_echo "$at_srcdir/versioning.at:179: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o libb.la libb.lo liba.la 	 -version-info 0:0:0 -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o libb.la libb.lo liba.la 	 -version-info 0:0:0 -rpath $libdir" "versioning.at:179"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o libb.la libb.lo liba.la 	 -version-info 0:0:0 -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:176"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:179"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:178: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o prog1\$EXEEXT prog1.\$OBJEXT 	 liba.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o prog1$EXEEXT prog1.$OBJEXT 	 liba.la" "versioning.at:178"
+$as_echo "$at_srcdir/versioning.at:181: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o prog1\$EXEEXT prog1.\$OBJEXT 	 liba.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o prog1$EXEEXT prog1.$OBJEXT 	 liba.la" "versioning.at:181"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o prog1$EXEEXT prog1.$OBJEXT 	 liba.la
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:178"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:181"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:180: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o prog2\$EXEEXT prog2.\$OBJEXT 	 libb.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o prog2$EXEEXT prog2.$OBJEXT 	 libb.la" "versioning.at:180"
+$as_echo "$at_srcdir/versioning.at:183: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o prog2\$EXEEXT prog2.\$OBJEXT 	 libb.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o prog2$EXEEXT prog2.$OBJEXT 	 libb.la" "versioning.at:183"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o prog2$EXEEXT prog2.$OBJEXT 	 libb.la
-) >>"$at_stdout" 2>>"$at_stderr"
-at_status=$? at_failed=false
-$at_check_filter
-echo stderr:; cat "$at_stderr"
-echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:180"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-test_uninstalled
-{ set +x
-$as_echo "$at_srcdir/versioning.at:183: \$LIBTOOL --mode=install cp liba.la libb.la \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la libb.la $libdir" "versioning.at:183"
-( $at_check_trace; $LIBTOOL --mode=install cp liba.la libb.la $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -12203,68 +12192,68 @@ at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:183"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+test_uninstalled
 { set +x
-$as_echo "$at_srcdir/versioning.at:185: \$LIBTOOL --mode=install cp prog1\$EXEEXT prog2\$EXEEXT \$bindir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp prog1$EXEEXT prog2$EXEEXT $bindir" "versioning.at:185"
+$as_echo "$at_srcdir/versioning.at:186: \$LIBTOOL --mode=install cp liba.la libb.la \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la libb.la $libdir" "versioning.at:186"
+( $at_check_trace; $LIBTOOL --mode=install cp liba.la libb.la $libdir
+) >>"$at_stdout" 2>>"$at_stderr"
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:186"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/versioning.at:188: \$LIBTOOL --mode=install cp prog1\$EXEEXT prog2\$EXEEXT \$bindir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp prog1$EXEEXT prog2$EXEEXT $bindir" "versioning.at:188"
 ( $at_check_trace; $LIBTOOL --mode=install cp prog1$EXEEXT prog2$EXEEXT $bindir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:185"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:188"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 { set +x
-$as_echo "$at_srcdir/versioning.at:187: \$LIBTOOL --mode=clean rm -f liba.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:187"
+$as_echo "$at_srcdir/versioning.at:190: \$LIBTOOL --mode=clean rm -f liba.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:190"
 ( $at_check_trace; $LIBTOOL --mode=clean rm -f liba.la
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:187"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:190"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 test_installed
 { set +x
-$as_echo "$at_srcdir/versioning.at:189: \$LIBTOOL --mode=uninstall rm -f \$libdir/liba.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=uninstall rm -f $libdir/liba.la" "versioning.at:189"
+$as_echo "$at_srcdir/versioning.at:192: \$LIBTOOL --mode=uninstall rm -f \$libdir/liba.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=uninstall rm -f $libdir/liba.la" "versioning.at:192"
 ( $at_check_trace; $LIBTOOL --mode=uninstall rm -f $libdir/liba.la
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:189"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:192"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 
 # Hypothesis: library revision updates do not require (uninstalled
-# nor installed) programs to be relinked.
+# nor installed) programs or libraries to be relinked.
 { set +x
-$as_echo "$at_srcdir/versioning.at:194: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba2.lo 	 -version-info 0:1:0 -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba2.lo 	 -version-info 0:1:0 -rpath $libdir" "versioning.at:194"
+$as_echo "$at_srcdir/versioning.at:197: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba2.lo 	 -version-info 0:1:0 -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba2.lo 	 -version-info 0:1:0 -rpath $libdir" "versioning.at:197"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba2.lo 	 -version-info 0:1:0 -rpath $libdir
-) >>"$at_stdout" 2>>"$at_stderr"
-at_status=$? at_failed=false
-$at_check_filter
-echo stderr:; cat "$at_stderr"
-echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:194"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-test_uninstalled
-{ set +x
-$as_echo "$at_srcdir/versioning.at:197: \$LIBTOOL --mode=install cp liba.la libb.la \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la libb.la $libdir" "versioning.at:197"
-( $at_check_trace; $LIBTOOL --mode=install cp liba.la libb.la $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -12274,16 +12263,30 @@ at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:197"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
+test_uninstalled
 { set +x
-$as_echo "$at_srcdir/versioning.at:199: \$LIBTOOL --mode=clean rm -f liba.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:199"
+$as_echo "$at_srcdir/versioning.at:200: \$LIBTOOL --mode=install cp liba.la \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la $libdir" "versioning.at:200"
+( $at_check_trace; $LIBTOOL --mode=install cp liba.la $libdir
+) >>"$at_stdout" 2>>"$at_stderr"
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:200"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/versioning.at:201: \$LIBTOOL --mode=clean rm -f liba.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:201"
 ( $at_check_trace; $LIBTOOL --mode=clean rm -f liba.la
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:199"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:201"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12291,7 +12294,7 @@ test_installed
 # do not uninstall here: the library may be reused in the next test.
 
 # Hypothesis: backward compatible library updates do not require
-# (uninstalled nor installed) programs to be relinked.
+# (uninstalled nor installed) programs or libraries to be relinked.
 # This can have one of several reasons:
 # - the soname is the difference between $current and $age, thus
 #   unchanged; in this case, the newly installed library will be used,
@@ -12300,36 +12303,23 @@ test_installed
 # - the numbers are not encoded at all, in which case the newly installed
 #   library will be used.
 { set +x
-$as_echo "$at_srcdir/versioning.at:212: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba3.lo 	 -version-info 1:0:1 -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba3.lo 	 -version-info 1:0:1 -rpath $libdir" "versioning.at:212"
+$as_echo "$at_srcdir/versioning.at:214: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba3.lo 	 -version-info 1:0:1 -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba3.lo 	 -version-info 1:0:1 -rpath $libdir" "versioning.at:214"
 ( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba3.lo 	 -version-info 1:0:1 -rpath $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:212"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:214"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 # Do not test the uninstalled program, it may be broken (in the second case).
 { set +x
-$as_echo "$at_srcdir/versioning.at:215: \$LIBTOOL --mode=install cp liba.la libb.la \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la libb.la $libdir" "versioning.at:215"
-( $at_check_trace; $LIBTOOL --mode=install cp liba.la libb.la $libdir
-) >>"$at_stdout" 2>>"$at_stderr"
-at_status=$? at_failed=false
-$at_check_filter
-echo stderr:; cat "$at_stderr"
-echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:215"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-{ set +x
-$as_echo "$at_srcdir/versioning.at:217: \$LIBTOOL --mode=clean rm -f liba.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:217"
-( $at_check_trace; $LIBTOOL --mode=clean rm -f liba.la
+$as_echo "$at_srcdir/versioning.at:217: \$LIBTOOL --mode=install cp liba.la \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la $libdir" "versioning.at:217"
+( $at_check_trace; $LIBTOOL --mode=install cp liba.la $libdir
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -12339,55 +12329,70 @@ at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:217"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-test_installed
-# do not uninstall here: the library may be reused in the next test.
-
-
-# Hypothesis: with shared libraries, incompatible library updates
-# will not cause old installed programs (linked against the old
-# library version) to break.
-# This can have one of several reasons:
-# - the soname has changed, so the old installed library will still be
-#   available,
-# - we are linking statically, so the old library code will still be used.
 { set +x
-$as_echo "$at_srcdir/versioning.at:229: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba4.lo 	 -version-info 2:0:0 -rpath \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba4.lo 	 -version-info 2:0:0 -rpath $libdir" "versioning.at:229"
-( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba4.lo 	 -version-info 2:0:0 -rpath $libdir
-) >>"$at_stdout" 2>>"$at_stderr"
-at_status=$? at_failed=false
-$at_check_filter
-echo stderr:; cat "$at_stderr"
-echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:229"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-# We do not guarantee that old versions of an uninstalled library are still
-# available, so test_uninstalled will not necessarily work here any more.
-{ set +x
-$as_echo "$at_srcdir/versioning.at:233: \$LIBTOOL --mode=install cp liba.la libb.la \$libdir"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la libb.la $libdir" "versioning.at:233"
-( $at_check_trace; $LIBTOOL --mode=install cp liba.la libb.la $libdir
-) >>"$at_stdout" 2>>"$at_stderr"
-at_status=$? at_failed=false
-$at_check_filter
-echo stderr:; cat "$at_stderr"
-echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:233"
-$at_failed && at_fn_log_failure
-$at_traceon; }
-
-{ set +x
-$as_echo "$at_srcdir/versioning.at:235: \$LIBTOOL --mode=clean rm -f liba.la"
-at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:235"
+$as_echo "$at_srcdir/versioning.at:218: \$LIBTOOL --mode=clean rm -f liba.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:218"
 ( $at_check_trace; $LIBTOOL --mode=clean rm -f liba.la
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
 echo stderr:; cat "$at_stderr"
 echo stdout:; cat "$at_stdout"
-at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:235"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:218"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+test_installed
+# do not uninstall here: the library may be reused in the next test.
+
+
+# Hypothesis: with shared libraries, incompatible library updates
+# will not cause old installed programs or libraries (linked against the old
+# library version) to break.
+# This can have one of several reasons:
+# - the soname has changed, so the old installed library will still be
+#   available,
+# - we are linking statically, so the old library code will still be used.
+# In order to be sure we are still linking against the old library version,
+# we must ensure that libb is not relinked, so we must not reinstall libb here.
+{ set +x
+$as_echo "$at_srcdir/versioning.at:232: \$LIBTOOL --mode=link \$CC \$CFLAGS \$LDFLAGS -o liba.la liba4.lo 	 -version-info 2:0:0 -rpath \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba4.lo 	 -version-info 2:0:0 -rpath $libdir" "versioning.at:232"
+( $at_check_trace; $LIBTOOL --mode=link $CC $CFLAGS $LDFLAGS -o liba.la liba4.lo 	 -version-info 2:0:0 -rpath $libdir
+) >>"$at_stdout" 2>>"$at_stderr"
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:232"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+# We do not guarantee that old versions of an uninstalled library are still
+# available, so test_uninstalled will not necessarily work here any more.
+{ set +x
+$as_echo "$at_srcdir/versioning.at:236: \$LIBTOOL --mode=install cp liba.la \$libdir"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=install cp liba.la $libdir" "versioning.at:236"
+( $at_check_trace; $LIBTOOL --mode=install cp liba.la $libdir
+) >>"$at_stdout" 2>>"$at_stderr"
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:236"
+$at_failed && at_fn_log_failure
+$at_traceon; }
+
+{ set +x
+$as_echo "$at_srcdir/versioning.at:237: \$LIBTOOL --mode=clean rm -f liba.la"
+at_fn_check_prepare_dynamic "$LIBTOOL --mode=clean rm -f liba.la" "versioning.at:237"
+( $at_check_trace; $LIBTOOL --mode=clean rm -f liba.la
+) >>"$at_stdout" 2>>"$at_stderr"
+at_status=$? at_failed=false
+$at_check_filter
+echo stderr:; cat "$at_stderr"
+echo stdout:; cat "$at_stdout"
+at_fn_check_status 0 $at_status "$at_srcdir/versioning.at:237"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
@@ -12836,11 +12841,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/old-m4-iface.at:90: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "old-m4-iface.at:90"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/old-m4-iface.at:90: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "old-m4-iface.at:90"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -12850,15 +12854,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/old-m4-iface.at:90"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/old-m4-iface.at:90: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "old-m4-iface.at:90"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/old-m4-iface.at:90: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "old-m4-iface.at:90"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -12868,7 +12870,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/old-m4-iface.at:90"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -13124,11 +13126,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/old-m4-iface.at:160: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --with-included-ltdl"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-included-ltdl" "old-m4-iface.at:160"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-included-ltdl
+{ set +x
+$as_echo "$at_srcdir/old-m4-iface.at:160: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --with-included-ltdl"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "old-m4-iface.at:160"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --with-included-ltdl
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -13138,15 +13139,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/old-m4-iface.at:160"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/old-m4-iface.at:160: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "old-m4-iface.at:160"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/old-m4-iface.at:160: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "old-m4-iface.at:160"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -13156,7 +13155,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/old-m4-iface.at:160"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -13199,7 +13198,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdir-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdir-demo], 2.2.10, bug-libtool@gnu.org)
 AM_INIT_AUTOMAKE
 LT_INIT([win32-dll])
 AC_PROG_CC
@@ -13312,11 +13311,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/am-subdir.at:78: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "am-subdir.at:78"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/am-subdir.at:78: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "am-subdir.at:78"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -13326,15 +13324,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/am-subdir.at:78"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/am-subdir.at:78: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "am-subdir.at:78"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/am-subdir.at:78: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "am-subdir.at:78"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -13344,7 +13340,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/am-subdir.at:78"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -13441,7 +13437,7 @@ $at_traceon; }
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdir-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdir-demo], 2.2.10, bug-libtool@gnu.org)
 AM_INIT_AUTOMAKE
 AC_PROG_CC
 AM_PROG_CC_C_O
@@ -13562,11 +13558,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/am-subdir.at:146: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "am-subdir.at:146"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/am-subdir.at:146: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "am-subdir.at:146"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -13576,15 +13571,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/am-subdir.at:146"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/am-subdir.at:146: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "am-subdir.at:146"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/am-subdir.at:146: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "am-subdir.at:146"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -13594,7 +13587,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/am-subdir.at:146"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -16992,11 +16985,10 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/standalone.at:34: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "standalone.at:34"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/standalone.at:34: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "standalone.at:34"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17006,15 +16998,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:34"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/standalone.at:35: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "standalone.at:35"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/standalone.at:35: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "standalone.at:35"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17024,7 +17014,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:35"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 { set +x
@@ -17078,11 +17068,10 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/standalone.at:49: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "standalone.at:49"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/standalone.at:49: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "standalone.at:49"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17092,15 +17081,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:49"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/standalone.at:50: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "standalone.at:50"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/standalone.at:50: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "standalone.at:50"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17110,7 +17097,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:50"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 { set +x
@@ -17166,11 +17153,10 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/standalone.at:66: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix" "standalone.at:66"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
+{ set +x
+$as_echo "$at_srcdir/standalone.at:66: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "standalone.at:66"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17180,15 +17166,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:66"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all install $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/standalone.at:67: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "standalone.at:67"
-( $at_check_trace; $MAKE $target
+for target in all install $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/standalone.at:67: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "standalone.at:67"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17198,7 +17182,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:67"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 { set +x
@@ -17366,13 +17350,12 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/standalone.at:83: \$MAKE \$target CC=\"\$CC\" LIBTOOLFLAGS=\"\$LIBTOOLFLAGS\" CPPFLAGS=\"\$CPPFLAGS\"         CFLAGS=\"\$CFLAGS\" LDFLAGS=\"\$LDFLAGS\" 	CONFIGURE_OPTIONS=\"\$configure_options\""
-at_fn_check_prepare_dynamic "$MAKE $target CC=\"$CC\" LIBTOOLFLAGS=\"$LIBTOOLFLAGS\" CPPFLAGS=\"$CPPFLAGS\"         CFLAGS=\"$CFLAGS\" LDFLAGS=\"$LDFLAGS\" 	CONFIGURE_OPTIONS=\"$configure_options\"" "standalone.at:83"
-( $at_check_trace; $MAKE $target CC="$CC" LIBTOOLFLAGS="$LIBTOOLFLAGS" CPPFLAGS="$CPPFLAGS"         CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" 	CONFIGURE_OPTIONS="$configure_options"
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/standalone.at:83: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target CC=\"\$CC\" LIBTOOLFLAGS=\"\$LIBTOOLFLAGS\" CPPFLAGS=\"\$CPPFLAGS\"         CFLAGS=\"\$CFLAGS\" LDFLAGS=\"\$LDFLAGS\" 	CONFIGURE_OPTIONS=\"\$configure_options\""
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target CC=\"$CC\" LIBTOOLFLAGS=\"$LIBTOOLFLAGS\" CPPFLAGS=\"$CPPFLAGS\"         CFLAGS=\"$CFLAGS\" LDFLAGS=\"$LDFLAGS\" 	CONFIGURE_OPTIONS=\"$configure_options\"" "standalone.at:83"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target CC="$CC" LIBTOOLFLAGS="$LIBTOOLFLAGS" CPPFLAGS="$CPPFLAGS"         CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" 	CONFIGURE_OPTIONS="$configure_options"
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17382,7 +17365,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/standalone.at:83"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 lt_exe=./ltdldemo; if test -f "./ltdldemo$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
@@ -17424,7 +17407,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subproject-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subproject-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([sub/ltdl])
 AC_CONFIG_AUX_DIR([sub/ltdl/config])
 AC_CONFIG_MACRO_DIR([sub/ltdl/m4])
@@ -17515,11 +17498,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/subproject.at:61: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "subproject.at:61"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/subproject.at:61: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "subproject.at:61"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17529,15 +17511,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:61"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/subproject.at:61: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "subproject.at:61"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/subproject.at:61: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "subproject.at:61"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17547,7 +17527,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:61"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -17588,7 +17568,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subproject-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subproject-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([sub/ltdl])
 AC_CONFIG_AUX_DIR([sub/ltdl/config])
 AC_CONFIG_MACRO_DIR([sub/ltdl/m4])
@@ -17679,11 +17659,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/subproject.at:77: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "subproject.at:77"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/subproject.at:77: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "subproject.at:77"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17693,15 +17672,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:77"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/subproject.at:77: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "subproject.at:77"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/subproject.at:77: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "subproject.at:77"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17711,7 +17688,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:77"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -17754,7 +17731,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 prefix=`pwd`/_inst
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subproject-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subproject-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([sub/ltdl])
 AC_CONFIG_AUX_DIR([sub/ltdl/config])
 AC_CONFIG_MACRO_DIR([sub/ltdl/m4])
@@ -17845,11 +17822,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/subproject.at:95: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix" "subproject.at:95"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
+{ set +x
+$as_echo "$at_srcdir/subproject.at:95: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "subproject.at:95"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17859,15 +17835,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:95"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all install $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/subproject.at:95: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "subproject.at:95"
-( $at_check_trace; $MAKE $target
+for target in all install $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/subproject.at:95: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "subproject.at:95"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -17877,7 +17851,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:95"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -18031,13 +18005,12 @@ EOF
 $LIBTOOLIZE --copy --ltdl=sub/ltdl
 
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/subproject.at:113: \$MAKE \$target CC=\"\$CC\" LIBTOOLFLAGS=\"\$LIBTOOLFLAGS\" CPPFLAGS=\"\$CPPFLAGS\"      CFLAGS=\"\$CFLAGS\" LDFLAGS=\"\$LDFLAGS\" SHELL=\"\$SHELL\" MAKE=\"\${MAKE-make}\"      CONFIGURE_OPTIONS=\"\$configure_options\""
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/subproject.at:113: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target CC=\"\$CC\" LIBTOOLFLAGS=\"\$LIBTOOLFLAGS\" CPPFLAGS=\"\$CPPFLAGS\"      CFLAGS=\"\$CFLAGS\" LDFLAGS=\"\$LDFLAGS\" SHELL=\"\$SHELL\" MAKE=\"\${MAKE-make}\"      CONFIGURE_OPTIONS=\"\$configure_options\""
 at_fn_check_prepare_notrace 'a ${...} parameter expansion' "subproject.at:113"
-( $at_check_trace; $MAKE $target CC="$CC" LIBTOOLFLAGS="$LIBTOOLFLAGS" CPPFLAGS="$CPPFLAGS"      CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" SHELL="$SHELL" MAKE="${MAKE-make}"      CONFIGURE_OPTIONS="$configure_options"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target CC="$CC" LIBTOOLFLAGS="$LIBTOOLFLAGS" CPPFLAGS="$CPPFLAGS"      CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" SHELL="$SHELL" MAKE="${MAKE-make}"      CONFIGURE_OPTIONS="$configure_options"
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18047,7 +18020,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/subproject.at:113"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 lt_exe=./ltdldemo; if test -f "./ltdldemo$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
@@ -18090,7 +18063,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -18236,11 +18209,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/nonrecursive.at:90: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "nonrecursive.at:90"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/nonrecursive.at:90: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nonrecursive.at:90"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18250,15 +18222,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/nonrecursive.at:90"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/nonrecursive.at:90: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "nonrecursive.at:90"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/nonrecursive.at:90: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "nonrecursive.at:90"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18268,7 +18238,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/nonrecursive.at:90"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -18310,7 +18280,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -18456,11 +18426,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/nonrecursive.at:114: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "nonrecursive.at:114"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/nonrecursive.at:114: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nonrecursive.at:114"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18470,15 +18439,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/nonrecursive.at:114"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/nonrecursive.at:114: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "nonrecursive.at:114"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/nonrecursive.at:114: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "nonrecursive.at:114"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18488,7 +18455,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/nonrecursive.at:114"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -18530,7 +18497,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -18678,11 +18645,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/nonrecursive.at:140: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix" "nonrecursive.at:140"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
+{ set +x
+$as_echo "$at_srcdir/nonrecursive.at:140: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "nonrecursive.at:140"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18692,15 +18658,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/nonrecursive.at:140"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all install $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/nonrecursive.at:140: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "nonrecursive.at:140"
-( $at_check_trace; $MAKE $target
+for target in all install $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/nonrecursive.at:140: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "nonrecursive.at:140"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18710,7 +18674,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/nonrecursive.at:140"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -18762,7 +18726,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -18837,11 +18801,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/recursive.at:68: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "recursive.at:68"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/recursive.at:68: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "recursive.at:68"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18851,15 +18814,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/recursive.at:68"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/recursive.at:69: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "recursive.at:69"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/recursive.at:69: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "recursive.at:69"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18869,7 +18830,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/recursive.at:69"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 { set +x
@@ -18907,7 +18868,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -18982,11 +18943,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/recursive.at:88: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "recursive.at:88"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/recursive.at:88: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "recursive.at:88"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -18996,15 +18956,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/recursive.at:88"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/recursive.at:89: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "recursive.at:89"
-( $at_check_trace; $MAKE $target
+for target in all $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/recursive.at:89: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "recursive.at:89"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -19014,7 +18972,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/recursive.at:89"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 { set +x
@@ -19052,7 +19010,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([subdirectory-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([subdirectory-demo], 2.2.10, bug-libtool@gnu.org)
 LT_CONFIG_LTDL_DIR([ltdl])
 AC_CONFIG_AUX_DIR([ltdl/config])
 AC_CONFIG_MACRO_DIR([ltdl/m4])
@@ -19129,11 +19087,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/recursive.at:110: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix" "recursive.at:110"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
+{ set +x
+$as_echo "$at_srcdir/recursive.at:110: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "recursive.at:110"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -19143,15 +19100,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/recursive.at:110"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all install $tst_dist
-  do
-    { set +x
-$as_echo "$at_srcdir/recursive.at:111: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "recursive.at:111"
-( $at_check_trace; $MAKE $target
+for target in all install $tst_dist
+do
+  { set +x
+$as_echo "$at_srcdir/recursive.at:111: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "recursive.at:111"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -19161,7 +19116,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/recursive.at:111"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 { set +x
@@ -20499,7 +20454,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtool-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtool-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 AC_CONFIG_FILES([Makefile])
@@ -20611,11 +20566,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/early-libtool.at:111: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "early-libtool.at:111"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/early-libtool.at:111: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "early-libtool.at:111"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -20625,15 +20579,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/early-libtool.at:111"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/early-libtool.at:112: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "early-libtool.at:112"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/early-libtool.at:112: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "early-libtool.at:112"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -20643,7 +20595,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/early-libtool.at:112"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 lt_exe=./hell; if test -f "./hell$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
@@ -20710,7 +20662,7 @@ echo "#                             -*- compilation -*-" >> "$at_group_log"
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([libtool-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([libtool-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_MACRO_DIR([m4])
 LT_INIT
 LT_OUTPUT
@@ -20835,11 +20787,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/early-libtool.at:218: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "early-libtool.at:218"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/early-libtool.at:218: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "early-libtool.at:218"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -20849,15 +20800,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/early-libtool.at:218"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/early-libtool.at:219: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "early-libtool.at:219"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/early-libtool.at:219: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "early-libtool.at:219"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -20867,7 +20816,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/early-libtool.at:219"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 lt_exe=./hell; if test -f "./hell$EXEEXT"; then lt_exe=$lt_exe$EXEEXT; fi
@@ -21036,11 +20985,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/no-executables.at:75: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "no-executables.at:75"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/no-executables.at:75: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "no-executables.at:75"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21050,13 +20998,11 @@ at_fn_check_status 0 $at_status "$at_srcdir/no-executables.at:75"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/no-executables.at:76: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options test_ac_libtool_dlopen=:"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options test_ac_libtool_dlopen=:" "no-executables.at:76"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options test_ac_libtool_dlopen=:
+{ set +x
+$as_echo "$at_srcdir/no-executables.at:76: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options test_ac_libtool_dlopen=:"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "no-executables.at:76"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options test_ac_libtool_dlopen=:
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21066,7 +21012,6 @@ at_fn_check_status 0 $at_status "$at_srcdir/no-executables.at:76"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
 
   set +x
@@ -21309,7 +21254,7 @@ esac
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([installable-ltdl-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([installable-ltdl-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([libltdl/config])
 AC_CONFIG_MACRO_DIR([libltdl/m4])
 AC_CONFIG_HEADERS([config.h:config.hin])
@@ -21429,11 +21374,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/configure-iface.at:144: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --with-included-ltdl --prefix=\$prefix"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-included-ltdl --prefix=$prefix" "configure-iface.at:144"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-included-ltdl --prefix=$prefix
+{ set +x
+$as_echo "$at_srcdir/configure-iface.at:144: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --with-included-ltdl --prefix=\$prefix"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "configure-iface.at:144"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --with-included-ltdl --prefix=$prefix
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21443,15 +21387,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:144"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all install
-  do
-    { set +x
-$as_echo "$at_srcdir/configure-iface.at:144: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "configure-iface.at:144"
-( $at_check_trace; $MAKE $target
+for target in all install
+do
+  { set +x
+$as_echo "$at_srcdir/configure-iface.at:144: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "configure-iface.at:144"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21461,7 +21403,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:144"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -21541,11 +21483,10 @@ $LIBTOOLIZE --copy --ltdl=ltdl
 
 
 (cd ltdl
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/configure-iface.at:171: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix" "configure-iface.at:171"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
+{ set +x
+$as_echo "$at_srcdir/configure-iface.at:171: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --enable-ltdl-install --prefix=\$prefix"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "configure-iface.at:171"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --enable-ltdl-install --prefix=$prefix
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21555,15 +21496,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:171"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all install
-  do
-    { set +x
-$as_echo "$at_srcdir/configure-iface.at:172: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "configure-iface.at:172"
-( $at_check_trace; $MAKE $target
+for target in all install
+do
+  { set +x
+$as_echo "$at_srcdir/configure-iface.at:172: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "configure-iface.at:172"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21573,7 +21512,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:172"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 )
 
@@ -21682,7 +21621,7 @@ esac
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([configure-iface-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([configure-iface-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_MACRO_DIR([_inst/aclocal])
 AC_CONFIG_HEADERS([config.h:config.hin])
 AM_INIT_AUTOMAKE([foreign])
@@ -21809,11 +21748,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/configure-iface.at:227: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --with-ltdl-lib=\$prefix/lib --with-ltdl-include=\$prefix/include"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-ltdl-lib=$prefix/lib --with-ltdl-include=$prefix/include" "configure-iface.at:227"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-ltdl-lib=$prefix/lib --with-ltdl-include=$prefix/include
+{ set +x
+$as_echo "$at_srcdir/configure-iface.at:227: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --with-ltdl-lib=\$prefix/lib --with-ltdl-include=\$prefix/include"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "configure-iface.at:227"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --with-ltdl-lib=$prefix/lib --with-ltdl-include=$prefix/include
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21823,15 +21761,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:227"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/configure-iface.at:227: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "configure-iface.at:227"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/configure-iface.at:227: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "configure-iface.at:227"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -21841,7 +21777,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:227"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -21963,7 +21899,7 @@ esac
 
 
 cat >configure.ac <<'_ATEOF'
-AC_INIT([configure-iface-demo], 2.2.8, bug-libtool@gnu.org)
+AC_INIT([configure-iface-demo], 2.2.10, bug-libtool@gnu.org)
 AC_CONFIG_AUX_DIR([libltdl/config])
 AC_CONFIG_MACRO_DIR([libltdl/m4])
 AC_CONFIG_HEADERS([config.h:config.hin])
@@ -22080,11 +22016,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/configure-iface.at:282: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options --with-included-ltdl"
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-included-ltdl" "configure-iface.at:282"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options --with-included-ltdl
+{ set +x
+$as_echo "$at_srcdir/configure-iface.at:282: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options --with-included-ltdl"
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "configure-iface.at:282"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options --with-included-ltdl
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -22094,15 +22029,13 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:282"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
-( $unset LIBTOOL LIBTOOLIZE
-  for target in all
-  do
-    { set +x
-$as_echo "$at_srcdir/configure-iface.at:282: \$MAKE \$target "
-at_fn_check_prepare_dynamic "$MAKE $target " "configure-iface.at:282"
-( $at_check_trace; $MAKE $target
+for target in all
+do
+  { set +x
+$as_echo "$at_srcdir/configure-iface.at:282: \$unset LIBTOOL LIBTOOLIZE; \$MAKE \$target "
+at_fn_check_prepare_dynamic "$unset LIBTOOL LIBTOOLIZE; $MAKE $target " "configure-iface.at:282"
+( $at_check_trace; $unset LIBTOOL LIBTOOLIZE; $MAKE $target
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -22112,7 +22045,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:282"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
-  done )
+done
 
 
 
@@ -22241,11 +22174,10 @@ $at_traceon; }
 
 
 
-( SHELL=${CONFIG_SHELL-/bin/sh}
-   { set +x
-$as_echo "$at_srcdir/configure-iface.at:321: CONFIG_SHELL=\$SHELL \$SHELL ./configure \$configure_options "
-at_fn_check_prepare_dynamic "CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options " "configure-iface.at:321"
-( $at_check_trace; CONFIG_SHELL=$SHELL $SHELL ./configure $configure_options
+{ set +x
+$as_echo "$at_srcdir/configure-iface.at:321: : \${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  \$CONFIG_SHELL ./configure \$configure_options "
+at_fn_check_prepare_notrace 'a ${...} parameter expansion' "configure-iface.at:321"
+( $at_check_trace; : ${CONFIG_SHELL=/bin/sh}; export CONFIG_SHELL; 	  $CONFIG_SHELL ./configure $configure_options
 ) >>"$at_stdout" 2>>"$at_stderr"
 at_status=$? at_failed=false
 $at_check_filter
@@ -22255,7 +22187,6 @@ at_fn_check_status 0 $at_status "$at_srcdir/configure-iface.at:321"
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
- )
 
 
 
