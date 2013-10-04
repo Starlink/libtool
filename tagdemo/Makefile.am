@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 ##
-## $Id: Makefile.am,v 1.4 2002/06/01 14:09:50 gary Exp $
+## $Id: Makefile.am,v 1.4.2.1 2006/02/03 09:37:34 rwild Exp $
 
 AUTOMAKE_OPTIONS = no-dependencies foreign
 
@@ -25,6 +25,5 @@ bin_PROGRAMS = tagdemo
 tagdemo_SOURCES = main.cpp
 tagdemo_LDADD = libbaz.la
 
-$(OBJECTS): libtool
 libtool: $(LIBTOOL_DEPS)
 	$(SHELL) ./config.status --recheck

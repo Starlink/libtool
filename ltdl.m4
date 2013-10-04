@@ -1,11 +1,11 @@
 ## ltdl.m4 - Configure ltdl for the target system. -*-Autoconf-*-
-## Copyright (C) 1999-2000 Free Software Foundation, Inc.
+## Copyright (C) 1999-2006 Free Software Foundation, Inc.
 ##
 ## This file is free software; the Free Software Foundation gives
 ## unlimited permission to copy and/or distribute it, with or without
 ## modifications, as long as this notice is preserved.
 
-# serial 7 AC_LIB_LTDL
+# serial 8 AC_LIB_LTDL
 
 # AC_WITH_LTDL
 # ------------
@@ -127,7 +127,10 @@ AC_CACHE_CHECK([whether deplibs are loaded by dlopen],
     # If you are looking for one http://www.opendarwin.org/projects/dlcompat
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;
-  gnu* | linux* | kfreebsd*-gnu | knetbsd*-gnu)
+  freebsd* | dragonfly*)
+    libltdl_cv_sys_dlopen_deplibs=yes
+    ;;
+  gnu* | linux* | k*bsd*-gnu)
     # GNU and its variants, using gnu ld.so (Glibc)
     libltdl_cv_sys_dlopen_deplibs=yes
     ;;

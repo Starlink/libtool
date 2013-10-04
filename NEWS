@@ -1,5 +1,34 @@
 NEWS - list of user-visible changes between releases of GNU Libtool
 
+New in 1.5.24: 2007-06-17; CVS version 1.5.23c, Libtool team:
+* Initial support for Interix newer than version 3.
+* Use getconf ARG_MAX to find the max command line length.
+* Bug Fixes.
+
+New in 1.5.23b: 2007-02-17; CVS version 1.5.23a, Libtool team:
+* New link flag `-static-libtool-libs' to provide the semantics that
+  `-static' had between 1.5 and before 1.5.22.
+* Initial support for RDOS.
+* Fix regression on DragonFly that disabled library hardcoding.
+* Fix regression on OpenBSD, NetBSD, DragonFly, and other systems
+  with hardcode_direct=yes that wrongly removed paths to uninstalled
+  libraries during link mode.
+* Let libltdl know that FreeBSD and DragonFly dlopen causes dependent
+  modules to be loaded.  This fixes excessive load times for modules
+  with large library dependency graphs.
+* Fix error with -version-info on systems with version_type=none, such
+  as BeOS.
+* Initial support for the Sun compiler suite on GNU/Linux.
+* Improved support for GNU/kFreeBSD and GNU/NetBSD.
+* Search paths with GCC on multilib systems like x86_64 have been fixed.
+* The libtool --tag argument which has been supported since version 1.5
+  is documented now.
+* Fix regression in libltdl symbol exports on Cygwin. Side effect:
+  LT_GLOBAL_DATA and LT_SCOPE are now explicitly defined as
+  declspec(dllexport), bypassing auto-export logic on Cygwin.
+  This tracks existing behavior on MinGW.
+* Bug Fixes.
+
 New in 1.5.22: 2005-12-18; CVS version 1.5.21a, Libtool team:
 * Fix 1.5 regression that caused linking a program `-static' to also
   link statically against installed libtool libraries, contrary to
@@ -31,7 +60,7 @@ New in 1.5.20: 2005-08-31; CVS version 1.5.19a, Libtool team:
 * Bug Fixes.
 
 New in 1.5.18: 2005-05-16; CVS version 1.5.17a, Libtool team:
-* Fix regression in 1.5.16 to not install libtldl data files from
+* Fix regression in 1.5.16 to not install libltdl data files from
   `libtoolize --ltdl'ed software packages.
 * Bug Fixes.
 

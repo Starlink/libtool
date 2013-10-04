@@ -1,3 +1,553 @@
+2007-06-23  Peter O'Gorman  <peter@pogma.com>
+
+	GNU libtool 1.5.24 is released.
+
+	* configure.ac: Bump version.
+	* NEWS: Updated.
+	* config.guess, config.sub, install-sh, texinfo.tex, INSTALL:
+	Updated from external sources.
+	* libtool.m4: Bump serial.
+
+2007-06-22  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER) [linux]:
+	Ignore lines in ld.so.conf starting with 'hwcap '.
+
+2007-06-22  Peter O'Gorman  <peter@pogma.com>
+
+	* ltmain.in (version-number) [irix]: Don't subtract 1 from
+	major as it may be less than age.
+
+2007-06-17  Peter O'Gorman  <peter@pogma.com>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_MAX_CMD_LEN): add quotes to
+	the test -n.
+
+2007-06-17  Charles Wilson  <libtool@cwilson.fastmail.fm>
+
+	* libtool.m4 (LT_CMD_MAX_LEN): ensure stderr
+	is redirected even when getconf does not exist.
+
+2007-06-03  Peter O'Gorman  <peter@pogma.com>
+
+	* libtool.m4 (old_archive_cmds): Remove old_deplibs.
+	Reported by Daniel Macks <dmacks@netspace.org>
+
+2007-06-01  Steve Ellcey  <sje@cup.hp.com>
+
+	* libtool.m4 (LT_CMD_MAX_LEN): Try using getconf to set
+	lt_cv_sys_max_cmd_len.
+
+2007-05-28  Peter O'Gorman  <peter@pogma.com>
+
+	* ltmain.in, libtool.m4 [darwin]: Only use ${wl} in verstring
+	with xlc.
+
+2007-05-03  Reuben Thomas  <rrt@sc3d.org>  (tiny change)
+
+	* doc/libtool.texi (Libltdl interface): Fix typo.
+
+2007-04-11  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* NEWS: Mention `-static-libtool-libs'.
+
+2007-04-10  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode) <-no-install> [ darwin ]: Treat like
+	`-no-fast-install', as we cannot hardcode.
+	Report by Simon Josefsson.
+
+	* ltmain.in (execute mode): Do not unset locale variables that
+	have not been set previously.  Do not use uninitialized
+	$lt_unset.  Report by <deckrider@gmail.com>.
+
+2007-04-03  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* doc/libtool.texi (Link mode) <-no-install>: Mention that this
+	still generates a wrapper script on systems without hardcoding.
+	* THANKS: Update.
+	Report by Simon Josefsson.
+
+2007-03-30   Matthieu Herrb  <matthieu.herrb@laas.fr>
+
+	* libtool.m4 (_LT_AC_LANG_CXX_CONFIG, AC_LIBTOOL_PROG_LD_SHLIBS)
+	[ openbsd ]: Add an explicit check for shared libraries support.
+
+2007-03-29  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_LIBTOOL_CONFIG) <fix_srcfile_path>: This
+	variable needs escaping, too.
+	Report by Akim Demaille.
+
+2007-03-18  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* mdemo/Makefile.am (libmlib_la_LDFLAGS): Add
+	`-export-symbols-regex ".*"' because the convenience libltdl
+	uses export markers and thus turns off autoexport on w32.  Fixes
+	test failures for Cygwin and MinGW.
+	Bug analysis by Charles Wilson.
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER)
+	(AC_DEPLIBS_CHECK_METHOD, _LT_AC_LANG_CXX_CONFIG)
+	(AC_LIBTOOL_POSTDEP_PREDEP, AC_LIBTOOL_PROG_COMPILER_PIC)
+	(AC_LIBTOOL_PROG_LD_SHLIBS) [ interix ]: When matching for
+	interix, accept version range [3-9] instead of 3.
+	* NEWS: Update.
+	Report by Martin Koeppe <mkoeppe@gmx.de>.
+
+2007-02-18  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* tests/dryrun.test: ls -l in MSYS sometimes shows year,
+	not time, for really fresh files.  Add sleep 1 calls at
+	strategic places.  Fixes test failure on MinGW.
+
+2007-02-17  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* configure.ac: Bump version.
+	* NEWS: Updated.
+
+2007-02-17  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	GNU libtool 1.5.23b is released.
+
+	* configure.ac: Bump version.  Adjust copyright years.
+	* NEWS: Updated.
+	* config.guess, config.sub, install-sh, texinfo.tex, INSTALL:
+	Updated from external sources.
+	* libtool.m4: Bump serial.
+	* ltdl.m4: Likewise.  Adjust copyright years.
+	* libltdl/Makefile.am: Bump library revision.
+
+2007-02-17  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_LIBTOOL_PROG_LD_SHLIBS) [ linux ]
+	<whole_archive_flag_spec>: For Sun C/C++ 5.9, do not add
+	/dev/null as dummy object, it fails with GNU ld version
+	2.16.91.0.7-amd-sles9.  Report by Terry D. Dontje.
+	* THANKS: Update.
+
+2007-02-11  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (_AS_TEST_PREPARE, AS_EXECUTABLE_P): m4_defun
+	these macros, if undefined, with modified copies from Autoconf
+	2.59.
+	(LT_AC_PROG_SED): Use AS_EXECUTABLE_P, not $as_executable_p,
+	this is an internal Autoconf detail.
+
+	* doc/libtool.texi: Update copyright years.
+
+2007-02-06  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/ltdl.h (LT_CONC) [_AIX]: Use `##'.  AIX 4.3.3 xlc
+	won't define __STDC__ with -qlanglvl=extc89.
+
+2007-02-05  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (_LT_COMPILER_BOILERPLATE, _LT_LINKER_BOILERPLATE)
+	(_LT_AC_SYS_LIBPATH_AIX, AC_LIBTOOL_LINKER_OPTION)
+	(AC_LIBTOOL_PROG_CC_C_O, AC_LIBTOOL_SYS_DYNAMIC_LINKER)
+	(_LT_AC_TAGCONFIG, AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE)
+	(AC_LIBTOOL_PROG_LD_SHLIBS): Require LT_AC_PROG_SED.
+	* THANKS: Update.
+	Report and initial patch by Maciej W. Rozycki.
+
+2007-01-29  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/ltdl.c (lt_dlexit): Fix my bogus backport of Dave
+	Brolley's patch from CVS HEAD.
+
+2007-01-29  Samuel Thibault <samuel.thibault@ens-lyon.org>
+
+	* libtool.m4 (AC_LIBTOOL_PROG_LD_SHLIBS) [ gnu ]
+	<archive_expsym_cmds>: Behave like Linux, so that
+	--version-script is used for Hurd as well.
+
+2007-01-28  Charles Wilson  <libtool@cwilson.fastmail.fm>
+
+	* NEWS: Update for Cygwin changes.
+
+2007-01-28  Dave Brolley  <brolley@redhat.com>
+
+	* libltdl/ltdl.c (lt_dlexit): Make sure that 'cur' is not NULL
+	before checking that it is still in the list.
+
+2007-01-28  Mike Frysinger  <vapier@gentoo.org>
+
+	* ltmain.in (link mode): Pass through `-p' and `-fprofile-*' for
+	GCC.
+
+2007-01-28  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libltdl/ltdl.c, libltdl/ltdl.h: Adjust copyright years.
+
+2007-01-28  Charles Wilson  <libtool@cwilson.fastmail.fm>
+
+	* libltdl/ltdl.c (LT_GLOBAL_DATA) [__CYGWIN__]: Also define on
+	Cygwin.
+	(LT_READTEXT_MODE): Ensure proper textmode fopen is used on
+	Cygwin.
+	* libltdl/ltdl.h (LT_SCOPE) [__CYGWIN__]: Also define on Cygwin.
+
+2007-01-28  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_LIBTOOL_PROG_LD_SHLIBS) [ cygwin, mingw ]
+	<export_symbols_cmds>: Avoid shell expansion of '/s/.*' through
+	double expansion, in case there is a 'S:' drive.
+	Report by Charles Wilson.
+
+2007-01-27  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* doc/libtool.texi (Invoking libtool): Document `--tag'.
+	(Tags): New node, backported from HEAD.
+	(Other languages): Adjust.
+	* NEWS: Update.
+
+2007-01-27  James Su <james.su@gmail.com>
+
+	* libltdl/ltdl.c (lt_dlmutex_register): Fix usage of old unlock
+	function.  Also replace the seterror function.
+	* THANKS: Update.
+
+2007-01-24  Reuben Thomas <rrt@sc3d.org>  (tiny change)
+
+	* doc/libtool.texi (Inter-library dependencies): Fix typo.
+
+2007-01-21  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_LIBTOOL_PROG_LD_SHLIBS) [cygwin, mingw]:
+	Use `lib -OUT' rather than `lib /OUT' to avoid MSYS path
+	translation mangling.  Report by Christopher Hulbert.
+	* THANKS: Update.
+
+	* ltmain.in (compile mode): Accept suffixes matching
+	`[fF][09].', for Fortran.
+	* tests/suffix.test: Also test f90, F90, f95, F95, f03, F03.
+
+	* doc/libtool.texi: Typo fixes.
+	* NEWS: Likewise.
+
+2006-12-10  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (--version): Do not output leading blank line,
+	added inadvertently after 1.5.22.
+	Report by John Vandenberg <jayvdb@gmail.com>.
+
+2006-10-24  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* NEWS: Account for recent fix.
+
+2006-10-22  Peter O'Gorman  <peter@pogma.com>
+
+	* ltmain.in: Add -F* to flags that are passed to the linker.
+	Reported by SIGOURE Benoit <sigoure.benoit@lrde.epita.fr>
+
+2006-10-19  Peter O'Gorman  <peter@pogma.com>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER): Improve multilib
+	support.
+	Reported by Kate Minola <kate01123@gmail.com> and others.
+
+2006-10-17  Peter O'Gorman  <peter@pogma.com>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_LIB_STRIP) [darwin]: Also set
+	old_striplib.
+
+2006-10-13  Eric Blake  <ebb9@byu.net>
+
+	* libltdl/ltdl.c (unload_deplibs, load_deplibs): Avoid memory
+	leaks.
+
+2006-08-25  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode): Pass through `--coverage', for GCC.
+	Report by Rainer Keller <keller@hlrs.de>.
+
+2006-08-25  Kurt Roeckx <kurt@roeckx.be>,
+	    Aurelien Jarno <aurel32@debian.org>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER)
+	(AC_DEPLIBS_CHECK_METHOD, AC_LIBTOOL_LANG_CXX_CONFIG)
+	(AC_LIBTOOL_SYS_GLOBAL_SYMBOL_PIPE)
+	(AC_LIBTOOL_PROG_COMPILER_PIC, AC_LIBTOOL_PROG_LD_SHLIBS)
+	[k*bsd*-gnu]: kfreebsd*-gnu and knetbsd*-gnu behave like
+	linux-gnu.
+	* ltdl.m4 (AC_LTDL_SYS_DLOPEN_DEPLIBS): Likewise.
+	* libtool.m4 (_LT_AC_LOCK)
+	[x86_64-*kfreebsd*-gnu]: Add 32/64 bit bi-arch support.
+	* NEWS: Update.
+
+2006-08-25  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_DEPLIBS_CHECK_METHOD) [ mingw, pw32 ]:
+	If `file' is present, use `func_win32_libid' rather than
+	`objdump -f', to facilitate cross-compilation.
+	Reported by Pierre Ossman <ossman@cendio.se>.
+
+2006-08-07  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (execute mode): Also search the directory above `$objdir'
+	for the argument of "-dlopen", as mentioned in the error message.
+
+2006-08-03  Ralf Menzel  <menzel@ls6.cs.uni-dortmund.de>
+
+	* libtool.m4 (AC_LIBTOOL_POSTDEP_PREDEP): Previous patch
+	applies to linux too, with Sun compiler.
+
+2006-08-01  Albert Chin <china@thewrittenword.com>
+
+	* libtool.m4 (AC_LIBTOOL_POSTDEP_PREDEP) [ solaris ]:
+	Don't set $postdeps to "-lCstd -lCrun" if
+	"-library=stlport4" set in CXXFLAGS as stlport4 C++
+	library incompatible with Cstd C++ library. Use
+	'-library=Cstd -library=Crun' instead of '-lCstd -lCrun'.
+
+2006-07-28  Eric Blake  <ebb9@byu.net>
+
+	* libtool.m4 (AC_DEPLIBS_CHECK_METHOD): s/recognise/recognize/.
+
+2006-06-24  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (_LT_COMPILER_BOILERPLATE, _LT_LINKER_BOILERPLATE):
+	Rewrite to not use unchecked `printf', for old systems like
+	SunOS 4.1.
+	(AC_LIBTOOL_COMPILER_OPTION, AC_LIBTOOL_LINKER_OPTION)
+	(AC_LIBTOOL_PROG_CC_C_O, AC_LIBTOOL_PROG_LD_SHLIBS): Likewise.
+	(AC_LIBTOOL_LANG_C_CONFIG): Adjust: use literal newlines in
+	`lt_simple_compile_test_code' and `lt_simple_link_test_code'.
+	(AC_LIBTOOL_LANG_CXX_CONFIG, AC_LIBTOOL_LANG_F77_CONFIG)
+	(AC_LIBTOOL_LANG_GCJ_CONFIG, AC_LIBTOOL_LANG_RC_CONFIG):
+	Likewise.
+	Bug report by Bruce Becker and Mark Andrews.
+
+2006-06-12  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode): Disregard
+	`hardcode_libdir_flag_spec_ld' if we're using `$CC' to link.
+	* libtool.m4 () [ hpux10, hpux11; hppa*64*, ia64* ]
+	<hardcode_libdir_flag_spec_ld>: Removed.
+	Reported by Roger While <simrw@sim-basis.de>.
+
+2006-06-08  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode): Honor `-threads', similar to `-mt'.
+	Report by Eric Paire <eric.paire@st.com>.
+
+2006-06-01  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in: Convert *each* occurrence of `compile_command',
+	`finalize_command', `relink_command', and `link_command',
+	that can conceivably be longer than 4000 bytes, to newline-
+	separated arguments before feeding to sed, to cater for sed
+	implementations with limited line lengths.  Convert back
+	afterwards.
+	* tests/link.test: Accommodate for trailing white space
+	resulting from above change.
+	This addresses an issue reported by Albert Chin on 2001-05-27:
+	http://lists.gnu.org/archive/html/libtool/2001-05/msg00159.html
+
+2006-06-01  Tim Rice  <tim@multitalents.net>
+
+	* libtool.m4 (AC_LIBTOOL_PROG_LD_SHLIBS) [ sco3.2v5.0.[024]* ]:
+	Add missing case entry for these systems.
+
+2006-06-01  Charles Wilson  <libtool@cwilson.fastmail.fm>
+
+	* libtool.m4 (AC_LIBTOOL_PROG_COMPILER_PIC) [ cygwin ]:
+	define DLL_EXPORT for PIC objects on cygwin.
+
+2006-05-19  Gary V. Vaughan  <gary@gnu.org>
+
+	* libtool.m4 (LT_AC_PROG_SED): AC_SUBST([SED]) for
+	compatibility with future autoconf release of AC_PROG_SED.
+
+2006-05-19  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (shell wrapper): Do not put `"$@"' in argument to
+	$echo.
+
+2006-05-18  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtoolize.in: Use just one `echo' for `--version' output
+	instead of several `echo', to avoid `Broken pipe' errors.
+	Reported by Behdad Esfahbod <behdad@cs.toronto.edu>.
+
+	* ltmain.in: Reset/unset not only LANG and LC_ALL, but also
+	LC_CTYPE, LC_COLLATE, LC_MESSAGES.
+	(execute mode): Restore them.
+	Noted by Peter O'Gorman.
+
+2006-05-17  Albert Chin-A-Young  <china@thewrittenword.com>
+
+	* tests/link-order.test: Take hardcode_direct into consideration
+	when testing link order.
+
+2006-05-15  Bruno Haible  <bruno@clisp.org>,
+	    Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 [ linux ] (AC_LIBTOOL_LANG_CXX_CONFIG)
+	(AC_LIBTOOL_POSTDEP_PREDEP, AC_LIBTOOL_PROG_COMPILER_PIC)
+	(AC_LIBTOOL_PROG_LD_SHLIBS): Add support for Sun C 5.9,
+	Sun C++ 5.9, and Sun Fortran 8.3 on GNU/Linux.
+	* NEWS: Update.
+
+2006-05-15  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* config.guess, config.sub: Update from external sources.
+
+2006-05-14  Albert Chin-A-Young  <china@thewrittenword.com>
+
+	* libtool.m4 [ aix ] (AC_LIBTOOL_PROG_LD_SHLIBS)
+	(AC_LIBTOOL_LANG_CXX_CONFIG): $hardcode_direct is set twice.
+
+2005-05-14  John Bowler  <jbowler@acm.org>
+
+	* ltmain.in (link mode): For version_type `none', we still need
+	to set `current', `age', and `revision', so that our checks
+	don't barf.  The values won't be used later.  Apparently
+	reported by several people, several times, for BeOS.
+	* NEWS, THANKS: Update.
+
+2006-03-28  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER) [ linux ]:
+	Avoid warning when "parsing" `/etc/ld.so.conf' and empty
+	`/etc/ld.so.conf.d'.
+	Reported by Orion Poplawski <orion@cora.nwra.com>.
+
+2006-03-23  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltdl.m4 (AC_LTDL_SYS_DLOPEN_DEPLIBS) [ freebsd, dragonfly ]:
+	Set libltdl_cv_sys_dlopen_deplibs to yes.  Fixes excessive
+	lt_dlopen times on these systems.
+	* NEWS, THANKS: Update.
+	Bug reported by Peter Jeremy <peterjeremy@optushome.com.au>,
+	patch by Joerg Sonnenberger <joerg@netbsd.org>.
+
+2006-03-20  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode) < -static-libtool-libs >: New option.
+	* doc/libtool.texi (Link mode, Distributing libltdl):
+	Document it.
+	Suggested by Gary Kumfert <kumfert@llnl.gov>.
+
+2006-03-17  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (LT_AC_PROG_SED): Do not forget to reset IFS even
+	in case of empty `$PATH'.
+
+2006-03-16  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode) [ openbsd, netbsd, dragonfly, .. ]:
+	Fix 1.5.22 regression by commenting out the code to remove the
+	uninstalled paths.  It was never working, and it is not at the
+	right place.  A proper removal code is to follow.  This
+	regression was visible on OpenBSD, NetBSD, DragonFly, and other
+	systems with hardcode_direct=yes.
+	* NEWS, THANKS: Updated.
+	Reported by Joerg Sonnenberger <joerg@netbsd.org> and
+	Marc Espie <espie@nerim.net> and others.
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER) [ freebsd,
+	dragonfly ]: Fix 1.5.22 regression caused by too strict $host_os
+	match that stopped DragonFly from working.
+	* NEWS, THANKS: Updated.
+	Reported by Jeremy C. Reed <reed@reedmedia.net>, patch by
+	Todd Vierling <tv@duh.org>.
+
+2006-02-13  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (link mode) [ linux ]: PGI: for `reload_cmds', we
+	not only need to get rid of `$wl', but also turn comma into
+	space so $LD understands whole_archive_flag_spec correctly.
+
+	* ltmain.in <startup, shell wrapper>: Add _AS_BOURNE_COMPATIBLE
+	code from Autoconf, to fix issues with zsh and other shells.
+	Reported by David Gómez Espinosa <david@pleyades.net>.
+
+2006-02-05  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* ltmain.in (extracted_archives, extracted_serial): New globals.
+	(func_extract_archives): Use them to rename extraction archives
+	for linking against multiple convenience libraries with the same
+	name.
+	Reported by Carlo Contavalli <ccontavalli@commedia.it>.
+
+	* ltmain.in (link mode) < test_compile >: Fix a couple of instances
+	where `test .. -ne ..' would possibly compare non-numbers.  Clean up a
+	bit.
+
+2006-02-03  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 [ solaris ] (AC_LIBTOOL_LANG_CXX_CONFIG)
+	(AC_LIBTOOL_PROG_LD_SHLIBS) < whole_archive_flag_spec >:
+	Fix this once and for all, for both the SUN compiler suite
+	(cc/CC/f77/f90/f95) and GCC.
+	Reported by Yuri Pukhalsky <pooh@cryptopro.ru>.
+
+	* cdemo/Makefile.am: Remove broken use of undocumented
+	Automake variable `$(OBJECTS)'.
+	* demo/Makefile.am, depdemo/Makefile.am: Likewise.
+	* f77demo/Makefile.am, mdemo/Makefile.am: Likewise.
+	* mdemo2/Makefile.am, pdemo/Makefile.am: Likewise.
+	* tagdemo/Makefile.am: Likewise.
+
+	* ltmain.in (link mode): Fix logic for adding run paths to
+	also add paths for installed libtool libraries in case
+	`-static' is used.
+
+2006-01-30  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* doc/libtool.texi (titlepage): Remove superfluous word.
+
+2006-01-23  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* commit, mailnotify: Bump copyright years.
+
+2006-01-21  Eric Blake  <ebb9@byu.net>
+
+	* THANKS: Move myself to contributor.
+
+2006-01-21  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4 (_LT_AC_SYS_LIBPATH_AIX): Don't use semicolons
+	inside { } in sed scripts, as Posix says it's not portable.
+	* ltmain.in (func_win32_libid): Likewise.
+	* mailnotify, commit: Likewise.
+	Noted by Paul Eggert <eggert@cs.ucla.edu>.
+
+	* ltmain.in (compile mode): Also transform `.obj' correctly.
+	Reported by George Bosilca <bosilca@cs.utk.edu>.
+
+2006-01-12  Leif Ekblad  <leif@rdos.net>
+
+	* libtool.m4 (AC_LIBTOOL_SYS_DYNAMIC_LINKER)
+	(AC_DEPLIBS_CHECK_METHOD, AC_LIBTOOL_PROG_COMPILER_PIC): Added
+	support for RDOS.
+	* NEWS: Updated.
+
+2006-01-11  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	* libtool.m4, ltmain.in, libltdl/ltdl.c: Bump copyright years.
+
+2006-01-02  Alexis Wilke  <alexis_wilke@yahoo.com>
+
+	* libltdl/ltdl.c (LT_DLMUTEX_GETERROR): check if
+	`lt_dlmutex_geterror_func' is set instead of
+	`lt_dlmutex_seterror_func'.
+
+2005-12-20  Eric Blake  <ebb9@byu.net>
+
+	* README-alpha: Another instance of anon cvs location.
+
+2005-12-19  Eric Blake  <ebb9@byu.net>
+
+	* README-alpha: Update anon cvs location.
+
+2005-12-18  Ralf Wildenhues <Ralf.Wildenhues@gmx.de>
+
+	* configure.ac: Bump version.
+	* NEWS: Updated.
+
 2005-12-18  Ralf Wildenhues <Ralf.Wildenhues@gmx.de>
 
 	GNU libtool 1.5.22 is released.
@@ -85,7 +635,7 @@
 
 2005-11-26  Peter O'Gorman  <peter@pogma.com>
 
-	* ltmain.in (link mode): Add missing $LTCFLAGS for a $LTCC. 
+	* ltmain.in (link mode): Add missing $LTCFLAGS for a $LTCC.
 	* libtool.m4 [darwin]: Use $LTCC $LTCFLAGS to create reloadable
 	objects.
 
@@ -210,7 +760,7 @@
 
 2005-11-12  Ralf Wildenhues <Ralf.Wildenhues@gmx.de>
 
-	* libltdl.m4 (AC_LIBTOOL_PROG_COMPILER_PIC): `wl' is tagged
+	* libtool.m4 (AC_LIBTOOL_PROG_COMPILER_PIC): `wl' is tagged
 	here.
 
 	* libtool.m4 (AC_LIBTOOL_DLOPEN_SELF)
@@ -352,7 +902,7 @@
 
 2005-10-17  Ralf Wildenhues <Ralf.Wildenhues@gmx.de>
 
-	* ltmain.in [darwin]: Don't check for "bundle" in file path. 
+	* ltmain.in [darwin]: Don't check for "bundle" in file path.
 	Reported by Christoph Egger <Christoph_Egger@gmx.de>.
 
 2005-10-13  Peter O'Gorman  <peter@pogma.com>
@@ -4022,7 +4572,7 @@
 	* cdemo/configure.ac: Ditto.
 	* demo/configure.ac: Ditto.
 	* depdemo/configure.ac: Ditto.
-	* libtldl/configure.ac: Ditto.
+	* libltdl/configure.ac: Ditto.
 	* mdemo/configure.ac: Ditto.
 	* pdemo/configure.ac: Ditto.
 	* tagdemo/configure.ac: Ditto.
@@ -4276,4 +4826,4 @@
 
 Continued in ChangeLog.1
 
-	$Revision: 1.1220.2.365 $ $Date: 2005/12/18 22:14:06 $
+	$Revision: 1.1220.2.456 $ $Date: 2007/06/24 02:25:32 $
