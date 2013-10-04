@@ -1,6 +1,7 @@
 # Process this file with autoconf to create configure. -*- autoconf -*-
 
-#   Copyright (C) 2001, 2004, 2005, 2008 Free Software Foundation, Inc.
+#   Copyright (C) 2001, 2004, 2005, 2008, 2010 Free Software Foundation,
+#   Inc.
 #   Written by Gary V. Vaughan, 2001
 #
 #   This file is part of GNU Libtool.
@@ -29,7 +30,9 @@ dnl Oldest automake required for bootstrap is below in AM_INIT_AUTOMAKE.
 ## ------------------------ ##
 ## Autoconf initialisation. ##
 ## ------------------------ ##
-AC_INIT([libtool], [2.2.10], [bug-libtool@gnu.org])
+AC_INIT([GNU Libtool], [2.4], [bug-libtool@gnu.org])
+m4_ifndef([AC_PACKAGE_URL],
+	  [AC_SUBST([PACKAGE_URL], [http://www.gnu.org/software/libtool/])])
 AC_CONFIG_HEADERS([config.h:config-h.in])
 AC_CONFIG_SRCDIR([libtoolize.in])
 LT_CONFIG_LTDL_DIR([libltdl], [nonrecursive])
@@ -115,7 +118,8 @@ case $lt_alpha in
     TIMESTAMP=
     ;;
 esac
-AS_BOX([Configuring AC_PACKAGE_TARNAME${TIMESTAMP:+" (Build:$TIMESTAMP)"} AC_PACKAGE_VERSION])
+timestamp_string="${TIMESTAMP:+ (Build:$TIMESTAMP)}"
+AS_BOX([Configuring AC_PACKAGE_TARNAME$timestamp_string AC_PACKAGE_VERSION])
 echo
 AC_SUBST([TIMESTAMP])
 AC_SUBST([package_revision])
@@ -127,20 +131,26 @@ AC_SUBST([package_revision])
 
 dnl These are bootstrap requirements! Once built, libtool may work with
 dnl much older releases of autoconf and automake.  See release notes.
-AM_INIT_AUTOMAKE([1.10.1 gnu subdir-objects dist-lzma])
+dnl 1.11 is needed for color-tests, 1.11.1 fixes a security issue.
+AM_INIT_AUTOMAKE([1.11.1 gnu subdir-objects dist-xz color-tests parallel-tests])
+
+
+## ------------------------- ##
+## Autobuild initialisation. ##
+## ------------------------- ##
+
+# You can set autobuild_mode at configure time to specify a "unique"
+# string for this build.
+: ${autobuild_mode=default}
+AB_VERSION="AC_PACKAGE_VERSION ($TIMESTAMP)"
+AB_INIT([$autobuild_mode])
+
 
 dnl We use m4sh to generate libtool's portable shell scripts
 AC_SUBST([M4SH], ['$(AUTOM4TE) --language=m4sh'])
 
 dnl Make sure config.status is regenerated when the version timestamp changes
 AC_SUBST([CONFIG_STATUS_DEPENDENCIES], ['$(top_srcdir)/ChangeLog'])
-
-dnl when installed libtool is used with automake-1.9.x or autoconf-2.59,
-dnl subdir libobjs don't work without a little extra help
-AC_MSG_CHECKING([whether subdir libobjs are useable])
-test -f $srcdir/argz.c || sublibobjs_supported=yes
-AM_CONDITIONAL([LTDL_SUBDIR_LIBOBJS], test x"${sublibobjs_supported-no}" != xno)
-AC_MSG_RESULT([${sublibobjs_supported-no}])
 
 
 ## ------------------------------- ##
@@ -194,6 +204,10 @@ LT_LANG(Fortran)
 LT_LANG(Java)
 LT_LANG(Windows Resource)
 
+# Ensure the correct file name (and path) conversion function
+# is available to the test suite.
+AC_SUBST([to_host_file_cmd])dnl
+AC_SUBST([to_tool_file_cmd])dnl
 
 ## --------------------------- ##
 ## Work out which tests to run ##
@@ -203,6 +217,34 @@ AM_CONDITIONAL(HAVE_F77,[test -n "[$]_LT_TAGVAR(compiler, F77)"])
 AM_CONDITIONAL(HAVE_FC,[test -n "[$]_LT_TAGVAR(compiler, FC)"])
 AM_CONDITIONAL(HAVE_GCJ, [test -n "[$]_LT_TAGVAR(compiler, GCJ)"])
 AM_CONDITIONAL(HAVE_RC, [test -n "[$]_LT_TAGVAR(compiler, RC)"])
+
+## Whether `make' supports order-only prerequisites.
+AC_CACHE_CHECK([whether ${MAKE-make} supports order-only prerequisites],
+  [lt_cv_make_order_only],
+  [mkdir conftest.dir
+   cd conftest.dir
+   touch b
+   touch a
+cat >confmk << 'END'
+a: b | c
+a b c:
+	touch $[]@
+END
+   touch c
+   if ${MAKE-make} -s -q -f confmk >/dev/null 2>&1; then
+     lt_cv_make_order_only=yes
+   else
+     lt_cv_make_order_only=no
+   fi
+   cd ..
+   rm -rf conftest.dir
+])
+if test $lt_cv_make_order_only = yes; then
+  ORDER='|'
+else
+  ORDER=''
+fi
+AC_SUBST([ORDER])
 
 ## ------------- ##
 ## Documentation ##

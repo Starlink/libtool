@@ -55,18 +55,15 @@ DIST_COMMON = README $(am__configure_deps) $(am__include_HEADERS_DIST) \
 @INSTALL_LTDL_TRUE@am__append_1 = libltdl/ltdl.h
 @INSTALL_LTDL_TRUE@am__append_2 = libltdl/libltdl.la
 @CONVENIENCE_LTDL_TRUE@am__append_3 = libltdl/libltdlc.la
-@LTDL_SUBDIR_LIBOBJS_FALSE@am__append_4 = \
-@LTDL_SUBDIR_LIBOBJS_FALSE@	argz.c libltdl/argz.c \
-@LTDL_SUBDIR_LIBOBJS_FALSE@	lt__dirent.c libltdl/lt__dirent.c \
-@LTDL_SUBDIR_LIBOBJS_FALSE@	lt__strl.c libltdl/lt__strl.c
-
-@HAVE_CXX_TRUE@am__append_5 = $(CXX_TESTS)
-@HAVE_F77_TRUE@am__append_6 = $(F77_TESTS)
-@HAVE_FC_TRUE@am__append_7 = $(FC_TESTS)
+@HAVE_CXX_TRUE@am__append_4 = $(CXX_TESTS)
+# f77demo-static-exec.test might be interactive on MSYS.
+@HAVE_F77_TRUE@am__append_5 = $(F77_TESTS)
+@HAVE_FC_TRUE@am__append_6 = $(FC_TESTS)
 subdir = .
 SUBDIRS =
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/libltdl/m4/argz.m4 \
+	$(top_srcdir)/libltdl/m4/autobuild.m4 \
 	$(top_srcdir)/libltdl/m4/libtool.m4 \
 	$(top_srcdir)/libltdl/m4/ltdl.m4 \
 	$(top_srcdir)/libltdl/m4/ltoptions.m4 \
@@ -227,11 +224,72 @@ RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 	$(RECURSIVE_CLEAN_TARGETS:-recursive=) tags TAGS ctags CTAGS \
-	distdir dist dist-all distcheck
+	check check-html recheck recheck-html distdir dist dist-all \
+	distcheck
 ETAGS = etags
 CTAGS = ctags
+# If stdout is a non-dumb tty, use colors.  If test -t is not supported,
+# then this fails; a conservative approach.  Of course do not redirect
+# stdout here, just stderr.
 am__tty_colors = \
-red=; grn=; lgn=; blu=; std=
+red=; grn=; lgn=; blu=; std=; \
+test "X$(AM_COLOR_TESTS)" != Xno \
+&& test "X$$TERM" != Xdumb \
+&& { test "X$(AM_COLOR_TESTS)" = Xalways || test -t 1 2>/dev/null; } \
+&& { \
+  red='[0;31m'; \
+  grn='[0;32m'; \
+  lgn='[1;32m'; \
+  blu='[1;34m'; \
+  std='[m'; \
+}
+# Restructured Text title and section.
+am__rst_title = sed 's/.*/   &   /;h;s/./=/g;p;x;p;g;p;s/.*//'
+am__rst_section = sed 'p;s/./=/g;p;g'
+# Put stdin (possibly several lines separated by ".  ") in a box.
+am__text_box = $(AWK) '{				\
+  n = split($$0, lines, "\\.  "); max = 0;		\
+  for (i = 1; i <= n; ++i)				\
+    if (max < length(lines[i]))				\
+      max = length(lines[i]);				\
+  for (i = 0; i < max; ++i) line = line "=";		\
+  print line;						\
+  for (i = 1; i <= n; ++i) if (lines[i]) print lines[i];\
+  print line;						\
+}'
+# Solaris 10 'make', and several other traditional 'make' implementations,
+# pass "-e" to $(SHELL).  This contradicts POSIX.  Work around the problem
+# by disabling -e (using the XSI extension "set +e") if it's set.
+am__sh_e_setup = case $$- in *e*) set +e;; esac
+# To be inserted before the command running the test.  Creates the
+# directory for the log if needed.  Stores in $dir the directory
+# containing $f, in $tst the test, in $log the log, and passes
+# TESTS_ENVIRONMENT.  Save and restore TERM around use of
+# TESTS_ENVIRONMENT, in case that unsets it.
+am__check_pre = \
+$(am__sh_e_setup);					\
+$(am__vpath_adj_setup) $(am__vpath_adj)			\
+srcdir=$(srcdir); export srcdir;			\
+rm -f $@-t;						\
+trap 'st=$$?; rm -f '\''$(abs_builddir)/$@-t'\''; (exit $$st); exit $$st' \
+  1 2 13 15;						\
+am__odir=`echo "./$@" | sed 's|/[^/]*$$||'`;		\
+test "x$$am__odir" = x. || $(MKDIR_P) "$$am__odir" || exit $$?;	\
+if test -f "./$$f"; then dir=./;			\
+elif test -f "$$f"; then dir=;				\
+else dir="$(srcdir)/"; fi;				\
+tst=$$dir$$f; log='$@'; __SAVED_TERM=$$TERM;		\
+$(TESTS_ENVIRONMENT)
+RECHECK_LOGS = $(TEST_LOGS)
+TEST_SUITE_LOG = test-suite.log
+TEST_SUITE_HTML = $(TEST_SUITE_LOG:.log=.html)
+TEST_EXTENSIONS = @EXEEXT@ .test
+am__test_logs1 = $(TESTS:=.log)
+am__test_logs2 = $(am__test_logs1:@EXEEXT@.log=.log)
+TEST_LOGS = $(am__test_logs2:.test.log=.log)
+TEST_LOG_COMPILE = $(TEST_LOG_COMPILER) $(AM_TEST_LOG_FLAGS) \
+	$(TEST_LOG_FLAGS)
+TEST_LOGS_TMP = $(TEST_LOGS:.log=.log-t)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -264,7 +322,7 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-DIST_ARCHIVES = $(distdir).tar.gz $(distdir).tar.lzma
+DIST_ARCHIVES = $(distdir).tar.gz $(distdir).tar.xz
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
@@ -336,11 +394,13 @@ LT_DLLOADERS = @LT_DLLOADERS@
 LT_DLPREOPEN = @LT_DLPREOPEN@
 M4SH = @M4SH@
 MAKEINFO = @MAKEINFO@
+MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
+ORDER = @ORDER@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
@@ -363,6 +423,7 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
@@ -413,6 +474,8 @@ srcdir = @srcdir@
 sys_symbol_underscore = @sys_symbol_underscore@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+to_host_file_cmd = @to_host_file_cmd@
+to_tool_file_cmd = @to_tool_file_cmd@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
@@ -438,11 +501,12 @@ EXTRA_DIST = libtoolize.m4sh bootstrap $(srcdir)/libtoolize.in \
 	libltdl/lt__dirent.c libltdl/lt__strl.c libltdl/COPYING.LIB \
 	libltdl/configure.ac libltdl/Makefile.am libltdl/aclocal.m4 \
 	libltdl/Makefile.in libltdl/configure libltdl/config-h.in \
-	libltdl/README libltdl/argz_.h libltdl/argz.c $(am__append_4) \
-	$(srcdir)/doc/notes.txt $(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) \
+	libltdl/README libltdl/argz_.h libltdl/argz.c \
+	$(srcdir)/doc/notes.txt $(edit_readme_alpha) \
+	$(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) \
 	$(srcdir)/tests/package.m4 $(srcdir)/tests/defs.in \
 	tests/defs.m4sh $(COMMON_TESTS) $(CXX_TESTS) $(F77_TESTS) \
-	$(FC_TESTS)
+	$(FC_TESTS) $(INTERACTIVE_TESTS)
 BUILT_SOURCES = libtool libtoolize libltdl/$(ARGZ_H)
 CLEANFILES = libtool libtoolize libtoolize.tmp $(auxdir)/ltmain.tmp \
 	$(m4dir)/ltversion.tmp libltdl/libltdl.la libltdl/libltdlc.la \
@@ -484,8 +548,9 @@ edit = sed \
 	-e 's,@MACRO_VERSION\@,$(VERSION),g' \
 	-e 's,@PACKAGE\@,$(PACKAGE),g' \
 	-e 's,@PACKAGE_BUGREPORT\@,$(PACKAGE_BUGREPORT),g' \
-	-e 's,@PACKAGE_NAME\@,$(PACKAGE),g' \
-	-e 's,@PACKAGE_STRING\@,$(PACKAGE) $(VERSION),g' \
+	-e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
+	-e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
+	-e 's,@PACKAGE_STRING\@,$(PACKAGE_NAME) $(VERSION),g' \
 	-e 's,@PACKAGE_TARNAME\@,$(PACKAGE),g' \
 	-e 's,@PACKAGE_VERSION\@,$(VERSION),g' \
 	-e 's,@SED\@,$(SED),g' \
@@ -494,10 +559,14 @@ edit = sed \
 	-e 's,@datadir\@,$(datadir),g' \
 	-e 's,@pkgdatadir\@,$(pkgdatadir),g' \
 	-e 's,@host_triplet\@,$(host_triplet),g' \
-	-e 's,@prefix\@,$(prefix),g' \
-	-e "s,@configure_input\@,Generated from $$input.,g"
+	-e 's,@prefix\@,$(prefix),g'
 
 sh_files = $(auxdir)/general.m4sh $(auxdir)/getopt.m4sh
+LTDL_BOOTSTRAP_DEPS = $(srcdir)/libltdl/aclocal.m4 \
+	$(srcdir)/libltdl/stamp-mk \
+	$(srcdir)/libltdl/configure \
+	$(srcdir)/libltdl/config-h.in
+
 sub_aclocal_m4_deps = \
 	$(srcdir)/libltdl/configure.ac \
 	$(m4dir)/libtool.m4 \
@@ -509,7 +578,7 @@ sub_aclocal_m4_deps = \
 	$(m4dir)/lt~obsolete.m4
 
 sub_configure_deps = $(sub_aclocal_m4_deps) $(srcdir)/libltdl/aclocal.m4
-LTDL_VERSION_INFO = -version-info 9:2:2
+LTDL_VERSION_INFO = -version-info 10:0:3
 @INSTALL_LTDL_TRUE@ltdlincludedir = $(includedir)/libltdl
 @INSTALL_LTDL_TRUE@ltdlinclude_HEADERS = libltdl/libltdl/lt_system.h \
 @INSTALL_LTDL_TRUE@			  libltdl/libltdl/lt_error.h \
@@ -598,10 +667,12 @@ ltdldatafiles = libltdl/COPYING.LIB \
 		  libltdl/lt__strl.c \
 		  $(libltdl_libltdl_la_SOURCES)
 
+edit_readme_alpha = $(auxdir)/edit-readme-alpha
 
 # The testsuite files are evaluated in the order given here.
 TESTSUITE = tests/testsuite
 TESTSUITE_AT = tests/testsuite.at \
+		  tests/getopt-m4sh.at \
 		  tests/libtoolize.at \
 		  tests/help.at \
 		  tests/duplicate_members.at \
@@ -620,12 +691,14 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/search-path.at \
 		  tests/indirect_deps.at \
 		  tests/archive-in-archive.at \
+		  tests/exeext.at \
 		  tests/execute-mode.at \
 		  tests/bindir.at \
 		  tests/cwrapper.at \
 		  tests/deplib-in-subdir.at \
 		  tests/infer-tag.at \
 		  tests/localization.at \
+		  tests/nocase.at \
 		  tests/install.at \
 		  tests/versioning.at \
 		  tests/destdir.at \
@@ -636,6 +709,7 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/lt_dlopen.at \
 		  tests/lt_dlopen_a.at \
 		  tests/lt_dlopenext.at \
+		  tests/ltdl-libdir.at \
 		  tests/ltdl-api.at \
 		  tests/dlloader-api.at \
 		  tests/loadlibrary.at \
@@ -656,21 +730,27 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/configure-iface.at \
 		  tests/stresstest.at \
 		  tests/cmdline_wrap.at \
+		  tests/pic_flag.at \
 		  tests/darwin.at \
-		  tests/deplibs-mingw.at
+		  tests/deplibs-mingw.at \
+		  tests/sysroot.at
 
 
 # Be sure to reexport important environment variables:
 TESTS_ENVIRONMENT = MAKE="$(MAKE)" CC="$(CC)" CFLAGS="$(CFLAGS)" \
 	CPP="$(CPP)" CPPFLAGS="$(CPPFLAGS)" LD="$(LD)" LDFLAGS="$(LDFLAGS)" \
 	LIBS="$(LIBS)" LN_S="$(LN_S)" NM="$(NM)" RANLIB="$(RANLIB)" \
-	STRIP="$(STRIP)" lt_INSTALL="$(INSTALL)" \
+	AR="$(AR)" \
+	M4SH="$(M4SH)" SED="$(SED)" STRIP="$(STRIP)" lt_INSTALL="$(INSTALL)" \
+	MANIFEST_TOOL="$(MANIFEST_TOOL)" \
 	OBJEXT="$(OBJEXT)" EXEEXT="$(EXEEXT)" \
 	SHELL="$(SHELL)" CONFIG_SHELL="$(SHELL)" \
 	CXX="$(CXX)" CXXFLAGS="$(CXXFLAGS)" CXXCPP="$(CXXCPP)" \
 	F77="$(F77)" FFLAGS="$(FFLAGS)" \
 	FC="$(FC)" FCFLAGS="$(FCFLAGS)" \
-	GCJ="$(GCJ)" GCJFLAGS="$(GCJFLAGS)"
+	GCJ="$(GCJ)" GCJFLAGS="$(GCJFLAGS)" \
+	lt_cv_to_host_file_cmd="$(to_host_file_cmd)" \
+	lt_cv_to_tool_file_cmd="$(to_tool_file_cmd)"
 
 BUILDCHECK_ENVIRONMENT = _lt_pkgdatadir="$(abs_top_srcdir)" \
 	LIBTOOLIZE="$(abs_top_builddir)/libtoolize" \
@@ -686,82 +766,155 @@ INSTALLCHECK_ENVIRONMENT = \
 
 CD_TESTDIR = abs_srcdir=`$(lt__cd) $(srcdir) && pwd`; cd tests
 testsuite_deps = tests/atconfig $(srcdir)/$(TESTSUITE)
-testsuite_deps_uninstalled = $(testsuite_deps) libltdl/libltdlc.la $(bin_SCRIPTS)
+testsuite_deps_uninstalled = $(testsuite_deps) libltdl/libltdlc.la \
+			     $(bin_SCRIPTS) $(LTDL_BOOTSTRAP_DEPS)
+
 
 # !WARNING! Don't add any new tests here, we are migrating to an
 #           Autotest driven framework, please add new test cases
 #           using the new framework above.  When the migration is
 #           complete this section should be removed.
 CXX_TESTS = \
-	tests/tagdemo-static.test tests/tagdemo-make.test \
-	tests/tagdemo-exec.test tests/tagdemo-conf.test \
-	tests/tagdemo-make.test tests/tagdemo-exec.test \
-	tests/tagdemo-shared.test tests/tagdemo-make.test \
-	tests/tagdemo-exec.test tests/tagdemo-undef.test \
-	tests/tagdemo-make.test tests/tagdemo-exec.test
+	tests/tagdemo-static.test \
+	tests/tagdemo-static-make.test \
+	tests/tagdemo-static-exec.test \
+	tests/tagdemo-conf.test \
+	tests/tagdemo-make.test \
+	tests/tagdemo-exec.test \
+	tests/tagdemo-shared.test \
+	tests/tagdemo-shared-make.test \
+	tests/tagdemo-shared-exec.test \
+	tests/tagdemo-undef.test \
+	tests/tagdemo-undef-make.test \
+	tests/tagdemo-undef-exec.test
 
 F77_TESTS = \
-	tests/f77demo-static.test tests/f77demo-make.test \
-	tests/f77demo-exec.test tests/f77demo-conf.test \
-	tests/f77demo-make.test tests/f77demo-exec.test \
-	tests/f77demo-shared.test tests/f77demo-make.test \
-	tests/f77demo-exec.test
+	tests/f77demo-static.test \
+	tests/f77demo-static-make.test \
+	tests/f77demo-static-exec.test \
+	tests/f77demo-conf.test \
+	tests/f77demo-make.test \
+	tests/f77demo-exec.test \
+	tests/f77demo-shared.test \
+	tests/f77demo-shared-make.test \
+	tests/f77demo-shared-exec.test
 
 FC_TESTS = \
-	tests/fcdemo-static.test tests/fcdemo-make.test \
-	tests/fcdemo-exec.test tests/fcdemo-conf.test \
-	tests/fcdemo-make.test tests/fcdemo-exec.test \
-	tests/fcdemo-shared.test tests/fcdemo-make.test \
-	tests/fcdemo-exec.test
+	tests/fcdemo-static.test \
+	tests/fcdemo-static-make.test \
+	tests/fcdemo-static-exec.test \
+	tests/fcdemo-conf.test \
+	tests/fcdemo-make.test \
+	tests/fcdemo-exec.test \
+	tests/fcdemo-shared.test \
+	tests/fcdemo-shared-make.test \
+	tests/fcdemo-shared-exec.test
 
 COMMON_TESTS = \
-	tests/link.test tests/link-2.test tests/nomode.test \
-	tests/objectlist.test tests/quote.test tests/sh.test \
-	tests/suffix.test tests/tagtrace.test \
-	tests/cdemo-static.test tests/cdemo-make.test tests/cdemo-exec.test \
-	tests/demo-static.test tests/demo-make.test tests/demo-exec.test \
-	tests/demo-inst.test tests/demo-unst.test \
-	tests/depdemo-static.test tests/depdemo-make.test \
-	tests/depdemo-exec.test tests/depdemo-inst.test \
+	tests/link.test \
+	tests/link-2.test \
+	tests/nomode.test \
+	tests/objectlist.test \
+	tests/quote.test \
+	tests/sh.test \
+	tests/suffix.test \
+	tests/tagtrace.test \
+	tests/cdemo-static.test \
+	tests/cdemo-static-make.test \
+	tests/cdemo-static-exec.test \
+	tests/demo-static.test \
+	tests/demo-static-make.test \
+	tests/demo-static-exec.test \
+	tests/demo-static-inst.test \
+	tests/demo-static-unst.test \
+	tests/depdemo-static.test \
+	tests/depdemo-static-make.test \
+	tests/depdemo-static-exec.test \
+	tests/depdemo-static-inst.test \
+	tests/depdemo-static-unst.test \
+	tests/mdemo-static.test \
+	tests/mdemo-static-make.test \
+	tests/mdemo-static-exec.test \
+	tests/mdemo-static-inst.test \
+	tests/mdemo-static-unst.test \
+	tests/cdemo-conf.test \
+	tests/cdemo-make.test \
+	tests/cdemo-exec.test \
+	tests/demo-conf.test \
+	tests/demo-make.test \
+	tests/demo-exec.test \
+	tests/demo-inst.test \
+	tests/demo-unst.test \
+	tests/demo-deplibs.test \
+	tests/depdemo-conf.test \
+	tests/depdemo-make.test \
+	tests/depdemo-exec.test \
+	tests/depdemo-inst.test \
 	tests/depdemo-unst.test \
-	tests/mdemo-static.test tests/mdemo-make.test tests/mdemo-exec.test \
-	tests/mdemo-inst.test tests/mdemo-unst.test \
-	tests/cdemo-conf.test tests/cdemo-make.test tests/cdemo-exec.test \
-	tests/demo-conf.test tests/demo-make.test tests/demo-exec.test \
-	tests/demo-inst.test tests/demo-unst.test tests/demo-deplibs.test \
-	tests/depdemo-conf.test tests/depdemo-make.test \
-	tests/depdemo-exec.test tests/depdemo-inst.test \
-	tests/depdemo-unst.test \
-	tests/mdemo-conf.test tests/mdemo-make.test tests/mdemo-exec.test \
-	tests/mdemo-inst.test tests/mdemo-unst.test tests/mdemo-dryrun.test \
-	tests/mdemo2-conf.test tests/mdemo2-make.test tests/mdemo2-exec.test \
-	tests/pdemo-conf.test tests/pdemo-make.test tests/pdemo-exec.test \
+	tests/mdemo-conf.test \
+	tests/mdemo-make.test \
+	tests/mdemo-exec.test \
+	tests/mdemo-inst.test \
+	tests/mdemo-unst.test \
+	tests/mdemo-dryrun.test \
+	tests/mdemo2-conf.test \
+	tests/mdemo2-make.test \
+	tests/mdemo2-exec.test \
+	tests/pdemo-conf.test \
+	tests/pdemo-make.test \
+	tests/pdemo-exec.test \
 	tests/pdemo-inst.test \
-	tests/demo-nofast.test tests/demo-make.test tests/demo-exec.test \
-	tests/demo-inst.test tests/demo-unst.test \
-	tests/depdemo-nofast.test tests/depdemo-make.test \
-	tests/depdemo-exec.test tests/depdemo-inst.test \
-	tests/depdemo-unst.test \
-	tests/demo-pic.test tests/demo-make.test tests/demo-exec.test \
-	tests/demo-nopic.test tests/demo-make.test tests/demo-exec.test \
-	tests/cdemo-shared.test tests/cdemo-make.test tests/cdemo-exec.test \
-	tests/demo-shared.test tests/demo-make.test tests/demo-exec.test \
-	tests/demo-inst.test tests/demo-hardcode.test tests/demo-relink.test \
-	tests/demo-noinst-link.test tests/demo-unst.test \
-	tests/depdemo-shared.test tests/depdemo-make.test \
-	tests/depdemo-exec.test tests/depdemo-inst.test \
-	tests/depdemo-relink.test tests/depdemo-unst.test \
-	tests/mdemo-shared.test tests/mdemo-make.test tests/mdemo-exec.test \
-	tests/mdemo-inst.test tests/mdemo-unst.test \
-	tests/cdemo-undef.test tests/cdemo-make.test tests/cdemo-exec.test
+	tests/demo-nofast.test \
+	tests/demo-nofast-make.test \
+	tests/demo-nofast-exec.test \
+	tests/demo-nofast-inst.test \
+	tests/demo-nofast-unst.test \
+	tests/depdemo-nofast.test \
+	tests/depdemo-nofast-make.test \
+	tests/depdemo-nofast-exec.test \
+	tests/depdemo-nofast-inst.test \
+	tests/depdemo-nofast-unst.test \
+	tests/demo-pic.test \
+	tests/demo-pic-make.test \
+	tests/demo-pic-exec.test \
+	tests/demo-nopic.test \
+	tests/demo-nopic-make.test \
+	tests/demo-nopic-exec.test \
+	tests/cdemo-shared.test \
+	tests/cdemo-shared-make.test \
+	tests/cdemo-shared-exec.test \
+	tests/mdemo-shared.test \
+	tests/mdemo-shared-make.test \
+	tests/mdemo-shared-exec.test \
+	tests/mdemo-shared-inst.test \
+	tests/mdemo-shared-unst.test \
+	tests/cdemo-undef.test \
+	tests/cdemo-undef-make.test \
+	tests/cdemo-undef-exec.test
 
-TESTS = $(COMMON_TESTS) $(am__append_5) $(am__append_6) \
-	$(am__append_7)
+
+# Actually, only demo-relink and depdemo-relink require interaction,
+# but they depend on the other tests being run beforehand.
+INTERACTIVE_TESTS = tests/demo-shared.test tests/demo-shared-make.test \
+	tests/demo-shared-exec.test tests/demo-shared-inst.test \
+	tests/demo-hardcode.test tests/demo-relink.test \
+	tests/demo-noinst-link.test tests/demo-shared-unst.test \
+	tests/depdemo-shared.test tests/depdemo-shared-make.test \
+	tests/depdemo-shared-exec.test tests/depdemo-shared-inst.test \
+	tests/depdemo-relink.test tests/depdemo-shared-unst.test \
+	$(am__append_5)
+NONINTERACTIVE_TESTS = $(COMMON_TESTS) $(am__append_4) $(am__append_6)
+TESTS = $(NONINTERACTIVE_TESTS) $(INTERACTIVE_TESTS)
+
+# For distclean, we may have to fake Makefiles in the test directories
+# so that descending in DIST_SUBDIRS works.
+# Hide the additional dependency from automake so it still outputs the rule.
+distclean_recursive = distclean-recursive
 all: $(BUILT_SOURCES) config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .dvi .lo .o .obj .ps
+.SUFFIXES: .c .dvi .html .lo .log .o .obj .ps .test .test$(EXEEXT)
 am--refresh:
 	@:
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(srcdir)/libltdl/Makefile.inc $(am__configure_deps)
@@ -1512,97 +1665,162 @@ GTAGS:
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 
-check-TESTS: $(TESTS)
-	@failed=0; all=0; xfail=0; xpass=0; skip=0; \
-	srcdir=$(srcdir); export srcdir; \
-	list=' $(TESTS) '; \
-	$(am__tty_colors); \
-	if test -n "$$list"; then \
-	  for tst in $$list; do \
-	    if test -f ./$$tst; then dir=./; \
-	    elif test -f $$tst; then dir=; \
-	    else dir="$(srcdir)/"; fi; \
-	    if $(TESTS_ENVIRONMENT) $${dir}$$tst; then \
-	      all=`expr $$all + 1`; \
-	      case " $(XFAIL_TESTS) " in \
-	      *[\ \	]$$tst[\ \	]*) \
-		xpass=`expr $$xpass + 1`; \
-		failed=`expr $$failed + 1`; \
-		col=$$red; res=XPASS; \
-	      ;; \
-	      *) \
-		col=$$grn; res=PASS; \
-	      ;; \
-	      esac; \
-	    elif test $$? -ne 77; then \
-	      all=`expr $$all + 1`; \
-	      case " $(XFAIL_TESTS) " in \
-	      *[\ \	]$$tst[\ \	]*) \
-		xfail=`expr $$xfail + 1`; \
-		col=$$lgn; res=XFAIL; \
-	      ;; \
-	      *) \
-		failed=`expr $$failed + 1`; \
-		col=$$red; res=FAIL; \
-	      ;; \
-	      esac; \
-	    else \
-	      skip=`expr $$skip + 1`; \
-	      col=$$blu; res=SKIP; \
-	    fi; \
-	    echo "$${col}$$res$${std}: $$tst"; \
-	  done; \
-	  if test "$$all" -eq 1; then \
-	    tests="test"; \
-	    All=""; \
-	  else \
-	    tests="tests"; \
-	    All="All "; \
-	  fi; \
-	  if test "$$failed" -eq 0; then \
-	    if test "$$xfail" -eq 0; then \
-	      banner="$$All$$all $$tests passed"; \
-	    else \
-	      if test "$$xfail" -eq 1; then failures=failure; else failures=failures; fi; \
-	      banner="$$All$$all $$tests behaved as expected ($$xfail expected $$failures)"; \
-	    fi; \
-	  else \
-	    if test "$$xpass" -eq 0; then \
-	      banner="$$failed of $$all $$tests failed"; \
-	    else \
-	      if test "$$xpass" -eq 1; then passes=pass; else passes=passes; fi; \
-	      banner="$$failed of $$all $$tests did not behave as expected ($$xpass unexpected $$passes)"; \
-	    fi; \
-	  fi; \
-	  dashes="$$banner"; \
-	  skipped=""; \
-	  if test "$$skip" -ne 0; then \
-	    if test "$$skip" -eq 1; then \
-	      skipped="($$skip test was not run)"; \
-	    else \
-	      skipped="($$skip tests were not run)"; \
-	    fi; \
-	    test `echo "$$skipped" | wc -c` -le `echo "$$banner" | wc -c` || \
-	      dashes="$$skipped"; \
-	  fi; \
-	  report=""; \
-	  if test "$$failed" -ne 0 && test -n "$(PACKAGE_BUGREPORT)"; then \
-	    report="Please report to $(PACKAGE_BUGREPORT)"; \
-	    test `echo "$$report" | wc -c` -le `echo "$$banner" | wc -c` || \
-	      dashes="$$report"; \
-	  fi; \
-	  dashes=`echo "$$dashes" | sed s/./=/g`; \
-	  if test "$$failed" -eq 0; then \
-	    echo "$$grn$$dashes"; \
-	  else \
-	    echo "$$red$$dashes"; \
-	  fi; \
-	  echo "$$banner"; \
-	  test -z "$$skipped" || echo "$$skipped"; \
-	  test -z "$$report" || echo "$$report"; \
-	  echo "$$dashes$$std"; \
-	  test "$$failed" -eq 0; \
-	else :; fi
+# To be appended to the command running the test.  Handle the stdout
+# and stderr redirection, and catch the exit status.
+am__check_post =					\
+>$@-t 2>&1;						\
+estatus=$$?;						\
+if test -n '$(DISABLE_HARD_ERRORS)'			\
+   && test $$estatus -eq 99; then			\
+  estatus=1;						\
+fi;							\
+TERM=$$__SAVED_TERM; export TERM;			\
+$(am__tty_colors);					\
+xfailed=PASS;						\
+case " $(XFAIL_TESTS) " in				\
+  *[\ \	]$$f[\ \	]* | *[\ \	]$$dir$$f[\ \	]*) \
+    xfailed=XFAIL;;					\
+esac;							\
+case $$estatus:$$xfailed in				\
+    0:XFAIL) col=$$red; res=XPASS;;			\
+    0:*)     col=$$grn; res=PASS ;;			\
+    77:*)    col=$$blu; res=SKIP ;;			\
+    99:*)    col=$$red; res=FAIL ;;			\
+    *:XFAIL) col=$$lgn; res=XFAIL;;			\
+    *:*)     col=$$red; res=FAIL ;;			\
+esac;							\
+echo "$${col}$$res$${std}: $$f";			\
+echo "$$res: $$f (exit: $$estatus)" |			\
+  $(am__rst_section) >$@;				\
+cat $@-t >>$@;						\
+rm -f $@-t
+
+$(TEST_SUITE_LOG): $(TEST_LOGS)
+	@$(am__sh_e_setup);						\
+	list='$(TEST_LOGS)';						\
+	results=`for f in $$list; do					\
+		   read line < $$f && echo "$$line" || echo FAIL;	\
+		 done`;							\
+	all=`echo "$$results" | sed '/^$$/d' | wc -l | sed -e 's/^[	 ]*//'`; \
+	fail=`echo "$$results" | grep -c '^FAIL'`;			\
+	pass=`echo "$$results" | grep -c '^PASS'`;			\
+	skip=`echo "$$results" | grep -c '^SKIP'`;			\
+	xfail=`echo "$$results" | grep -c '^XFAIL'`;			\
+	xpass=`echo "$$results" | grep -c '^XPASS'`;			\
+	failures=`expr $$fail + $$xpass`;				\
+	all=`expr $$all - $$skip`;					\
+	if test "$$all" -eq 1; then tests=test; All=;			\
+	else tests=tests; All="All "; fi;				\
+	case fail=$$fail:xpass=$$xpass:xfail=$$xfail in			\
+	  fail=0:xpass=0:xfail=0)					\
+	    msg="$$All$$all $$tests passed.  ";				\
+	    exit=true;;							\
+	  fail=0:xpass=0:xfail=*)					\
+	    msg="$$All$$all $$tests behaved as expected";		\
+	    if test "$$xfail" -eq 1; then xfailures=failure;		\
+	    else xfailures=failures; fi;				\
+	    msg="$$msg ($$xfail expected $$xfailures).  ";		\
+	    exit=true;;							\
+	  fail=*:xpass=0:xfail=*)					\
+	    msg="$$fail of $$all $$tests failed.  ";			\
+	    exit=false;;						\
+	  fail=*:xpass=*:xfail=*)					\
+	    msg="$$failures of $$all $$tests did not behave as expected"; \
+	    if test "$$xpass" -eq 1; then xpasses=pass;			\
+	    else xpasses=passes; fi;					\
+	    msg="$$msg ($$xpass unexpected $$xpasses).  ";		\
+	    exit=false;;						\
+	  *)								\
+	    echo >&2 "incorrect case"; exit 4;;				\
+	esac;								\
+	if test "$$skip" -ne 0; then					\
+	  if test "$$skip" -eq 1; then					\
+	    msg="$$msg($$skip test was not run).  ";			\
+	  else								\
+	    msg="$$msg($$skip tests were not run).  ";			\
+	  fi;								\
+	fi;								\
+	{								\
+	  echo "$(PACKAGE_STRING): $(subdir)/$(TEST_SUITE_LOG)" |	\
+	    $(am__rst_title);						\
+	  echo "$$msg";							\
+	  echo;								\
+	  echo ".. contents:: :depth: 2";				\
+	  echo;								\
+	  for f in $$list; do						\
+	    read line < $$f;						\
+	    case $$line in						\
+	      PASS:*|XFAIL:*);;						\
+	      *) echo; cat $$f;;					\
+	    esac;							\
+	  done;								\
+	} >$(TEST_SUITE_LOG).tmp;					\
+	mv $(TEST_SUITE_LOG).tmp $(TEST_SUITE_LOG);			\
+	if test "$$failures" -ne 0; then				\
+	  msg="$${msg}See $(subdir)/$(TEST_SUITE_LOG).  ";		\
+	  if test -n "$(PACKAGE_BUGREPORT)"; then			\
+	    msg="$${msg}Please report to $(PACKAGE_BUGREPORT).  ";	\
+	  fi;								\
+	fi;								\
+	test x"$$VERBOSE" = x || $$exit || cat $(TEST_SUITE_LOG);	\
+	$(am__tty_colors);						\
+	if $$exit; then							\
+	  echo $(ECHO_N) "$$grn$(ECHO_C)";				\
+	 else								\
+	  echo $(ECHO_N) "$$red$(ECHO_C)";				\
+	fi;								\
+	echo "$$msg" | $(am__text_box);					\
+	echo $(ECHO_N) "$$std$(ECHO_C)";				\
+	$$exit
+
+# Run all the tests.
+check-TESTS:
+	@list='$(RECHECK_LOGS)'; test -z "$$list" || rm -f $$list
+	@test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
+	@list='$(TEST_LOGS)';						\
+	list=`for f in $$list; do					\
+	  test .log = $$f || echo $$f;					\
+	done | tr '\012\015' '  '`;					\
+	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_LOG) TEST_LOGS="$$list"
+
+.log.html:
+	@list='$(RST2HTML) $$RST2HTML rst2html rst2html.py';		\
+	for r2h in $$list; do						\
+	  if ($$r2h --version) >/dev/null 2>&1; then			\
+	    R2H=$$r2h;							\
+	  fi;								\
+	done;								\
+	if test -z "$$R2H"; then					\
+	  echo >&2 "cannot find rst2html, cannot create $@";		\
+	  exit 2;							\
+	fi;								\
+	$$R2H $< >$@.tmp
+	@mv $@.tmp $@
+
+# Be sure to run check first, and then to convert the result.
+# Beware of concurrent executions.  Run "check" not "check-TESTS", as
+# check-SCRIPTS and other dependencies are rebuilt by the former only.
+# And expect check to fail.
+check-html:
+	@if $(MAKE) $(AM_MAKEFLAGS) check; then			\
+	  rv=0; else rv=$$?;					\
+	fi;							\
+	$(MAKE) $(AM_MAKEFLAGS) $(TEST_SUITE_HTML) || exit 4;	\
+	exit $$rv
+recheck recheck-html:
+	@target=`echo $@ | sed 's,^re,,'`;				\
+	list='$(TEST_LOGS)';						\
+	list=`for f in $$list; do					\
+	        test -f $$f || continue;				\
+	        if read line < $$f; then				\
+	          case $$line in FAIL*|XPASS*) echo $$f;; esac;		\
+	        else echo $$f; fi;					\
+	      done | tr '\012\015' '  '`;				\
+	$(MAKE) $(AM_MAKEFLAGS) $$target AM_MAKEFLAGS='$(AM_MAKEFLAGS) TEST_LOGS="'"$$list"'"'
+.test.log:
+	@p='$<'; $(am__check_pre) $(TEST_LOG_COMPILE) "$$tst" $(am__check_post)
+@am__EXEEXT_TRUE@.test$(EXEEXT).log:
+@am__EXEEXT_TRUE@	@p='$<'; $(am__check_pre) $(TEST_LOG_COMPILE) "$$tst" $(am__check_post)
 
 distdir: $(DISTFILES)
 	@list='$(MANS)'; if test -n "$$list"; then \
@@ -1694,10 +1912,10 @@ dist-gzip: distdir
 dist-bzip2: distdir
 	tardir=$(distdir) && $(am__tar) | bzip2 -9 -c >$(distdir).tar.bz2
 	$(am__remove_distdir)
+
 dist-lzma: distdir
 	tardir=$(distdir) && $(am__tar) | lzma -9 -c >$(distdir).tar.lzma
 	$(am__remove_distdir)
-
 dist-xz: distdir
 	tardir=$(distdir) && $(am__tar) | xz -c >$(distdir).tar.xz
 	$(am__remove_distdir)
@@ -1717,7 +1935,7 @@ dist-zip: distdir
 
 dist dist-all: distdir
 	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
-	tardir=$(distdir) && $(am__tar) | lzma -9 -c >$(distdir).tar.lzma
+	tardir=$(distdir) && $(am__tar) | xz -c >$(distdir).tar.xz
 	$(am__remove_distdir)
 
 # This target untars the dist file and tries a VPATH configuration.  Then
@@ -1825,6 +2043,10 @@ mostlyclean-generic:
 	-test -z "$(LIBOBJS)" || rm -f $(LIBOBJS)
 	-test -z "$(LTLIBOBJS)" || rm -f $(LTLIBOBJS)
 	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+	-test -z "$(TEST_LOGS)" || rm -f $(TEST_LOGS)
+	-test -z "$(TEST_LOGS_TMP)" || rm -f $(TEST_LOGS_TMP)
+	-test -z "$(TEST_SUITE_HTML)" || rm -f $(TEST_SUITE_HTML)
+	-test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
 
 clean-generic:
 	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
@@ -2004,12 +2226,12 @@ uninstall-am: uninstall-binSCRIPTS uninstall-dvi-am uninstall-html-am \
 uninstall-man: uninstall-man1
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all check \
-	check-am ctags-recursive install install-am install-strip \
-	tags-recursive uninstall-am
+	check-am check-html ctags-recursive install install-am \
+	install-strip recheck recheck-html tags-recursive uninstall-am
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
 	all all-am all-local am--refresh check check-TESTS check-am \
-	check-local clean clean-aminfo clean-generic \
+	check-html check-local clean clean-aminfo clean-generic \
 	clean-libLTLIBRARIES clean-libtool clean-local \
 	clean-noinstLTLIBRARIES ctags ctags-recursive dist dist-all \
 	dist-bzip2 dist-gzip dist-hook dist-info dist-lzma dist-shar \
@@ -2028,18 +2250,17 @@ uninstall-man: uninstall-man1
 	maintainer-clean-aminfo maintainer-clean-generic \
 	maintainer-clean-vti mostlyclean mostlyclean-aminfo \
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	mostlyclean-vti pdf pdf-am ps ps-am tags tags-recursive \
-	uninstall uninstall-am uninstall-binSCRIPTS uninstall-dvi-am \
-	uninstall-hook uninstall-html-am uninstall-includeHEADERS \
-	uninstall-info-am uninstall-libLTLIBRARIES \
-	uninstall-ltdlincludeHEADERS uninstall-man uninstall-man1 \
-	uninstall-pdf-am uninstall-ps-am
+	mostlyclean-vti pdf pdf-am ps ps-am recheck recheck-html tags \
+	tags-recursive uninstall uninstall-am uninstall-binSCRIPTS \
+	uninstall-dvi-am uninstall-hook uninstall-html-am \
+	uninstall-includeHEADERS uninstall-info-am \
+	uninstall-libLTLIBRARIES uninstall-ltdlincludeHEADERS \
+	uninstall-man uninstall-man1 uninstall-pdf-am uninstall-ps-am
 
 
 libtoolize: $(srcdir)/libtoolize.in $(top_builddir)/config.status
 	rm -f libtoolize.tmp libtoolize
 	$(timestamp); \
-	input="libtoolize.m4sh"; \
 	$(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
 		-e 's,@aclocal_DATA\@,$(aclocalfiles),g' \
 		-e "s,@pkgltdl_files\@,$(ltdldatafiles),g" \
@@ -2091,7 +2312,6 @@ $(srcdir)/$(m4dir)/ltversion.m4: $(m4dir)/ltversion.in configure.ac ChangeLog
 	  cd $(srcdir); \
 	  rm -f $(m4dir)/ltversion.tmp; \
 	  serial=`echo "$$correctver" | sed 's,^1[.],,g'`; \
-	  input="ltversion.in"; \
 	  echo $(edit) -e "s,@MACRO_REVISION\@,$$correctver,g" \
 	    -e "s,@MACRO_SERIAL\@,$$serial,g" \
 	    $(srcdir)/$(m4dir)/ltversion.in \> $(srcdir)/$(m4dir)/ltversion.m4; \
@@ -2119,7 +2339,6 @@ $(srcdir)/$(auxdir)/ltmain.sh: $(sh_files) $(auxdir)/ltmain.m4sh configure.ac Ch
 	    \> $(auxdir)/ltmain.in; \
 	  $(M4SH) -B $(auxdir) $(auxdir)/ltmain.m4sh \
 	    > $(auxdir)/ltmain.in; \
-	  input="ltmain.m4sh"; \
 	  echo $(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
 	    -e "s,@package_revision\@,$$correctver," \
 	    $(srcdir)/$(auxdir)/ltmain.in "> $$target"; \
@@ -2157,10 +2376,7 @@ $(srcdir)/libltdl/Makefile.am: $(srcdir)/libltdl/Makefile.inc
 	       -e '1s,^\(.. Makefile.\)inc.*,\1am -- Process this file with automake to produce Makefile.in,' > $$out;
 	chmod a-w $(srcdir)/libltdl/Makefile.am
 
-all-local: $(srcdir)/libltdl/aclocal.m4 \
-	$(srcdir)/libltdl/stamp-mk \
-	$(srcdir)/libltdl/configure \
-	$(srcdir)/libltdl/config-h.in
+all-local: $(LTDL_BOOTSTRAP_DEPS)
 
 $(srcdir)/libltdl/Makefile.in: $(srcdir)/libltdl/Makefile.am \
 	    $(srcdir)/libltdl/aclocal.m4 
@@ -2239,10 +2455,9 @@ uninstall-hook:
 	done
 
 dist-hook:
-	@if test -f $(srcdir)/README.alpha; then \
 	case $(VERSION) in \
-	  *[a-z]) cp -p $(srcdir)/README.alpha $(distdir)/README ;; \
-	esac; else :; fi
+	  *[a-z]) $(SHELL) $(srcdir)/$(edit_readme_alpha) $(distdir)/README ;; \
+	esac
 	for macro in LT_INIT AC_PROG_LIBTOOL AM_PROG_LIBTOOL; do \
 	  if grep $$macro $(srcdir)/aclocal.m4 $(srcdir)/libltdl/aclocal.m4; then \
 	    echo "Bogus $$macro macro contents in an aclocal.m4 file." >&2; \
@@ -2257,7 +2472,7 @@ $(srcdir)/$(TESTSUITE): $(srcdir)/tests/package.m4 $(TESTSUITE_AT) Makefile.am
 	$(AUTOTEST) `echo $(TESTSUITE_AT) | sed 's,tests/,,g'` -o testsuite.tmp && \
 	mv -f testsuite.tmp testsuite
 
-$(srcdir)/tests/package.m4: $(srcdir)/configure.ac
+$(srcdir)/tests/package.m4: $(srcdir)/configure.ac Makefile.am
 	{ \
 	  echo '# Signature of the current package.'; \
 	  echo 'm4_define([AT_PACKAGE_NAME],      [@PACKAGE_NAME@])'; \
@@ -2265,6 +2480,7 @@ $(srcdir)/tests/package.m4: $(srcdir)/configure.ac
 	  echo 'm4_define([AT_PACKAGE_VERSION],   [@PACKAGE_VERSION@])'; \
 	  echo 'm4_define([AT_PACKAGE_STRING],    [@PACKAGE_STRING@])'; \
 	  echo 'm4_define([AT_PACKAGE_BUGREPORT], [@PACKAGE_BUGREPORT@])'; \
+	  echo 'm4_define([AT_PACKAGE_URL],       [@PACKAGE_URL@])'; \
 	} | $(edit) > $(srcdir)/tests/package.m4
 
 tests/atconfig: $(top_builddir)/config.status
@@ -2283,8 +2499,13 @@ installcheck-local: $(testsuite_deps)
 	  $(TESTS_ENVIRONMENT) $(INSTALLCHECK_ENVIRONMENT) $(TESTSUITEFLAGS) \
 	  AUTOTEST_PATH="$(exec_prefix)/bin"
 
+check-noninteractive-old:
+	$(MAKE) $(AM_MAKEFLAGS) check-TESTS TESTS='$(NONINTERACTIVE_TESTS)'
+check-interactive-old:
+	$(MAKE) $(AM_MAKEFLAGS) check-TESTS TESTS='$(INTERACTIVE_TESTS)'
+
 # Run only noninteractive parts of the new testsuite.
-check-noninteractive: $(testsuite_deps_uninstalled)
+check-noninteractive-new: $(testsuite_deps_uninstalled)
 	$(CD_TESTDIR); \
 	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
 	  $(TESTS_ENVIRONMENT) $(BUILDCHECK_ENVIRONMENT) \
@@ -2292,12 +2513,15 @@ check-noninteractive: $(testsuite_deps_uninstalled)
 	  $(TESTSUITEFLAGS)
 
 # Run only interactive parts of the new testsuite.
-check-interactive: $(testsuite_deps_uninstalled)
+check-interactive-new: $(testsuite_deps_uninstalled)
 	$(CD_TESTDIR); \
 	CONFIG_SHELL="$(SHELL)" $(SHELL) $$abs_srcdir/$(TESTSUITE) \
 	  $(TESTS_ENVIRONMENT) $(BUILDCHECK_ENVIRONMENT) \
 	  -k interactive -k recursive INNER_TESTSUITEFLAGS=",interactive" \
 	  $(TESTSUITEFLAGS)
+
+check-interactive: check-interactive-old check-interactive-new
+check-noninteractive: check-noninteractive-old check-noninteractive-new
 
 # We need to remove any file droppings left behind by testsuite
 clean-local: clean-local-legacy
@@ -2305,14 +2529,130 @@ clean-local: clean-local-legacy
 	test -f $$abs_srcdir/$(TESTSUITE) && \
 	    $(SHELL) $$abs_srcdir/$(TESTSUITE) --clean
 
-tests/demo-conf.test: libtool
+tests/tagdemo-undef-exec.log:	tests/tagdemo-undef-make.log
+tests/tagdemo-undef-make.log:	tests/tagdemo-undef.log
+tests/tagdemo-undef.log:	tests/tagdemo-shared-exec.log
+tests/tagdemo-shared-exec.log:	tests/tagdemo-shared-make.log
+tests/tagdemo-shared-make.log:	tests/tagdemo-shared.log
+tests/tagdemo-shared.log:	tests/tagdemo-exec.log
+tests/tagdemo-exec.log:		tests/tagdemo-make.log
+tests/tagdemo-make.log:		tests/tagdemo-conf.log
+tests/tagdemo-conf.log:		tests/tagdemo-static-exec.log
+tests/tagdemo-static-exec.log:	tests/tagdemo-static-make.log
+tests/tagdemo-static-make.log:	tests/tagdemo-static.log
+
+tests/f77demo-shared-exec.log:	tests/f77demo-shared-make.log
+tests/f77demo-shared-make.log:	tests/f77demo-shared.log
+tests/f77demo-shared.log:	tests/f77demo-exec.log
+tests/f77demo-exec.log:		tests/f77demo-make.log
+tests/f77demo-make.log:		tests/f77demo-conf.log
+tests/f77demo-conf.log:		tests/f77demo-static-exec.log
+tests/f77demo-static-exec.log:	tests/f77demo-static-make.log
+tests/f77demo-static-make.log:	tests/f77demo-static.log
+
+tests/fcdemo-shared-exec.log:	tests/fcdemo-shared-make.log
+tests/fcdemo-shared-make.log:	tests/fcdemo-shared.log
+tests/fcdemo-shared.log:	tests/fcdemo-exec.log
+tests/fcdemo-exec.log:		tests/fcdemo-make.log
+tests/fcdemo-make.log:		tests/fcdemo-conf.log
+tests/fcdemo-conf.log:		tests/fcdemo-static-exec.log
+tests/fcdemo-static-exec.log:	tests/fcdemo-static-make.log
+tests/fcdemo-static-make.log:	tests/fcdemo-static.log
+
+tests/cdemo-undef-exec.log:	tests/cdemo-undef-make.log
+tests/cdemo-undef-make.log:	tests/cdemo-undef.log
+tests/cdemo-undef.log: @ORDER@	tests/cdemo-shared-exec.log
+tests/cdemo-shared-exec.log:	tests/cdemo-shared-make.log
+tests/cdemo-shared-make.log:	tests/cdemo-shared.log
+tests/cdemo-shared.log: @ORDER@	tests/cdemo-exec.log
+tests/cdemo-exec.log:		tests/cdemo-make.log
+tests/cdemo-make.log:		tests/cdemo-conf.log
+tests/cdemo-conf.log: @ORDER@	tests/cdemo-static-exec.log
+tests/cdemo-static-exec.log:	tests/cdemo-static-make.log
+tests/cdemo-static-make.log:	tests/cdemo-static.log
+
+tests/demo-shared-unst.log:	tests/demo-noinst-link.log
+tests/demo-noinst-link.log:	tests/demo-relink.log
+tests/demo-relink.log:		tests/demo-hardcode.log
+tests/demo-hardcode.log:	tests/demo-shared-inst.log
+tests/demo-shared-inst.log:	tests/demo-shared-exec.log
+tests/demo-shared-exec.log:	tests/demo-shared-make.log
+tests/demo-shared-make.log:	tests/demo-shared.log
+tests/demo-shared.log: @ORDER@	tests/demo-nopic-exec.log
+tests/demo-nopic-exec.log:	tests/demo-nopic-make.log
+tests/demo-nopic-make.log:	tests/demo-nopic.log
+tests/demo-nopic.log: @ORDER@	tests/demo-pic-exec.log
+tests/demo-pic-exec.log:	tests/demo-pic-make.log
+tests/demo-pic-make.log:	tests/demo-pic.log
+tests/demo-pic.log: @ORDER@	tests/demo-nofast-unst.log
+tests/demo-nofast-unst.log:	tests/demo-nofast-inst.log
+tests/demo-nofast-inst.log:	tests/demo-nofast-exec.log
+tests/demo-nofast-exec.log:	tests/demo-nofast-make.log
+tests/demo-nofast-make.log:	tests/demo-nofast.log
+tests/demo-nofast.log: @ORDER@	tests/demo-deplibs.log
+tests/demo-deplibs.log:		tests/demo-unst.log
+tests/demo-unst.log:		tests/demo-inst.log
+tests/demo-inst.log:		tests/demo-exec.log
+tests/demo-exec.log:		tests/demo-make.log
+tests/demo-make.log:		tests/demo-conf.log
+tests/demo-conf.log: @ORDER@	tests/demo-static-unst.log
+tests/demo-static-unst.log:	tests/demo-static-inst.log
+tests/demo-static-inst.log:	tests/demo-static-exec.log
+tests/demo-static-exec.log:	tests/demo-static-make.log
+tests/demo-static-make.log:	tests/demo-static.log
+
+tests/depdemo-shared-unst.log:	tests/depdemo-relink.log
+tests/depdemo-relink.log:	tests/depdemo-shared-inst.log
+tests/depdemo-shared-inst.log:	tests/depdemo-shared-exec.log
+tests/depdemo-shared-exec.log:	tests/depdemo-shared-make.log
+tests/depdemo-shared-make.log:	tests/depdemo-shared.log
+tests/depdemo-shared.log: @ORDER@ tests/depdemo-nofast-unst.log
+tests/depdemo-nofast-unst.log:	tests/depdemo-nofast-inst.log
+tests/depdemo-nofast-inst.log:	tests/depdemo-nofast-exec.log
+tests/depdemo-nofast-exec.log:	tests/depdemo-nofast-make.log
+tests/depdemo-nofast-make.log:	tests/depdemo-nofast.log
+tests/depdemo-nofast.log: @ORDER@ tests/depdemo-unst.log
+tests/depdemo-unst.log:		tests/depdemo-inst.log
+tests/depdemo-inst.log:		tests/depdemo-exec.log
+tests/depdemo-exec.log:		tests/depdemo-make.log
+tests/depdemo-make.log:		tests/depdemo-conf.log
+tests/depdemo-conf.log: @ORDER@	tests/depdemo-static-unst.log
+tests/depdemo-static-unst.log:	tests/depdemo-static-inst.log
+tests/depdemo-static-inst.log:	tests/depdemo-static-exec.log
+tests/depdemo-static-exec.log:	tests/depdemo-static-make.log
+tests/depdemo-static-make.log:	tests/depdemo-static.log
+
+tests/mdemo-shared-unst.log:	tests/mdemo-shared-inst.log
+tests/mdemo-shared-inst.log:	tests/mdemo-shared-exec.log
+tests/mdemo-shared-exec.log:	tests/mdemo-shared-make.log
+tests/mdemo-shared-make.log:	tests/mdemo-shared.log
+tests/mdemo-shared.log: @ORDER@	tests/mdemo-dryrun.log \
+				tests/mdemo2-exec.log
+
+tests/mdemo-dryrun.log:		tests/mdemo-unst.log
+tests/mdemo-unst.log:		tests/mdemo-inst.log
+tests/mdemo-inst.log:		tests/mdemo-exec.log
+tests/mdemo-exec.log:		tests/mdemo-make.log
+tests/mdemo-make.log:		tests/mdemo-conf.log
+tests/mdemo-conf.log: @ORDER@	tests/mdemo-static-unst.log
+tests/mdemo-static-unst.log:	tests/mdemo-static-inst.log
+tests/mdemo-static-inst.log:	tests/mdemo-static-exec.log
+tests/mdemo-static-exec.log:	tests/mdemo-static-make.log
+tests/mdemo-static-make.log:	tests/mdemo-static.log
+
+tests/mdemo2-exec.log:		tests/mdemo2-make.log
+tests/mdemo2-make.log:		tests/mdemo2-conf.log \
+				tests/mdemo-dryrun.log
+
+tests/pdemo-inst.log:		tests/pdemo-exec.log
+tests/pdemo-exec.log:		tests/pdemo-make.log
+tests/pdemo-make.log:		tests/pdemo-conf.log
 
 # The defs script shouldn't be recreated whenever the Makefile is
 # regenerated since the source tree can be read-only.
 check-recursive: tests/defs
 tests/defs: $(srcdir)/tests/defs.in
 	rm -f tests/defs.tmp tests/defs; \
-	input="defs.m4sh"; \
 	$(edit) $(srcdir)/tests/defs.in > tests/defs.tmp; \
 	mv -f tests/defs.tmp tests/defs
 
@@ -2325,12 +2665,21 @@ $(srcdir)/tests/defs.in: $(auxdir)/general.m4sh tests/defs.m4sh Makefile.am
 
 # We need to remove any files that the above tests created.
 clean-local-legacy:
-	-cd tests; \
-	for dir in cdemo demo depdemo f77demo fcdemo mdemo mdemo2 pdemo tagdemo; \
-	do \
-	    test -f $$dir/Makefile && ( cd $$dir && $(MAKE) distclean; ); \
+	-for dir in $(CONF_SUBDIRS); do \
+	  if test -f $$dir/Makefile; then \
+	    (cd $$dir && $(MAKE) $(AM_MAKEFLAGS) distclean); \
+	  else :; fi; \
 	done
-	rm -rf _inst
+	rm -rf _inst _inst-*
+$(distclean_recursive): fake-distclean-legacy
+.PHONY: fake-distclean-legacy
+fake-distclean-legacy:
+	-for dir in $(CONF_SUBDIRS); do \
+	  if test ! -f $$dir/Makefile; then \
+	    $(mkinstalldirs) $$dir; \
+	    echo 'distclean: ; rm -f Makefile' > $$dir/Makefile; \
+	  else :; fi; \
+	done
 
 $(TESTS): tests/defs
 

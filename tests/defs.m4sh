@@ -1,8 +1,7 @@
-AS_INIT[]m4_divert_push([HEADER-COPYRIGHT])dnl
-# @configure_input@
+AS_INIT[]m4_divert_push([HEADER-COPYRIGHT])
 # defs -- Defines for Libtool testing environment.
 #
-#   Copyright (C) 2003, 2004, 2005, 2007, 2008, 2009 Free Software
+#   Copyright (C) 2003, 2004, 2005, 2007, 2008, 2009, 2010 Free Software
 #   Foundation, Inc.
 #   Written by Gord Matzigkeit, 1996
 #   Rewritten by Gary V. Vaughan, 2003
@@ -43,15 +42,10 @@ if test -z "$DJGPP"; then
     CONFIG_SITE=/nonexistent
 fi
 
-# How verbose should we be?  Default is no test output.
-# Setting VERBOSE=yes enables test output.
-# Setting VERBOSE=debug also puts the shell in debug mode.
+# How verbose should we be?  Default is test output in log file.
+# Setting VERBOSE=debug puts the shell in debug mode.
 opt_debug=:
-test "${VERBOSE+set}" != "set" && VERBOSE=no
 case "$VERBOSE" in
-NO | no | 0 | "")
-  exec > /dev/null 2>&1
-  ;;
 DEBUG | debug )
   opt_debug='set -x'
   $opt_debug
@@ -59,7 +53,7 @@ DEBUG | debug )
 esac
 
 if test -z "$srcdir"; then
-  srcdir=`$ECHO "$0" | $SED "$dirname"`
+  srcdir=`$ECHO "$0" | $SED "$dirname; s,/tests\$,,"`
   test "$srcdir" = "$0" && srcdir=.
 fi
 
@@ -130,6 +124,7 @@ func_get_config "objext
 objdir
 CC
 host
+host_os
 host_alias
 build
 build_alias" "$LIBTOOL --config" ": fatal"
@@ -345,11 +340,25 @@ func_exec ()
 }
 
 # Shared global variables for test scripts
-prefix="./_inst"
+prefix=./_inst-`echo "$0" | sed 's,.*/,,; s,-.*,,'`
 srcdir=`cd $srcdir && pwd`
 m4dir=$srcdir/libltdl/m4
 auxdir=$srcdir/libltdl/config
 scripts="$auxdir/ltmain.m4sh $srcdir/libtoolize.m4sh"
+
+# Unset some MAKE... variables that may cause $MAKE to act like a
+# recursively invoked sub-make.  Any $MAKE invocation in a test is
+# conceptually an independent invocation.
+unset MFLAGS MAKEFLAGS MAKELEVEL __MKLVL__ MAKE_JOBS_FIFO
+
+# On AIX, shared libraries remain loaded in memory after use if they
+# are world-readable, until root issues slibclean.  On NFS, this causes
+# a testsuite rerun to fail to clean up test group directories.  Avoid
+# this with a suitable umask.  Do not do this on other systems, for
+# example HP-UX suffers unless shared libraries are mode 555.
+case $host_os in
+aix*) umask o-rwx ;;
+esac
 
 func_msg "Running $progname"
 

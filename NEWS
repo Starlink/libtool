@@ -1,5 +1,51 @@
 NEWS - list of user-visible changes between releases of GNU Libtool
 
+New in 2.4 2010-09-22: git version 2.2.11a, Libtool team:
+
+* New features:
+
+  - Sysroot support.  This allows you to build cross-compiled packages
+    with the same prefix that will be used on the destination machine,
+    and still find dependent libraries under the compiler's "sysroot".
+    Without sysroot support, paths internal to the build system may leak
+    into the product of the build.
+
+    Sysroot support is disabled unless the --with-sysroot configure
+    option is passed to configure, because .la files generated with
+    sysroot support will _not_ be usable in general with older Libtools.
+
+  - On non-cygwin Windows systems, we now lookup potential library
+    file names without regard to file name case.
+  - The old testsuite now uses the `parallel-tests' Automake test driver
+    now for more concurrency and better test logging.  For this, tests are
+    run in verbose mode by default now.
+
+* Important incompatible changes:
+
+  - Autoconf 2.62 and Automake 1.11.1 or newer are now required for
+    bootstrapping Libtool.  For using Libtool in your own projects,
+    Autoconf 2.59 and Automake 1.9.6 should still work.
+  - The fix_srcfile_path variable has been replaced by a more thorough
+    mechanism triggered by the to_tool_file_cmd variable.
+
+* Changes in supported systems or compilers:
+
+  - Initial support for the Microsoft C/C++ Compiler, with help from
+    the compile script in unreleased Automake 1.12. Override the manifest
+    tool used to embed the manifest resource through the environment
+    variable MANIFEST_TOOL. Please note that the import library naming
+    has changed (from foo-2.lib to foo.dll.lib) from when the code lived
+    in its own git branch.
+  - Initial support for the NAG Fortran compiler on GNU/Linux.
+
+* Bug fixes:
+
+  - The `check-interactive' and `check-noninteractive' convenience make
+    targets now also work for the old testsuite.
+  - Warnings from Autoconf v2.67-36-g1e604ec about incomplete programs
+    passed to AC_*_IFELSE tests have been fixed.
+  - On IRIX, the test for -Wl,-exported_symbol now also works with gfortran.
+
 New in 2.2.10 2010-06-10: git version 2.2.9a, Libtool team:
 
 * New features:
@@ -42,6 +88,9 @@ New in 2.2.7b 2010-05-20: git version 2.2.7a, Libtool team:
     options that begin with '--lt-*' from the argument list before launching
     (uninstalled) programs. Any '--lt-*' option on the command line not
     recognized by the wrapper will result in an error.
+  - The type of the symbol lists variables (lt_*_LTX_preloaded_symbols) has
+    been fixed in the manual and in a couple of tests to match the actual
+    implementation.
 
 * Changes in supported systems or compilers:
 
@@ -53,6 +102,7 @@ New in 2.2.7b 2010-05-20: git version 2.2.7a, Libtool team:
   - With binutils 2.19.50+, shared libraries can be built on AIX.
   - Initial support for the Cuda Compiler Driver on GNU/Linux.
   - Support for Haiku (i586-pc-haiku).
+  - Initial support for GCC link-time optimization (LTO) flags.
 
 * Bug fixes:
 
