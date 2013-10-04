@@ -368,6 +368,7 @@ FFLAGS = @FFLAGS@
 FGREP = @FGREP@
 GCJ = @GCJ@
 GCJFLAGS = @GCJFLAGS@
+GOC = @GOC@
 GREP = @GREP@
 HELP2MAN = @HELP2MAN@
 INSTALL = @INSTALL@
@@ -490,20 +491,20 @@ DIST_SUBDIRS = . $(CONF_SUBDIRS)
 
 # Use `$(srcdir)' for the benefit of non-GNU makes: this is
 # how libtoolize.in appears in our dependencies.
-EXTRA_DIST = libtoolize.m4sh bootstrap $(srcdir)/libtoolize.in \
-	$(auxdir)/ltmain.m4sh $(auxdir)/mkstamp $(sh_files) \
-	ChangeLog.1996 ChangeLog.1997 ChangeLog.1998 ChangeLog.1999 \
-	ChangeLog.2000 ChangeLog.2001 ChangeLog.2002 ChangeLog.2003 \
-	ChangeLog.2004 ChangeLog.2005 ChangeLog.2006 ChangeLog.2007 \
-	ChangeLog.2008 ChangeLog.2009 $(m4dir)/ltversion.in \
+EXTRA_DIST = bootstrap $(srcdir)/libtoolize.in $(auxdir)/ltmain.m4sh \
+	$(auxdir)/mkstamp $(sh_files) ChangeLog.1996 ChangeLog.1997 \
+	ChangeLog.1998 ChangeLog.1999 ChangeLog.2000 ChangeLog.2001 \
+	ChangeLog.2002 ChangeLog.2003 ChangeLog.2004 ChangeLog.2005 \
+	ChangeLog.2006 ChangeLog.2007 ChangeLog.2008 ChangeLog.2009 \
+	ChangeLog.2010 $(m4dir)/ltversion.in \
 	$(srcdir)/$(m4dir)/ltversion.m4 $(srcdir)/$(auxdir)/ltmain.sh \
-	$(srcdir)/libltdl/stamp-mk $(m4dir)/lt~obsolete.m4 \
-	libltdl/lt__dirent.c libltdl/lt__strl.c libltdl/COPYING.LIB \
-	libltdl/configure.ac libltdl/Makefile.am libltdl/aclocal.m4 \
-	libltdl/Makefile.in libltdl/configure libltdl/config-h.in \
-	libltdl/README libltdl/argz_.h libltdl/argz.c \
-	$(srcdir)/doc/notes.txt $(edit_readme_alpha) \
-	$(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) \
+	libtoolize.m4sh libltdl/lt__dirent.c libltdl/lt__strl.c \
+	libltdl/COPYING.LIB libltdl/configure.ac libltdl/Makefile.am \
+	libltdl/aclocal.m4 libltdl/Makefile.in libltdl/configure \
+	libltdl/config-h.in libltdl/README libltdl/argz_.h \
+	libltdl/argz.c $(srcdir)/libltdl/stamp-mk \
+	$(m4dir)/lt~obsolete.m4 $(srcdir)/doc/notes.txt \
+	$(edit_readme_alpha) $(srcdir)/$(TESTSUITE) $(TESTSUITE_AT) \
 	$(srcdir)/tests/package.m4 $(srcdir)/tests/defs.in \
 	tests/defs.m4sh $(COMMON_TESTS) $(CXX_TESTS) $(F77_TESTS) \
 	$(FC_TESTS) $(INTERACTIVE_TESTS)
@@ -534,50 +535,48 @@ timestamp = set dummy `$(MKSTAMP) $(srcdir)`; shift; \
 
 rebuild = rebuild=:; $(timestamp); correctver=$$1
 
-# The libtool distributor and the standalone libtool script.
-bin_SCRIPTS = libtoolize libtool
-
 # ---------- #
 # Bootstrap. #
 # ---------- #
-edit = sed \
-	-e 's,@EGREP\@,$(EGREP),g' \
-	-e 's,@FGREP\@,$(FGREP),g' \
-	-e 's,@GREP\@,$(GREP),g' \
-	-e 's,@LN_S\@,$(LN_S),g' \
-	-e 's,@MACRO_VERSION\@,$(VERSION),g' \
-	-e 's,@PACKAGE\@,$(PACKAGE),g' \
-	-e 's,@PACKAGE_BUGREPORT\@,$(PACKAGE_BUGREPORT),g' \
-	-e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
-	-e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
-	-e 's,@PACKAGE_STRING\@,$(PACKAGE_NAME) $(VERSION),g' \
-	-e 's,@PACKAGE_TARNAME\@,$(PACKAGE),g' \
-	-e 's,@PACKAGE_VERSION\@,$(VERSION),g' \
-	-e 's,@SED\@,$(SED),g' \
-	-e 's,@VERSION\@,$(VERSION),g' \
-	-e 's,@aclocaldir\@,$(aclocaldir),g' \
-	-e 's,@datadir\@,$(datadir),g' \
-	-e 's,@pkgdatadir\@,$(pkgdatadir),g' \
-	-e 's,@host_triplet\@,$(host_triplet),g' \
-	-e 's,@prefix\@,$(prefix),g'
-
 sh_files = $(auxdir)/general.m4sh $(auxdir)/getopt.m4sh
+bootstrap_edit = sed \
+		  -e 's,@MACRO_VERSION\@,$(VERSION),g' \
+		  -e "s,@MACRO_REVISION\@,$$correctver,g" \
+		  -e "s,@MACRO_SERIAL\@,$$serial,g" \
+		  -e 's,@PACKAGE\@,$(PACKAGE),g' \
+		  -e 's,@PACKAGE_BUGREPORT\@,$(PACKAGE_BUGREPORT),g' \
+		  -e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
+		  -e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
+		  -e "s,@package_revision\@,$$correctver,g" \
+		  -e 's,@PACKAGE_STRING\@,$(PACKAGE_NAME) $(VERSION),g' \
+		  -e 's,@PACKAGE_TARNAME\@,$(PACKAGE),g' \
+		  -e 's,@PACKAGE_VERSION\@,$(VERSION),g' \
+		  -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
+		  -e 's,@VERSION\@,$(VERSION),g'
+
 LTDL_BOOTSTRAP_DEPS = $(srcdir)/libltdl/aclocal.m4 \
 	$(srcdir)/libltdl/stamp-mk \
 	$(srcdir)/libltdl/configure \
 	$(srcdir)/libltdl/config-h.in
 
-sub_aclocal_m4_deps = \
-	$(srcdir)/libltdl/configure.ac \
-	$(m4dir)/libtool.m4 \
-	$(m4dir)/ltoptions.m4 \
-	$(m4dir)/ltdl.m4 \
-	$(srcdir)/$(m4dir)/ltversion.m4 \
-	$(m4dir)/ltsugar.m4 \
-	$(m4dir)/argz.m4 \
-	$(m4dir)/lt~obsolete.m4
+configure_edit = sed \
+	-e 's,@aclocal_DATA\@,$(aclocalfiles),g' \
+	-e 's,@aclocaldir\@,$(aclocaldir),g' \
+	-e 's,@datadir\@,$(datadir),g' \
+	-e 's,@EGREP\@,$(EGREP),g' \
+	-e 's,@FGREP\@,$(FGREP),g' \
+	-e 's,@GREP\@,$(GREP),g' \
+	-e 's,@host_triplet\@,$(host_triplet),g' \
+	-e 's,@LN_S\@,$(LN_S),g' \
+	-e "s,@pkgconfig_files\@,$(auxfiles),g" \
+	-e 's,@pkgdatadir\@,$(pkgdatadir),g' \
+	-e "s,@pkgltdl_files\@,$(ltdldatafiles),g" \
+	-e 's,@prefix\@,$(prefix),g' \
+	-e 's,@SED\@,$(SED),g'
 
-sub_configure_deps = $(sub_aclocal_m4_deps) $(srcdir)/libltdl/aclocal.m4
+
+# The libtool distributor and the standalone libtool script.
+bin_SCRIPTS = libtoolize libtool
 LTDL_VERSION_INFO = -version-info 10:0:3
 @INSTALL_LTDL_TRUE@ltdlincludedir = $(includedir)/libltdl
 @INSTALL_LTDL_TRUE@ltdlinclude_HEADERS = libltdl/libltdl/lt_system.h \
@@ -625,11 +624,22 @@ libltdl_loadlibrary_la_LDFLAGS = -module -avoid-version
 libltdl_shl_load_la_SOURCES = libltdl/loaders/shl_load.c
 libltdl_shl_load_la_LDFLAGS = -module -avoid-version
 libltdl_shl_load_la_LIBADD = $(LIBADD_SHL_LOAD)
+sub_aclocal_m4_deps = \
+	$(srcdir)/libltdl/configure.ac \
+	$(m4dir)/libtool.m4 \
+	$(m4dir)/ltoptions.m4 \
+	$(m4dir)/ltdl.m4 \
+	$(srcdir)/$(m4dir)/ltversion.m4 \
+	$(m4dir)/ltsugar.m4 \
+	$(m4dir)/argz.m4 \
+	$(m4dir)/lt~obsolete.m4
+
+sub_configure_deps = $(sub_aclocal_m4_deps) $(srcdir)/libltdl/aclocal.m4
 info_TEXINFOS = doc/libtool.texi
 doc_libtool_TEXINFOS = doc/PLATFORMS doc/fdl.texi doc/notes.texi
 dist_man1_MANS = $(srcdir)/doc/libtool.1 $(srcdir)/doc/libtoolize.1
 update_mans = \
-  PATH=.$(PATH_SEPARATOR)$$PATH; export PATH; \
+  PATH=".$(PATH_SEPARATOR)$$PATH"; export PATH; \
   $(HELP2MAN) --output=$@
 
 
@@ -725,6 +735,7 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/ctor.at \
 		  tests/exceptions.at \
 		  tests/early-libtool.at \
+		  tests/with-pic.at \
 		  tests/no-executables.at \
 		  tests/deplibs-ident.at \
 		  tests/configure-iface.at \
@@ -732,6 +743,7 @@ TESTSUITE_AT = tests/testsuite.at \
 		  tests/cmdline_wrap.at \
 		  tests/pic_flag.at \
 		  tests/darwin.at \
+		  tests/dumpbin-symbols.at \
 		  tests/deplibs-mingw.at \
 		  tests/sysroot.at
 
@@ -2257,47 +2269,6 @@ uninstall-man: uninstall-man1
 	uninstall-libLTLIBRARIES uninstall-ltdlincludeHEADERS \
 	uninstall-man uninstall-man1 uninstall-pdf-am uninstall-ps-am
 
-
-libtoolize: $(srcdir)/libtoolize.in $(top_builddir)/config.status
-	rm -f libtoolize.tmp libtoolize
-	$(timestamp); \
-	$(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
-		-e 's,@aclocal_DATA\@,$(aclocalfiles),g' \
-		-e "s,@pkgltdl_files\@,$(ltdldatafiles),g" \
-		-e "s,@pkgconfig_files\@,$(auxfiles),g" \
-		$(srcdir)/libtoolize.in > libtoolize.tmp
-	chmod a+x libtoolize.tmp
-	chmod a-w libtoolize.tmp
-	mv -f libtoolize.tmp libtoolize
-$(srcdir)/libtoolize.in: $(sh_files) libtoolize.m4sh Makefile.am
-	cd $(srcdir); \
-	rm -f libtoolize.in; \
-	$(M4SH) -B $(auxdir) libtoolize.m4sh > libtoolize.in
-
-# We used to do this with a 'stamp-vcl' file, but non-gmake builds
-# would rerun configure on every invocation, so now we manually
-# check the version numbers from the build rule when necessary.
-libtool: $(top_builddir)/config.status $(srcdir)/$(auxdir)/ltmain.sh ChangeLog
-	@target=libtool; $(rebuild); \
-	if test -f "$$target"; then \
-	  set dummy `./$$target --version | sed 1q`; actualver="$$5"; \
-	  test "$$actualver" = "$$correctver" && rebuild=false; \
-	fi; \
-	for prereq in $?; do \
-	  case $$prereq in *ChangeLog);; *) rebuild=:;; esac; \
-	done; \
-	if $$rebuild; then \
-	  echo $(SHELL) ./config.status $$target; \
-	  cd $(top_builddir) && $(SHELL) ./config.status $$target; \
-	fi
-
-.PHONY: configure-subdirs
-configure-subdirs distdir: $(DIST_MAKEFILE_LIST)
-@DIST_MAKEFILE_LIST@:
-	dir=`echo $@ | sed 's,^[^/]*$$,.,;s,/[^/]*$$,,'`; \
-	test -d $$dir || mkdir $$dir || exit 1; \
-	abs_srcdir=`$(lt__cd) $(srcdir) && pwd`; \
-	(cd $$dir && $$abs_srcdir/$$dir/configure --with-dist) || exit 1
 $(srcdir)/$(m4dir)/ltversion.m4: $(m4dir)/ltversion.in configure.ac ChangeLog
 	@target='$(srcdir)/$(m4dir)/ltversion.m4'; $(rebuild); \
 	if test -f "$$target"; then \
@@ -2312,11 +2283,9 @@ $(srcdir)/$(m4dir)/ltversion.m4: $(m4dir)/ltversion.in configure.ac ChangeLog
 	  cd $(srcdir); \
 	  rm -f $(m4dir)/ltversion.tmp; \
 	  serial=`echo "$$correctver" | sed 's,^1[.],,g'`; \
-	  echo $(edit) -e "s,@MACRO_REVISION\@,$$correctver,g" \
-	    -e "s,@MACRO_SERIAL\@,$$serial,g" \
+	  echo $(bootstrap_edit) \
 	    $(srcdir)/$(m4dir)/ltversion.in \> $(srcdir)/$(m4dir)/ltversion.m4; \
-	  $(edit) -e "s,@MACRO_REVISION\@,$$correctver,g" \
-		  -e "s,@MACRO_SERIAL\@,$$serial,g" \
+	  $(bootstrap_edit) \
 		  $(m4dir)/ltversion.in > $(m4dir)/ltversion.tmp; \
 	  chmod a-w $(m4dir)/ltversion.tmp; \
 	  mv -f $(m4dir)/ltversion.tmp $(m4dir)/ltversion.m4; \
@@ -2339,16 +2308,20 @@ $(srcdir)/$(auxdir)/ltmain.sh: $(sh_files) $(auxdir)/ltmain.m4sh configure.ac Ch
 	    \> $(auxdir)/ltmain.in; \
 	  $(M4SH) -B $(auxdir) $(auxdir)/ltmain.m4sh \
 	    > $(auxdir)/ltmain.in; \
-	  echo $(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
-	    -e "s,@package_revision\@,$$correctver," \
+	  echo $(bootstrap_edit) \
 	    $(srcdir)/$(auxdir)/ltmain.in "> $$target"; \
-	  $(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
-		-e "s,@package_revision\@,$$1,g" \
-		$(auxdir)/ltmain.in > $(auxdir)/ltmain.tmp; \
+	  $(bootstrap_edit) -e '/^: \$${.*="@.*@"}$$/d' \
+	    $(auxdir)/ltmain.in > $(auxdir)/ltmain.tmp; \
 	  rm -f $(auxdir)/ltmain.in; \
 	  chmod a-w $(auxdir)/ltmain.tmp; \
 	  mv -f $(auxdir)/ltmain.tmp $(auxdir)/ltmain.sh; \
 	fi
+$(srcdir)/libtoolize.in: $(sh_files) libtoolize.m4sh Makefile.am
+	cd $(srcdir); \
+	rm -f libtoolize.in libtoolize.tmp; \
+	$(M4SH) -B $(auxdir) libtoolize.m4sh > libtoolize.tmp; \
+	$(bootstrap_edit) libtoolize.tmp > libtoolize.in; \
+	rm -f libtoolize.tmp
 
 $(srcdir)/libltdl/Makefile.am: $(srcdir)/libltdl/Makefile.inc
 	cd $(srcdir); \
@@ -2378,6 +2351,47 @@ $(srcdir)/libltdl/Makefile.am: $(srcdir)/libltdl/Makefile.inc
 
 all-local: $(LTDL_BOOTSTRAP_DEPS)
 
+libtoolize: $(srcdir)/libtoolize.in $(top_builddir)/config.status
+	rm -f libtoolize.tmp libtoolize
+	$(configure_edit) \
+		$(srcdir)/libtoolize.in > libtoolize.tmp
+	chmod a+x libtoolize.tmp
+	chmod a-w libtoolize.tmp
+	mv -f libtoolize.tmp libtoolize
+
+# We used to do this with a 'stamp-vcl' file, but non-gmake builds
+# would rerun configure on every invocation, so now we manually
+# check the version numbers from the build rule when necessary.
+libtool: $(top_builddir)/config.status $(srcdir)/$(auxdir)/ltmain.sh ChangeLog
+	@target=libtool; $(rebuild); \
+	if test -f "$$target"; then \
+	  set dummy `./$$target --version | sed 1q`; actualver="$$5"; \
+	  test "$$actualver" = "$$correctver" && rebuild=false; \
+	fi; \
+	for prereq in $?; do \
+	  case $$prereq in *ChangeLog);; *) rebuild=:;; esac; \
+	done; \
+	if $$rebuild; then \
+	  echo $(SHELL) ./config.status $$target; \
+	  cd $(top_builddir) && $(SHELL) ./config.status $$target; \
+	fi
+
+.PHONY: configure-subdirs
+configure-subdirs distdir: $(DIST_MAKEFILE_LIST)
+@DIST_MAKEFILE_LIST@:
+	dir=`echo $@ | sed 's,^[^/]*$$,.,;s,/[^/]*$$,,'`; \
+	test -d $$dir || mkdir $$dir || exit 1; \
+	abs_srcdir=`$(lt__cd) $(srcdir) && pwd`; \
+	(cd $$dir && $$abs_srcdir/$$dir/configure --with-dist) || exit 1
+
+# We need the following in order to create an <argz.h> when the system
+# doesn't have one that works with the given compiler.
+all-local $(lib_OBJECTS): libltdl/$(ARGZ_H)
+libltdl/argz.h: libltdl/argz_.h
+	$(mkinstalldirs) . libltdl/
+	cp $(srcdir)/libltdl/argz_.h $@-t
+	mv $@-t $@
+
 $(srcdir)/libltdl/Makefile.in: $(srcdir)/libltdl/Makefile.am \
 	    $(srcdir)/libltdl/aclocal.m4 
 	cd $(srcdir)/libltdl && $(AUTOMAKE) Makefile
@@ -2400,14 +2414,6 @@ $(srcdir)/libltdl/config-h.in: $(sub_configure_deps)
 	cd $(srcdir)/libltdl && $(AUTOHEADER)
 	touch $@
 
-# We need the following in order to create an <argz.h> when the system
-# doesn't have one that works with the given compiler.
-all-local $(lib_OBJECTS): libltdl/$(ARGZ_H)
-libltdl/argz.h: libltdl/argz_.h
-	$(mkinstalldirs) . libltdl/
-	cp $(srcdir)/libltdl/argz_.h $@-t
-	mv $@-t $@
-
 all-local: $(srcdir)/doc/notes.txt
 
 $(srcdir)/doc/notes.txt: $(srcdir)/doc/notes.texi
@@ -2429,10 +2435,11 @@ install-data-local: libltdl/Makefile.in
 	done
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/config
-	@list='$(auxfiles)' && for p in $$list; do \
+	@list='$(auxexefiles)' && for p in $$list; do \
 	  echo " $(INSTALL_SCRIPT) '$(srcdir)/libltdl/$$p' '$(DESTDIR)$(pkgdatadir)/$$p'"; \
 	  $(INSTALL_SCRIPT) "$(srcdir)/libltdl/$$p" "$(DESTDIR)$(pkgdatadir)/$$p"; \
 	done
+	$(INSTALL_DATA) "$(srcdir)/libltdl/config/ltmain.sh" "$(DESTDIR)$(pkgdatadir)/config/ltmain.sh" 
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/libltdl
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/libltdl/libltdl
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/libltdl/loaders
@@ -2481,7 +2488,7 @@ $(srcdir)/tests/package.m4: $(srcdir)/configure.ac Makefile.am
 	  echo 'm4_define([AT_PACKAGE_STRING],    [@PACKAGE_STRING@])'; \
 	  echo 'm4_define([AT_PACKAGE_BUGREPORT], [@PACKAGE_BUGREPORT@])'; \
 	  echo 'm4_define([AT_PACKAGE_URL],       [@PACKAGE_URL@])'; \
-	} | $(edit) > $(srcdir)/tests/package.m4
+	} | $(bootstrap_edit) > $(srcdir)/tests/package.m4
 
 tests/atconfig: $(top_builddir)/config.status
 	$(SHELL) ./config.status tests/atconfig
@@ -2653,7 +2660,7 @@ tests/pdemo-make.log:		tests/pdemo-conf.log
 check-recursive: tests/defs
 tests/defs: $(srcdir)/tests/defs.in
 	rm -f tests/defs.tmp tests/defs; \
-	$(edit) $(srcdir)/tests/defs.in > tests/defs.tmp; \
+	$(configure_edit) $(srcdir)/tests/defs.in > tests/defs.tmp; \
 	mv -f tests/defs.tmp tests/defs
 
 # Use `$(srcdir)/tests' for the benefit of non-GNU makes: this is

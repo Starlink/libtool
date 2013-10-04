@@ -1,7 +1,7 @@
 ## Makefile.am -- Process this file with automake to produce Makefile.in
 ##
-##   Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010  Free
-##   Software Foundation, Inc.
+##   Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011
+##   Free Software Foundation, Inc.
 ##   Written by Gary V. Vaughan, 2003
 ##
 ##   This file is part of GNU Libtool.
@@ -60,83 +60,9 @@ timestamp = set dummy `$(MKSTAMP) $(srcdir)`; shift; \
 rebuild = rebuild=:; $(timestamp); correctver=$$1
 
 
-## ---------------- ##
-## Libtool scripts. ##
-## ---------------- ##
-
-# The libtool distributor and the standalone libtool script.
-bin_SCRIPTS = libtoolize libtool
-
-libtoolize: $(srcdir)/libtoolize.in $(top_builddir)/config.status
-	rm -f libtoolize.tmp libtoolize
-	$(timestamp); \
-	$(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
-		-e 's,@aclocal_DATA\@,$(aclocalfiles),g' \
-		-e "s,@pkgltdl_files\@,$(ltdldatafiles),g" \
-		-e "s,@pkgconfig_files\@,$(auxfiles),g" \
-		$(srcdir)/libtoolize.in > libtoolize.tmp
-	chmod a+x libtoolize.tmp
-	chmod a-w libtoolize.tmp
-	mv -f libtoolize.tmp libtoolize
-
-# Use `$(srcdir)' for the benefit of non-GNU makes: this is
-# how libtoolize.in appears in our dependencies.
-EXTRA_DIST += libtoolize.m4sh
-$(srcdir)/libtoolize.in: $(sh_files) libtoolize.m4sh Makefile.am
-	cd $(srcdir); \
-	rm -f libtoolize.in; \
-	$(M4SH) -B $(auxdir) libtoolize.m4sh > libtoolize.in
-
-# We used to do this with a 'stamp-vcl' file, but non-gmake builds
-# would rerun configure on every invocation, so now we manually
-# check the version numbers from the build rule when necessary.
-libtool: $(top_builddir)/config.status $(srcdir)/$(auxdir)/ltmain.sh ChangeLog
-	@target=libtool; $(rebuild); \
-	if test -f "$$target"; then \
-	  set dummy `./$$target --version | sed 1q`; actualver="$$5"; \
-	  test "$$actualver" = "$$correctver" && rebuild=false; \
-	fi; \
-	for prereq in $?; do \
-	  case $$prereq in *ChangeLog);; *) rebuild=:;; esac; \
-	done; \
-	if $$rebuild; then \
-	  echo $(SHELL) ./config.status $$target; \
-	  cd $(top_builddir) && $(SHELL) ./config.status $$target; \
-	fi
-
-.PHONY: configure-subdirs
-configure-subdirs distdir: $(DIST_MAKEFILE_LIST)
-@DIST_MAKEFILE_LIST@:
-	dir=`echo $@ | sed 's,^[^/]*$$,.,;s,/[^/]*$$,,'`; \
-	test -d $$dir || mkdir $$dir || exit 1; \
-	abs_srcdir=`$(lt__cd) $(srcdir) && pwd`; \
-	(cd $$dir && $$abs_srcdir/$$dir/configure --with-dist) || exit 1
-
-
 # ---------- #
 # Bootstrap. #
 # ---------- #
-
-edit = sed \
-	-e 's,@EGREP\@,$(EGREP),g' \
-	-e 's,@FGREP\@,$(FGREP),g' \
-	-e 's,@GREP\@,$(GREP),g' \
-	-e 's,@LN_S\@,$(LN_S),g' \
-	-e 's,@MACRO_VERSION\@,$(VERSION),g' \
-	-e 's,@PACKAGE\@,$(PACKAGE),g' \
-	-e 's,@PACKAGE_BUGREPORT\@,$(PACKAGE_BUGREPORT),g' \
-	-e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
-	-e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
-	-e 's,@PACKAGE_STRING\@,$(PACKAGE_NAME) $(VERSION),g' \
-	-e 's,@PACKAGE_TARNAME\@,$(PACKAGE),g' \
-	-e 's,@PACKAGE_VERSION\@,$(VERSION),g' \
-	-e 's,@SED\@,$(SED),g' \
-	-e 's,@VERSION\@,$(VERSION),g' \
-	-e 's,@aclocaldir\@,$(aclocaldir),g' \
-	-e 's,@datadir\@,$(datadir),g' \
-	-e 's,@pkgdatadir\@,$(pkgdatadir),g' \
-	-e 's,@host_triplet\@,$(host_triplet),g' \
-	-e 's,@prefix\@,$(prefix),g'
 
 sh_files	= $(auxdir)/general.m4sh $(auxdir)/getopt.m4sh
 EXTRA_DIST     += bootstrap $(srcdir)/libtoolize.in $(auxdir)/ltmain.m4sh \
@@ -145,9 +71,27 @@ EXTRA_DIST     += bootstrap $(srcdir)/libtoolize.in $(auxdir)/ltmain.m4sh \
 		  ChangeLog.1999 ChangeLog.2000 ChangeLog.2001 \
 		  ChangeLog.2002 ChangeLog.2003 ChangeLog.2004 \
 		  ChangeLog.2005 ChangeLog.2006 ChangeLog.2007 \
-		  ChangeLog.2008 ChangeLog.2009
+		  ChangeLog.2008 ChangeLog.2009 ChangeLog.2010
 CLEANFILES     += libtool libtoolize libtoolize.tmp \
 		  $(auxdir)/ltmain.tmp $(m4dir)/ltversion.tmp
+
+## These are the replacements that need to be made at bootstrap time,
+## because they must be static in distributed files, and not accidentally
+## changed by configure running on the build machine.
+bootstrap_edit  = sed \
+		  -e 's,@MACRO_VERSION\@,$(VERSION),g' \
+		  -e "s,@MACRO_REVISION\@,$$correctver,g" \
+		  -e "s,@MACRO_SERIAL\@,$$serial,g" \
+		  -e 's,@PACKAGE\@,$(PACKAGE),g' \
+		  -e 's,@PACKAGE_BUGREPORT\@,$(PACKAGE_BUGREPORT),g' \
+		  -e 's,@PACKAGE_URL\@,$(PACKAGE_URL),g' \
+		  -e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
+		  -e "s,@package_revision\@,$$correctver,g" \
+		  -e 's,@PACKAGE_STRING\@,$(PACKAGE_NAME) $(VERSION),g' \
+		  -e 's,@PACKAGE_TARNAME\@,$(PACKAGE),g' \
+		  -e 's,@PACKAGE_VERSION\@,$(VERSION),g' \
+		  -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
+		  -e 's,@VERSION\@,$(VERSION),g'
 
 ## We build ltversion.m4 here, instead of from config.status,
 ## because config.status is rerun each time one of configure's
@@ -174,11 +118,9 @@ $(srcdir)/$(m4dir)/ltversion.m4: $(m4dir)/ltversion.in configure.ac ChangeLog
 	  cd $(srcdir); \
 	  rm -f $(m4dir)/ltversion.tmp; \
 	  serial=`echo "$$correctver" | sed 's,^1[.],,g'`; \
-	  echo $(edit) -e "s,@MACRO_REVISION\@,$$correctver,g" \
-	    -e "s,@MACRO_SERIAL\@,$$serial,g" \
+	  echo $(bootstrap_edit) \
 	    $(srcdir)/$(m4dir)/ltversion.in \> $(srcdir)/$(m4dir)/ltversion.m4; \
-	  $(edit) -e "s,@MACRO_REVISION\@,$$correctver,g" \
-		  -e "s,@MACRO_SERIAL\@,$$serial,g" \
+	  $(bootstrap_edit) \
 		  $(m4dir)/ltversion.in > $(m4dir)/ltversion.tmp; \
 	  chmod a-w $(m4dir)/ltversion.tmp; \
 	  mv -f $(m4dir)/ltversion.tmp $(m4dir)/ltversion.m4; \
@@ -213,16 +155,24 @@ $(srcdir)/$(auxdir)/ltmain.sh: $(sh_files) $(auxdir)/ltmain.m4sh configure.ac Ch
 	    \> $(auxdir)/ltmain.in; \
 	  $(M4SH) -B $(auxdir) $(auxdir)/ltmain.m4sh \
 	    > $(auxdir)/ltmain.in; \
-	  echo $(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
-	    -e "s,@package_revision\@,$$correctver," \
+	  echo $(bootstrap_edit) \
 	    $(srcdir)/$(auxdir)/ltmain.in "> $$target"; \
-	  $(edit) -e "s,@TIMESTAMP\@,$$TIMESTAMP,g" \
-		-e "s,@package_revision\@,$$1,g" \
-		$(auxdir)/ltmain.in > $(auxdir)/ltmain.tmp; \
+	  $(bootstrap_edit) -e '/^: \$${.*="@.*@"}$$/d' \
+	    $(auxdir)/ltmain.in > $(auxdir)/ltmain.tmp; \
 	  rm -f $(auxdir)/ltmain.in; \
 	  chmod a-w $(auxdir)/ltmain.tmp; \
 	  mv -f $(auxdir)/ltmain.tmp $(auxdir)/ltmain.sh; \
 	fi
+
+# Use `$(srcdir)' for the benefit of non-GNU makes: this is
+# how libtoolize.in appears in our dependencies.
+EXTRA_DIST += libtoolize.m4sh
+$(srcdir)/libtoolize.in: $(sh_files) libtoolize.m4sh Makefile.am
+	cd $(srcdir); \
+	rm -f libtoolize.in libtoolize.tmp; \
+	$(M4SH) -B $(auxdir) libtoolize.m4sh > libtoolize.tmp; \
+	$(bootstrap_edit) libtoolize.tmp > libtoolize.in; \
+	rm -f libtoolize.tmp
 
 $(srcdir)/libltdl/Makefile.am: $(srcdir)/libltdl/Makefile.inc
 	cd $(srcdir); \
@@ -259,6 +209,69 @@ LTDL_BOOTSTRAP_DEPS = $(srcdir)/libltdl/aclocal.m4 \
 	$(srcdir)/libltdl/config-h.in
 
 all-local: $(LTDL_BOOTSTRAP_DEPS)
+
+
+## ---------------- ##
+## Libtool scripts. ##
+## ---------------- ##
+
+configure_edit = sed \
+	-e 's,@aclocal_DATA\@,$(aclocalfiles),g' \
+	-e 's,@aclocaldir\@,$(aclocaldir),g' \
+	-e 's,@datadir\@,$(datadir),g' \
+	-e 's,@EGREP\@,$(EGREP),g' \
+	-e 's,@FGREP\@,$(FGREP),g' \
+	-e 's,@GREP\@,$(GREP),g' \
+	-e 's,@host_triplet\@,$(host_triplet),g' \
+	-e 's,@LN_S\@,$(LN_S),g' \
+	-e "s,@pkgconfig_files\@,$(auxfiles),g" \
+	-e 's,@pkgdatadir\@,$(pkgdatadir),g' \
+	-e "s,@pkgltdl_files\@,$(ltdldatafiles),g" \
+	-e 's,@prefix\@,$(prefix),g' \
+	-e 's,@SED\@,$(SED),g'
+
+# The libtool distributor and the standalone libtool script.
+bin_SCRIPTS = libtoolize libtool
+
+libtoolize: $(srcdir)/libtoolize.in $(top_builddir)/config.status
+	rm -f libtoolize.tmp libtoolize
+	$(configure_edit) \
+		$(srcdir)/libtoolize.in > libtoolize.tmp
+	chmod a+x libtoolize.tmp
+	chmod a-w libtoolize.tmp
+	mv -f libtoolize.tmp libtoolize
+
+# We used to do this with a 'stamp-vcl' file, but non-gmake builds
+# would rerun configure on every invocation, so now we manually
+# check the version numbers from the build rule when necessary.
+libtool: $(top_builddir)/config.status $(srcdir)/$(auxdir)/ltmain.sh ChangeLog
+	@target=libtool; $(rebuild); \
+	if test -f "$$target"; then \
+	  set dummy `./$$target --version | sed 1q`; actualver="$$5"; \
+	  test "$$actualver" = "$$correctver" && rebuild=false; \
+	fi; \
+	for prereq in $?; do \
+	  case $$prereq in *ChangeLog);; *) rebuild=:;; esac; \
+	done; \
+	if $$rebuild; then \
+	  echo $(SHELL) ./config.status $$target; \
+	  cd $(top_builddir) && $(SHELL) ./config.status $$target; \
+	fi
+
+.PHONY: configure-subdirs
+configure-subdirs distdir: $(DIST_MAKEFILE_LIST)
+@DIST_MAKEFILE_LIST@:
+	dir=`echo $@ | sed 's,^[^/]*$$,.,;s,/[^/]*$$,,'`; \
+	test -d $$dir || mkdir $$dir || exit 1; \
+	abs_srcdir=`$(lt__cd) $(srcdir) && pwd`; \
+	(cd $$dir && $$abs_srcdir/$$dir/configure --with-dist) || exit 1
+
+
+## -------- ##
+## Libltdl. ##
+## -------- ##
+
+include libltdl/Makefile.inc
 
 EXTRA_DIST += $(srcdir)/libltdl/stamp-mk $(m4dir)/lt~obsolete.m4
 
@@ -297,13 +310,6 @@ $(srcdir)/libltdl/config-h.in: $(sub_configure_deps)
 	touch $@
 
 
-## -------- ##
-## Libltdl. ##
-## -------- ##
-
-include libltdl/Makefile.inc
-
-
 ## -------------- ##
 ## Documentation. ##
 ## -------------- ##
@@ -324,7 +330,7 @@ $(srcdir)/doc/notes.txt: $(srcdir)/doc/notes.texi
 dist_man1_MANS		= $(srcdir)/doc/libtool.1 $(srcdir)/doc/libtoolize.1
 MAINTAINERCLEANFILES	+= $(dist_man1_MANS)
 update_mans = \
-  PATH=.$(PATH_SEPARATOR)$$PATH; export PATH; \
+  PATH=".$(PATH_SEPARATOR)$$PATH"; export PATH; \
   $(HELP2MAN) --output=$@
 $(srcdir)/doc/libtool.1: $(srcdir)/$(auxdir)/ltmain.sh
 	$(update_mans) --help-option=--help-all libtool
@@ -387,10 +393,11 @@ install-data-local: libltdl/Makefile.in
 ## install the helper scripts
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/config
-	@list='$(auxfiles)' && for p in $$list; do \
+	@list='$(auxexefiles)' && for p in $$list; do \
 	  echo " $(INSTALL_SCRIPT) '$(srcdir)/libltdl/$$p' '$(DESTDIR)$(pkgdatadir)/$$p'"; \
 	  $(INSTALL_SCRIPT) "$(srcdir)/libltdl/$$p" "$(DESTDIR)$(pkgdatadir)/$$p"; \
 	done
+	$(INSTALL_DATA) "$(srcdir)/libltdl/config/ltmain.sh" "$(DESTDIR)$(pkgdatadir)/config/ltmain.sh" 
 ## install the libltdl files
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/libltdl
 	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)/libltdl/libltdl
@@ -496,6 +503,7 @@ TESTSUITE_AT	= tests/testsuite.at \
 		  tests/ctor.at \
 		  tests/exceptions.at \
 		  tests/early-libtool.at \
+		  tests/with-pic.at \
 		  tests/no-executables.at \
 		  tests/deplibs-ident.at \
 		  tests/configure-iface.at \
@@ -503,6 +511,7 @@ TESTSUITE_AT	= tests/testsuite.at \
 		  tests/cmdline_wrap.at \
 		  tests/pic_flag.at \
 		  tests/darwin.at \
+		  tests/dumpbin-symbols.at \
 		  tests/deplibs-mingw.at \
 		  tests/sysroot.at
 
@@ -552,7 +561,7 @@ $(srcdir)/tests/package.m4: $(srcdir)/configure.ac Makefile.am
 	  echo 'm4_define([AT_PACKAGE_STRING],    [@PACKAGE_STRING@])'; \
 	  echo 'm4_define([AT_PACKAGE_BUGREPORT], [@PACKAGE_BUGREPORT@])'; \
 	  echo 'm4_define([AT_PACKAGE_URL],       [@PACKAGE_URL@])'; \
-	} | $(edit) > $(srcdir)/tests/package.m4
+	} | $(bootstrap_edit) > $(srcdir)/tests/package.m4
 
 tests/atconfig: $(top_builddir)/config.status
 	$(SHELL) ./config.status tests/atconfig
@@ -897,7 +906,7 @@ DIST_SUBDIRS   += $(CONF_SUBDIRS)
 check-recursive: tests/defs
 tests/defs: $(srcdir)/tests/defs.in
 	rm -f tests/defs.tmp tests/defs; \
-	$(edit) $(srcdir)/tests/defs.in > tests/defs.tmp; \
+	$(configure_edit) $(srcdir)/tests/defs.in > tests/defs.tmp; \
 	mv -f tests/defs.tmp tests/defs
 
 # Use `$(srcdir)/tests' for the benefit of non-GNU makes: this is
