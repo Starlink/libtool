@@ -281,6 +281,7 @@ srcdir = @srcdir@
 sys_symbol_underscore = @sys_symbol_underscore@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
@@ -303,7 +304,7 @@ EXTRA_DIST = lt__dirent.c lt__strl.c COPYING.LIB configure.ac \
 CLEANFILES = libltdl.la libltdlc.la libdlloader.la $(LIBOBJS) \
 	$(LTLIBOBJS)
 MOSTLYCLEANFILES = argz.h argz.h-t
-LTDL_VERSION_INFO = -version-info 8:2:1
+LTDL_VERSION_INFO = -version-info 9:0:2
 @INSTALL_LTDL_TRUE@ltdlincludedir = $(includedir)/libltdl
 @INSTALL_LTDL_TRUE@ltdlinclude_HEADERS = libltdl/lt_system.h \
 @INSTALL_LTDL_TRUE@			  libltdl/lt_error.h \
