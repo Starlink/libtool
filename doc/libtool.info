@@ -13,7 +13,7 @@ START-INFO-DIR-ENTRY
 * libtoolize: (libtool)Invoking libtoolize.     Adding libtool support.
 END-INFO-DIR-ENTRY
 
-   This file documents GNU Libtool 2.2.8
+   This file documents GNU Libtool 2.2.10
 
    Copyright (C) 1996-2009 Free Software Foundation, Inc.
 
@@ -26,106 +26,106 @@ Free Documentation License".
 
 
 Indirect:
-libtool.info-1: 1003
-libtool.info-2: 272636
+libtool.info-1: 1004
+libtool.info-2: 272647
 
 Tag Table:
 (Indirect)
-Node: Top1003
-Node: Introduction7494
-Node: Motivation9316
-Node: Issues10636
-Node: Other implementations12114
-Node: Postmortem12657
-Node: Libtool paradigm14277
-Node: Using libtool15222
-Node: Creating object files17325
-Node: Linking libraries21062
-Ref: Linking libraries-Footnote-124890
-Node: Linking executables25031
-Ref: Linking executables-Footnote-130282
-Ref: Linking executables-Footnote-230575
-Node: Wrapper executables30655
-Node: Debugging executables32878
-Node: Installing libraries35701
-Ref: Installing libraries-Footnote-138863
-Node: Installing executables38934
-Node: Static libraries39770
-Node: Invoking libtool43047
-Node: Compile mode48340
-Node: Link mode51301
-Node: Execute mode60466
-Node: Install mode61246
-Node: Finish mode63603
-Node: Uninstall mode64038
-Node: Clean mode64479
-Node: Integrating libtool64938
-Node: Autoconf macros65695
-Node: Makefile rules69542
-Node: Using Automake70645
-Ref: Using Automake-Footnote-172226
-Node: Configuring72622
-Node: LT_INIT73874
-Ref: LT_INIT-Footnote-187972
-Node: Configure notes88225
-Node: Distributing91400
-Node: Invoking libtoolize92317
-Node: Autoconf and LTLIBOBJS98505
-Node: Static-only libraries99249
-Ref: Static-only libraries-Footnote-1100576
-Node: Other languages100685
-Node: C++ libraries101393
-Node: Tags102831
-Node: Versioning104223
-Node: Interfaces105591
-Node: Libtool versioning106224
-Node: Updating version info108437
-Node: Release numbers111465
-Node: Library tips113321
-Node: C header files116127
-Ref: C header files-Footnote-1119801
-Node: Inter-library dependencies120010
-Node: Dlopened modules122674
-Node: Building modules124580
-Node: Dlpreopening125781
-Node: Linking with dlopened modules131339
-Node: Finding the dlname136268
-Ref: Finding the dlname-Footnote-1137586
-Node: Dlopen issues137639
-Node: Using libltdl138694
-Node: Libltdl interface140534
-Ref: Libltdl interface-Footnote-1154191
-Node: Modules for libltdl154485
-Node: Thread Safety in libltdl157011
-Node: User defined module data158024
-Node: Module loaders for libltdl165516
-Ref: Module loaders for libltdl-Footnote-1174759
-Node: Distributing libltdl174865
-Ref: Distributing libltdl-Footnote-1188647
-Ref: Distributing libltdl-Footnote-2188943
-Node: Trace interface189093
-Node: FAQ189929
-Node: Stripped link flags190267
-Node: Troubleshooting191713
-Node: Libtool test suite192236
-Node: Test descriptions193014
-Node: When tests fail204232
-Node: Reporting bugs205424
-Node: Maintaining207042
-Node: New ports207785
-Node: Information sources208478
-Node: Porting inter-library dependencies210946
-Node: Tested platforms213670
-Node: Platform quirks222100
-Node: References223080
-Node: Compilers223930
-Ref: Compilers-Footnote-1225506
-Node: Reloadable objects225822
-Node: Multiple dependencies226181
-Node: Archivers227078
-Node: libtool script contents227644
-Node: Cheap tricks245603
-Node: GNU Free Documentation License247470
-Node: Index272636
+Node: Top1004
+Node: Introduction7496
+Node: Motivation9323
+Node: Issues10643
+Node: Other implementations12121
+Node: Postmortem12664
+Node: Libtool paradigm14284
+Node: Using libtool15229
+Node: Creating object files17332
+Node: Linking libraries21071
+Ref: Linking libraries-Footnote-124899
+Node: Linking executables25040
+Ref: Linking executables-Footnote-130291
+Ref: Linking executables-Footnote-230584
+Node: Wrapper executables30664
+Node: Debugging executables32887
+Node: Installing libraries35710
+Ref: Installing libraries-Footnote-138872
+Node: Installing executables38943
+Node: Static libraries39779
+Node: Invoking libtool43056
+Node: Compile mode48349
+Node: Link mode51310
+Node: Execute mode60475
+Node: Install mode61255
+Node: Finish mode63612
+Node: Uninstall mode64047
+Node: Clean mode64488
+Node: Integrating libtool64947
+Node: Autoconf macros65704
+Node: Makefile rules69551
+Node: Using Automake70654
+Ref: Using Automake-Footnote-172235
+Node: Configuring72631
+Node: LT_INIT73883
+Ref: LT_INIT-Footnote-187982
+Node: Configure notes88235
+Node: Distributing91410
+Node: Invoking libtoolize92327
+Node: Autoconf and LTLIBOBJS98515
+Node: Static-only libraries99259
+Ref: Static-only libraries-Footnote-1100586
+Node: Other languages100695
+Node: C++ libraries101403
+Node: Tags102841
+Node: Versioning104233
+Node: Interfaces105601
+Node: Libtool versioning106234
+Node: Updating version info108447
+Node: Release numbers111475
+Node: Library tips113331
+Node: C header files116137
+Ref: C header files-Footnote-1119811
+Node: Inter-library dependencies120020
+Node: Dlopened modules122684
+Node: Building modules124591
+Node: Dlpreopening125792
+Node: Linking with dlopened modules131350
+Node: Finding the dlname136279
+Ref: Finding the dlname-Footnote-1137597
+Node: Dlopen issues137650
+Node: Using libltdl138705
+Node: Libltdl interface140545
+Ref: Libltdl interface-Footnote-1154202
+Node: Modules for libltdl154496
+Node: Thread Safety in libltdl157022
+Node: User defined module data158035
+Node: Module loaders for libltdl165527
+Ref: Module loaders for libltdl-Footnote-1174770
+Node: Distributing libltdl174876
+Ref: Distributing libltdl-Footnote-1188658
+Ref: Distributing libltdl-Footnote-2188954
+Node: Trace interface189104
+Node: FAQ189940
+Node: Stripped link flags190278
+Node: Troubleshooting191724
+Node: Libtool test suite192247
+Node: Test descriptions193025
+Node: When tests fail204243
+Node: Reporting bugs205435
+Node: Maintaining207053
+Node: New ports207796
+Node: Information sources208489
+Node: Porting inter-library dependencies210957
+Node: Tested platforms213681
+Node: Platform quirks222111
+Node: References223091
+Node: Compilers223941
+Ref: Compilers-Footnote-1225517
+Node: Reloadable objects225833
+Node: Multiple dependencies226192
+Node: Archivers227089
+Node: libtool script contents227655
+Node: Cheap tricks245614
+Node: GNU Free Documentation License247481
+Node: Index272647
 
 End Tag Table

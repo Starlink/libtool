@@ -1,4 +1,144 @@
+2010-06-09  Gary V. Vaughan  <gary@gnu.org>
+
+	Prepare for next release.
+	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version number
+	to 2.2.10.
+	* NEWS: Update version number.
+
+	Fix a quoting bug with ./commit -a 'A U Thor'.
+	* clcommit.m4sh (func_commit): Use func_show_eval when calling
+	git, so that the previously func_quote_for_eval()ed $git_flags is
+	expanded properly.
+
+2009-09-15  Peter Rosin  <peda@lysator.liu.se>
+
+	Don't try the MSYS libdir path on MinGW.
+	* libltdl/ltdl.c (parse_dotla_file) [mingw]: The absolute
+	libdir path in the .la file is recorded as an MSYS (POSIX
+	style) path. Make sure it isn't tried when locating the
+	shared library.
+	* NEWS: Updated.
+
+2010-06-09  Gary V. Vaughan  <gary@gnu.org>
+
+	Simplify license variations, and add missing license texts.
+	* ChangeLog, ChangeLog.1996, ChangeLog.1997, ChangeLog.1998,
+	ChangeLog.1999, ChangeLog.2000, ChangeLog.2001, ChangeLog.2002,
+	ChangeLog.2003, ChangeLog.2004, ChangeLog.2005, ChangeLog.2006,
+	ChangeLog.2007, ChangeLog.2008, ChangeLog.2009, NEWS: Add
+	all-permissive license.
+	* HACKING, README, README.alpha, TODO: Relax license to RMS
+	encouraged all-permissive terms.
+	* libltdl/README: Ditto. I added the original license text in
+	2007, and there's no need for it to be so long for such a trivial
+	file.
+	* libltdl/config/getopt.m4sh, libltdl/general.m4sh: Cvs-utils is
+	dead, and I am the author of these files, so consolidated license
+	terms to match regular Libtool licensing.
+	* HACKING (Licensing Rules): Update wording, and list of files for
+	the all permissive license.
+	(GPL with CVS-Utils exception clause): Removed.  No files have these 
+	license any more.
+	(GPL with Libtool exception clause): Ditto, only libltdl/README
+	used to be distributed with this variation.
+	* AUTHORS: Add GPL license text.
+	
+	Fix a type in the 2.2.8 release notes.
+	* NEWS: s/ romoted/ promoted/ in the 2.2.8 release notes.
+
+	Don't warn about the blank line inserted into git commit message.
+	* clcommit.m4sh: When searching for accidental commits of mutliple
+	changes, ignore the second line of the message, which we inserted
+	earlier to support "git log --oneline".
+
+	Enable correct extraction of multiline copyright from --version.
+	* libltdl/config/getopt.m4sh: Wrap copyright notice at 76
+	columns.
+	(func_version): Don't omit spaces when merging multiline copyright
+	notices.
+	* clcommit.m4sh, libtoolize.m4sh: Wrap copyright notice at 76
+	columns.
+
+	* NEWS (2.2.8): BlueGene compiler tests were performed on BG/P
+	systems, not BG/L.
+	Reported by Christian Rössel <christian.roessel@gmx.de>
+
+2010-06-08  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Fix testsuite helper macros to not hide failure.
+	* tests/testsuite.at (LT_AT_CONFIGURE, LT_AT_MAKE):
+	Do not wrap AT_CHECK in a subshell, so that failures are
+	properly propagated; instead, move environment changes inside
+	the AT_CHECK code.
+	Report and analysis by Peter Rosin.
+
+	Avoid autom4te warning about unnamed diversion.
+	* libltdl/config/getopt.m4sh: Use diversion name KILL not -1.
+
+2010-06-07  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Make versioning test stricter for w32, enable shared libs.
+	* tests/versioning.at (versioning): Add -no-undefined to
+	LDFLAGS.
+	(test_uninstalled): Also move $bindir out of the way
+	temporarily.
+
+	Fix versioning test for LDFLAGS=-Wl,--as-needed.
+	* tests/versioning.at (versioning): For the library update
+	hypotheses, ensure the unchanged library libb isn't accidentally
+	relinked against the new liba, by not reinstalling libb.
+	Fixes testsuite failure for the incompatible update case with
+	LDFLAGS=-Wl,--as-needed.
+	* THANKS: Update.
+	Report by Ryan Hill.
+
+2010-06-06  Ralf Wildenhues  <Ralf.Wildenhues@gmx.de>
+
+	Rewrite manual intro to be gender-neutral.
+	* doc/libtool.texi (Introduction): Use gender-neutral
+	formulation when addressing developers.
+
 2010-06-05  Gary V. Vaughan  <gary@gnu.org>
+
+	Update and simplify all m4sh scripts to use latest getopt.m4sh.
+	* clcommit.m4sh, libltdl/config/mailnotify.m4sh: Rewrite option
+	parsing loop over M4SH_GETOPTS macro, and adjust all clients of
+	option variables to use generated option names.
+
+	Add missing quote for literal ? in a shell case statement.
+	* libltdl/config/getopt.m4sh (m4go_shortnoargs): Quote initial ?
+	correctly for use in a shell case statement.
+
+	Quote command line arguments after --rcfile properly.
+	* libltdl/config/announce-gen.m4sh (--rcfile): Quote remaining
+	arguments shell variable expression correctly for eval.
+	
+	Shift correctly in numbered option argument collection.
+	* libltdl/config/getopt.m4sh (_m4go_option): Argument list also
+	needs to be `shift'ed in the shell option loop after processing a
+	numbered argument collection.
+
+	Fetch from new upstream host for config.guess and config.sub.
+	* Makefile.maint (WGET_CGIT): Location of newest config.guess and
+	config.sub upstream.
+	(fetch): Fetch config.guess and config.sub from WGET_CGIT, rather
+	than no-longer-updating WGET_SGO location.
+
+	Update generated upload directive file format to v1.1.
+	* Makefile.maint (git-dist, diffs): Update to generate v1.1 format
+	directive files for ftp://ftp-upload.gnu.org/incoming/ftp.
+
+	Fix web manual generation details in release instructions.
+	* HACKING (Release Procedure): Move the instruction for generating
+	web manuals for a new release to before the instruction that bumps
+	the version numbers to the post release values.
+
+	Set SCM version number to 2.2.9a.
+	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version
+	number to 2.2.9a.
+	* NEWS: Updated.
+
+	GNU Libtool 2.2.8 was released.
 
 	Prepare for next release.
 	* configure.ac, libltdl/configure.ac (AC_INIT): Bump version
@@ -354,5 +494,15 @@
 	* libtoolize.m4sh: Likewise.
 
 Continued in ChangeLog.2009
+-- 
+  Copyright (C) 1996, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+  2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
+
+  This file is part of GNU Libtool.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without warranty of any kind.
 
 vim:tw=72
