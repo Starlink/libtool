@@ -553,11 +553,11 @@ Combined Index
 * AM_ENABLE_SHARED:                      LT_INIT.             (line 198)
 * AM_ENABLE_STATIC:                      LT_INIT.             (line 215)
 * AM_PROG_LIBTOOL:                       LT_INIT.             (line  23)
-* application-level dynamic linking <1>: Dlopened modules.    (line   6)
-* application-level dynamic linking:     Using libltdl.       (line   6)
-* ar:                                    Linking libraries.   (line   6)
+* application-level dynamic linking <1>: Using libltdl.       (line   6)
+* application-level dynamic linking:     Dlopened modules.    (line   6)
 * AR:                                    libtool script contents.
                                                               (line  30)
+* ar:                                    Linking libraries.   (line   6)
 * archive_cmds:                          libtool script contents.
                                                               (line  88)
 * archive_expsym_cmds:                   libtool script contents.
@@ -586,9 +586,9 @@ Combined Index
 * C++, pitfalls:                         C++ libraries.       (line   6)
 * C++, using:                            Other languages.     (line   6)
 * C, not using:                          Other languages.     (line   6)
-* CC <1>:                                LT_INIT.             (line 228)
-* CC:                                    libtool script contents.
+* CC <1>:                                libtool script contents.
                                                               (line  33)
+* CC:                                    LT_INIT.             (line 228)
 * cdemo-conf.test:                       Test descriptions.   (line  21)
 * cdemo-exec.test:                       Test descriptions.   (line  21)
 * cdemo-make.test:                       Test descriptions.   (line  21)
@@ -687,23 +687,23 @@ Combined Index
 * design philosophy:                     Motivation.          (line   6)
 * developing libraries:                  Static-only libraries.
                                                               (line   6)
-* dlclose <1>:                           Dlopened modules.    (line   6)
-* dlclose:                               Using libltdl.       (line   6)
+* dlclose <1>:                           Using libltdl.       (line   6)
+* dlclose:                               Dlopened modules.    (line   6)
 * dlerror:                               Using libltdl.       (line   6)
 * DLLTOOL:                               LT_INIT.             (line 270)
-* dlopen <1>:                            Dlopened modules.    (line   6)
-* dlopen:                                Using libltdl.       (line   6)
+* dlopen <1>:                            Using libltdl.       (line   6)
+* dlopen:                                Dlopened modules.    (line   6)
 * dlopen_self:                           libtool script contents.
                                                               (line 146)
 * dlopen_self_static:                    libtool script contents.
                                                               (line 150)
 * dlopen_support:                        libtool script contents.
                                                               (line 142)
-* dlopening modules <1>:                 Dlopened modules.    (line   6)
-* dlopening modules:                     Using libltdl.       (line   6)
+* dlopening modules <1>:                 Using libltdl.       (line   6)
+* dlopening modules:                     Dlopened modules.    (line   6)
 * dlopening, pitfalls:                   Dlopen issues.       (line   6)
-* dlsym <1>:                             Dlopened modules.    (line   6)
-* dlsym:                                 Using libltdl.       (line   6)
+* dlsym <1>:                             Using libltdl.       (line   6)
+* dlsym:                                 Dlopened modules.    (line   6)
 * double-compilation, avoiding:          Static-only libraries.
                                                               (line   6)
 * dynamic dependencies:                  Versioning.          (line   6)
@@ -772,7 +772,7 @@ Combined Index
                                                               (line 207)
 * formal versioning:                     Libtool versioning.  (line   6)
 * func_convert_file_cygwin_to_w32:       Cygwin to MinGW Cross.
-                                                              (line  61)
+                                                              (line  38)
 * global functions:                      Library tips.        (line  45)
 * global_symbol_pipe:                    libtool script contents.
                                                               (line 210)
@@ -823,9 +823,9 @@ Combined Index
                                                               (line   6)
 * language names:                        Tags.                (line   6)
 * languages, non-C:                      Other languages.     (line   6)
-* LD <1>:                                LT_INIT.             (line 242)
-* LD:                                    libtool script contents.
+* LD <1>:                                libtool script contents.
                                                               (line  43)
+* LD:                                    LT_INIT.             (line 242)
 * LDFLAGS:                               LT_INIT.             (line 247)
 * libext:                                libtool script contents.
                                                               (line 299)
@@ -880,7 +880,7 @@ Combined Index
 * lt_cv_to_host_file_cmd:                Cygwin to MinGW Cross.
                                                               (line  61)
 * lt_cv_to_tool_file_cmd:                Cygwin to MinGW Cross.
-                                                              (line  61)
+                                                              (line  38)
 * LT_CYGPATH:                            LT_CYGPATH.          (line   6)
 * LT_DIRSEP_CHAR:                        Libltdl interface.   (line  40)
 * lt_dladderror:                         Module loaders for libltdl.
@@ -953,8 +953,8 @@ Combined Index
                                                               (line 203)
 * lt_dlsetsearchpath:                    Libltdl interface.   (line 255)
 * lt_dlsym:                              Libltdl interface.   (line 233)
-* lt_dlsymlist <1>:                      Dlpreopening.        (line  42)
-* lt_dlsymlist:                          Libltdl interface.   (line  55)
+* lt_dlsymlist <1>:                      Libltdl interface.   (line  55)
+* lt_dlsymlist:                          Dlpreopening.        (line  42)
 * lt_find_sym:                           Module loaders for libltdl.
                                                               (line  79)
 * LT_FUNC_DLSYM_USCORE:                  Autoconf macros.     (line  24)
@@ -1038,8 +1038,8 @@ Combined Index
 * mode, install:                         Install mode.        (line   6)
 * mode, link:                            Link mode.           (line   6)
 * mode, uninstall:                       Uninstall mode.      (line   6)
-* modules, dynamic <1>:                  Dlopened modules.    (line   6)
-* modules, dynamic:                      Using libltdl.       (line   6)
+* modules, dynamic <1>:                  Using libltdl.       (line   6)
+* modules, dynamic:                      Dlopened modules.    (line   6)
 * motivation for writing libtool:        Motivation.          (line   6)
 * MSYS:                                  Native MinGW File Name Conversion.
                                                               (line   6)
@@ -1050,9 +1050,9 @@ Combined Index
                                                               (line 344)
 * need_version:                          libtool script contents.
                                                               (line 338)
-* NM <1>:                                LT_INIT.             (line 259)
-* NM:                                    libtool script contents.
+* NM <1>:                                libtool script contents.
                                                               (line  52)
+* NM:                                    LT_INIT.             (line 259)
 * nm_file_list_spec:                     libtool script contents.
                                                               (line 348)
 * no_builtin_flag:                       libtool script contents.
@@ -1128,10 +1128,10 @@ Combined Index
 * program wrapper executables:           Wrapper executables. (line   6)
 * program wrapper scripts:               Linking executables. (line  71)
 * quote.test:                            Test descriptions.   (line 220)
-* ranlib:                                Linking libraries.   (line  12)
-* RANLIB <1>:                            LT_INIT.             (line 262)
-* RANLIB:                                libtool script contents.
+* RANLIB <1>:                            libtool script contents.
                                                               (line  73)
+* RANLIB:                                LT_INIT.             (line 262)
+* ranlib:                                Linking libraries.   (line  12)
 * reload_cmds:                           libtool script contents.
                                                               (line 388)
 * reload_flag:                           libtool script contents.
@@ -1148,8 +1148,8 @@ Combined Index
 * shared libraries, not using:           Static-only libraries.
                                                               (line   6)
 * shared library versions:               Versioning.          (line   6)
-* shl_load <1>:                          Dlopened modules.    (line   6)
-* shl_load:                              Using libltdl.       (line   6)
+* shl_load <1>:                          Using libltdl.       (line   6)
+* shl_load:                              Dlopened modules.    (line   6)
 * shlibpath_overrides_runpath:           libtool script contents.
                                                               (line 397)
 * shlibpath_var:                         libtool script contents.

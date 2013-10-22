@@ -14,6 +14,6 @@ libltdl/.libs
 libltdl/config.h
 libltdl/stamp-h1
 libtoolize
-make.log
+*.log
 make.log.err
 
