@@ -25,3 +25,4 @@ libtoolize
 make.log.err
 stamp-h1
 tests/atconfig
+configure.lineno
